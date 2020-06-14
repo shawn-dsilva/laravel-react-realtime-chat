@@ -11,9 +11,7 @@ function Example() {
 
                         <div className="card-body">I'm an example component!</div>
                         {
-                             Echo.channel('chat').listen(".ChatMessageWasReceived", (event) => {
-                                console.log(event);
-                              })
+
                         }
                     </div>
                 </div>
