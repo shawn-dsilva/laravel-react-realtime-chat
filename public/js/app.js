@@ -89060,12 +89060,21 @@ var Register = /*#__PURE__*/function (_Component) {
         email: email,
         password: password
       });
-      axios.post("/api/users/register", body, headers).then(function (res) {
-        if (res.message === 'Successfully created user!') {
-          console.log(res.message);
+      var headers = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      axios.post("/api/auth/register", body, headers).then(function (res) {
+        if (res.status === 201) {
+          console.log(res.data.message);
         }
       })["catch"](function (err) {
-        console.log(err);
+        var errors = err.response.data.errors;
+        console.log(errors);
+        Object.values(errors).map(function (error) {
+          console.log(error.toString());
+        });
       });
     });
 

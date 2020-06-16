@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Validation\ValidationException;
+
 class AuthController extends Controller
 {
     /**
@@ -15,22 +17,31 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
-    public function signup(Request $request)
+    public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
-        ]);
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
+        try {
+                $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string'
+            ]);
+                $user = new User([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+                $user->save();
+                return response()->json([
+                'message' => 'Successfully created user!'
+            ], 201);
+        }
+        catch(ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'Error',
+                'errors' => $exception->errors(),
+            ], 422);
+        }
     }
 
     /**

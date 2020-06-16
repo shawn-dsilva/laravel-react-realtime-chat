@@ -28,15 +28,25 @@ class Register extends Component {
 
     const body = JSON.stringify({ name, email, password });
 
+    const headers = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
     axios
-      .post("/api/users/register", body, headers)
+      .post("/api/auth/register", body, headers)
       .then((res) =>{
-        if(res.message === 'Successfully created user!') {
-          console.log(res.message);
+       if(res.status === 201) {
+          console.log(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
+        const errors = err.response.data.errors;
+        console.log(errors);
+        Object.values(errors).map( error => {
+          console.log(error.toString());
+        });
       });
   };
 
