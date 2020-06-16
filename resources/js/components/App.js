@@ -2,14 +2,14 @@
     import React, { Component } from 'react'
     import ReactDOM from 'react-dom'
     import { BrowserRouter, Route, Switch } from 'react-router-dom'
-    import Register from './Register'
+    import Login from './Login'
 
     class App extends Component {
       render () {
         return (
           <BrowserRouter>
             <div>
-              <Register />
+              <Login />
             </div>
           </BrowserRouter>
         )
