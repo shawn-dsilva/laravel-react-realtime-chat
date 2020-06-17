@@ -13,8 +13,9 @@ class SendChatMessage extends Command
     public function handle()
     {
         // Fire off an event, just randomly grabbing the first user for now
+        $user = \App\User::first();
         $message = $this->argument('message');
 
-        event(new \App\Events\ChatMessageWasReceived($message));
+        event(new \App\Events\ChatMessageWasReceived($message, $user));
     }
 }

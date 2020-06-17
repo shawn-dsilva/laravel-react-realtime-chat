@@ -18,14 +18,15 @@ class ChatMessageWasReceived implements ShouldBroadcastNow
     public $chatMessage;
     public $user;
 
-    public function __construct($chatMessage)
+    public function __construct($chatMessage, $user)
     {
         $this->chatMessage = $chatMessage;
+        $this->user = $user;
     }
 
     public function broadcastOn()
     {
-        return new Channel("chat");
+        return new PrivateChannel("chat");
     }
 
     public function broadcastAs() {

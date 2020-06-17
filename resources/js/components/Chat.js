@@ -10,7 +10,7 @@
       }
     }
       componentDidMount () {
-        Echo.channel('chat').listen(".ChatMessageWasReceived", (event) => {
+        Echo.private('chat').listen(".ChatMessageWasReceived", (event) => {
           console.log(event);
           this.setState({
             messages: [...this.state.messages, event.chatMessage ]
