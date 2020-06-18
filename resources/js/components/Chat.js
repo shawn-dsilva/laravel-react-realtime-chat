@@ -1,6 +1,11 @@
 
     import React, { Component } from 'react'
-    import Button from 'reactstrap/lib/Button';
+    import {
+      Button,
+      InputGroup,
+      InputGroupAddon,
+      Input
+    } from 'reactstrap';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
     class Chat extends Component {
@@ -64,11 +69,14 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
         return (
           <div className='container py-4'>
             <h1>Chat Homepage</h1>
+            <Button onClick={this.onLogout}>Logout</Button>
             <ul>
               {this.messageList()}
             </ul>
-            <Button onClick={this.onLogout}>Logout</Button>
-
+            <InputGroup>
+            <Input />
+              <InputGroupAddon addonType="append"><Button onClick={this.submitMessage}>Send Message</Button></InputGroupAddon>
+            </InputGroup>
           </div>
         )
       }
