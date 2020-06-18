@@ -89630,9 +89630,13 @@ var Chat = /*#__PURE__*/function (_Component) {
 
       Echo.join('chat').listen(".ChatMessageWasReceived", function (event) {
         console.log(event);
+        var message = {
+          user: event.user,
+          message: event.chatMessage
+        };
 
         _this2.setState({
-          messages: [].concat(_toConsumableArray(_this2.state.messages), [event.chatMessage])
+          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
         });
       });
     }
@@ -89642,9 +89646,10 @@ var Chat = /*#__PURE__*/function (_Component) {
       var messages = this.state.messages;
       console.log(_typeof(messages));
       var messagelist = messages.map(function (value, index) {
+        console.log(value);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
-        }, value);
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
       });
       return messagelist;
     }
@@ -89653,7 +89658,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container py-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Dummy Div"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.messageList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_lib_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.messageList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap_lib_Button__WEBPACK_IMPORTED_MODULE_1___default.a, {
         onClick: this.onLogout
       }, "Logout"));
     }

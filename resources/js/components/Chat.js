@@ -15,8 +15,12 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
       componentDidMount () {
         Echo.join('chat').listen(".ChatMessageWasReceived", (event) => {
           console.log(event);
+          const message = {
+            user: event.user,
+            message: event.chatMessage
+          }
           this.setState({
-            messages: [...this.state.messages, event.chatMessage ]
+            messages: [...this.state.messages, message ]
           });
         })
       }
@@ -25,7 +29,8 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
         const messages = this.state.messages;
         console.log(typeof(messages));
         const messagelist = messages.map((value, index) => {
-          return <li key={index}>{value}</li>
+          console.log(value)
+          return <li key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</li>
         });
 
         return messagelist;
@@ -58,7 +63,7 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
         return (
           <div className='container py-4'>
-            <h1>Dummy Div</h1>
+            <h1>Chat Homepage</h1>
             <ul>
               {this.messageList()}
             </ul>

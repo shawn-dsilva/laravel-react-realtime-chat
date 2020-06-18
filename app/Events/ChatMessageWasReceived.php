@@ -26,7 +26,7 @@ class ChatMessageWasReceived implements ShouldBroadcastNow
 
     public function broadcastOn()
     {
-        return new PrivateChannel("chat");
+        return new PresenceChannel("chat");
     }
 
     public function broadcastAs() {
