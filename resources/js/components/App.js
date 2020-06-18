@@ -13,12 +13,12 @@
         return (
           <BrowserRouter>
             <div>
-              <Chat/>
-            {/* <Landing/>
             <Switch>
+              <Route exact path ="/" component={Landing}/>
+              <Route exact path ="/chat" component={Chat}/>
               <Route exact path ="/login" component={Login}/>
               <Route exact path ="/register" component={Register}/>
-            </Switch> */}
+            </Switch>
             </div>
           </BrowserRouter>
         )

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
+import Button from 'reactstrap/lib/Button';
 
 export class Landing extends Component {
 
@@ -20,14 +22,21 @@ export class Landing extends Component {
     });
   }
 
+
+
+
   render() {
 
     return (
       <div>
-
+        <ul>
+          <li><a href="register">Register</a></li>
+          <li><a href="login">Login</a></li>
+          <li><a href="chat">Start Chatting</a></li>
+        </ul>
       </div>
     )
   }
 }
 
-export default Landing
+export default withRouter(Landing);

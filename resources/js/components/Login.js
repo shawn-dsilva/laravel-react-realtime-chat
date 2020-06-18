@@ -6,6 +6,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -41,6 +42,7 @@ class Login extends Component {
          console.log(res);
           console.log(res.data.user);
           localStorage.setItem("LRC_Token", res.data.token);
+          this.props.history.push("/chat");
         }
       })
       .catch((err) => {
@@ -88,4 +90,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Login);
