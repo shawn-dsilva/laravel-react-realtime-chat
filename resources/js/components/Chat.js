@@ -54,6 +54,28 @@
               users: [...this.state.users, ...users ]
             });
 
+            let tokenValue = localStorage.getItem("LRC_Token");
+
+            // axios.defaults.headers.common["Authorization"] =
+            // "Bearer " + tokenValue;
+
+            const headers = {
+              headers: {
+                "Authorization":"Bearer "+tokenValue
+              }
+            };
+
+            axios.get("/api/messages", headers)
+              .then((res) =>{
+                console.log(res.data);
+                const messages = res.data;
+                this.setState({
+                  messages: [...this.state.messages, ...messages ]
+                });
+              })
+              .catch((err) => {
+              });
+
             })
             .joining(user => {
 
@@ -94,7 +116,7 @@
             console.log(event);
             const message = {
               user: event.user,
-              message: event.message
+              message: event.message.message
             }
             this.setState({
               messages: [...this.state.messages, message ]

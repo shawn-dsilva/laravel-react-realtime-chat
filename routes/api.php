@@ -28,4 +28,9 @@ Route::group([
     });
 });
 
-Route::post('messages', 'ChatController@sendMessage')->middleware("auth:api");
+Route::group([
+    'middleware' => 'auth:api'
+], function() {
+    Route::post('messages', 'ChatController@sendMessage');
+    Route::get('messages', 'ChatController@getMessages');
+});

@@ -89658,6 +89658,23 @@ var Chat = /*#__PURE__*/function (_Component) {
         _this2.setState({
           users: [].concat(_toConsumableArray(_this2.state.users), _toConsumableArray(users))
         });
+
+        var tokenValue = localStorage.getItem("LRC_Token"); // axios.defaults.headers.common["Authorization"] =
+        // "Bearer " + tokenValue;
+
+        var headers = {
+          headers: {
+            "Authorization": "Bearer " + tokenValue
+          }
+        };
+        axios.get("/api/messages", headers).then(function (res) {
+          console.log(res.data);
+          var messages = res.data;
+
+          _this2.setState({
+            messages: [].concat(_toConsumableArray(_this2.state.messages), _toConsumableArray(messages))
+          });
+        })["catch"](function (err) {});
       }).joining(function (user) {
         console.log("JOINING: " + user.name);
 
@@ -89696,7 +89713,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         console.log(event);
         var message = {
           user: event.user,
-          message: event.message
+          message: event.message.message
         };
 
         _this2.setState({
