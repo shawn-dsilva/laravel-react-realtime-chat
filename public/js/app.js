@@ -89636,7 +89636,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       // if(localStorage.getItem("LRC_Token") !== null) {
-      console.log("IN componentDidMount() token if branch");
       var token = localStorage.getItem("LRC_Token");
       window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
       window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -89652,7 +89651,8 @@ var Chat = /*#__PURE__*/function (_Component) {
         headers: {
           Authorization: 'Bearer ' + token
         }
-      }, window.Echo.join('chat').here(function (users) {
+      };
+      window.Echo.join('chat').here(function (users) {
         console.log(users);
 
         _this2.setState({
@@ -89664,6 +89664,16 @@ var Chat = /*#__PURE__*/function (_Component) {
         _this2.setState({
           users: [].concat(_toConsumableArray(_this2.state.users), [user])
         });
+
+        var message = {
+          user: user,
+          message: "Joined",
+          status: true
+        };
+
+        _this2.setState({
+          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
+        });
       }).leaving(function (user) {
         console.log("LEAVING: " + user.name);
 
@@ -89671,6 +89681,16 @@ var Chat = /*#__PURE__*/function (_Component) {
           users: _this2.state.users.filter(function (u) {
             return u.id !== user.id;
           })
+        });
+
+        var message = {
+          user: user,
+          message: "Left",
+          status: true
+        };
+
+        _this2.setState({
+          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
         });
       }).listen("MessageSent", function (event) {
         console.log(event);
@@ -89691,9 +89711,23 @@ var Chat = /*#__PURE__*/function (_Component) {
 
       var messagelist = messages.map(function (value, index) {
         // console.log(value)
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+        if (value.status === true) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+            className: "my-3",
+            key: index,
+            sm: "6",
+            md: {
+              size: 8,
+              offset: 3
+            }
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, value.user.name), " has ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "text-primary"
+          }, value.message), " the channel");
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+            key: index
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message));
+        }
       });
       return messagelist;
     }
@@ -89706,20 +89740,22 @@ var Chat = /*#__PURE__*/function (_Component) {
         console.log(value);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name, "  < ", value.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
       });
       return userList;
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+        fluid: "true"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Users in this Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.userList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        xs: "auto"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Users in this Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.userList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        xs: "6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout
-      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.messageList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      }, "Logout"), this.messageList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         onChange: this.onChange,
         id: "message",
         name: "message"
@@ -89727,7 +89763,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         addonType: "append"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.sendMessage
-      }, "Send Message"))))));
+      }, "Send ")))))));
     }
   }]);
 
@@ -89936,7 +89972,7 @@ var Login = /*#__PURE__*/function (_Component) {
         id: "email",
         placeholder: "you@youremail.com",
         className: "mb-3",
-        size: "lg",
+        bsSize: "lg",
         onChange: this.onChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         "for": "password"
@@ -89946,14 +89982,14 @@ var Login = /*#__PURE__*/function (_Component) {
         id: "password",
         placeholder: "Enter your Password",
         className: "mb-3",
-        size: "lg",
+        bsSize: "lg",
         onChange: this.onChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         color: "dark",
         className: "mt-5",
         size: "lg",
         block: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Register")))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Login")))));
     }
   }]);
 

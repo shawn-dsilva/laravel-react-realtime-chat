@@ -66,7 +66,7 @@ class Login extends Component {
                   id="email"
                   placeholder="you@youremail.com"
                   className="mb-3"
-                  size="lg"
+                  bsSize="lg"
                   onChange={this.onChange}
                 />
 
@@ -77,11 +77,11 @@ class Login extends Component {
                   id="password"
                   placeholder="Enter your Password"
                   className="mb-3"
-                  size="lg"
+                  bsSize="lg"
                   onChange={this.onChange}
                 />
                 <Button color="dark" className="mt-5" size="lg" block>
-              <span>Register</span>
+              <span>Login</span>
                 </Button>
               </FormGroup>
             </Form>

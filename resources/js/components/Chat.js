@@ -19,6 +19,8 @@
           users: []
       }
 
+
+
       componentDidMount () {
 
         // if(localStorage.getItem("LRC_Token") !== null) {
@@ -42,7 +44,7 @@
             headers: {
                 Authorization: 'Bearer ' + token,
             },
-          },
+          }
 
           window.Echo.join('chat')
           .here(users => {
@@ -60,13 +62,34 @@
                   users: [...this.state.users, user ]
                 });
 
+                const message = {
+                  user: user,
+                  message: "Joined",
+                  status:true
+                }
+                this.setState({
+                  messages: [...this.state.messages, message ]
+                });
+
+
             })
             .leaving(user => {
               console.log("LEAVING: "+user.name);
                 this.setState({
                   users: this.state.users.filter(u => u.id !== user.id)
                 });
+
+                const message = {
+                  user: user,
+                  message: "Left",
+                  status:true
+                }
+                this.setState({
+                  messages: [...this.state.messages, message ]
+                });
+
             })
+
             .listen("MessageSent", (event) => {
             console.log(event);
             const message = {
@@ -85,7 +108,13 @@
         // console.log(typeof(messages));
         const messagelist = messages.map((value, index) => {
           // console.log(value)
-          return <li key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</li>
+          if(value.status === true) {
+            return <Col className="my-3" key={index} sm="6" md={{size: 8, offset: 3}}><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
+          } else {
+            return <Row>
+              <Col key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+              </Row>
+          }
         });
 
         return messagelist;
@@ -98,7 +127,7 @@
 
         const userList = users.map((value, index) => {
           console.log(value)
-          return <li key={index}><b>{value.name }  &lt; { value.email }  &gt;  :</b> <br></br> {value.message}</li>
+          return <li key={index}><b>{value.name }</b></li>
         });
 
         return userList;
@@ -177,27 +206,27 @@
       render () {
 
         return (
-          <Container>
+          <div>
+          <Container fluid="true">
             <Row>
               <Col xs="3">
-                <h2>Users in this Room</h2>
+                <h3>Users in this Room</h3>
                 <ul>
                   {this.userList()}
                 </ul>
               </Col>
-              <Col xs="auto">
+              <Col xs="6">
                 <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
-                <ul>
                   {this.messageList()}
-                </ul>
                 <InputGroup>
                 <Input onChange={this.onChange} id="message" name="message" />
-                  <InputGroupAddon addonType="append"><Button onClick={this.sendMessage}>Send Message</Button></InputGroupAddon>
+                  <InputGroupAddon addonType="append"><Button onClick={this.sendMessage}>Send </Button></InputGroupAddon>
                 </InputGroup>
               </Col>
             </Row>
           </Container>
+          </div>
         )
       }
     }
