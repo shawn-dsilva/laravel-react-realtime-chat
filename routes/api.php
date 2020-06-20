@@ -27,3 +27,5 @@ Route::group([
         Route::get('user', 'AuthController@user');
     });
 });
+
+Route::post('messages', 'ChatController@sendMessage')->middleware("auth:api");
