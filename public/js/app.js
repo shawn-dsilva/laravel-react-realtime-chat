@@ -89574,12 +89574,33 @@ var Chat = /*#__PURE__*/function (_Component) {
       messages: [],
       message: "",
       users: [],
-      allUsers: []
+      allUsers: [],
+      currUser: "",
+      token: "",
+      selectedChannel: ""
     });
 
     _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
       event.stopPropagation();
       console.log(id);
+      var body = "{ \"receiver\": ".concat(id, " }");
+      var headers = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      var tokenValue = localStorage.getItem("LRC_Token");
+      axios.defaults.headers.common["Authorization"] = "Bearer " + tokenValue;
+      console.log(body);
+      axios.post("/api/directmessage", body, headers).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        var errors = err.response.data.errors;
+        console.log(errors);
+        Object.values(errors).map(function (error) {
+          console.log(error.toString());
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -89642,6 +89663,17 @@ var Chat = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       // if(localStorage.getItem("LRC_Token") !== null) {
+      var tokenValueA = localStorage.getItem("LRC_Token");
+      axios.defaults.headers.common["Authorization"] = "Bearer " + tokenValueA;
+      axios.get("/api/auth/user").then(function (res) {
+        // if(res.status === 201) {
+        console.log(res.data);
+
+        _this2.setState({
+          currUser: res.data
+        }); // }
+
+      })["catch"](function (err) {});
       var token = localStorage.getItem("LRC_Token");
       window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
       window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -89789,7 +89821,11 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function allUserList() {
       var _this3 = this;
 
-      var users = this.state.allUsers; // console.log(typeof(users));
+      console.log("CURRENT USER BELOW ");
+      console.log(this.state.currUser);
+      var users = this.state.allUsers.filter(function (u) {
+        return u.id !== _this3.state.currUser.id;
+      }); // console.log(typeof(users));
 
       var userList = users.map(function (value, index) {
         console.log(value);

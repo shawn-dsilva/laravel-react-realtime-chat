@@ -17,7 +17,11 @@
           messages:[],
           message:"",
           users: [],
-          allUsers: []
+          allUsers: [],
+          currUser:"",
+          token:"",
+          selectedChannel:""
+
       }
 
 
@@ -25,6 +29,24 @@
       componentDidMount () {
 
         // if(localStorage.getItem("LRC_Token") !== null) {
+          let tokenValueA = localStorage.getItem("LRC_Token");
+
+          axios.defaults.headers.common["Authorization"] =
+          "Bearer " + tokenValueA;
+
+          axios.get("/api/auth/user")
+          .then((res) =>{
+            // if(res.status === 201) {
+              console.log(res.data);
+              this.setState({
+                currUser:  res.data
+              });
+
+            // }
+          })
+          .catch((err) => {
+
+          });
 
           let token = localStorage.getItem("LRC_Token");
 
@@ -178,7 +200,9 @@
       }
 
       allUserList() {
-        const users = this.state.allUsers;
+        console.log("CURRENT USER BELOW ");
+        console.log(this.state.currUser);
+        const users = this.state.allUsers.filter(u => u.id !== this.state.currUser.id);
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
@@ -195,6 +219,32 @@
         event.stopPropagation();
         console.log(id);
 
+        const body = `{ "receiver": ${id} }`;
+
+        const headers = {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+
+        let tokenValue = localStorage.getItem("LRC_Token");
+
+        axios.defaults.headers.common["Authorization"] =
+        "Bearer " + tokenValue;
+
+        console.log(body);
+        axios
+          .post("/api/directmessage", body, headers)
+          .then((res) =>{
+             console.log(res.data);
+          })
+          .catch((err) => {
+            const errors = err.response.data.errors;
+            console.log(errors);
+            Object.values(errors).map( error => {
+              console.log(error.toString());
+            });
+          });
       }
 
       onLogout = () => {
