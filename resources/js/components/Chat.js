@@ -237,6 +237,7 @@
           .post("/api/directmessage", body, headers)
           .then((res) =>{
              console.log(res.data);
+             this.setState({ selectedChannel: res.data});
           })
           .catch((err) => {
             const errors = err.response.data.errors;
