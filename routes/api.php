@@ -33,4 +33,6 @@ Route::group([
 ], function() {
     Route::post('messages', 'ChatController@sendMessage');
     Route::get('messages', 'ChatController@getMessages');
+    Route::post('directmessage', 'ChatController@directMessage');
+
 });

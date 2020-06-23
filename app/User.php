@@ -42,4 +42,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function channels() {
+        return $this->belongsToMany('App\Channel', 'user_channel')->withTimestamps();
+    }
 }

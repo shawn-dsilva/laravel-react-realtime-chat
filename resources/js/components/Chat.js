@@ -231,8 +231,8 @@
           <div>
           <Container fluid="true">
             <Row>
-              <Col xs="3">
-                <h3>Users in this Room</h3>
+            <Col xs="3">
+                <h3>Direct Message</h3>
                 <ul>
                   {this.userList()}
                 </ul>
@@ -245,6 +245,12 @@
                 <Input onChange={this.onChange} id="message" name="message" />
                   <InputGroupAddon addonType="append"><Button onClick={this.sendMessage}>Send </Button></InputGroupAddon>
                 </InputGroup>
+              </Col>
+              <Col xs="3">
+                <h3>Users in this Room</h3>
+                <ul>
+                  {this.userList()}
+                </ul>
               </Col>
             </Row>
           </Container>
