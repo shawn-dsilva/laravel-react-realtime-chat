@@ -89573,7 +89573,13 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       messages: [],
       message: "",
-      users: []
+      users: [],
+      allUsers: []
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
+      event.stopPropagation();
+      console.log(id);
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -89720,6 +89726,23 @@ var Chat = /*#__PURE__*/function (_Component) {
           messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
         });
       }); // }
+
+      var tokenValue = localStorage.getItem("LRC_Token"); // axios.defaults.headers.common["Authorization"] =
+      // "Bearer " + tokenValue;
+
+      var headers = {
+        headers: {
+          "Authorization": "Bearer " + tokenValue
+        }
+      };
+      axios.get("/api/allusers", headers).then(function (res) {
+        console.log(res.data);
+        var users = res.data;
+
+        _this2.setState({
+          allUsers: [].concat(_toConsumableArray(_this2.state.allUsers), _toConsumableArray(users))
+        });
+      })["catch"](function (err) {});
     }
   }, {
     key: "messageList",
@@ -89762,13 +89785,30 @@ var Chat = /*#__PURE__*/function (_Component) {
       return userList;
     }
   }, {
+    key: "allUserList",
+    value: function allUserList() {
+      var _this3 = this;
+
+      var users = this.state.allUsers; // console.log(typeof(users));
+
+      var userList = users.map(function (value, index) {
+        console.log(value);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          onClick: _this3.dmSelect.bind(_this3, value.id),
+          id: value.id,
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      });
+      return userList;
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.userList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.allUserList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout

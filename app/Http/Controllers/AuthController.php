@@ -104,4 +104,11 @@ class AuthController extends Controller
             'user' => $request->user()
             ]);
     }
+
+    public function allUsersList()
+    {
+        $allUsersList = User::all()->toArray();
+
+        return response()->json($allUsersList);
+    }
 }

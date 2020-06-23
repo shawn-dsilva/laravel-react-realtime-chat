@@ -34,5 +34,7 @@ Route::group([
     Route::post('messages', 'ChatController@sendMessage');
     Route::get('messages', 'ChatController@getMessages');
     Route::post('directmessage', 'ChatController@directMessage');
+    Route::get('allusers', 'AuthController@allUsersList');
+
 
 });

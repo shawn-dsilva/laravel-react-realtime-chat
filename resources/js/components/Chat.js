@@ -16,7 +16,8 @@
         state = {
           messages:[],
           message:"",
-          users: []
+          users: [],
+          allUsers: []
       }
 
 
@@ -123,6 +124,27 @@
             });
           })
         // }
+        let tokenValue = localStorage.getItem("LRC_Token");
+
+            // axios.defaults.headers.common["Authorization"] =
+            // "Bearer " + tokenValue;
+
+            const headers = {
+              headers: {
+                "Authorization":"Bearer "+tokenValue
+              }
+            };
+
+            axios.get("/api/allusers", headers)
+              .then((res) =>{
+                console.log(res.data);
+                const users = res.data;
+                this.setState({
+                  allUsers: [...this.state.allUsers, ...users ]
+                });
+              })
+              .catch((err) => {
+              });
       }
 
       messageList() {
@@ -153,6 +175,26 @@
         });
 
         return userList;
+      }
+
+      allUserList() {
+        const users = this.state.allUsers;
+        // console.log(typeof(users));
+
+        const userList = users.map((value, index) => {
+          console.log(value)
+          return <Col> <Button onClick={this.dmSelect.bind(this, value.id)} id={value.id} key={index}><b>{value.name }</b></Button>
+          <br></br>
+          </Col>
+        });
+
+        return userList;
+      }
+
+      dmSelect = (id, event ) => {
+        event.stopPropagation();
+        console.log(id);
+
       }
 
       onLogout = () => {
@@ -234,7 +276,7 @@
             <Col xs="3">
                 <h3>Direct Message</h3>
                 <ul>
-                  {this.userList()}
+                  {this.allUserList()}
                 </ul>
               </Col>
               <Col xs="6">
