@@ -89590,8 +89590,14 @@ var Chat = /*#__PURE__*/function (_Component) {
         console.log(res.data);
 
         _this.setState({
-          selectedChannel: res.data
+          selectedChannel: res.data.id
         });
+
+        _this.setState({
+          messages: []
+        });
+
+        _this.getMessages();
       })["catch"](function (err) {
         var errors = err.response.data.errors;
         console.log(errors);
@@ -89599,6 +89605,22 @@ var Chat = /*#__PURE__*/function (_Component) {
           console.log(error.toString());
         });
       });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (id, event) {
+      event.stopPropagation();
+
+      _this.setState({
+        selectedChannel: id
+      }, function () {
+        _this.setState({
+          messages: []
+        });
+
+        _this.getMessages();
+      });
+
+      ;
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -89627,8 +89649,11 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "sendMessage", function (e) {
       e.preventDefault();
       var message = _this.state.message;
+      var channel_id = _this.state.selectedChannel[0].id;
+      console.log(_this.state.selectedChannel);
       var body = JSON.stringify({
-        message: message
+        message: message,
+        channel_id: channel_id
       });
       var headers = {
         headers: {
@@ -89648,6 +89673,25 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "getMessages", function () {
+      var headers = {
+        headers: {
+          "Authorization": "Bearer " + _this.myToken
+        }
+      };
+      console.log("CURRENTLY SELECTED CHANNEL BELOW");
+      console.log(_this.state.selectedChannel);
+      axios.get("/api/messages/".concat(_this.state.selectedChannel), headers).then(function (res) {
+        console.log("GET MESSAGES OUTPUT BELOW");
+        console.log(res.data);
+        var messages = res.data;
+
+        _this.setState({
+          messages: [].concat(_toConsumableArray(_this.state.messages), _toConsumableArray(messages))
+        });
+      })["catch"](function (err) {});
+    });
+
     _this.myToken = localStorage.getItem("LRC_Token");
     return _this;
   }
@@ -89657,8 +89701,6 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // this.myToken = localStorage.getItem("LRC_Token");
-      // if(localStorage.getItem("LRC_Token") !== null) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + this.myToken;
       axios.get("/api/auth/user").then(function (res) {
         // if(res.status === 201) {
@@ -89666,6 +89708,10 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         _this2.setState({
           currUser: res.data
+        });
+
+        _this2.setState({
+          selectedChannel: 5
         }); // }
 
       })["catch"](function (err) {});
@@ -89691,19 +89737,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           users: [].concat(_toConsumableArray(_this2.state.users), _toConsumableArray(users))
         });
 
-        var headers = {
-          headers: {
-            "Authorization": "Bearer " + _this2.myToken
-          }
-        };
-        axios.get("/api/messages", headers).then(function (res) {
-          console.log(res.data);
-          var messages = res.data;
-
-          _this2.setState({
-            messages: [].concat(_toConsumableArray(_this2.state.messages), _toConsumableArray(messages))
-          });
-        })["catch"](function (err) {});
+        _this2.getMessages();
       }).joining(function (user) {
         console.log("JOINING: " + user.name);
 
@@ -89816,7 +89850,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       }); // console.log(typeof(users));
 
       var userList = users.map(function (value, index) {
-        console.log(value);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
           onClick: _this3.dmSelect.bind(_this3, value.id),
           id: value.id,
@@ -89832,7 +89865,11 @@ var Chat = /*#__PURE__*/function (_Component) {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), this.allUserList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: this.channelSelect.bind(this, 5),
+        id: "5",
+        key: "5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), this.allUserList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout

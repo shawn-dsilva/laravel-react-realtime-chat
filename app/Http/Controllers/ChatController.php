@@ -25,7 +25,7 @@ class ChatController extends Controller
 
     public function getMessages(Request $request, $channel_id)
     {
-        return Message::find("channel_id", $channel_id)->get();
+        return Message::where("channel_id", $channel_id)->with('user')->get();
     }
 
     public function sendMessage(Request $request)
@@ -49,7 +49,7 @@ class ChatController extends Controller
              $q->where('user_id',$sender  );
         })->whereHas('users', function($q) use ($receiver) {
             $q->where('user_id',$receiver);
-        })->get()->toArray();
+        })->first();
 
         if(!empty($channelIsFound)) {
             $channel = $channelIsFound;

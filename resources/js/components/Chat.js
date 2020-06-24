@@ -42,6 +42,9 @@
               this.setState({
                 currUser:  res.data
               });
+              this.setState({
+                selectedChannel: 5
+              })
 
             // }
           })
@@ -77,22 +80,7 @@
               users: [...this.state.users, ...users ]
             });
 
-            const headers = {
-              headers: {
-                "Authorization":"Bearer "+this.myToken
-              }
-            };
-
-            axios.get("/api/messages", headers)
-              .then((res) =>{
-                console.log(res.data);
-                const messages = res.data;
-                this.setState({
-                  messages: [...this.state.messages, ...messages ]
-                });
-              })
-              .catch((err) => {
-              });
+            this.getMessages();
 
             })
             .joining(user => {
@@ -199,7 +187,6 @@
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
-          console.log(value)
           return <Col> <Button onClick={this.dmSelect.bind(this, value.id)} id={value.id} key={index}><b>{value.name }</b></Button>
           <br></br>
           </Col>
@@ -229,7 +216,9 @@
           .post("/api/directmessage", body, headers)
           .then((res) =>{
              console.log(res.data);
-             this.setState({ selectedChannel: res.data});
+             this.setState({ selectedChannel: res.data.id});
+             this.setState({ messages: []});
+             this.getMessages();
           })
           .catch((err) => {
             const errors = err.response.data.errors;
@@ -238,6 +227,16 @@
               console.log(error.toString());
             });
           });
+      }
+
+      channelSelect = (id, event) => {
+        event.stopPropagation();
+        this.setState({ selectedChannel: id}, () => {
+          this.setState({ messages: []});
+          this.getMessages()
+        });
+
+;
       }
 
       onLogout = () => {
@@ -273,8 +272,9 @@
         e.preventDefault();
 
         const message = this.state.message;
-
-        const body = JSON.stringify({ message });
+        const channel_id = this.state.selectedChannel[0].id;
+        console.log(this.state.selectedChannel);
+        const body = JSON.stringify({ message, channel_id });
 
         const headers = {
           headers: {
@@ -302,6 +302,29 @@
 
       };
 
+      getMessages = () => {
+        const headers = {
+          headers: {
+            "Authorization":"Bearer "+this.myToken
+          }
+        };
+
+        console.log("CURRENTLY SELECTED CHANNEL BELOW");
+        console.log(this.state.selectedChannel)
+
+        axios.get(`/api/messages/${this.state.selectedChannel}`, headers)
+          .then((res) =>{
+
+            console.log("GET MESSAGES OUTPUT BELOW");
+            console.log(res.data);
+            const messages = res.data;
+            this.setState({
+              messages: [...this.state.messages, ...messages ]
+            });
+          })
+          .catch((err) => {
+          });
+      }
 
 
       render () {
@@ -311,6 +334,10 @@
           <Container fluid="true">
             <Row>
             <Col xs="3">
+              <h3>Channels</h3>
+               <Col> <Button onClick={this.channelSelect.bind(this, 5)} id="5" key="5"><b> General</b></Button>
+          <br></br>
+          </Col>
                 <h3>Direct Message</h3>
                   {this.allUserList()}
               </Col>

@@ -3,7 +3,6 @@
 ## TODO
 
 ### Immediate
-- Rework message model to include channel ID
 - Add Online/Offline and Typing events support.
 
 ### Later
@@ -15,3 +14,4 @@
 
 ### Done
   - Add token in constructor to prevent repetition.
+  - Rework message model to include channel ID
