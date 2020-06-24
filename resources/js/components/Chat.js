@@ -19,20 +19,22 @@
           users: [],
           allUsers: [],
           currUser:"",
-          token:"",
           selectedChannel:""
 
       }
 
-
+      constructor(props) {
+        super(props);
+        this.myToken = "";
+    }
 
       componentDidMount () {
 
+        this.myToken = localStorage.getItem("LRC_Token");
         // if(localStorage.getItem("LRC_Token") !== null) {
-          let tokenValueA = localStorage.getItem("LRC_Token");
 
           axios.defaults.headers.common["Authorization"] =
-          "Bearer " + tokenValueA;
+          "Bearer " + this.myToken;
 
           axios.get("/api/auth/user")
           .then((res) =>{
@@ -48,7 +50,6 @@
 
           });
 
-          let token = localStorage.getItem("LRC_Token");
 
           window.Pusher = require('pusher-js');
 
@@ -62,10 +63,10 @@
               forceTLS: false
           });
 
-          window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + token
+          window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + this.myToken
           window.Echo.options.auth = {
             headers: {
-                Authorization: 'Bearer ' + token,
+                Authorization: 'Bearer ' + this.myToken,
             },
           }
 
@@ -77,14 +78,9 @@
               users: [...this.state.users, ...users ]
             });
 
-            let tokenValue = localStorage.getItem("LRC_Token");
-
-            // axios.defaults.headers.common["Authorization"] =
-            // "Bearer " + tokenValue;
-
             const headers = {
               headers: {
-                "Authorization":"Bearer "+tokenValue
+                "Authorization":"Bearer "+this.myToken
               }
             };
 
@@ -146,14 +142,12 @@
             });
           })
         // }
-        let tokenValue = localStorage.getItem("LRC_Token");
 
-            // axios.defaults.headers.common["Authorization"] =
-            // "Bearer " + tokenValue;
+
 
             const headers = {
               headers: {
-                "Authorization":"Bearer "+tokenValue
+                "Authorization":"Bearer "+this.myToken
               }
             };
 
@@ -227,10 +221,9 @@
           }
         };
 
-        let tokenValue = localStorage.getItem("LRC_Token");
 
         axios.defaults.headers.common["Authorization"] =
-        "Bearer " + tokenValue;
+        "Bearer " + this.myToken;
 
         console.log(body);
         axios
@@ -250,15 +243,10 @@
 
       onLogout = () => {
 
-           let tokenValue = localStorage.getItem("LRC_Token");
-
-            // axios.defaults.headers.common["Authorization"] =
-            // "Bearer " + tokenValue;
-
             const headers = {
               headers: {
                 "Content-Type": "application/json",
-                "Authorization":"Bearer "+tokenValue
+                "Authorization":"Bearer "+this.myToken
               }
             };
 
@@ -295,10 +283,9 @@
           }
         };
 
-        let tokenValue = localStorage.getItem("LRC_Token");
 
         axios.defaults.headers.common["Authorization"] =
-        "Bearer " + tokenValue;
+        "Bearer " + this.myToken;
 
         console.log(body);
         axios

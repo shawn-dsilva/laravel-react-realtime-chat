@@ -89559,16 +89559,12 @@ var Chat = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Chat);
 
-  function Chat() {
+  function Chat(props) {
     var _this;
 
     _classCallCheck(this, Chat);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _super.call.apply(_super, [this].concat(args));
+    _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       messages: [],
@@ -89589,11 +89585,14 @@ var Chat = /*#__PURE__*/function (_Component) {
           "Content-Type": "application/json"
         }
       };
-      var tokenValue = localStorage.getItem("LRC_Token");
-      axios.defaults.headers.common["Authorization"] = "Bearer " + tokenValue;
+      axios.defaults.headers.common["Authorization"] = "Bearer " + _this.myToken;
       console.log(body);
       axios.post("/api/directmessage", body, headers).then(function (res) {
         console.log(res.data);
+
+        _this.setState({
+          selectedChannel: res.data
+        });
       })["catch"](function (err) {
         var errors = err.response.data.errors;
         console.log(errors);
@@ -89610,7 +89609,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       var headers = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + tokenValue
+          "Authorization": "Bearer " + _this.myToken
         }
       };
       axios.get("/api/auth/logout", headers).then(function (res) {
@@ -89640,8 +89639,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           "Content-Type": "application/json"
         }
       };
-      var tokenValue = localStorage.getItem("LRC_Token");
-      axios.defaults.headers.common["Authorization"] = "Bearer " + tokenValue;
+      axios.defaults.headers.common["Authorization"] = "Bearer " + _this.myToken;
       console.log(body);
       axios.post("/api/messages", body, headers).then(function (res) {
         console.log(res);
@@ -89654,6 +89652,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _this.myToken = "";
     return _this;
   }
 
@@ -89662,9 +89661,10 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      // if(localStorage.getItem("LRC_Token") !== null) {
-      var tokenValueA = localStorage.getItem("LRC_Token");
-      axios.defaults.headers.common["Authorization"] = "Bearer " + tokenValueA;
+      var ThemeContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext('name');
+      this.myToken = localStorage.getItem("LRC_Token"); // if(localStorage.getItem("LRC_Token") !== null) {
+
+      axios.defaults.headers.common["Authorization"] = "Bearer " + this.myToken;
       axios.get("/api/auth/user").then(function (res) {
         // if(res.status === 201) {
         console.log(res.data);
@@ -89674,7 +89674,6 @@ var Chat = /*#__PURE__*/function (_Component) {
         }); // }
 
       })["catch"](function (err) {});
-      var token = localStorage.getItem("LRC_Token");
       window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
       window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
         broadcaster: 'pusher',
@@ -89684,10 +89683,10 @@ var Chat = /*#__PURE__*/function (_Component) {
         disableStats: true,
         forceTLS: false
       });
-      window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + token;
+      window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + this.myToken;
       window.Echo.options.auth = {
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + this.myToken
         }
       };
       window.Echo.join('chat').here(function (users) {
@@ -89695,14 +89694,13 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         _this2.setState({
           users: [].concat(_toConsumableArray(_this2.state.users), _toConsumableArray(users))
-        });
-
-        var tokenValue = localStorage.getItem("LRC_Token"); // axios.defaults.headers.common["Authorization"] =
+        }); // axios.defaults.headers.common["Authorization"] =
         // "Bearer " + tokenValue;
+
 
         var headers = {
           headers: {
-            "Authorization": "Bearer " + tokenValue
+            "Authorization": "Bearer " + _this2.myToken
           }
         };
         axios.get("/api/messages", headers).then(function (res) {
@@ -89758,13 +89756,12 @@ var Chat = /*#__PURE__*/function (_Component) {
           messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
         });
       }); // }
-
-      var tokenValue = localStorage.getItem("LRC_Token"); // axios.defaults.headers.common["Authorization"] =
+      // axios.defaults.headers.common["Authorization"] =
       // "Bearer " + tokenValue;
 
       var headers = {
         headers: {
-          "Authorization": "Bearer " + tokenValue
+          "Authorization": "Bearer " + this.myToken
         }
       };
       axios.get("/api/allusers", headers).then(function (res) {

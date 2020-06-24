@@ -3,7 +3,6 @@
 ## TODO
 
 ### Immediate
-- Add token to state to prevent repetition.
 - Rework message model to include channel ID
 - Add Online/Offline and Typing events support.
 
@@ -13,3 +12,6 @@
 - Add User profiles which are hyper linked.
 - Add support for user made channels, public and private/invite-only.
 - Unread messages notification
+
+### Done
+  - Add token in constructor to prevent repetition.
