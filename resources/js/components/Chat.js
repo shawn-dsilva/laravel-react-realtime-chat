@@ -25,13 +25,12 @@
 
       constructor(props) {
         super(props);
-        this.myToken = "";
+        this.myToken = localStorage.getItem("LRC_Token");
     }
 
       componentDidMount () {
 
-        this.myToken = localStorage.getItem("LRC_Token");
-        // if(localStorage.getItem("LRC_Token") !== null) {
+
 
           axios.defaults.headers.common["Authorization"] =
           "Bearer " + this.myToken;
@@ -313,9 +312,7 @@
             <Row>
             <Col xs="3">
                 <h3>Direct Message</h3>
-                <ul>
                   {this.allUserList()}
-                </ul>
               </Col>
               <Col xs="6">
                 <h1>Chat Homepage</h1>

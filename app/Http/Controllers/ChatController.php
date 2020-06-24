@@ -23,18 +23,19 @@ class ChatController extends Controller
     //     return view('chat');
     // }
 
-    public function getMessages()
+    public function getMessages(Request $request, $channel_id)
     {
-        return Message::with('user')->get();
+        return Message::find("channel_id", $channel_id)->get();
     }
 
     public function sendMessage(Request $request)
     {
         $message = auth()->user()->messages()->create([
-            'message' => $request->message
+            'message' => $request->message,
+            'channel_id' => $request->channel_id
         ]);
 
-		broadcast(new MessageSent($request->user(), $message));
+		broadcast(new MessageSent($request->user(), $message, $request->channel_id));
 
         return ['status' => 'Message Sent!'];
     }

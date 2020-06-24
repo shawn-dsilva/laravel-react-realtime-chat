@@ -32,7 +32,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function() {
     Route::post('messages', 'ChatController@sendMessage');
-    Route::get('messages', 'ChatController@getMessages');
+    Route::get('messages/{channel_id}', 'ChatController@getMessages');
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');
 

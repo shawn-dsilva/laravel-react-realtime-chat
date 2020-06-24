@@ -89572,7 +89572,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       users: [],
       allUsers: [],
       currUser: "",
-      token: "",
       selectedChannel: ""
     });
 
@@ -89603,9 +89602,6 @@ var Chat = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
-      var tokenValue = localStorage.getItem("LRC_Token"); // axios.defaults.headers.common["Authorization"] =
-      // "Bearer " + tokenValue;
-
       var headers = {
         headers: {
           "Content-Type": "application/json",
@@ -89652,7 +89648,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _this.myToken = "";
+    _this.myToken = localStorage.getItem("LRC_Token");
     return _this;
   }
 
@@ -89661,9 +89657,8 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var ThemeContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext('name');
-      this.myToken = localStorage.getItem("LRC_Token"); // if(localStorage.getItem("LRC_Token") !== null) {
-
+      // this.myToken = localStorage.getItem("LRC_Token");
+      // if(localStorage.getItem("LRC_Token") !== null) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + this.myToken;
       axios.get("/api/auth/user").then(function (res) {
         // if(res.status === 201) {
@@ -89694,9 +89689,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         _this2.setState({
           users: [].concat(_toConsumableArray(_this2.state.users), _toConsumableArray(users))
-        }); // axios.defaults.headers.common["Authorization"] =
-        // "Bearer " + tokenValue;
-
+        });
 
         var headers = {
           headers: {
@@ -89756,8 +89749,6 @@ var Chat = /*#__PURE__*/function (_Component) {
           messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
         });
       }); // }
-      // axios.defaults.headers.common["Authorization"] =
-      // "Bearer " + tokenValue;
 
       var headers = {
         headers: {
@@ -89841,7 +89832,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.allUserList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), this.allUserList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout
