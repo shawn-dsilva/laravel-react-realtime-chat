@@ -3,6 +3,7 @@
 ## TODO
 
 ### Immediate
+- Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
 - Add Online/Offline and Typing events support.
 
 ### Later

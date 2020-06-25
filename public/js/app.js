@@ -89649,7 +89649,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "sendMessage", function (e) {
       e.preventDefault();
       var message = _this.state.message;
-      var channel_id = _this.state.selectedChannel[0].id;
+      var channel_id = _this.state.selectedChannel;
       console.log(_this.state.selectedChannel);
       var body = JSON.stringify({
         message: message,

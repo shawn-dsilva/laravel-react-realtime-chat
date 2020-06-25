@@ -272,7 +272,7 @@
         e.preventDefault();
 
         const message = this.state.message;
-        const channel_id = this.state.selectedChannel[0].id;
+        const channel_id = this.state.selectedChannel;
         console.log(this.state.selectedChannel);
         const body = JSON.stringify({ message, channel_id });
 
