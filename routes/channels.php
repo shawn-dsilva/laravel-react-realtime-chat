@@ -17,6 +17,12 @@ Broadcast::channel('chat', function ($user) {
 	return $user;
 });
 
+Broadcast::channel('chat.channel.{channel_id}', function ($user, $channel_id) {
+	if($channel_id == 5) {
+		return $user;
+	}
+});
+
 Broadcast::channel('chat.dm.{channel_id}', function ($user, $channel_id) {
 	// return $user->id === Channel::find($channel_id)->user_id;
 return 	User::where('id', $user->id)->whereHas('channels', function ($q) use ($channel_id) {

@@ -72,65 +72,7 @@
             },
           }
 
-          window.Echo.join('chat')
-          .here(users => {
-
-            console.log(users);
-            this.setState({
-              users: [...this.state.users, ...users ]
-            });
-
-            this.getMessages();
-
-            })
-            .joining(user => {
-
-              console.log("JOINING: "+user.name);
-              this.setState({
-                  users: [...this.state.users, user ]
-                });
-
-                const message = {
-                  user: user,
-                  message: "Joined",
-                  status:true
-                }
-                this.setState({
-                  messages: [...this.state.messages, message ]
-                });
-
-
-            })
-            .leaving(user => {
-              console.log("LEAVING: "+user.name);
-                this.setState({
-                  users: this.state.users.filter(u => u.id !== user.id)
-                });
-
-                const message = {
-                  user: user,
-                  message: "Left",
-                  status:true
-                }
-                this.setState({
-                  messages: [...this.state.messages, message ]
-                });
-
-            })
-
-            .listen("MessageSent", (event) => {
-            console.log(event);
-            const message = {
-              user: event.user,
-              message: event.message.message
-            }
-            this.setState({
-              messages: [...this.state.messages, message ]
-            });
-          })
-        // }
-
-
+          window.Echo.join('chat');
 
             const headers = {
               headers: {
@@ -148,6 +90,8 @@
               })
               .catch((err) => {
               });
+
+              this.channelSelect(5);
       }
 
       messageList() {
@@ -241,13 +185,59 @@
       }
 
       channelSelect = (id, event) => {
-        event.stopPropagation();
+        if(event !== undefined) {
+          event.stopPropagation();
+        }
+
         this.setState({ selectedChannel: id}, () => {
           this.setState({ messages: []});
-          this.getMessages()
-        });
+          this.getMessages();
+          console.log("SELECTED CHANNEL IN channelSelect()");
+          console.log(this.state.selectedChannel);
+          window.Echo.join(`chat.channel.${this.state.selectedChannel}`)
+          .here(users => {
+            this.setState({
+              users: [...this.state.users, ...users ]
+            });
+            })
+            .joining(user => {
+              this.setState({
+                  users: [...this.state.users, user ]
+                });
+                const message = {
+                  user: user,
+                  message: "Joined",
+                  status:true
+                }
+                this.setState({
+                  messages: [...this.state.messages, message ]
+                });
+            })
+            .leaving(user => {
+                this.setState({
+                  users: this.state.users.filter(u => u.id !== user.id)
+                });
+                const message = {
+                  user: user,
+                  message: "Left",
+                  status:true
+                }
+                this.setState({
+                  messages: [...this.state.messages, message ]
+                });
 
-;
+            })
+            .listen("MessageSent", (event) => {
+            console.log(event);
+            const message = {
+              user: event.user,
+              message: event.message.message
+            }
+            this.setState({
+              messages: [...this.state.messages, message ]
+            });
+          });
+        });
       }
 
       onLogout = () => {

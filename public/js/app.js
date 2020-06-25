@@ -89620,7 +89620,9 @@ var Chat = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (id, event) {
-      event.stopPropagation();
+      if (event !== undefined) {
+        event.stopPropagation();
+      }
 
       _this.setState({
         selectedChannel: id
@@ -89630,9 +89632,55 @@ var Chat = /*#__PURE__*/function (_Component) {
         });
 
         _this.getMessages();
-      });
 
-      ;
+        console.log("SELECTED CHANNEL IN channelSelect()");
+        console.log(_this.state.selectedChannel);
+        window.Echo.join("chat.channel.".concat(_this.state.selectedChannel)).here(function (users) {
+          _this.setState({
+            users: [].concat(_toConsumableArray(_this.state.users), _toConsumableArray(users))
+          });
+        }).joining(function (user) {
+          _this.setState({
+            users: [].concat(_toConsumableArray(_this.state.users), [user])
+          });
+
+          var message = {
+            user: user,
+            message: "Joined",
+            status: true
+          };
+
+          _this.setState({
+            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+          });
+        }).leaving(function (user) {
+          _this.setState({
+            users: _this.state.users.filter(function (u) {
+              return u.id !== user.id;
+            })
+          });
+
+          var message = {
+            user: user,
+            message: "Left",
+            status: true
+          };
+
+          _this.setState({
+            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+          });
+        }).listen("MessageSent", function (event) {
+          console.log(event);
+          var message = {
+            user: event.user,
+            message: event.message.message
+          };
+
+          _this.setState({
+            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+          });
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -89742,60 +89790,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           Authorization: 'Bearer ' + this.myToken
         }
       };
-      window.Echo.join('chat').here(function (users) {
-        console.log(users);
-
-        _this2.setState({
-          users: [].concat(_toConsumableArray(_this2.state.users), _toConsumableArray(users))
-        });
-
-        _this2.getMessages();
-      }).joining(function (user) {
-        console.log("JOINING: " + user.name);
-
-        _this2.setState({
-          users: [].concat(_toConsumableArray(_this2.state.users), [user])
-        });
-
-        var message = {
-          user: user,
-          message: "Joined",
-          status: true
-        };
-
-        _this2.setState({
-          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
-        });
-      }).leaving(function (user) {
-        console.log("LEAVING: " + user.name);
-
-        _this2.setState({
-          users: _this2.state.users.filter(function (u) {
-            return u.id !== user.id;
-          })
-        });
-
-        var message = {
-          user: user,
-          message: "Left",
-          status: true
-        };
-
-        _this2.setState({
-          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
-        });
-      }).listen("MessageSent", function (event) {
-        console.log(event);
-        var message = {
-          user: event.user,
-          message: event.message.message
-        };
-
-        _this2.setState({
-          messages: [].concat(_toConsumableArray(_this2.state.messages), [message])
-        });
-      }); // }
-
+      window.Echo.join('chat');
       var headers = {
         headers: {
           "Authorization": "Bearer " + this.myToken
@@ -89809,6 +89804,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           allUsers: [].concat(_toConsumableArray(_this2.state.allUsers), _toConsumableArray(users))
         });
       })["catch"](function (err) {});
+      this.channelSelect(5);
     }
   }, {
     key: "messageList",
