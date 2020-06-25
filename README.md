@@ -3,7 +3,6 @@
 ## TODO
 
 ### Immediate
-- Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
 - Add Online/Offline and Typing events support.
 
 ### Later
@@ -14,5 +13,6 @@
 - Unread messages notification
 
 ### Done
+  - Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
   - Add token in constructor to prevent repetition.
   - Rework message model to include channel ID

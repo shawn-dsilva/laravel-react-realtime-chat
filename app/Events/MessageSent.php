@@ -55,6 +55,10 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('chat');
+        if($this->channel == 5) {
+            return new PresenceChannel('chat');
+        } else {
+            return new PresenceChannel("chat.dm.".$this->channel);
+        }
     }
 }

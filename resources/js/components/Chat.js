@@ -219,6 +219,17 @@
              this.setState({ selectedChannel: res.data.id});
              this.setState({ messages: []});
              this.getMessages();
+             window.Echo.join(`chat.dm.${this.state.selectedChannel}`)
+            .listen("MessageSent", (event) => {
+                console.log(event);
+                const message = {
+                  user: event.user,
+                  message: event.message.message
+                }
+                this.setState({
+                  messages: [...this.state.messages, message ]
+                });
+           });
           })
           .catch((err) => {
             const errors = err.response.data.errors;

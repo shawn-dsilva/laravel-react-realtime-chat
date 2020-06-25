@@ -89598,6 +89598,18 @@ var Chat = /*#__PURE__*/function (_Component) {
         });
 
         _this.getMessages();
+
+        window.Echo.join("chat.dm.".concat(_this.state.selectedChannel)).listen("MessageSent", function (event) {
+          console.log(event);
+          var message = {
+            user: event.user,
+            message: event.message.message
+          };
+
+          _this.setState({
+            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+          });
+        });
       })["catch"](function (err) {
         var errors = err.response.data.errors;
         console.log(errors);
