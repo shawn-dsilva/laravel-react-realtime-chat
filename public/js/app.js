@@ -89590,7 +89590,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         console.log(res.data);
 
         _this.setState({
-          selectedChannel: res.data.id
+          selectedChannel: res.data
         });
 
         _this.setState({
@@ -89599,7 +89599,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         _this.getMessages();
 
-        window.Echo.join("chat.dm.".concat(_this.state.selectedChannel)).listen("MessageSent", function (event) {
+        window.Echo.join("chat.dm.".concat(_this.state.selectedChannel.id)).listen("MessageSent", function (event) {
           console.log(event);
           var message = {
             user: event.user,
@@ -89619,13 +89619,13 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (id, event) {
+    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
       if (event !== undefined) {
         event.stopPropagation();
       }
 
       _this.setState({
-        selectedChannel: id
+        selectedChannel: selectedChannel
       }, function () {
         _this.setState({
           messages: []
@@ -89635,7 +89635,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         console.log("SELECTED CHANNEL IN channelSelect()");
         console.log(_this.state.selectedChannel);
-        window.Echo.join("chat.channel.".concat(_this.state.selectedChannel)).here(function (users) {
+        window.Echo.join("chat.channel.".concat(_this.state.selectedChannel.id)).here(function (users) {
           _this.setState({
             users: [].concat(_toConsumableArray(_this.state.users), _toConsumableArray(users))
           });
@@ -89709,8 +89709,8 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "sendMessage", function (e) {
       e.preventDefault();
       var message = _this.state.message;
-      var channel_id = _this.state.selectedChannel;
-      console.log(_this.state.selectedChannel);
+      var channel_id = _this.state.selectedChannel.id;
+      console.log(_this.state.selectedChannel.id);
       var body = JSON.stringify({
         message: message,
         channel_id: channel_id
@@ -89740,8 +89740,8 @@ var Chat = /*#__PURE__*/function (_Component) {
         }
       };
       console.log("CURRENTLY SELECTED CHANNEL BELOW");
-      console.log(_this.state.selectedChannel);
-      axios.get("/api/messages/".concat(_this.state.selectedChannel), headers).then(function (res) {
+      console.log(_this.state.selectedChannel.id);
+      axios.get("/api/messages/".concat(_this.state.selectedChannel.id), headers).then(function (res) {
         console.log("GET MESSAGES OUTPUT BELOW");
         console.log(res.data);
         var messages = res.data;
@@ -89753,6 +89753,9 @@ var Chat = /*#__PURE__*/function (_Component) {
     });
 
     _this.myToken = localStorage.getItem("LRC_Token");
+    _this.fakeGeneralChannel = {
+      "id": 5
+    };
     return _this;
   }
 
@@ -89768,10 +89771,6 @@ var Chat = /*#__PURE__*/function (_Component) {
 
         _this2.setState({
           currUser: res.data
-        });
-
-        _this2.setState({
-          selectedChannel: 5
         }); // }
 
       })["catch"](function (err) {});
@@ -89804,7 +89803,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           allUsers: [].concat(_toConsumableArray(_this2.state.allUsers), _toConsumableArray(users))
         });
       })["catch"](function (err) {});
-      this.channelSelect(5);
+      this.channelSelect(this.fakeGeneralChannel);
     }
   }, {
     key: "messageList",
@@ -89826,9 +89825,9 @@ var Chat = /*#__PURE__*/function (_Component) {
             className: "text-primary"
           }, value.message), " the channel");
         } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
             key: index
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message));
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
         }
       });
       return messagelist;
@@ -89858,10 +89857,11 @@ var Chat = /*#__PURE__*/function (_Component) {
       }); // console.log(typeof(users));
 
       var userList = users.map(function (value, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-          onClick: _this3.dmSelect.bind(_this3, value.id),
-          id: value.id,
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
           key: index
+        }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+          onClick: _this3.dmSelect.bind(_this3, value.id),
+          id: value.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       });
       return userList;
@@ -89874,7 +89874,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        onClick: this.channelSelect.bind(this, 5),
+        onClick: this.channelSelect.bind(this, this.fakeGeneralChannel),
         id: "5",
         key: "5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), this.allUserList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {

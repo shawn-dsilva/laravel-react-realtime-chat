@@ -26,6 +26,7 @@
       constructor(props) {
         super(props);
         this.myToken = localStorage.getItem("LRC_Token");
+        this.fakeGeneralChannel = { "id": 5};
     }
 
       componentDidMount () {
@@ -42,9 +43,6 @@
               this.setState({
                 currUser:  res.data
               });
-              this.setState({
-                selectedChannel: 5
-              })
 
             // }
           })
@@ -91,7 +89,7 @@
               .catch((err) => {
               });
 
-              this.channelSelect(5);
+              this.channelSelect(this.fakeGeneralChannel);
       }
 
       messageList() {
@@ -102,9 +100,7 @@
           if(value.status === true) {
             return <Col className="my-3" key={index} sm="6" md={{size: 8, offset: 3}}><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {
-            return <Row>
-              <Col key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
-              </Row>
+            return <Col key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
           }
         });
 
@@ -131,7 +127,7 @@
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
-          return <Col> <Button onClick={this.dmSelect.bind(this, value.id)} id={value.id} key={index}><b>{value.name }</b></Button>
+          return <Col key={index}> <Button onClick={this.dmSelect.bind(this, value.id)} id={value.id} ><b>{value.name }</b></Button>
           <br></br>
           </Col>
         });
@@ -160,10 +156,10 @@
           .post("/api/directmessage", body, headers)
           .then((res) =>{
              console.log(res.data);
-             this.setState({ selectedChannel: res.data.id});
+             this.setState({ selectedChannel: res.data});
              this.setState({ messages: []});
              this.getMessages();
-             window.Echo.join(`chat.dm.${this.state.selectedChannel}`)
+             window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
             .listen("MessageSent", (event) => {
                 console.log(event);
                 const message = {
@@ -184,17 +180,17 @@
           });
       }
 
-      channelSelect = (id, event) => {
+      channelSelect = (selectedChannel, event) => {
         if(event !== undefined) {
           event.stopPropagation();
         }
 
-        this.setState({ selectedChannel: id}, () => {
+        this.setState({ selectedChannel: selectedChannel}, () => {
           this.setState({ messages: []});
           this.getMessages();
           console.log("SELECTED CHANNEL IN channelSelect()");
           console.log(this.state.selectedChannel);
-          window.Echo.join(`chat.channel.${this.state.selectedChannel}`)
+          window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
           .here(users => {
             this.setState({
               users: [...this.state.users, ...users ]
@@ -273,8 +269,8 @@
         e.preventDefault();
 
         const message = this.state.message;
-        const channel_id = this.state.selectedChannel;
-        console.log(this.state.selectedChannel);
+        const channel_id = this.state.selectedChannel.id;
+        console.log(this.state.selectedChannel.id);
         const body = JSON.stringify({ message, channel_id });
 
         const headers = {
@@ -311,9 +307,9 @@
         };
 
         console.log("CURRENTLY SELECTED CHANNEL BELOW");
-        console.log(this.state.selectedChannel)
+        console.log(this.state.selectedChannel.id)
 
-        axios.get(`/api/messages/${this.state.selectedChannel}`, headers)
+        axios.get(`/api/messages/${this.state.selectedChannel.id}`, headers)
           .then((res) =>{
 
             console.log("GET MESSAGES OUTPUT BELOW");
@@ -333,10 +329,10 @@
         return (
           <div>
           <Container fluid="true">
-            <Row>
+             <Row>
             <Col xs="3">
               <h3>Channels</h3>
-               <Col> <Button onClick={this.channelSelect.bind(this, 5)} id="5" key="5"><b> General</b></Button>
+               <Col> <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
           <br></br>
           </Col>
                 <h3>Direct Message</h3>
