@@ -89578,6 +89578,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
       event.stopPropagation();
       console.log(id);
+      window.Echo.leave('chat.channel.5');
       var body = "{ \"receiver\": ".concat(id, " }");
       var headers = {
         headers: {
@@ -89636,13 +89637,25 @@ var Chat = /*#__PURE__*/function (_Component) {
         console.log("SELECTED CHANNEL IN channelSelect()");
         console.log(_this.state.selectedChannel);
         window.Echo.join("chat.channel.".concat(_this.state.selectedChannel.id)).here(function (users) {
+          users.forEach(function (user) {
+            return user.name += "FROM.HERE()";
+          });
+
           _this.setState({
-            users: [].concat(_toConsumableArray(_this.state.users), _toConsumableArray(users))
+            users: users
           });
         }).joining(function (user) {
           _this.setState({
             users: [].concat(_toConsumableArray(_this.state.users), [user])
-          });
+          }); // this.setState( function (state, props) {
+          //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+          //   if(isInState) {
+          //     return state;
+          //   } else {
+          //     return [...this.state.users, user ]
+          //   }
+          // });
+
 
           var message = {
             user: user,
@@ -89650,14 +89663,16 @@ var Chat = /*#__PURE__*/function (_Component) {
             status: true
           };
 
-          _this.setState({
-            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-          });
+          if (_this.state.selectedChannel.type === "channel") {
+            _this.setState({
+              messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+            });
+          }
         }).leaving(function (user) {
           _this.setState({
-            users: _this.state.users.filter(function (u) {
+            users: _toConsumableArray(_this.state.users.filter(function (u) {
               return u.id !== user.id;
-            })
+            }))
           });
 
           var message = {
@@ -89666,9 +89681,11 @@ var Chat = /*#__PURE__*/function (_Component) {
             status: true
           };
 
-          _this.setState({
-            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-          });
+          if (_this.state.selectedChannel.type === "channel") {
+            _this.setState({
+              messages: [].concat(_toConsumableArray(_this.state.messages), [message])
+            });
+          }
         }).listen("MessageSent", function (event) {
           console.log(event);
           var message = {
@@ -89754,7 +89771,8 @@ var Chat = /*#__PURE__*/function (_Component) {
 
     _this.myToken = localStorage.getItem("LRC_Token");
     _this.fakeGeneralChannel = {
-      "id": 5
+      "id": 5,
+      "type": "channel"
     };
     return _this;
   }

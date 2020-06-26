@@ -26,7 +26,7 @@
       constructor(props) {
         super(props);
         this.myToken = localStorage.getItem("LRC_Token");
-        this.fakeGeneralChannel = { "id": 5};
+        this.fakeGeneralChannel = { "id": 5, "type": "channel"};
     }
 
       componentDidMount () {
@@ -138,7 +138,7 @@
       dmSelect = (id, event ) => {
         event.stopPropagation();
         console.log(id);
-
+        window.Echo.leave('chat.channel.5');
         const body = `{ "receiver": ${id} }`;
 
         const headers = {
@@ -192,35 +192,56 @@
           console.log(this.state.selectedChannel);
           window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
           .here(users => {
+
+            users.forEach( user => user.name += "FROM.HERE()");
             this.setState({
-              users: [...this.state.users, ...users ]
+              users: users
             });
             })
             .joining(user => {
               this.setState({
                   users: [...this.state.users, user ]
                 });
+
+              // this.setState( function (state, props) {
+              //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+
+              //   if(isInState) {
+              //     return state;
+              //   } else {
+              //     return [...this.state.users, user ]
+              //   }
+              // });
+
                 const message = {
                   user: user,
                   message: "Joined",
                   status:true
                 }
-                this.setState({
-                  messages: [...this.state.messages, message ]
-                });
+                if(this.state.selectedChannel.type === "channel")
+                 {
+                    this.setState({
+                      messages: [...this.state.messages, message ]
+                    });
+                 }
+
             })
             .leaving(user => {
                 this.setState({
-                  users: this.state.users.filter(u => u.id !== user.id)
+                  users: [...this.state.users.filter(u => u.id !== user.id)]
                 });
                 const message = {
                   user: user,
                   message: "Left",
                   status:true
                 }
-                this.setState({
-                  messages: [...this.state.messages, message ]
-                });
+                if(this.state.selectedChannel.type === "channel")
+                {
+                   this.setState({
+                     messages: [...this.state.messages, message ]
+                   });
+                }
+
 
             })
             .listen("MessageSent", (event) => {
