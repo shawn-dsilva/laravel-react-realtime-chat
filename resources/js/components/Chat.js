@@ -10,6 +10,7 @@
       Col
     } from 'reactstrap';
     import Echo from 'laravel-echo'
+import connect from 'react-redux/lib/connect/connect';
 
     class Chat extends Component {
 
@@ -22,6 +23,21 @@
           selectedChannel:""
 
       }
+
+      static propTypes = {
+        getList: PropTypes.func.isRequired,
+        getSingleList: PropTypes.func.isRequired,
+        deleteOneList: PropTypes.func.isRequired,
+        authState: PropTypes.object.isRequired,
+        messages: PropTypes.array.isRequired,
+        users: PropTypes.array.isRequired,
+        allUsers: PropTypes.array.isRequired,
+        message: PropTypes.object.isRequired,
+        currUser: PropTypes.object.isRequired,
+        selectedChannel: PropTypes.object.isRequired
+,
+      };
+
 
       constructor(props) {
         super(props);
@@ -381,4 +397,15 @@
       }
     }
 
-    export default Chat
+    const mapStateToProps = (state) => ({ //Maps state to redux store as props
+
+      authState: state.auth,
+      messages:state.chat.messages,
+      message:state.chat.message,
+      users: state.chat.users,
+      allUsers: state.chat.allUsers,
+      currUser:state.chat.currUser,
+      selectedChannel:state.chat.selectedChannel
+
+    });
+    export default connect(mapStateToProps, { getList, getSingleList, createNewList, deleteOneList })(Chat);
