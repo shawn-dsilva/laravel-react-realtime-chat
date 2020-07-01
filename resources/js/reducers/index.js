@@ -3,7 +3,7 @@ import { combineReducers} from 'redux';
 import authReducer from './authReducer';
 import uiReducer from './uiReducer';
 import statusReducer from './statusReducer';
-import listReducer from './listReducer';
+import chatReducer from './chatReducer';
 
 
 export default combineReducers({
@@ -11,5 +11,5 @@ export default combineReducers({
     auth: authReducer,
     ui: uiReducer,
     status: statusReducer,
-    list: listReducer
+    chat: chatReducer
 });
