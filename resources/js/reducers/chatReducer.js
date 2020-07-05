@@ -11,14 +11,22 @@ import {
     SET_SELECTED_CHANNEL
 } from "../actions/types";
 
-const initialState = {};
+const initialState = {
+    messages: [],
+    message:{},
+    selectedChannel:{},
+    usersInRoom:[],
+    dmUsers:[],
+    currUser:{}
+
+};
 
 export default function(state = initialState, action) {
     switch (action.type) {
         case IS_AUTH:
             return {
                 ...state,
-                currUserName: action.payload.name
+                currUser: action.payload
             };
         case GET_MESSAGES:
             return {
@@ -58,7 +66,7 @@ export default function(state = initialState, action) {
         case USER_LEAVES_ROOM:
             return {
                 ...state,
-                posts: state.usersInRoom.filter(
+                usersInRoom: state.usersInRoom.filter(
                     user => user.id !== action.payload
                 )
             };

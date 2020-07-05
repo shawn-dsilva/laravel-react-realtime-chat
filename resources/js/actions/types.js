@@ -11,6 +11,7 @@ export const BUTTON_RESET = 'BUTTON_RESET';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const IS_LOADING = 'IS_LOADING';
+export const IS_AUTH = 'IS_AUTH';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const SET_MESSAGES = 'SET_MESSAGES';
 export const ADD_MESSAGE = 'ADD_MESSAGE';

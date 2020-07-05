@@ -10,7 +10,11 @@
       Col
     } from 'reactstrap';
     import Echo from 'laravel-echo'
-import connect from 'react-redux/lib/connect/connect';
+import { connect }from 'react-redux';
+import PropTypes from "prop-types";
+import { IS_AUTH } from '../actions/types';
+import { isAuth } from '../actions/chatActions';
+
 
     class Chat extends Component {
 
@@ -25,13 +29,10 @@ import connect from 'react-redux/lib/connect/connect';
       }
 
       static propTypes = {
-        getList: PropTypes.func.isRequired,
-        getSingleList: PropTypes.func.isRequired,
-        deleteOneList: PropTypes.func.isRequired,
-        authState: PropTypes.object.isRequired,
+        isAuth: PropTypes.func.isRequired,
         messages: PropTypes.array.isRequired,
-        users: PropTypes.array.isRequired,
-        allUsers: PropTypes.array.isRequired,
+        usersInRoom: PropTypes.array.isRequired,
+        dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
         currUser: PropTypes.object.isRequired,
         selectedChannel: PropTypes.object.isRequired
@@ -47,28 +48,9 @@ import connect from 'react-redux/lib/connect/connect';
 
       componentDidMount () {
 
-
-
-          axios.defaults.headers.common["Authorization"] =
-          "Bearer " + this.myToken;
-
-          axios.get("/api/auth/user")
-          .then((res) =>{
-            // if(res.status === 201) {
-              console.log(res.data);
-              this.setState({
-                currUser:  res.data
-              });
-
-            // }
-          })
-          .catch((err) => {
-
-          });
-
-
           window.Pusher = require('pusher-js');
 
+          this.props.isAuth(this.myToken);
 
           window.Echo = new Echo({
               broadcaster: 'pusher',
@@ -138,8 +120,8 @@ import connect from 'react-redux/lib/connect/connect';
 
       allUserList() {
         console.log("CURRENT USER BELOW ");
-        console.log(this.state.currUser);
-        const users = this.state.allUsers.filter(u => u.id !== this.state.currUser.id);
+        console.log(this.props.currUser);
+        const users = this.state.allUsers.filter(u => u.id !== this.props.currUser.id);
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
@@ -402,10 +384,10 @@ import connect from 'react-redux/lib/connect/connect';
       authState: state.auth,
       messages:state.chat.messages,
       message:state.chat.message,
-      users: state.chat.users,
-      allUsers: state.chat.allUsers,
+      usersInRoom: state.chat.usersInRoom,
+      dmUsers: state.chat.dmUsers,
       currUser:state.chat.currUser,
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, { getList, getSingleList, createNewList, deleteOneList })(Chat);
+    export default connect(mapStateToProps, {isAuth})(Chat);
