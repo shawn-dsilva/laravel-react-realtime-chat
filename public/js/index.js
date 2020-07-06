@@ -91883,12 +91883,13 @@ var App = /*#__PURE__*/function (_Component) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: isAuth */
+/*! exports provided: isAuth, getDmUsers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAuth", function() { return isAuth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
@@ -91897,6 +91898,11 @@ __webpack_require__.r(__webpack_exports__);
 // Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
 //Check if user is already logged in
 
+var headers = {
+  headers: {
+    "Authorization": "Bearer " + localStorage.getItem("LRC_Token")
+  }
+};
 var isAuth = function isAuth(myToken) {
   return function (dispatch) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + myToken;
@@ -91908,6 +91914,18 @@ var isAuth = function isAuth(myToken) {
         type: _types__WEBPACK_IMPORTED_MODULE_1__["IS_AUTH"],
         payload: res.data
       }); // }
+    })["catch"](function (err) {});
+  };
+};
+var getDmUsers = function getDmUsers() {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", headers).then(function (res) {
+      console.log(res.data);
+      var users = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_DM_USERS"],
+        payload: users
+      });
     })["catch"](function (err) {});
   };
 };
@@ -92033,8 +92051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/types */ "./resources/js/actions/types.js");
-/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -92070,7 +92087,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -92305,8 +92321,6 @@ var Chat = /*#__PURE__*/function (_Component) {
   _createClass(Chat, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
       this.props.isAuth(this.myToken);
       window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
@@ -92324,19 +92338,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         }
       };
       window.Echo.join('chat');
-      var headers = {
-        headers: {
-          "Authorization": "Bearer " + this.myToken
-        }
-      };
-      axios.get("/api/allusers", headers).then(function (res) {
-        console.log(res.data);
-        var users = res.data;
-
-        _this2.setState({
-          allUsers: [].concat(_toConsumableArray(_this2.state.allUsers), _toConsumableArray(users))
-        });
-      })["catch"](function (err) {});
+      this.props.getDmUsers();
       this.channelSelect(this.fakeGeneralChannel);
     }
   }, {
@@ -92382,19 +92384,19 @@ var Chat = /*#__PURE__*/function (_Component) {
   }, {
     key: "allUserList",
     value: function allUserList() {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log("CURRENT USER BELOW ");
       console.log(this.props.currUser);
-      var users = this.state.allUsers.filter(function (u) {
-        return u.id !== _this3.props.currUser.id;
+      var users = this.props.dmUsers.filter(function (u) {
+        return u.id !== _this2.props.currUser.id;
       }); // console.log(typeof(users));
 
       var userList = users.map(function (value, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
           key: index
         }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-          onClick: _this3.dmSelect.bind(_this3, value.id),
+          onClick: _this2.dmSelect.bind(_this2, value.id),
           id: value.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       });
@@ -92434,6 +92436,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 
 _defineProperty(Chat, "propTypes", {
   isAuth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
@@ -92456,7 +92459,8 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
-  isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["isAuth"]
+  isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__["isAuth"],
+  getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__["getDmUsers"]
 })(Chat));
 
 /***/ }),

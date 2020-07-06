@@ -12,8 +12,7 @@
     import Echo from 'laravel-echo'
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import { IS_AUTH } from '../actions/types';
-import { isAuth } from '../actions/chatActions';
+import { isAuth, getDmUsers } from '../actions/chatActions';
 
 
     class Chat extends Component {
@@ -30,6 +29,7 @@ import { isAuth } from '../actions/chatActions';
 
       static propTypes = {
         isAuth: PropTypes.func.isRequired,
+        getDmUsers: PropTypes.func.isRequired,
         messages: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
@@ -70,24 +70,12 @@ import { isAuth } from '../actions/chatActions';
 
           window.Echo.join('chat');
 
-            const headers = {
-              headers: {
-                "Authorization":"Bearer "+this.myToken
-              }
-            };
+          this.props.getDmUsers();
 
-            axios.get("/api/allusers", headers)
-              .then((res) =>{
-                console.log(res.data);
-                const users = res.data;
-                this.setState({
-                  allUsers: [...this.state.allUsers, ...users ]
-                });
-              })
-              .catch((err) => {
-              });
+          this.channelSelect(this.fakeGeneralChannel);
 
-              this.channelSelect(this.fakeGeneralChannel);
+
+
       }
 
       messageList() {
@@ -121,7 +109,7 @@ import { isAuth } from '../actions/chatActions';
       allUserList() {
         console.log("CURRENT USER BELOW ");
         console.log(this.props.currUser);
-        const users = this.state.allUsers.filter(u => u.id !== this.props.currUser.id);
+        const users = this.props.dmUsers.filter(u => u.id !== this.props.currUser.id);
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
@@ -390,4 +378,4 @@ import { isAuth } from '../actions/chatActions';
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {isAuth})(Chat);
+    export default connect(mapStateToProps, {isAuth, getDmUsers})(Chat);
