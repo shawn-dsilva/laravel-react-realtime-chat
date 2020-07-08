@@ -91883,13 +91883,15 @@ var App = /*#__PURE__*/function (_Component) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: isAuth, getDmUsers */
+/*! exports provided: isAuth, getDmUsers, getMessages, dmSelectAction */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAuth", function() { return isAuth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
@@ -91900,13 +91902,37 @@ __webpack_require__.r(__webpack_exports__);
 
 var headers = {
   headers: {
-    "Authorization": "Bearer " + localStorage.getItem("LRC_Token")
+    Authorization: "Bearer " + localStorage.getItem("LRC_Token")
   }
 };
-var isAuth = function isAuth(myToken) {
+var postHeaders = {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("LRC_Token"),
+    "Content-Type": "application/json"
+  }
+};
+
+var fetchMessages = function fetchMessages(selectedChannel) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), headers).then(function (res) {
+    var messages = res.data;
+    console.log(messages);
+    return messages;
+  })["catch"](function (err) {}); // axios
+  // .get(`/api/messages/${selectedChannel.id}`, headers)
+  // .then(res => {
+  //     console.log("GET MESSAGES OUTPUT BELOW");
+  //     console.log(res.data);
+  //     const messages = res.data;
+  //     dispatch({ type: GET_MESSAGES, payload: messages });
+  // })
+  // .catch(err => {});
+};
+
+var isAuth = function isAuth() {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = "Bearer " + myToken;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user").then(function (res) {
+    // axios.defaults.headers.common["Authorization"] =
+    // "Bearer " + myToken;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", headers).then(function (res) {
       // if(res.status === 201) {
       console.log("IS AUTH USER DATA RESPONSE");
       console.log(res.data);
@@ -91927,6 +91953,56 @@ var getDmUsers = function getDmUsers() {
         payload: users
       });
     })["catch"](function (err) {});
+  };
+};
+var getMessages = function getMessages(selectedChannel) {
+  return function (dispatch) {
+    console.log("CURRENTLY SELECTED CHANNEL BELOW");
+    console.log(selectedChannel);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), headers).then(function (res) {
+      console.log("GET MESSAGES OUTPUT BELOW");
+      console.log(res.data);
+      var messages = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_MESSAGES"],
+        payload: messages
+      });
+    })["catch"](function (err) {});
+  };
+};
+var dmSelectAction = function dmSelectAction(id) {
+  return function (dispatch, getState) {
+    window.Echo.leave("chat.channel.5");
+    var body = "{ \"receiver\": ".concat(id, " }");
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, postHeaders).then(function (res) {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_CHANNEL"],
+        payload: res.data
+      }); //  dispatch({type:CLEAR_MESSAGES});
+      //  window.Echo.join(`chat.dm.${id}`)
+      // .listen("MessageSent", (event) => {
+      //     console.log(event);
+      //     const message = {
+      //       user: event.user,
+      //       message: event.message.message
+      //     }
+      //     dispatch({type:ADD_MESSAGE, payload:message})
+      //  });
+
+      var state = getState();
+      var selectedChannel = state.chat.selectedChannel;
+      console.log("GET STATE SELECTED CHANNEL");
+      console.log(state); // const messages = fetchMessages(selectedChannel)
+      // console.log(messages);
+      // dispatch({ type: GET_MESSAGES, payload: messages });
+
+      dispatch(getMessages(selectedChannel));
+    })["catch"](function (err) {// const errors = err.response.data.errors;
+      // console.log(errors);
+      // Object.values(errors).map( error => {
+      //   console.log(error.toString());
+      // });
+    });
   };
 };
 
@@ -92047,11 +92123,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -92118,47 +92194,49 @@ var Chat = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
       event.stopPropagation();
-      console.log(id);
-      window.Echo.leave('chat.channel.5');
-      var body = "{ \"receiver\": ".concat(id, " }");
-      var headers = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      axios.defaults.headers.common["Authorization"] = "Bearer " + _this.myToken;
-      console.log(body);
-      axios.post("/api/directmessage", body, headers).then(function (res) {
-        console.log(res.data);
 
-        _this.setState({
-          selectedChannel: res.data
-        });
+      _this.props.dmSelectAction(id); // this.props.getMessages(this.props.selectedChannel);
 
-        _this.setState({
-          messages: []
-        });
 
-        _this.getMessages();
-
-        window.Echo.join("chat.dm.".concat(_this.state.selectedChannel.id)).listen("MessageSent", function (event) {
-          console.log(event);
-          var message = {
-            user: event.user,
-            message: event.message.message
-          };
-
-          _this.setState({
-            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-          });
-        });
-      })["catch"](function (err) {
-        var errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map(function (error) {
-          console.log(error.toString());
-        });
-      });
+      console.log("SELECTED CHANNEL IN dmSelect()");
+      console.log(_this.props.selectedChannel); // this.props.getMessages({'id':id});
+      // console.log(id);
+      // window.Echo.leave('chat.channel.5');
+      // const body = `{ "receiver": ${id} }`;
+      // const headers = {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // };
+      // axios.defaults.headers.common["Authorization"] =
+      // "Bearer " + this.myToken;
+      // console.log(body);
+      // axios
+      //   .post("/api/directmessage", body, headers)
+      //   .then((res) =>{
+      //      console.log(res.data);
+      //      this.setState({ selectedChannel: res.data});
+      //      this.setState({ messages: []});
+      //      this.getMessages();
+      //      window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
+      //     .listen("MessageSent", (event) => {
+      //         console.log(event);
+      //         const message = {
+      //           user: event.user,
+      //           message: event.message.message
+      //         }
+      //         this.setState({
+      //           messages: [...this.state.messages, message ]
+      //         });
+      //    });
+      //   })
+      //   .catch((err) => {
+      //     const errors = err.response.data.errors;
+      //     console.log(errors);
+      //     Object.values(errors).map( error => {
+      //       console.log(error.toString());
+      //     });
+      //   });
     });
 
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
@@ -92166,14 +92244,14 @@ var Chat = /*#__PURE__*/function (_Component) {
         event.stopPropagation();
       }
 
+      _this.props.getMessages(selectedChannel);
+
       _this.setState({
         selectedChannel: selectedChannel
       }, function () {
         _this.setState({
           messages: []
         });
-
-        _this.getMessages();
 
         console.log("SELECTED CHANNEL IN channelSelect()");
         console.log(_this.state.selectedChannel);
@@ -92321,30 +92399,15 @@ var Chat = /*#__PURE__*/function (_Component) {
   _createClass(Chat, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-      this.props.isAuth(this.myToken);
-      window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__["default"]({
-        broadcaster: 'pusher',
-        key: "websocketkey",
-        wsHost: window.location.hostname,
-        wsPort: 6001,
-        disableStats: true,
-        forceTLS: false
-      });
-      window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + this.myToken;
-      window.Echo.options.auth = {
-        headers: {
-          Authorization: 'Bearer ' + this.myToken
-        }
-      };
-      window.Echo.join('chat');
+      this.props.isAuth();
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
       this.props.getDmUsers();
       this.channelSelect(this.fakeGeneralChannel);
     }
   }, {
     key: "messageList",
     value: function messageList() {
-      var messages = this.state.messages; // console.log(typeof(messages));
+      var messages = this.props.messages; // console.log(typeof(messages));
 
       var messagelist = messages.map(function (value, index) {
         // console.log(value)
@@ -92405,6 +92468,8 @@ var Chat = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log("SELECTED CHANNEL IN RENDER FUNCTION");
+      console.log(this.props.selectedChannel);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -92435,14 +92500,16 @@ var Chat = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(Chat, "propTypes", {
-  isAuth: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  messages: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
-  usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
-  dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
-  message: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
-  currUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
-  selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired
+  isAuth: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+  currUser: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+  selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -92458,9 +92525,11 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
-  isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__["isAuth"],
-  getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__["getDmUsers"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["isAuth"],
+  getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getDmUsers"],
+  getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
+  dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"]
 })(Chat));
 
 /***/ }),
@@ -92926,6 +92995,39 @@ var Register = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/utils/echoHelpers.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/utils/echoHelpers.js ***!
+  \******************************************************/
+/*! exports provided: echoInit */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "echoInit", function() { return echoInit; });
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+
+var echoInit = function echoInit(token) {
+  window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+  window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    broadcaster: 'pusher',
+    key: "websocketkey",
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    disableStats: true,
+    forceTLS: false
+  });
+  window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + token;
+  window.Echo.options.auth = {
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  };
+  window.Echo.join('chat');
+};
+
+/***/ }),
+
 /***/ "./resources/js/index.js":
 /*!*******************************!*\
   !*** ./resources/js/index.js ***!
@@ -93056,7 +93158,7 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["CLEAR_MESSAGES"]:
       return _objectSpread(_objectSpread({}, state), {}, {
-        selectedChannel: []
+        messages: []
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_USERS_IN_ROOM"]:

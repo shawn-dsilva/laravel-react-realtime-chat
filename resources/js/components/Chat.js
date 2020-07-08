@@ -9,10 +9,10 @@
       Row,
       Col
     } from 'reactstrap';
-    import Echo from 'laravel-echo'
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import { isAuth, getDmUsers } from '../actions/chatActions';
+import { isAuth, getDmUsers, getMessages, dmSelectAction } from '../actions/chatActions';
+import { echoInit } from './utils/echoHelpers';
 
 
     class Chat extends Component {
@@ -30,6 +30,9 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
       static propTypes = {
         isAuth: PropTypes.func.isRequired,
         getDmUsers: PropTypes.func.isRequired,
+        getMessages: PropTypes.func.isRequired,
+        dmSelectAction: PropTypes.func.isRequired,
+
         messages: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
@@ -48,27 +51,10 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
 
       componentDidMount () {
 
-          window.Pusher = require('pusher-js');
 
-          this.props.isAuth(this.myToken);
+          this.props.isAuth();
 
-          window.Echo = new Echo({
-              broadcaster: 'pusher',
-              key: process.env.MIX_PUSHER_APP_KEY,
-              wsHost: window.location.hostname,
-              wsPort: 6001,
-              disableStats: true,
-              forceTLS: false
-          });
-
-          window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + this.myToken
-          window.Echo.options.auth = {
-            headers: {
-                Authorization: 'Bearer ' + this.myToken,
-            },
-          }
-
-          window.Echo.join('chat');
+          echoInit(this.myToken);
 
           this.props.getDmUsers();
 
@@ -79,7 +65,7 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
       }
 
       messageList() {
-        const messages = this.state.messages;
+        const messages = this.props.messages;
         // console.log(typeof(messages));
         const messagelist = messages.map((value, index) => {
           // console.log(value)
@@ -123,57 +109,64 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
 
       dmSelect = (id, event ) => {
         event.stopPropagation();
-        console.log(id);
-        window.Echo.leave('chat.channel.5');
-        const body = `{ "receiver": ${id} }`;
 
-        const headers = {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        };
+        this.props.dmSelectAction(id)
+        // this.props.getMessages(this.props.selectedChannel);
+
+        console.log("SELECTED CHANNEL IN dmSelect()");
+        console.log(this.props.selectedChannel);
+        // this.props.getMessages({'id':id});
+        // console.log(id);
+        // window.Echo.leave('chat.channel.5');
+        // const body = `{ "receiver": ${id} }`;
+
+        // const headers = {
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   }
+        // };
 
 
-        axios.defaults.headers.common["Authorization"] =
-        "Bearer " + this.myToken;
+        // axios.defaults.headers.common["Authorization"] =
+        // "Bearer " + this.myToken;
 
-        console.log(body);
-        axios
-          .post("/api/directmessage", body, headers)
-          .then((res) =>{
-             console.log(res.data);
-             this.setState({ selectedChannel: res.data});
-             this.setState({ messages: []});
-             this.getMessages();
-             window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
-            .listen("MessageSent", (event) => {
-                console.log(event);
-                const message = {
-                  user: event.user,
-                  message: event.message.message
-                }
-                this.setState({
-                  messages: [...this.state.messages, message ]
-                });
-           });
-          })
-          .catch((err) => {
-            const errors = err.response.data.errors;
-            console.log(errors);
-            Object.values(errors).map( error => {
-              console.log(error.toString());
-            });
-          });
+        // console.log(body);
+        // axios
+        //   .post("/api/directmessage", body, headers)
+        //   .then((res) =>{
+        //      console.log(res.data);
+        //      this.setState({ selectedChannel: res.data});
+        //      this.setState({ messages: []});
+        //      this.getMessages();
+        //      window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
+        //     .listen("MessageSent", (event) => {
+        //         console.log(event);
+        //         const message = {
+        //           user: event.user,
+        //           message: event.message.message
+        //         }
+        //         this.setState({
+        //           messages: [...this.state.messages, message ]
+        //         });
+        //    });
+        //   })
+        //   .catch((err) => {
+        //     const errors = err.response.data.errors;
+        //     console.log(errors);
+        //     Object.values(errors).map( error => {
+        //       console.log(error.toString());
+        //     });
+        //   });
       }
 
       channelSelect = (selectedChannel, event) => {
         if(event !== undefined) {
           event.stopPropagation();
         }
+        this.props.getMessages(selectedChannel);
 
         this.setState({ selectedChannel: selectedChannel}, () => {
           this.setState({ messages: []});
-          this.getMessages();
           console.log("SELECTED CHANNEL IN channelSelect()");
           console.log(this.state.selectedChannel);
           window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
@@ -332,7 +325,8 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
 
 
       render () {
-
+        console.log("SELECTED CHANNEL IN RENDER FUNCTION");
+        console.log(this.props.selectedChannel);
         return (
           <div>
           <Container fluid="true">
@@ -378,4 +372,4 @@ import { isAuth, getDmUsers } from '../actions/chatActions';
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {isAuth, getDmUsers})(Chat);
+    export default connect(mapStateToProps, {isAuth, getDmUsers, getMessages,dmSelectAction})(Chat);

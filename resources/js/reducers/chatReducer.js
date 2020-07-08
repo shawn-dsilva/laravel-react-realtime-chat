@@ -46,7 +46,7 @@ export default function(state = initialState, action) {
         case CLEAR_MESSAGES:
             return {
                 ...state,
-                selectedChannel: []
+                messages: []
             };
         case GET_USERS_IN_ROOM:
             return {
