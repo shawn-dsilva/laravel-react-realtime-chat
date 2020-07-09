@@ -6,7 +6,9 @@ import {
     GET_MESSAGES,
     SET_SELECTED_CHANNEL,
     CLEAR_MESSAGES,
-    ADD_MESSAGE
+    ADD_MESSAGE,
+    SET_USERS_IN_ROOM,
+    ADD_USER_TO_ROOM
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -26,7 +28,6 @@ const postHeaders = {
         "Content-Type": "application/json"
     }
 };
-
 
 export const isAuth = () => dispatch => {
     // axios.defaults.headers.common["Authorization"] =
@@ -71,7 +72,6 @@ export const getMessages = selectedChannel => dispatch => {
 };
 export const dmSelectAction = id => {
     return (dispatch, getState) => {
-
         // Leave general channel
 
         window.Echo.leave("chat.channel.5");
@@ -85,20 +85,21 @@ export const dmSelectAction = id => {
         axios
             .post("/api/directmessage", body, postHeaders)
             .then(res => {
-
                 // selectedChannel state is set to chatroom/channel object in response
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });
 
                 // Join the chatroom in Echo
-                window.Echo.join(`chat.dm.${id}`)
-                .listen("MessageSent", (event) => {
-                    console.log(event);
-                    const message = {
-                      user: event.user,
-                      message: event.message.message
+                window.Echo.join(`chat.dm.${id}`).listen(
+                    "MessageSent",
+                    event => {
+                        console.log(event);
+                        const message = {
+                            user: event.user,
+                            message: event.message.message
+                        };
+                        dispatch({ type: ADD_MESSAGE, payload: message });
                     }
-                    dispatch({type:ADD_MESSAGE, payload:message})
-                 });
+                );
 
                 // Get current updated State
                 const state = getState();
@@ -106,7 +107,6 @@ export const dmSelectAction = id => {
 
                 //getMessages(selectedChannel) works only inside dispatch()
                 dispatch(getMessages(selectedChannel));
-
             })
             .catch(err => {
                 // const errors = err.response.data.errors;
@@ -114,6 +114,61 @@ export const dmSelectAction = id => {
                 // Object.values(errors).map( error => {
                 //   console.log(error.toString());
                 // });
+            });
+    };
+};
+
+export const channelSelect = id => {
+    return (dispatch, getState) => {
+        dispatch({ type: SET_SELECTED_CHANNEL, payload: id });
+        const selectedChannelInState = getState().chat.selectedChannel;
+        window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
+            .here(users => {
+                users.forEach(user => (user.name += "FROM.HERE()"));
+                dispatch({ type: SET_USERS_IN_ROOM, payload: users });
+            })
+            .joining(user => {
+                dispatch({ type: ADD_USER_TO_ROOM, payload: user });
+
+                // this.setState( function (state, props) {
+                //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+
+                //   if(isInState) {
+                //     return state;
+                //   } else {
+                //     return [...this.state.users, user ]
+                //   }
+                // });
+
+                const message = {
+                    user: user,
+                    message: "Joined",
+                    status: true
+                };
+
+                if (this.state.selectedChannel.type === "channel") {
+                    dispatch({ type: ADD_MESSAGE, payload: message });
+                }
+            })
+            .leaving(user => {
+                dispatch({ type: USER_LEAVES_ROOM, payload: user });
+
+                const message = {
+                    user: user,
+                    message: "Left",
+                    status: true
+                };
+                if (this.state.selectedChannel.type === "channel") {
+                    dispatch({ type: ADD_MESSAGE, payload: message });
+                }
+            })
+            .listen("MessageSent", event => {
+                console.log(event);
+                const message = {
+                    user: event.user,
+                    message: event.message.message
+                };
+                dispatch({ type: ADD_MESSAGE, payload: message });
             });
     };
 };

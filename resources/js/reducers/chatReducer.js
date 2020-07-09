@@ -53,7 +53,7 @@ export default function(state = initialState, action) {
                 ...state,
                 usersInRoom: action.payload
             };
-        case GET_DM_USERS:
+        case SdET_DM_USERS:
             return {
                 ...state,
                 dmUsers: action.payload

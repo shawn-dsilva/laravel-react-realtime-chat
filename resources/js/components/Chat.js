@@ -109,54 +109,7 @@ import { echoInit } from './utils/echoHelpers';
 
       dmSelect = (id, event ) => {
         event.stopPropagation();
-
         this.props.dmSelectAction(id)
-        // this.props.getMessages(this.props.selectedChannel);
-
-        console.log("SELECTED CHANNEL IN dmSelect()");
-        console.log(this.props.selectedChannel);
-        // this.props.getMessages({'id':id});
-        // console.log(id);
-        // window.Echo.leave('chat.channel.5');
-        // const body = `{ "receiver": ${id} }`;
-
-        // const headers = {
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   }
-        // };
-
-
-        // axios.defaults.headers.common["Authorization"] =
-        // "Bearer " + this.myToken;
-
-        // console.log(body);
-        // axios
-        //   .post("/api/directmessage", body, headers)
-        //   .then((res) =>{
-        //      console.log(res.data);
-        //      this.setState({ selectedChannel: res.data});
-        //      this.setState({ messages: []});
-        //      this.getMessages();
-        //      window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
-        //     .listen("MessageSent", (event) => {
-        //         console.log(event);
-        //         const message = {
-        //           user: event.user,
-        //           message: event.message.message
-        //         }
-        //         this.setState({
-        //           messages: [...this.state.messages, message ]
-        //         });
-        //    });
-        //   })
-        //   .catch((err) => {
-        //     const errors = err.response.data.errors;
-        //     console.log(errors);
-        //     Object.values(errors).map( error => {
-        //       console.log(error.toString());
-        //     });
-        //   });
       }
 
       channelSelect = (selectedChannel, event) => {
