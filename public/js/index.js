@@ -91911,23 +91911,6 @@ var postHeaders = {
     "Content-Type": "application/json"
   }
 };
-
-var fetchMessages = function fetchMessages(selectedChannel) {
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), headers).then(function (res) {
-    var messages = res.data;
-    console.log(messages);
-    return messages;
-  })["catch"](function (err) {}); // axios
-  // .get(`/api/messages/${selectedChannel.id}`, headers)
-  // .then(res => {
-  //     console.log("GET MESSAGES OUTPUT BELOW");
-  //     console.log(res.data);
-  //     const messages = res.data;
-  //     dispatch({ type: GET_MESSAGES, payload: messages });
-  // })
-  // .catch(err => {});
-};
-
 var isAuth = function isAuth() {
   return function (dispatch) {
     // axios.defaults.headers.common["Authorization"] =
@@ -91992,10 +91975,7 @@ var dmSelectAction = function dmSelectAction(id) {
       var state = getState();
       var selectedChannel = state.chat.selectedChannel;
       console.log("GET STATE SELECTED CHANNEL");
-      console.log(state); // const messages = fetchMessages(selectedChannel)
-      // console.log(messages);
-      // dispatch({ type: GET_MESSAGES, payload: messages });
-
+      console.log(state);
       dispatch(getMessages(selectedChannel));
     })["catch"](function (err) {// const errors = err.response.data.errors;
       // console.log(errors);

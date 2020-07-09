@@ -77,16 +77,16 @@ export const dmSelectAction = id => {
             .post("/api/directmessage", body, postHeaders)
             .then(res => {
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });
-                //  dispatch({type:CLEAR_MESSAGES});
-                //  window.Echo.join(`chat.dm.${id}`)
-                // .listen("MessageSent", (event) => {
-                //     console.log(event);
-                //     const message = {
-                //       user: event.user,
-                //       message: event.message.message
-                //     }
-                //     dispatch({type:ADD_MESSAGE, payload:message})
-                //  });
+
+                window.Echo.join(`chat.dm.${id}`)
+                .listen("MessageSent", (event) => {
+                    console.log(event);
+                    const message = {
+                      user: event.user,
+                      message: event.message.message
+                    }
+                    dispatch({type:ADD_MESSAGE, payload:message})
+                 });
                 const state = getState();
                 const selectedChannel = state.chat.selectedChannel;
                 console.log("GET STATE SELECTED CHANNEL");
