@@ -71,13 +71,25 @@ export const getMessages = selectedChannel => dispatch => {
 };
 export const dmSelectAction = id => {
     return (dispatch, getState) => {
+
+        // Leave general channel
+
         window.Echo.leave("chat.channel.5");
+
+        // Make Post request containing ID of recepient.
+        // If a Chat Room containing only these two users exists.
+        // It will be returned, else a new chatroom will be created
+        // for only these two users and  returned
+
         const body = `{ "receiver": ${id} }`;
         axios
             .post("/api/directmessage", body, postHeaders)
             .then(res => {
+
+                // selectedChannel state is set to chatroom/channel object in response
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });
 
+                // Join the chatroom in Echo
                 window.Echo.join(`chat.dm.${id}`)
                 .listen("MessageSent", (event) => {
                     console.log(event);
@@ -87,10 +99,12 @@ export const dmSelectAction = id => {
                     }
                     dispatch({type:ADD_MESSAGE, payload:message})
                  });
+
+                // Get current updated State
                 const state = getState();
                 const selectedChannel = state.chat.selectedChannel;
-                console.log("GET STATE SELECTED CHANNEL");
-                console.log(state);
+
+                //getMessages(selectedChannel) works only inside dispatch()
                 dispatch(getMessages(selectedChannel));
 
             })
