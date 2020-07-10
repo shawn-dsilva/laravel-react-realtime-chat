@@ -91908,7 +91908,7 @@ var headers = {
 };
 var postHeaders = {
   headers: {
-    Authorization: "Bearer " + localStorage.getItem("LRC_Token"),
+    "Authorization": "Bearer " + localStorage.getItem("LRC_Token"),
     "Content-Type": "application/json"
   }
 };
@@ -92277,30 +92277,13 @@ var Chat = /*#__PURE__*/function (_Component) {
       _this.setState(_defineProperty({}, e.target.name, e.target.value));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "sendMessage", function (e) {
-      e.preventDefault();
-      var message = _this.state.message;
-      var channel_id = _this.state.selectedChannel.id;
-      console.log(_this.state.selectedChannel.id);
-      var body = JSON.stringify({
-        message: message,
-        channel_id: channel_id
-      });
-      var headers = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
-      axios.defaults.headers.common["Authorization"] = "Bearer " + _this.myToken;
-      console.log(body);
-      axios.post("/api/messages", body, headers).then(function (res) {
-        console.log(res);
-      })["catch"](function (err) {
-        var errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map(function (error) {
-          console.log(error.toString());
-        });
+    _defineProperty(_assertThisInitialized(_this), "sendMessageWrapper", function (e) {
+      e.stopPropagation();
+      console.log(_this.state.message);
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["sendMessage"])(_this.state.message, _this.props.selectedChannel.id);
+
+      _this.setState({
+        message: ''
       });
     });
 
@@ -92399,11 +92382,12 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, "Logout"), this.messageList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         onChange: this.onChange,
         id: "message",
+        value: this.state.message,
         name: "message"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroupAddon"], {
         addonType: "append"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        onClick: this.sendMessage
+        onClick: this.sendMessageWrapper
       }, "Send ")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Users in this Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.userList())))));
@@ -92915,31 +92899,53 @@ var Register = /*#__PURE__*/function (_Component) {
 /*!******************************************************!*\
   !*** ./resources/js/components/utils/echoHelpers.js ***!
   \******************************************************/
-/*! exports provided: echoInit */
+/*! exports provided: echoInit, sendMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "echoInit", function() { return echoInit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendMessage", function() { return sendMessage; });
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 
 var echoInit = function echoInit(token) {
   window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
   window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    broadcaster: 'pusher',
+    broadcaster: "pusher",
     key: "websocketkey",
     wsHost: window.location.hostname,
     wsPort: 6001,
     disableStats: true,
     forceTLS: false
   });
-  window.Echo.connector.options.auth.headers['Authorization'] = 'Bearer ' + token;
+  window.Echo.connector.options.auth.headers["Authorization"] = "Bearer " + token;
   window.Echo.options.auth = {
     headers: {
-      Authorization: 'Bearer ' + token
+      Authorization: "Bearer " + token
     }
   };
-  window.Echo.join('chat');
+  window.Echo.join("chat");
+};
+var sendMessage = function sendMessage(message, channel_id) {
+  var body = JSON.stringify({
+    message: message,
+    channel_id: channel_id
+  });
+  var postHeaders = {
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem("LRC_Token"),
+      "Content-Type": "application/json"
+    }
+  };
+  axios.post("/api/messages", body, postHeaders).then(function (res) {
+    console.log(res);
+  })["catch"](function (err) {
+    var errors = err.response.data.errors;
+    console.log(errors);
+    Object.values(errors).map(function (error) {
+      console.log(error.toString());
+    });
+  });
 };
 
 /***/ }),

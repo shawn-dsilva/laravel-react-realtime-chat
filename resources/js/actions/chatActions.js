@@ -25,7 +25,7 @@ const headers = {
 
 const postHeaders = {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("LRC_Token"),
+        "Authorization": "Bearer " + localStorage.getItem("LRC_Token"),
         "Content-Type": "application/json"
     }
 };

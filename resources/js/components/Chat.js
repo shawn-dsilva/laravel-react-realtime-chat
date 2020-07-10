@@ -12,7 +12,7 @@
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
-import { echoInit } from './utils/echoHelpers';
+import { echoInit, sendMessage } from './utils/echoHelpers';
 
 
     class Chat extends Component {
@@ -149,39 +149,13 @@ import { echoInit } from './utils/echoHelpers';
       };
 
       // Calls action to register user
-      sendMessage = (e) => {
-        e.preventDefault();
+      sendMessageWrapper = (e) => {
+        e.stopPropagation();
+        console.log(this.state.message);
+        sendMessage(this.state.message, this.props.selectedChannel.id)
+        this.setState({ message:'' });
 
-        const message = this.state.message;
-        const channel_id = this.state.selectedChannel.id;
-        console.log(this.state.selectedChannel.id);
-        const body = JSON.stringify({ message, channel_id });
-
-        const headers = {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        };
-
-
-        axios.defaults.headers.common["Authorization"] =
-        "Bearer " + this.myToken;
-
-        console.log(body);
-        axios
-          .post("/api/messages", body, headers)
-          .then((res) =>{
-             console.log(res);
-          })
-          .catch((err) => {
-            const errors = err.response.data.errors;
-            console.log(errors);
-            Object.values(errors).map( error => {
-              console.log(error.toString());
-            });
-          });
-
-      };
+      }
 
       render () {
         return (
@@ -201,8 +175,8 @@ import { echoInit } from './utils/echoHelpers';
                 <Button onClick={this.onLogout}>Logout</Button>
                   {this.messageList()}
                 <InputGroup>
-                <Input onChange={this.onChange} id="message" name="message" />
-                  <InputGroupAddon addonType="append"><Button onClick={this.sendMessage}>Send </Button></InputGroupAddon>
+                <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />
+                  <InputGroupAddon addonType="append"><Button onClick={this.sendMessageWrapper}>Send </Button></InputGroupAddon>
                 </InputGroup>
               </Col>
               <Col xs="3">

@@ -3,9 +3,11 @@
 ## TODO
 
 ### Immediate
-- Add Online/Offline and Typing events support.
+
+- Add Online/Offline status and Typing events support.
 
 ### Later
+
 - Add search all users functionality
 - Add Friends list for DM.
 - Add User profiles which are hyper linked.
@@ -13,6 +15,9 @@
 - Unread messages notification
 
 ### Done
-  - Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
-  - Add token in constructor to prevent repetition.
-  - Rework message model to include channel ID
+
+- Input box clears on submit
+- Chat component functionality refactored into using Redux
+- Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
+- Add token in constructor to prevent repetition.
+- Rework message model to include channel ID
