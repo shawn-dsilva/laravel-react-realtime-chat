@@ -4,7 +4,7 @@ import {
     SET_MESSAGES,
     ADD_MESSAGE,
     CLEAR_MESSAGES,
-    GET_USERS_IN_ROOM,
+    SET_USERS_IN_ROOM,
     GET_DM_USERS,
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
@@ -48,12 +48,12 @@ export default function(state = initialState, action) {
                 ...state,
                 messages: []
             };
-        case GET_USERS_IN_ROOM:
+        case SET_USERS_IN_ROOM:
             return {
                 ...state,
                 usersInRoom: action.payload
             };
-        case SdET_DM_USERS:
+        case GET_DM_USERS:
             return {
                 ...state,
                 dmUsers: action.payload
@@ -67,7 +67,7 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 usersInRoom: state.usersInRoom.filter(
-                    user => user.id !== action.payload
+                    user => user.id !== action.payload.id
                 )
             };
         case SET_SELECTED_CHANNEL:

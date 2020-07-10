@@ -91883,7 +91883,7 @@ var App = /*#__PURE__*/function (_Component) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: isAuth, getDmUsers, getMessages, dmSelectAction */
+/*! exports provided: isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -91892,6 +91892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
@@ -91955,33 +91956,112 @@ var getMessages = function getMessages(selectedChannel) {
 };
 var dmSelectAction = function dmSelectAction(id) {
   return function (dispatch, getState) {
-    window.Echo.leave("chat.channel.5");
+    // Leave general channel
+    window.Echo.leave("chat.channel.5"); // Make Post request containing ID of recepient.
+    // If a Chat Room containing only these two users exists.
+    // It will be returned, else a new chatroom will be created
+    // for only these two users and  returned
+
     var body = "{ \"receiver\": ".concat(id, " }");
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, postHeaders).then(function (res) {
+      // selectedChannel state is set to chatroom/channel object in response
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_CHANNEL"],
         payload: res.data
-      }); //  dispatch({type:CLEAR_MESSAGES});
-      //  window.Echo.join(`chat.dm.${id}`)
-      // .listen("MessageSent", (event) => {
-      //     console.log(event);
-      //     const message = {
-      //       user: event.user,
-      //       message: event.message.message
-      //     }
-      //     dispatch({type:ADD_MESSAGE, payload:message})
-      //  });
+      }); // Join the chatroom in Echo
+
+      window.Echo.join("chat.dm.".concat(res.data.id)).listen("MessageSent", function (event) {
+        console.log(event);
+        var message = {
+          user: event.user,
+          message: event.message.message
+        };
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          payload: message
+        });
+      }); // Get current updated State
 
       var state = getState();
-      var selectedChannel = state.chat.selectedChannel;
-      console.log("GET STATE SELECTED CHANNEL");
-      console.log(state);
+      var selectedChannel = state.chat.selectedChannel; //getMessages(selectedChannel) works only inside dispatch()
+
       dispatch(getMessages(selectedChannel));
     })["catch"](function (err) {// const errors = err.response.data.errors;
       // console.log(errors);
       // Object.values(errors).map( error => {
       //   console.log(error.toString());
       // });
+    });
+  };
+};
+var channelSelect = function channelSelect(id) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_CHANNEL"],
+      payload: id
+    });
+    var selectedChannelInState = getState().chat.selectedChannel;
+    dispatch(getMessages(selectedChannelInState));
+    window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
+      users.forEach(function (user) {
+        return user.name += "FROM.HERE()";
+      });
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_USERS_IN_ROOM"],
+        payload: users
+      });
+    }).joining(function (user) {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_USER_TO_ROOM"],
+        payload: user
+      }); // this.setState( function (state, props) {
+      //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+      //   if(isInState) {
+      //     return state;
+      //   } else {
+      //     return [...this.state.users, user ]
+      //   }
+      // });
+
+      var message = {
+        user: user,
+        message: "Joined",
+        status: true
+      };
+
+      if (selectedChannelInState.type === "channel") {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          payload: message
+        });
+      }
+    }).leaving(function (user) {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["USER_LEAVES_ROOM"],
+        payload: user
+      });
+      var message = {
+        user: user,
+        message: "Left",
+        status: true
+      };
+
+      if (selectedChannelInState.type === "channel") {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          payload: message
+        });
+      }
+    }).listen("MessageSent", function (event) {
+      console.log(event);
+      var message = {
+        user: event.user,
+        message: event.message.message
+      };
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+        payload: message
+      });
     });
   };
 };
@@ -91992,7 +92072,7 @@ var dmSelectAction = function dmSelectAction(id) {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, GET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92015,7 +92095,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_MESSAGES", function() { return SET_MESSAGES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_MESSAGE", function() { return ADD_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_MESSAGES", function() { return CLEAR_MESSAGES; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USERS_IN_ROOM", function() { return GET_USERS_IN_ROOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_USERS_IN_ROOM", function() { return SET_USERS_IN_ROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_DM_USERS", function() { return GET_DM_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_USER_TO_ROOM", function() { return ADD_USER_TO_ROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_LEAVES_ROOM", function() { return USER_LEAVES_ROOM; });
@@ -92038,7 +92118,7 @@ var GET_MESSAGES = 'GET_MESSAGES';
 var SET_MESSAGES = 'SET_MESSAGES';
 var ADD_MESSAGE = 'ADD_MESSAGE';
 var CLEAR_MESSAGES = 'CLEAR_MESSAGES';
-var GET_USERS_IN_ROOM = 'GET_USERS_IN_ROOM';
+var SET_USERS_IN_ROOM = 'SET_USERS_IN_ROOM';
 var GET_DM_USERS = 'GET_DM_USERS';
 var ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 var USER_LEAVES_ROOM = 'USER_LEAVES_ROOM';
@@ -92175,48 +92255,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
       event.stopPropagation();
 
-      _this.props.dmSelectAction(id); // this.props.getMessages(this.props.selectedChannel);
-
-
-      console.log("SELECTED CHANNEL IN dmSelect()");
-      console.log(_this.props.selectedChannel); // this.props.getMessages({'id':id});
-      // console.log(id);
-      // window.Echo.leave('chat.channel.5');
-      // const body = `{ "receiver": ${id} }`;
-      // const headers = {
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   }
-      // };
-      // axios.defaults.headers.common["Authorization"] =
-      // "Bearer " + this.myToken;
-      // console.log(body);
-      // axios
-      //   .post("/api/directmessage", body, headers)
-      //   .then((res) =>{
-      //      console.log(res.data);
-      //      this.setState({ selectedChannel: res.data});
-      //      this.setState({ messages: []});
-      //      this.getMessages();
-      //      window.Echo.join(`chat.dm.${this.state.selectedChannel.id}`)
-      //     .listen("MessageSent", (event) => {
-      //         console.log(event);
-      //         const message = {
-      //           user: event.user,
-      //           message: event.message.message
-      //         }
-      //         this.setState({
-      //           messages: [...this.state.messages, message ]
-      //         });
-      //    });
-      //   })
-      //   .catch((err) => {
-      //     const errors = err.response.data.errors;
-      //     console.log(errors);
-      //     Object.values(errors).map( error => {
-      //       console.log(error.toString());
-      //     });
-      //   });
+      _this.props.dmSelectAction(id);
     });
 
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
@@ -92224,79 +92263,70 @@ var Chat = /*#__PURE__*/function (_Component) {
         event.stopPropagation();
       }
 
-      _this.props.getMessages(selectedChannel);
+      _this.props.channelSelect(selectedChannel); // this.props.getMessages(selectedChannel);
+      // this.setState({ selectedChannel: selectedChannel}, () => {
+      //   this.setState({ messages: []});
+      //   console.log("SELECTED CHANNEL IN channelSelect()");
+      //   console.log(this.state.selectedChannel);
+      //   window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
+      //   .here(users => {
+      //     users.forEach( user => user.name += "FROM.HERE()");
+      //     this.setState({
+      //       users: users
+      //     });
+      //     })
+      //     .joining(user => {
+      //       this.setState({
+      //           users: [...this.state.users, user ]
+      //         });
+      //       // this.setState( function (state, props) {
+      //       //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+      //       //   if(isInState) {
+      //       //     return state;
+      //       //   } else {
+      //       //     return [...this.state.users, user ]
+      //       //   }
+      //       // });
+      //         const message = {
+      //           user: user,
+      //           message: "Joined",
+      //           status:true
+      //         }
+      //         if(this.state.selectedChannel.type === "channel")
+      //          {
+      //             this.setState({
+      //               messages: [...this.state.messages, message ]
+      //             });
+      //          }
+      //     })
+      //     .leaving(user => {
+      //         this.setState({
+      //           users: [...this.state.users.filter(u => u.id !== user.id)]
+      //         });
+      //         const message = {
+      //           user: user,
+      //           message: "Left",
+      //           status:true
+      //         }
+      //         if(this.state.selectedChannel.type === "channel")
+      //         {
+      //            this.setState({
+      //              messages: [...this.state.messages, message ]
+      //            });
+      //         }
+      //     })
+      //     .listen("MessageSent", (event) => {
+      //     console.log(event);
+      //     const message = {
+      //       user: event.user,
+      //       message: event.message.message
+      //     }
+      //     this.setState({
+      //       messages: [...this.state.messages, message ]
+      //     });
+      //   });
+      // });
 
-      _this.setState({
-        selectedChannel: selectedChannel
-      }, function () {
-        _this.setState({
-          messages: []
-        });
-
-        console.log("SELECTED CHANNEL IN channelSelect()");
-        console.log(_this.state.selectedChannel);
-        window.Echo.join("chat.channel.".concat(_this.state.selectedChannel.id)).here(function (users) {
-          users.forEach(function (user) {
-            return user.name += "FROM.HERE()";
-          });
-
-          _this.setState({
-            users: users
-          });
-        }).joining(function (user) {
-          _this.setState({
-            users: [].concat(_toConsumableArray(_this.state.users), [user])
-          }); // this.setState( function (state, props) {
-          //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
-          //   if(isInState) {
-          //     return state;
-          //   } else {
-          //     return [...this.state.users, user ]
-          //   }
-          // });
-
-
-          var message = {
-            user: user,
-            message: "Joined",
-            status: true
-          };
-
-          if (_this.state.selectedChannel.type === "channel") {
-            _this.setState({
-              messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-            });
-          }
-        }).leaving(function (user) {
-          _this.setState({
-            users: _toConsumableArray(_this.state.users.filter(function (u) {
-              return u.id !== user.id;
-            }))
-          });
-
-          var message = {
-            user: user,
-            message: "Left",
-            status: true
-          };
-
-          if (_this.state.selectedChannel.type === "channel") {
-            _this.setState({
-              messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-            });
-          }
-        }).listen("MessageSent", function (event) {
-          console.log(event);
-          var message = {
-            user: event.user,
-            message: event.message.message
-          };
-
-          _this.setState({
-            messages: [].concat(_toConsumableArray(_this.state.messages), [message])
-          });
-        });
-      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -92414,7 +92444,7 @@ var Chat = /*#__PURE__*/function (_Component) {
   }, {
     key: "userList",
     value: function userList() {
-      var users = this.state.users; // console.log(typeof(users));
+      var users = this.props.usersInRoom; // console.log(typeof(users));
 
       var userList = users.map(function (value, index) {
         console.log(value);
@@ -92484,6 +92514,7 @@ _defineProperty(Chat, "propTypes", {
   getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -92509,7 +92540,8 @@ var mapStateToProps = function mapStateToProps(state) {
   isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["isAuth"],
   getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getDmUsers"],
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
-  dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"]
+  dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
+  channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"]
 })(Chat));
 
 /***/ }),
@@ -93141,7 +93173,7 @@ var initialState = {
         messages: []
       });
 
-    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_USERS_IN_ROOM"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERS_IN_ROOM"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         usersInRoom: action.payload
       });
@@ -93159,7 +93191,7 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_LEAVES_ROOM"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         usersInRoom: state.usersInRoom.filter(function (user) {
-          return user.id !== action.payload;
+          return user.id !== action.payload.id;
         })
       });
 

@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import { isAuth, getDmUsers, getMessages, dmSelectAction } from '../actions/chatActions';
+import { isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
 import { echoInit } from './utils/echoHelpers';
 
 
@@ -32,6 +32,7 @@ import { echoInit } from './utils/echoHelpers';
         getDmUsers: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
+        channelSelect: PropTypes.func.isRequired,
 
         messages: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
@@ -81,7 +82,7 @@ import { echoInit } from './utils/echoHelpers';
 
 
       userList() {
-        const users = this.state.users;
+        const users = this.props.usersInRoom;
         // console.log(typeof(users));
 
         const userList = users.map((value, index) => {
@@ -116,77 +117,79 @@ import { echoInit } from './utils/echoHelpers';
         if(event !== undefined) {
           event.stopPropagation();
         }
-        this.props.getMessages(selectedChannel);
 
-        this.setState({ selectedChannel: selectedChannel}, () => {
-          this.setState({ messages: []});
-          console.log("SELECTED CHANNEL IN channelSelect()");
-          console.log(this.state.selectedChannel);
-          window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
-          .here(users => {
+        this.props.channelSelect(selectedChannel);
+        // this.props.getMessages(selectedChannel);
 
-            users.forEach( user => user.name += "FROM.HERE()");
-            this.setState({
-              users: users
-            });
-            })
-            .joining(user => {
-              this.setState({
-                  users: [...this.state.users, user ]
-                });
+        // this.setState({ selectedChannel: selectedChannel}, () => {
+        //   this.setState({ messages: []});
+        //   console.log("SELECTED CHANNEL IN channelSelect()");
+        //   console.log(this.state.selectedChannel);
+        //   window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
+        //   .here(users => {
 
-              // this.setState( function (state, props) {
-              //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+        //     users.forEach( user => user.name += "FROM.HERE()");
+        //     this.setState({
+        //       users: users
+        //     });
+        //     })
+        //     .joining(user => {
+        //       this.setState({
+        //           users: [...this.state.users, user ]
+        //         });
 
-              //   if(isInState) {
-              //     return state;
-              //   } else {
-              //     return [...this.state.users, user ]
-              //   }
-              // });
+        //       // this.setState( function (state, props) {
+        //       //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
 
-                const message = {
-                  user: user,
-                  message: "Joined",
-                  status:true
-                }
-                if(this.state.selectedChannel.type === "channel")
-                 {
-                    this.setState({
-                      messages: [...this.state.messages, message ]
-                    });
-                 }
+        //       //   if(isInState) {
+        //       //     return state;
+        //       //   } else {
+        //       //     return [...this.state.users, user ]
+        //       //   }
+        //       // });
 
-            })
-            .leaving(user => {
-                this.setState({
-                  users: [...this.state.users.filter(u => u.id !== user.id)]
-                });
-                const message = {
-                  user: user,
-                  message: "Left",
-                  status:true
-                }
-                if(this.state.selectedChannel.type === "channel")
-                {
-                   this.setState({
-                     messages: [...this.state.messages, message ]
-                   });
-                }
+        //         const message = {
+        //           user: user,
+        //           message: "Joined",
+        //           status:true
+        //         }
+        //         if(this.state.selectedChannel.type === "channel")
+        //          {
+        //             this.setState({
+        //               messages: [...this.state.messages, message ]
+        //             });
+        //          }
+
+        //     })
+        //     .leaving(user => {
+        //         this.setState({
+        //           users: [...this.state.users.filter(u => u.id !== user.id)]
+        //         });
+        //         const message = {
+        //           user: user,
+        //           message: "Left",
+        //           status:true
+        //         }
+        //         if(this.state.selectedChannel.type === "channel")
+        //         {
+        //            this.setState({
+        //              messages: [...this.state.messages, message ]
+        //            });
+        //         }
 
 
-            })
-            .listen("MessageSent", (event) => {
-            console.log(event);
-            const message = {
-              user: event.user,
-              message: event.message.message
-            }
-            this.setState({
-              messages: [...this.state.messages, message ]
-            });
-          });
-        });
+        //     })
+        //     .listen("MessageSent", (event) => {
+        //     console.log(event);
+        //     const message = {
+        //       user: event.user,
+        //       message: event.message.message
+        //     }
+        //     this.setState({
+        //       messages: [...this.state.messages, message ]
+        //     });
+        //   });
+        // });
       }
 
       onLogout = () => {
@@ -325,4 +328,4 @@ import { echoInit } from './utils/echoHelpers';
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {isAuth, getDmUsers, getMessages,dmSelectAction})(Chat);
+    export default connect(mapStateToProps, {isAuth, getDmUsers, getMessages,dmSelectAction, channelSelect})(Chat);

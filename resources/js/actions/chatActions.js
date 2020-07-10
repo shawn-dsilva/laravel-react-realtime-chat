@@ -8,7 +8,8 @@ import {
     CLEAR_MESSAGES,
     ADD_MESSAGE,
     SET_USERS_IN_ROOM,
-    ADD_USER_TO_ROOM
+    ADD_USER_TO_ROOM,
+    USER_LEAVES_ROOM
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -89,7 +90,7 @@ export const dmSelectAction = id => {
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });
 
                 // Join the chatroom in Echo
-                window.Echo.join(`chat.dm.${id}`).listen(
+                window.Echo.join(`chat.dm.${res.data.id}`).listen(
                     "MessageSent",
                     event => {
                         console.log(event);
@@ -122,6 +123,9 @@ export const channelSelect = id => {
     return (dispatch, getState) => {
         dispatch({ type: SET_SELECTED_CHANNEL, payload: id });
         const selectedChannelInState = getState().chat.selectedChannel;
+
+        dispatch(getMessages(selectedChannelInState));
+
         window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
             .here(users => {
                 users.forEach(user => (user.name += "FROM.HERE()"));
@@ -146,7 +150,7 @@ export const channelSelect = id => {
                     status: true
                 };
 
-                if (this.state.selectedChannel.type === "channel") {
+                if (selectedChannelInState.type === "channel") {
                     dispatch({ type: ADD_MESSAGE, payload: message });
                 }
             })
@@ -158,7 +162,7 @@ export const channelSelect = id => {
                     message: "Left",
                     status: true
                 };
-                if (this.state.selectedChannel.type === "channel") {
+                if (selectedChannelInState.type === "channel") {
                     dispatch({ type: ADD_MESSAGE, payload: message });
                 }
             })
