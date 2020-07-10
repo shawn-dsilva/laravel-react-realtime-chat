@@ -92190,18 +92190,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -92263,70 +92251,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         event.stopPropagation();
       }
 
-      _this.props.channelSelect(selectedChannel); // this.props.getMessages(selectedChannel);
-      // this.setState({ selectedChannel: selectedChannel}, () => {
-      //   this.setState({ messages: []});
-      //   console.log("SELECTED CHANNEL IN channelSelect()");
-      //   console.log(this.state.selectedChannel);
-      //   window.Echo.join(`chat.channel.${this.state.selectedChannel.id}`)
-      //   .here(users => {
-      //     users.forEach( user => user.name += "FROM.HERE()");
-      //     this.setState({
-      //       users: users
-      //     });
-      //     })
-      //     .joining(user => {
-      //       this.setState({
-      //           users: [...this.state.users, user ]
-      //         });
-      //       // this.setState( function (state, props) {
-      //       //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
-      //       //   if(isInState) {
-      //       //     return state;
-      //       //   } else {
-      //       //     return [...this.state.users, user ]
-      //       //   }
-      //       // });
-      //         const message = {
-      //           user: user,
-      //           message: "Joined",
-      //           status:true
-      //         }
-      //         if(this.state.selectedChannel.type === "channel")
-      //          {
-      //             this.setState({
-      //               messages: [...this.state.messages, message ]
-      //             });
-      //          }
-      //     })
-      //     .leaving(user => {
-      //         this.setState({
-      //           users: [...this.state.users.filter(u => u.id !== user.id)]
-      //         });
-      //         const message = {
-      //           user: user,
-      //           message: "Left",
-      //           status:true
-      //         }
-      //         if(this.state.selectedChannel.type === "channel")
-      //         {
-      //            this.setState({
-      //              messages: [...this.state.messages, message ]
-      //            });
-      //         }
-      //     })
-      //     .listen("MessageSent", (event) => {
-      //     console.log(event);
-      //     const message = {
-      //       user: event.user,
-      //       message: event.message.message
-      //     }
-      //     this.setState({
-      //       messages: [...this.state.messages, message ]
-      //     });
-      //   });
-      // });
-
+      _this.props.channelSelect(selectedChannel);
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
@@ -92377,25 +92302,6 @@ var Chat = /*#__PURE__*/function (_Component) {
           console.log(error.toString());
         });
       });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "getMessages", function () {
-      var headers = {
-        headers: {
-          "Authorization": "Bearer " + _this.myToken
-        }
-      };
-      console.log("CURRENTLY SELECTED CHANNEL BELOW");
-      console.log(_this.state.selectedChannel.id);
-      axios.get("/api/messages/".concat(_this.state.selectedChannel.id), headers).then(function (res) {
-        console.log("GET MESSAGES OUTPUT BELOW");
-        console.log(res.data);
-        var messages = res.data;
-
-        _this.setState({
-          messages: [].concat(_toConsumableArray(_this.state.messages), _toConsumableArray(messages))
-        });
-      })["catch"](function (err) {});
     });
 
     _this.myToken = localStorage.getItem("LRC_Token");
@@ -92478,8 +92384,6 @@ var Chat = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("SELECTED CHANNEL IN RENDER FUNCTION");
-      console.log(this.props.selectedChannel);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
