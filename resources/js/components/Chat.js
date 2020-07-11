@@ -13,6 +13,8 @@ import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
+import ChatMessageList from './ChatMessageList';
+import ChatDmUsersList from './ChatDmUserList';
 
 
     class Chat extends Component {
@@ -48,6 +50,8 @@ import { echoInit, sendMessage } from './utils/echoHelpers';
         super(props);
         this.myToken = localStorage.getItem("LRC_Token");
         this.fakeGeneralChannel = { "id": 5, "type": "channel"};
+        this.dmSelect = this.dmSelect.bind(this)
+
     }
 
       componentDidMount () {
@@ -108,8 +112,7 @@ import { echoInit, sendMessage } from './utils/echoHelpers';
         return userList;
       }
 
-      dmSelect = (id, event ) => {
-        event.stopPropagation();
+      dmSelect(id){
         this.props.dmSelectAction(id)
       }
 
@@ -168,13 +171,13 @@ import { echoInit, sendMessage } from './utils/echoHelpers';
           <br></br>
           </Col>
                 <h3>Direct Message</h3>
-                  {this.allUserList()}
-              </Col>
+                <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
+          </Col>
               <Col xs="6">
                 <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
-                  {this.messageList()}
-                <InputGroup>
+                    <ChatMessageList messages={this.props.messages}/>
+                  <InputGroup>
                 <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />
                   <InputGroupAddon addonType="append"><Button onClick={this.sendMessageWrapper}>Send </Button></InputGroupAddon>
                 </InputGroup>

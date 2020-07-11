@@ -92188,6 +92188,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 /* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
+/* harmony import */ var _ChatMessageList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ChatMessageList */ "./resources/js/components/ChatMessageList.js");
+/* harmony import */ var _ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ChatDmUserList */ "./resources/js/components/ChatDmUserList.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92219,6 +92221,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 var Chat = /*#__PURE__*/function (_Component) {
   _inherits(Chat, _Component);
 
@@ -92238,12 +92242,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       allUsers: [],
       currUser: "",
       selectedChannel: ""
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "dmSelect", function (id, event) {
-      event.stopPropagation();
-
-      _this.props.dmSelectAction(id);
     });
 
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
@@ -92292,6 +92290,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       "id": 5,
       "type": "channel"
     };
+    _this.dmSelect = _this.dmSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -92365,6 +92364,11 @@ var Chat = /*#__PURE__*/function (_Component) {
       return userList;
     }
   }, {
+    key: "dmSelect",
+    value: function dmSelect(id) {
+      this.props.dmSelectAction(id);
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
@@ -92375,11 +92379,17 @@ var Chat = /*#__PURE__*/function (_Component) {
         onClick: this.channelSelect.bind(this, this.fakeGeneralChannel),
         id: "5",
         key: "5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), this.allUserList()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        dmUsers: this.props.dmUsers,
+        currUser: this.props.currUser,
+        dmSelect: this.dmSelect
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout
-      }, "Logout"), this.messageList(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        messages: this.props.messages
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         onChange: this.onChange,
         id: "message",
         value: this.state.message,
@@ -92431,6 +92441,88 @@ var mapStateToProps = function mapStateToProps(state) {
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"]
 })(Chat));
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatDmUserList.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ChatDmUserList.js ***!
+  \***************************************************/
+/*! exports provided: ChatDmUsersList, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatDmUsersList", function() { return ChatDmUsersList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+
+
+var ChatDmUsersList = function ChatDmUsersList(props) {
+  var users = props.dmUsers.filter(function (u) {
+    return u.id !== props.currUser.id;
+  }); // console.log(typeof(users));
+
+  var dmSelect = props.dmSelect;
+  var userList = users.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      onClick: function onClick() {
+        return dmSelect(value.id);
+      },
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, userList);
+};
+/* harmony default export */ __webpack_exports__["default"] = (ChatDmUsersList);
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatMessageList.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ChatMessageList.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+
+
+
+function ChatMessageList(props) {
+  var messages = props.messages; // console.log(typeof(messages));
+
+  var messagelist = messages.map(function (value, index) {
+    // console.log(value)
+    if (value.status === true) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        className: "my-3",
+        key: index,
+        sm: "6",
+        md: {
+          size: 8,
+          offset: 3
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, value.user.name), " has ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-primary"
+      }, value.message), " the channel");
+    } else {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+        key: index
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+    }
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, messagelist);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ChatMessageList);
 
 /***/ }),
 
