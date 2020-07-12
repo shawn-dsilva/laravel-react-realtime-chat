@@ -91903,12 +91903,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var headers = {
   headers: {
-    Authorization: "Bearer " + localStorage.getItem("LRC_Token")
+    Authorization: "Bearer " + localStorage.LRC_Token
   }
 };
 var postHeaders = {
   headers: {
-    "Authorization": "Bearer " + localStorage.getItem("LRC_Token"),
+    "Authorization": "Bearer " + localStorage.LRC_Token,
     "Content-Type": "application/json"
   }
 };
@@ -91929,6 +91929,8 @@ var isAuth = function isAuth() {
 };
 var getDmUsers = function getDmUsers() {
   return function (dispatch) {
+    console.log(window.Token);
+    console.log(headers);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", headers).then(function (res) {
       console.log(res.data);
       var users = res.data;
@@ -92287,7 +92289,8 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _this.myToken = localStorage.getItem("LRC_Token");
+    _this.myToken = localStorage.LRC_Token;
+    window.token = localStorage.LRC_Token;
     _this.fakeGeneralChannel = {
       "id": 5,
       "type": "channel"
@@ -92668,6 +92671,8 @@ var Login = /*#__PURE__*/function (_Component) {
           localStorage.setItem("LRC_Token", res.data.token);
 
           _this.props.history.push("/chat");
+
+          window.location.reload();
         }
       })["catch"](function (err) {
         var errors = err.response.data.errors;

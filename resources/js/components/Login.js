@@ -42,7 +42,9 @@ class Login extends Component {
          console.log(res);
           console.log(res.data.user);
           localStorage.setItem("LRC_Token", res.data.token);
-          this.props.history.push("/chat");
+           this.props.history.push("/chat");
+           window.location.reload();
+
         }
       })
       .catch((err) => {

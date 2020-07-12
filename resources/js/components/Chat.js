@@ -49,9 +49,10 @@ import ChatRoomUsersList from './ChatRoomUsersList';
 
       constructor(props) {
         super(props);
-        this.myToken = localStorage.getItem("LRC_Token");
+        this.myToken = localStorage.LRC_Token;
+        window.token = localStorage.LRC_Token;
         this.fakeGeneralChannel = { "id": 5, "type": "channel"};
-        this.dmSelect = this.dmSelect.bind(this)
+        this.dmSelect = this.dmSelect.bind(this);
 
     }
 

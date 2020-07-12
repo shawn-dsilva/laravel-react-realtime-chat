@@ -19,13 +19,13 @@ import {
 
 const headers = {
     headers: {
-        Authorization: "Bearer " + localStorage.getItem("LRC_Token")
+        Authorization: "Bearer " + localStorage.LRC_Token
     }
 };
 
 const postHeaders = {
     headers: {
-        "Authorization": "Bearer " + localStorage.getItem("LRC_Token"),
+        "Authorization": "Bearer " + localStorage.LRC_Token,
         "Content-Type": "application/json"
     }
 };
@@ -47,6 +47,8 @@ export const isAuth = () => dispatch => {
 };
 
 export const getDmUsers = () => dispatch => {
+    console.log(window.Token);
+    console.log(headers);
     axios
         .get("/api/allusers", headers)
         .then(res => {
