@@ -15,6 +15,7 @@ import { isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect } from '
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
+import ChatRoomUsersList from './ChatRoomUsersList';
 
 
     class Chat extends Component {
@@ -67,49 +68,6 @@ import ChatDmUsersList from './ChatDmUserList';
 
 
 
-      }
-
-      messageList() {
-        const messages = this.props.messages;
-        // console.log(typeof(messages));
-        const messagelist = messages.map((value, index) => {
-          // console.log(value)
-          if(value.status === true) {
-            return <Col className="my-3" key={index} sm="6" md={{size: 8, offset: 3}}><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
-          } else {
-            return <Col key={index}><b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
-          }
-        });
-
-        return messagelist;
-      }
-
-
-      userList() {
-        const users = this.props.usersInRoom;
-        // console.log(typeof(users));
-
-        const userList = users.map((value, index) => {
-          console.log(value)
-          return <li key={index}><b>{value.name }</b></li>
-        });
-
-        return userList;
-      }
-
-      allUserList() {
-        console.log("CURRENT USER BELOW ");
-        console.log(this.props.currUser);
-        const users = this.props.dmUsers.filter(u => u.id !== this.props.currUser.id);
-        // console.log(typeof(users));
-
-        const userList = users.map((value, index) => {
-          return <Col key={index}> <Button onClick={this.dmSelect.bind(this, value.id)} id={value.id} ><b>{value.name }</b></Button>
-          <br></br>
-          </Col>
-        });
-
-        return userList;
       }
 
       dmSelect(id){
@@ -182,12 +140,7 @@ import ChatDmUsersList from './ChatDmUserList';
                   <InputGroupAddon addonType="append"><Button onClick={this.sendMessageWrapper}>Send </Button></InputGroupAddon>
                 </InputGroup>
               </Col>
-              <Col xs="3">
-                <h3>Users in this Room</h3>
-                <ul>
-                  {this.userList()}
-                </ul>
-              </Col>
+            <ChatRoomUsersList usersInRoom={this.props.usersInRoom}/>
             </Row>
           </Container>
           </div>

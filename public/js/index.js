@@ -92190,6 +92190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
 /* harmony import */ var _ChatMessageList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ChatMessageList */ "./resources/js/components/ChatMessageList.js");
 /* harmony import */ var _ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ChatDmUserList */ "./resources/js/components/ChatDmUserList.js");
+/* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92213,6 +92214,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -92303,67 +92305,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.channelSelect(this.fakeGeneralChannel);
     }
   }, {
-    key: "messageList",
-    value: function messageList() {
-      var messages = this.props.messages; // console.log(typeof(messages));
-
-      var messagelist = messages.map(function (value, index) {
-        // console.log(value)
-        if (value.status === true) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-            className: "my-3",
-            key: index,
-            sm: "6",
-            md: {
-              size: 8,
-              offset: 3
-            }
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, value.user.name), " has ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            className: "text-primary"
-          }, value.message), " the channel");
-        } else {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-            key: index
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
-        }
-      });
-      return messagelist;
-    }
-  }, {
-    key: "userList",
-    value: function userList() {
-      var users = this.props.usersInRoom; // console.log(typeof(users));
-
-      var userList = users.map(function (value, index) {
-        console.log(value);
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
-      });
-      return userList;
-    }
-  }, {
-    key: "allUserList",
-    value: function allUserList() {
-      var _this2 = this;
-
-      console.log("CURRENT USER BELOW ");
-      console.log(this.props.currUser);
-      var users = this.props.dmUsers.filter(function (u) {
-        return u.id !== _this2.props.currUser.id;
-      }); // console.log(typeof(users));
-
-      var userList = users.map(function (value, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-          key: index
-        }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-          onClick: _this2.dmSelect.bind(_this2, value.id),
-          id: value.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
-      });
-      return userList;
-    }
-  }, {
     key: "dmSelect",
     value: function dmSelect(id) {
       this.props.dmSelectAction(id);
@@ -92398,9 +92339,9 @@ var Chat = /*#__PURE__*/function (_Component) {
         addonType: "append"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.sendMessageWrapper
-      }, "Send ")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        xs: "3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Users in this Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.userList())))));
+      }, "Send ")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        usersInRoom: this.props.usersInRoom
+      }))));
     }
   }]);
 
@@ -92523,6 +92464,37 @@ function ChatMessageList(props) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ChatMessageList);
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatRoomUsersList.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/ChatRoomUsersList.js ***!
+  \******************************************************/
+/*! exports provided: ChatRoomUsersList, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatRoomUsersList", function() { return ChatRoomUsersList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+
+
+var ChatRoomUsersList = function ChatRoomUsersList(props) {
+  var users = props.usersInRoom;
+  var userInRoomList = users.map(function (value, index) {
+    console.log(value);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+    xs: "3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Users in this Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userInRoomList));
+};
+/* harmony default export */ __webpack_exports__["default"] = (ChatRoomUsersList);
 
 /***/ }),
 
