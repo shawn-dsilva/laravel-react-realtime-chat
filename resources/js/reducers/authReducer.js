@@ -12,20 +12,27 @@ import {
 
 
 const initialState = {
-  isAuthenticated: null,
-  user: null,
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  currUser: {},
 };
 
 export default function (state = initialState, action) {
 
   switch (action.type) {
 
-    case LOGIN_SUCCESS:
     case AUTH_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload
+        currUser: action.payload
+      };
+    case LOGIN_SUCCESS:
+      localStorage.setItem('token', action.payload.token);
+      return {
+        ...state,
+        isAuthenticated: true,
+        token: localStorage.getItem('token'),
       };
 
     case AUTH_ERROR:
@@ -34,6 +41,7 @@ export default function (state = initialState, action) {
     case REGISTER_SUCCESS:
     case REGISTER_FAIL:
     case AUTH_FAIL:
+      localStorage.removeItem('token');
       return {
         ...state,
         user: null,

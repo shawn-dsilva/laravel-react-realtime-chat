@@ -4,21 +4,29 @@ import {
     SET_MESSAGES,
     ADD_MESSAGE,
     CLEAR_MESSAGES,
-    GET_USERS_IN_ROOM,
+    SET_USERS_IN_ROOM,
     GET_DM_USERS,
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
     SET_SELECTED_CHANNEL
 } from "../actions/types";
 
-const initialState = {};
+const initialState = {
+    messages: [],
+    message:{},
+    selectedChannel:{},
+    usersInRoom:[],
+    dmUsers:[],
+    currUser:{}
+
+};
 
 export default function(state = initialState, action) {
     switch (action.type) {
         case IS_AUTH:
             return {
                 ...state,
-                currUserName: action.payload.name
+                currUser: action.payload
             };
         case GET_MESSAGES:
             return {
@@ -38,9 +46,9 @@ export default function(state = initialState, action) {
         case CLEAR_MESSAGES:
             return {
                 ...state,
-                selectedChannel: []
+                messages: []
             };
-        case GET_USERS_IN_ROOM:
+        case SET_USERS_IN_ROOM:
             return {
                 ...state,
                 usersInRoom: action.payload
@@ -58,8 +66,8 @@ export default function(state = initialState, action) {
         case USER_LEAVES_ROOM:
             return {
                 ...state,
-                posts: state.usersInRoom.filter(
-                    user => user.id !== action.payload
+                usersInRoom: state.usersInRoom.filter(
+                    user => user.id !== action.payload.id
                 )
             };
         case SET_SELECTED_CHANNEL:

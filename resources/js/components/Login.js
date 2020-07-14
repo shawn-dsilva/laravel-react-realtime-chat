@@ -7,6 +7,9 @@ import {
   Input
 } from "reactstrap";
 import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { login, getUser } from '../actions/authActions';
 
 class Login extends Component {
 
@@ -16,6 +19,13 @@ class Login extends Component {
     password: "",
   };
 
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    currUser: PropTypes.object.isRequired,
+    token: PropTypes.string,
+    login: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+  }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -24,35 +34,50 @@ class Login extends Component {
   // Calls action to register user
   onSubmit = (e) => {
     e.preventDefault();
+    const { email, password} = this.state;
 
-    const { name, email, password } = this.state;
+    const user = { email, password};
+    this.props.login(user, this.props.history);
+    // this.props.history.push(chat)
 
-    const body = JSON.stringify({ name, email, password });
+    //  this.props.getUser();
 
-    const headers = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
+    // this.setState({isLoading:true});
 
-    axios
-      .post("/api/auth/login", body, headers)
-      .then((res) =>{
-       if(res.status === 200) {
-         console.log(res);
-          console.log(res.data.user);
-          localStorage.setItem("LRC_Token", res.data.token);
-          this.props.history.push("/chat");
-        }
-      })
-      .catch((err) => {
-        const errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map( error => {
-          console.log(error.toString());
-        });
-      });
+    // const { name, email, password } = this.state;
+
+    // const body = JSON.stringify({ name, email, password });
+
+    // const headers = {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // };
+
+    // axios
+    //   .post("/api/auth/login", body, headers)
+    //   .then((res) =>{
+    //    if(res.status === 200) {
+    //      console.log(res);
+    //       console.log(res.data.user);
+    //       localStorage.setItem("LRC_Token", res.data.token);
+    //       console.log(localStorage.LRC_Token);
+    //       this.props.history.push("/chat")
+    //       //  window.location.reload();
+
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     const errors = err.response.data.errors;
+    //     console.log(errors);
+    //     Object.values(errors).map( error => {
+    //       console.log(error.toString());
+    //     });
+    //   });
+
+
   };
+
 
   render() {
     return (
@@ -90,4 +115,10 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  currUser: state.auth.currUser,
+  token: state.auth.token
+});
+
+export default connect(mapStateToProps, { login,getUser })(withRouter(Login));
