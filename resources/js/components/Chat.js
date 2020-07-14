@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import { isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
+import {  getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -31,7 +31,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
       }
 
       static propTypes = {
-        isAuth: PropTypes.func.isRequired,
+        // isAuth: PropTypes.func.isRequired,
         getDmUsers: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
@@ -49,7 +49,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
 
       constructor(props) {
         super(props);
-        this.myToken = localStorage.LRC_Token;
+        this.myToken = localStorage.token;
         window.token = localStorage.LRC_Token;
         this.fakeGeneralChannel = { "id": 5, "type": "channel"};
         this.dmSelect = this.dmSelect.bind(this);
@@ -59,7 +59,8 @@ import ChatRoomUsersList from './ChatRoomUsersList';
       componentDidMount () {
 
 
-          this.props.isAuth();
+          // this.props.isAuth();
+          // console.log(this.props.location.state.token);
 
           echoInit(this.myToken);
 
@@ -156,8 +157,8 @@ import ChatRoomUsersList from './ChatRoomUsersList';
       message:state.chat.message,
       usersInRoom: state.chat.usersInRoom,
       dmUsers: state.chat.dmUsers,
-      currUser:state.chat.currUser,
+      currUser:state.auth.currUser,
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {isAuth, getDmUsers, getMessages,dmSelectAction, channelSelect})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getMessages,dmSelectAction, channelSelect})(Chat);

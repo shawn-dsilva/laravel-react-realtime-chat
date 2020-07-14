@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {makeHeaders} from "./authActions";
 import {
     IS_AUTH,
     GET_DM_USERS,
@@ -30,27 +30,25 @@ const postHeaders = {
     }
 };
 
-export const isAuth = () => dispatch => {
-    // axios.defaults.headers.common["Authorization"] =
-    // "Bearer " + myToken;
+// export const isAuth = () => dispatch => {
+//     // axios.defaults.headers.common["Authorization"] =
+//     // "Bearer " + myToken;
 
-    axios
-        .get("/api/auth/user", headers)
-        .then(res => {
-            // if(res.status === 201) {
-            console.log("IS AUTH USER DATA RESPONSE");
-            console.log(res.data);
-            dispatch({ type: IS_AUTH, payload: res.data });
-            // }
-        })
-        .catch(err => {});
-};
+//     axios
+//         .get("/api/auth/user", headers)
+//         .then(res => {
+//             // if(res.status === 201) {
+//             console.log("IS AUTH USER DATA RESPONSE");
+//             console.log(res.data);
+//             dispatch({ type: IS_AUTH, payload: res.data });
+//             // }
+//         })
+//         .catch(err => {});
+// };
 
-export const getDmUsers = () => dispatch => {
-    console.log(window.Token);
-    console.log(headers);
+export const getDmUsers = () => (dispatch, getState) => {
     axios
-        .get("/api/allusers", headers)
+        .get("/api/allusers", makeHeaders(getState))
         .then(res => {
             console.log(res.data);
             const users = res.data;
@@ -59,12 +57,12 @@ export const getDmUsers = () => dispatch => {
         .catch(err => {});
 };
 
-export const getMessages = selectedChannel => dispatch => {
+export const getMessages = selectedChannel => (dispatch, getState) => {
     console.log("CURRENTLY SELECTED CHANNEL BELOW");
     console.log(selectedChannel);
 
     axios
-        .get(`/api/messages/${selectedChannel.id}`, headers)
+        .get(`/api/messages/${selectedChannel.id}`, makeHeaders(getState))
         .then(res => {
             console.log("GET MESSAGES OUTPUT BELOW");
             console.log(res.data);
@@ -73,6 +71,7 @@ export const getMessages = selectedChannel => dispatch => {
         })
         .catch(err => {});
 };
+
 export const dmSelectAction = id => {
     return (dispatch, getState) => {
         // Leave general channel
@@ -86,7 +85,7 @@ export const dmSelectAction = id => {
 
         const body = `{ "receiver": ${id} }`;
         axios
-            .post("/api/directmessage", body, postHeaders)
+            .post("/api/directmessage", body, makeHeaders(getState))
             .then(res => {
                 // selectedChannel state is set to chatroom/channel object in response
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });

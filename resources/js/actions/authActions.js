@@ -17,21 +17,25 @@ import {
 // Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
 
 //Check if user is already logged in
-export const isAuth = () => (dispatch) => {
-
+export const getUser = () => {
+  return (dispatch, getState) => {
+  console.log(makeHeaders(getState));
     axios
-    .get("/api/users/authchecker",{withCredentials:true})
-    .then((res) =>
+    .get("/api/auth/user",makeHeaders(getState))
+    .then((res) => {
+    console.log(res.data);
       dispatch({
         type: AUTH_SUCCESS,
         payload: res.data
       })
+    }
     )
     .catch((err) => {
       dispatch({
         type: AUTH_FAIL
       });
     });
+  }
 
 }
 
@@ -66,7 +70,7 @@ export const register = ({ name, email, password }) => (dispatch) => {
 };
 
 //Login User
-export const login = ({ email, password }) => (dispatch) => {
+export const login = ({ email, password }, history) => (dispatch) => {
   // Headers
   const headers = {
     headers: {
@@ -78,21 +82,25 @@ export const login = ({ email, password }) => (dispatch) => {
   const body = JSON.stringify({ email, password });
 
   axios
-    .post("/api/users/login", body, headers)
+    .post("/api/auth/login", body, headers)
     .then((res) => {
+      console.log(res.data);
+
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       });
       dispatch({ type: IS_LOADING });
+      dispatch(getUser());
+      dispatch(history.push("/chat"));
     }
     )
     .catch((err) => {
-      dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
-      dispatch({
-        type: LOGIN_FAIL
-      });
-      dispatch({ type: IS_LOADING })
+      // dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
+      // dispatch({
+      //   type: LOGIN_FAIL
+      // });
+      // dispatch({ type: IS_LOADING })
     });
 };
 
@@ -111,3 +119,22 @@ export const logout = () => (dispatch) => {
     });
 
 }
+
+export const makeHeaders = (getState) => {
+  // Get token from localstorage
+  const token = getState().auth.token;
+  // console.log(token);
+  // Headers
+  const headersObj = {
+    headers: {
+      'Content-type': 'application/json'
+    }
+  };
+
+  // If token, add to headers
+  if (token) {
+    headersObj.headers["Authorization"] = "Bearer " + token;
+  }
+
+  return headersObj;
+};

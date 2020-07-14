@@ -16,6 +16,7 @@
 
 ### Done
 
+- Chat component loads successfully upon Login
 - Input box clears on submit
 - Chat component functionality refactored into using Redux
 - Add Laravel-Echo and Laravel-Websockets side auth logic for DMs

@@ -91823,6 +91823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./resources/js/components/Main.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/authActions */ "./resources/js/actions/authActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -91852,6 +91853,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -91864,6 +91866,11 @@ var App = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      _store__WEBPACK_IMPORTED_MODULE_5__["default"].dispatch(Object(_actions_authActions__WEBPACK_IMPORTED_MODULE_6__["getUser"])());
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
@@ -91879,23 +91886,170 @@ var App = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/actions/chatActions.js":
+/***/ "./resources/js/actions/authActions.js":
 /*!*********************************************!*\
-  !*** ./resources/js/actions/chatActions.js ***!
+  !*** ./resources/js/actions/authActions.js ***!
   \*********************************************/
-/*! exports provided: isAuth, getDmUsers, getMessages, dmSelectAction, channelSelect */
+/*! exports provided: getUser, register, login, logout, makeHeaders */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAuth", function() { return isAuth; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeHeaders", function() { return makeHeaders; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _statusActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./statusActions */ "./resources/js/actions/statusActions.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+
+
+ //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
+// Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
+//Check if user is already logged in
+
+var getUser = function getUser() {
+  return function (dispatch, getState) {
+    console.log(makeHeaders(getState));
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", makeHeaders(getState)).then(function (res) {
+      console.log(res.data);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_SUCCESS"],
+        payload: res.data
+      });
+    })["catch"](function (err) {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_FAIL"]
+      });
+    });
+  };
+}; //Register New User
+
+var register = function register(_ref) {
+  var name = _ref.name,
+      email = _ref.email,
+      password = _ref.password;
+  return function (dispatch) {
+    // Headers
+    var headers = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }; // Request body
+
+    var body = JSON.stringify({
+      name: name,
+      email: email,
+      password: password
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/register", body, headers).then(function (res) {
+      dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(res.data, res.status, 'REGISTER_SUCCESS'));
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["REGISTER_SUCCESS"]
+      });
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+      });
+    })["catch"](function (err) {
+      dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(err.response.data, err.response.status, 'REGISTER_FAIL'));
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["REGISTER_FAIL"]
+      });
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+      });
+    });
+  };
+}; //Login User
+
+var login = function login(_ref2, history) {
+  var email = _ref2.email,
+      password = _ref2.password;
+  return function (dispatch) {
+    // Headers
+    var headers = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }; // Request body
+
+    var body = JSON.stringify({
+      email: email,
+      password: password
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/login", body, headers).then(function (res) {
+      console.log(res.data);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["LOGIN_SUCCESS"],
+        payload: res.data
+      });
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+      });
+      dispatch(getUser());
+      dispatch(history.push("/chat"));
+    })["catch"](function (err) {// dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
+      // dispatch({
+      //   type: LOGIN_FAIL
+      // });
+      // dispatch({ type: IS_LOADING })
+    });
+  };
+}; //Logout User and Destroy session
+
+var logout = function logout() {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/logout", {
+      withCredentials: true
+    }).then(function (res) {
+      return dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_SUCCESS"]
+      });
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+};
+var makeHeaders = function makeHeaders(getState) {
+  // Get token from localstorage
+  var token = getState().auth.token; // console.log(token);
+  // Headers
+
+  var headersObj = {
+    headers: {
+      'Content-type': 'application/json'
+    }
+  }; // If token, add to headers
+
+  if (token) {
+    headersObj.headers["Authorization"] = "Bearer " + token;
+  }
+
+  return headersObj;
+};
+
+/***/ }),
+
+/***/ "./resources/js/actions/chatActions.js":
+/*!*********************************************!*\
+  !*** ./resources/js/actions/chatActions.js ***!
+  \*********************************************/
+/*! exports provided: getDmUsers, getMessages, dmSelectAction, channelSelect */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+/* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+
 
  //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
 // Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
@@ -91911,46 +92065,43 @@ var postHeaders = {
     "Authorization": "Bearer " + localStorage.LRC_Token,
     "Content-Type": "application/json"
   }
-};
-var isAuth = function isAuth() {
-  return function (dispatch) {
-    // axios.defaults.headers.common["Authorization"] =
-    // "Bearer " + myToken;
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", headers).then(function (res) {
-      // if(res.status === 201) {
-      console.log("IS AUTH USER DATA RESPONSE");
-      console.log(res.data);
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["IS_AUTH"],
-        payload: res.data
-      }); // }
-    })["catch"](function (err) {});
-  };
-};
+}; // export const isAuth = () => dispatch => {
+//     // axios.defaults.headers.common["Authorization"] =
+//     // "Bearer " + myToken;
+//     axios
+//         .get("/api/auth/user", headers)
+//         .then(res => {
+//             // if(res.status === 201) {
+//             console.log("IS AUTH USER DATA RESPONSE");
+//             console.log(res.data);
+//             dispatch({ type: IS_AUTH, payload: res.data });
+//             // }
+//         })
+//         .catch(err => {});
+// };
+
 var getDmUsers = function getDmUsers() {
-  return function (dispatch) {
-    console.log(window.Token);
-    console.log(headers);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", headers).then(function (res) {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
       console.log(res.data);
       var users = res.data;
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_DM_USERS"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_DM_USERS"],
         payload: users
       });
     })["catch"](function (err) {});
   };
 };
 var getMessages = function getMessages(selectedChannel) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     console.log("CURRENTLY SELECTED CHANNEL BELOW");
     console.log(selectedChannel);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), headers).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
       console.log("GET MESSAGES OUTPUT BELOW");
       console.log(res.data);
       var messages = res.data;
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_MESSAGES"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_MESSAGES"],
         payload: messages
       });
     })["catch"](function (err) {});
@@ -91965,10 +92116,10 @@ var dmSelectAction = function dmSelectAction(id) {
     // for only these two users and  returned
 
     var body = "{ \"receiver\": ".concat(id, " }");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, postHeaders).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
       // selectedChannel state is set to chatroom/channel object in response
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_CHANNEL"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
         payload: res.data
       }); // Join the chatroom in Echo
 
@@ -91979,7 +92130,7 @@ var dmSelectAction = function dmSelectAction(id) {
           message: event.message.message
         };
         dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
           payload: message
         });
       }); // Get current updated State
@@ -91999,7 +92150,7 @@ var dmSelectAction = function dmSelectAction(id) {
 var channelSelect = function channelSelect(id) {
   return function (dispatch, getState) {
     dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_SELECTED_CHANNEL"],
+      type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
       payload: id
     });
     var selectedChannelInState = getState().chat.selectedChannel;
@@ -92009,12 +92160,12 @@ var channelSelect = function channelSelect(id) {
         return user.name += "FROM.HERE()";
       });
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["SET_USERS_IN_ROOM"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_USERS_IN_ROOM"],
         payload: users
       });
     }).joining(function (user) {
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_USER_TO_ROOM"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_USER_TO_ROOM"],
         payload: user
       }); // this.setState( function (state, props) {
       //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
@@ -92033,13 +92184,13 @@ var channelSelect = function channelSelect(id) {
 
       if (selectedChannelInState.type === "channel") {
         dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
           payload: message
         });
       }
     }).leaving(function (user) {
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["USER_LEAVES_ROOM"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["USER_LEAVES_ROOM"],
         payload: user
       });
       var message = {
@@ -92050,7 +92201,7 @@ var channelSelect = function channelSelect(id) {
 
       if (selectedChannelInState.type === "channel") {
         dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
           payload: message
         });
       }
@@ -92061,10 +92212,44 @@ var channelSelect = function channelSelect(id) {
         message: event.message.message
       };
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_MESSAGE"],
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
         payload: message
       });
     });
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/js/actions/statusActions.js":
+/*!***********************************************!*\
+  !*** ./resources/js/actions/statusActions.js ***!
+  \***********************************************/
+/*! exports provided: returnStatus, clearStatus */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "returnStatus", function() { return returnStatus; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearStatus", function() { return clearStatus; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+ // RETURN STATUS
+
+var returnStatus = function returnStatus(msg, status) {
+  var id = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["GET_STATUS"],
+    payload: {
+      msg: msg,
+      status: status,
+      id: id
+    }
+  };
+}; // CLEAR STATUS
+
+var clearStatus = function clearStatus() {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["CLEAR_STATUS"]
   };
 };
 
@@ -92289,7 +92474,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
-    _this.myToken = localStorage.LRC_Token;
+    _this.myToken = localStorage.token;
     window.token = localStorage.LRC_Token;
     _this.fakeGeneralChannel = {
       "id": 5,
@@ -92302,7 +92487,8 @@ var Chat = /*#__PURE__*/function (_Component) {
   _createClass(Chat, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.isAuth();
+      // this.props.isAuth();
+      // console.log(this.props.location.state.token);
       Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
       this.props.getDmUsers();
       this.channelSelect(this.fakeGeneralChannel);
@@ -92352,7 +92538,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(Chat, "propTypes", {
-  isAuth: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  // isAuth: PropTypes.func.isRequired,
   getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
@@ -92373,13 +92559,12 @@ var mapStateToProps = function mapStateToProps(state) {
     message: state.chat.message,
     usersInRoom: state.chat.usersInRoom,
     dmUsers: state.chat.dmUsers,
-    currUser: state.chat.currUser,
+    currUser: state.auth.currUser,
     selectedChannel: state.chat.selectedChannel
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
-  isAuth: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["isAuth"],
   getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getDmUsers"],
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
@@ -92594,6 +92779,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92617,6 +92806,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -92651,36 +92843,43 @@ var Login = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
       e.preventDefault();
       var _this$state = _this.state,
-          name = _this$state.name,
           email = _this$state.email,
           password = _this$state.password;
-      var body = JSON.stringify({
-        name: name,
+      var user = {
         email: email,
         password: password
-      });
-      var headers = {
-        headers: {
-          "Content-Type": "application/json"
-        }
       };
-      axios.post("/api/auth/login", body, headers).then(function (res) {
-        if (res.status === 200) {
-          console.log(res);
-          console.log(res.data.user);
-          localStorage.setItem("LRC_Token", res.data.token);
 
-          _this.props.history.push("/chat");
+      _this.props.login(user, _this.props.history); // this.props.history.push(chat)
+      //  this.props.getUser();
+      // this.setState({isLoading:true});
+      // const { name, email, password } = this.state;
+      // const body = JSON.stringify({ name, email, password });
+      // const headers = {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // };
+      // axios
+      //   .post("/api/auth/login", body, headers)
+      //   .then((res) =>{
+      //    if(res.status === 200) {
+      //      console.log(res);
+      //       console.log(res.data.user);
+      //       localStorage.setItem("LRC_Token", res.data.token);
+      //       console.log(localStorage.LRC_Token);
+      //       this.props.history.push("/chat")
+      //       //  window.location.reload();
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     const errors = err.response.data.errors;
+      //     console.log(errors);
+      //     Object.values(errors).map( error => {
+      //       console.log(error.toString());
+      //     });
+      //   });
 
-          window.location.reload();
-        }
-      })["catch"](function (err) {
-        var errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map(function (error) {
-          console.log(error.toString());
-        });
-      });
     });
 
     return _this;
@@ -92725,7 +92924,26 @@ var Login = /*#__PURE__*/function (_Component) {
   return Login;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Login));
+_defineProperty(Login, "propTypes", {
+  isAuthenticated: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  currUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
+  token: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+  login: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  getUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired
+});
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    currUser: state.auth.currUser,
+    token: state.auth.token
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
+  login: _actions_authActions__WEBPACK_IMPORTED_MODULE_5__["login"],
+  getUser: _actions_authActions__WEBPACK_IMPORTED_MODULE_5__["getUser"]
+})(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Login)));
 
 /***/ }),
 
@@ -93064,19 +93282,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  isAuthenticated: null,
-  user: null
+  token: localStorage.getItem('token'),
+  isAuthenticated: false,
+  currUser: {}
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LOGIN_SUCCESS"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_SUCCESS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         isAuthenticated: true,
-        user: action.payload
+        currUser: action.payload
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LOGIN_SUCCESS"]:
+      localStorage.setItem('token', action.payload.token);
+      return _objectSpread(_objectSpread({}, state), {}, {
+        isAuthenticated: true,
+        token: localStorage.getItem('token')
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_ERROR"]:
@@ -93085,6 +93310,7 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_SUCCESS"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_FAIL"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_FAIL"]:
+      localStorage.removeItem('token');
       return _objectSpread(_objectSpread({}, state), {}, {
         user: null,
         isAuthenticated: false
