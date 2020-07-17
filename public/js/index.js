@@ -91913,7 +91913,9 @@ __webpack_require__.r(__webpack_exports__);
 var getUser = function getUser() {
   return function (dispatch, getState) {
     console.log(makeHeaders(getState));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", makeHeaders(getState)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", makeHeaders(getState), {
+      withCredentials: true
+    }).then(function (res) {
       console.log(res.data);
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_SUCCESS"],
@@ -92022,10 +92024,9 @@ var makeHeaders = function makeHeaders(getState) {
       'Content-type': 'application/json'
     }
   }; // If token, add to headers
-
-  if (token) {
-    headersObj.headers["Authorization"] = "Bearer " + token;
-  }
+  // if (token) {
+  //   headersObj.headers["Authorization"] = "Bearer " + token;
+  // }
 
   return headersObj;
 };
@@ -92082,7 +92083,9 @@ var postHeaders = {
 
 var getDmUsers = function getDmUsers() {
   return function (dispatch, getState) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
       console.log(res.data);
       var users = res.data;
       dispatch({
@@ -92096,7 +92099,9 @@ var getMessages = function getMessages(selectedChannel) {
   return function (dispatch, getState) {
     console.log("CURRENTLY SELECTED CHANNEL BELOW");
     console.log(selectedChannel);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
       console.log("GET MESSAGES OUTPUT BELOW");
       console.log(res.data);
       var messages = res.data;
@@ -92116,7 +92121,9 @@ var dmSelectAction = function dmSelectAction(id) {
     // for only these two users and  returned
 
     var body = "{ \"receiver\": ".concat(id, " }");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
       // selectedChannel state is set to chatroom/channel object in response
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -93573,8 +93580,8 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/shawn/react-laravel-websockets/resources/js/index.js */"./resources/js/index.js");
-module.exports = __webpack_require__(/*! /home/shawn/react-laravel-websockets/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /mnt/c/Users/Shawn/Projects/WebDev/laravel-react-realtime-chat/resources/js/index.js */"./resources/js/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/Shawn/Projects/WebDev/laravel-react-realtime-chat/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

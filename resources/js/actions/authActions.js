@@ -21,7 +21,7 @@ export const getUser = () => {
   return (dispatch, getState) => {
   console.log(makeHeaders(getState));
     axios
-    .get("/api/auth/user",makeHeaders(getState))
+    .get("/api/auth/user",makeHeaders(getState), {withCredentials:true})
     .then((res) => {
     console.log(res.data);
       dispatch({
@@ -132,9 +132,9 @@ export const makeHeaders = (getState) => {
   };
 
   // If token, add to headers
-  if (token) {
-    headersObj.headers["Authorization"] = "Bearer " + token;
-  }
+  // if (token) {
+  //   headersObj.headers["Authorization"] = "Bearer " + token;
+  // }
 
   return headersObj;
 };

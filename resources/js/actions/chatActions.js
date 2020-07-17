@@ -48,7 +48,7 @@ const postHeaders = {
 
 export const getDmUsers = () => (dispatch, getState) => {
     axios
-        .get("/api/allusers", makeHeaders(getState))
+        .get("/api/allusers", makeHeaders(getState), {withCredentials:true})
         .then(res => {
             console.log(res.data);
             const users = res.data;
@@ -62,7 +62,7 @@ export const getMessages = selectedChannel => (dispatch, getState) => {
     console.log(selectedChannel);
 
     axios
-        .get(`/api/messages/${selectedChannel.id}`, makeHeaders(getState))
+        .get(`/api/messages/${selectedChannel.id}`, makeHeaders(getState), {withCredentials:true})
         .then(res => {
             console.log("GET MESSAGES OUTPUT BELOW");
             console.log(res.data);
@@ -85,7 +85,7 @@ export const dmSelectAction = id => {
 
         const body = `{ "receiver": ${id} }`;
         axios
-            .post("/api/directmessage", body, makeHeaders(getState))
+            .post("/api/directmessage", body, makeHeaders(getState), {withCredentials:true})
             .then(res => {
                 // selectedChannel state is set to chatroom/channel object in response
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });

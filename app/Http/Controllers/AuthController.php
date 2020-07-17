@@ -17,6 +17,8 @@ class AuthController extends Controller
      * @param  [string] password_confirmation
      * @return [string] message
      */
+
+
     public function register(Request $request)
     {
         try {
@@ -73,12 +75,7 @@ class AuthController extends Controller
         $token->save();
         return response()->json([
             'user' => $request->user(),
-            'token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
-            ],200);
+            ],200)->cookie('jwt', $tokenResult->accessToken, true);
     }
 
     /**
