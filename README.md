@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Finish AuthGuard/ProtectedRoutes functionality in React
 - Add Online/Offline status and Typing events support.
 - Add create channel modal and functionality
 
