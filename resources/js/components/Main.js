@@ -5,20 +5,33 @@ import Register from './Register';
 import Landing from './Landing';
 import Chat from './Chat';
 
+import { connect } from "react-redux";
+import LoadingSpinner from './LoadingSpinner';
+import ProtectedRoute from './router/ProtectedRoute';
+import ProtectedRouteIfAuth from './router/ProtectedRouteIfAuth';
 
 export class Main extends Component {
   render() {
+    console.log(this.props.isAuthenticated);
+    if(this.props.isAuthenticated === true || this.props.isAuthenticated === false) {
     return (
-      <div>
       <Switch>
-        <Route exact path ="/" component={Landing}/>
-        <Route exact path ="/chat" component={Chat}/>
-        <Route exact path ="/login" component={Login}/>
-        <Route exact path ="/register" component={Register}/>
+        <ProtectedRoute isAuthenticated={this.props.isAuthenticated} exact path="/chat" component={Chat} />
+        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/(|login|register)/" component={Login} />
+
       </Switch>
-      </div>
     )
+    } else {
+      return <LoadingSpinner/>
+
+    }
   }
 }
 
-export default Main
+const mapStateToProps = (state) => ({
+  //Maps state to redux store as props
+  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth.user
+});
+
+export default connect(mapStateToProps)(Main);

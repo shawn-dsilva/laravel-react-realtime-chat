@@ -17,27 +17,24 @@ import {
 // Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
 
 //Check if user is already logged in
-export const getUser = () => {
-  return (dispatch, getState) => {
-  console.log(makeHeaders(getState));
-    axios
-    .get("/api/auth/user",makeHeaders(getState), {withCredentials:true})
-    .then((res) => {
-    console.log(res.data);
-      dispatch({
-        type: AUTH_SUCCESS,
-        payload: res.data
-      })
-    }
-    )
-    .catch((err) => {
-      dispatch({
-        type: AUTH_FAIL
-      });
+export const getUser = () => (dispatch) => {
+
+  axios
+  .get("/api/auth/user",{withCredentials:true})
+  .then((res) =>
+    dispatch({
+      type: AUTH_SUCCESS,
+      payload: res.data
+    })
+  )
+  .catch((err) => {
+    dispatch({
+      type: AUTH_FAIL
     });
-  }
+  });
 
 }
+
 
 //Register New User
 export const register = ({ name, email, password }) => (dispatch) => {
