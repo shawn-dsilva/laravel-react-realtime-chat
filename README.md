@@ -4,8 +4,8 @@
 
 ### Immediate
 
+- Add Create Channel modal and functionality
 - Add Online/Offline status and Typing events support.
-- Add create channel modal and functionality
 
 ### Later
 
@@ -17,6 +17,7 @@
 
 ### Done
 
+- Finish AuthGuard/ProtectedRoutes functionality in React
 - Chat component loads successfully upon Login
 - Input box clears on submit
 - Chat component functionality refactored into using Redux

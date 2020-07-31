@@ -91824,6 +91824,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Main */ "./resources/js/components/Main.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
 /* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/authActions */ "./resources/js/actions/authActions.js");
+/* harmony import */ var _components_router_MainRouter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/router/MainRouter */ "./resources/js/components/router/MainRouter.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -91845,6 +91846,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -91911,13 +91913,11 @@ __webpack_require__.r(__webpack_exports__);
 //Check if user is already logged in
 
 var getUser = function getUser() {
-  return function (dispatch, getState) {
-    console.log(makeHeaders(getState));
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", makeHeaders(getState), {
+  return function (dispatch) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", {
       withCredentials: true
     }).then(function (res) {
-      console.log(res.data);
-      dispatch({
+      return dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_SUCCESS"],
         payload: res.data
       });
@@ -92773,6 +92773,79 @@ var Landing = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/LoadingSpinner.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/LoadingSpinner.js ***!
+  \***************************************************/
+/*! exports provided: LoadingSpinner, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadingSpinner", function() { return LoadingSpinner; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var LoadingSpinner = /*#__PURE__*/function (_Component) {
+  _inherits(LoadingSpinner, _Component);
+
+  var _super = _createSuper(LoadingSpinner);
+
+  function LoadingSpinner() {
+    _classCallCheck(this, LoadingSpinner);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(LoadingSpinner, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mt-auto mb-auto ml-auto mr-auto"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Spinner"], {
+        className: "ml-auto mr-auto",
+        style: {
+          width: "3.5rem",
+          height: "3.5rem"
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "d-block"
+      }, "LOADING...")));
+    }
+  }]);
+
+  return LoadingSpinner;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+/* harmony default export */ __webpack_exports__["default"] = (LoadingSpinner);
+
+/***/ }),
+
 /***/ "./resources/js/components/Login.js":
 /*!******************************************!*\
   !*** ./resources/js/components/Login.js ***!
@@ -92971,6 +93044,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Register__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Register */ "./resources/js/components/Register.js");
 /* harmony import */ var _Landing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Landing */ "./resources/js/components/Landing.js");
 /* harmony import */ var _Chat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Chat */ "./resources/js/components/Chat.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./LoadingSpinner */ "./resources/js/components/LoadingSpinner.js");
+/* harmony import */ var _router_ProtectedRoute__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./router/ProtectedRoute */ "./resources/js/components/router/ProtectedRoute.js");
+/* harmony import */ var _router_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./router/ProtectedRouteIfAuth */ "./resources/js/components/router/ProtectedRouteIfAuth.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92999,6 +93076,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
 var Main = /*#__PURE__*/function (_Component) {
   _inherits(Main, _Component);
 
@@ -93013,29 +93094,38 @@ var Main = /*#__PURE__*/function (_Component) {
   _createClass(Main, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        exact: true,
-        path: "/",
-        component: _Landing__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        exact: true,
-        path: "/chat",
-        component: _Chat__WEBPACK_IMPORTED_MODULE_5__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        exact: true,
-        path: "/login",
-        component: _Login__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        exact: true,
-        path: "/register",
-        component: _Register__WEBPACK_IMPORTED_MODULE_3__["default"]
-      })));
+      console.log(this.props.isAuthenticated);
+
+      if (this.props.isAuthenticated === true || this.props.isAuthenticated === false) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_router_ProtectedRoute__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/chat",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_5__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_router_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/(|login|register)/",
+          component: _Login__WEBPACK_IMPORTED_MODULE_2__["default"]
+        }));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_7__["default"], null);
+      }
     }
   }]);
 
   return Main;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-/* harmony default export */ __webpack_exports__["default"] = (Main);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    //Maps state to redux store as props
+    isAuthenticated: state.auth.isAuthenticated,
+    auth: state.auth.user
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Main));
 
 /***/ }),
 
@@ -93189,6 +93279,270 @@ var Register = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/router/MainRouter.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/router/MainRouter.js ***!
+  \******************************************************/
+/*! exports provided: MainRouter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainRouter", function() { return MainRouter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _ProtectedRoute__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProtectedRoute */ "./resources/js/components/router/ProtectedRoute.js");
+/* harmony import */ var _ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProtectedRouteIfAuth */ "./resources/js/components/router/ProtectedRouteIfAuth.js");
+/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../LoadingSpinner */ "./resources/js/components/LoadingSpinner.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Chat__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Chat */ "./resources/js/components/Chat.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+ // import { isAuth } from "../../actions/authActions";
+// import HomePage from '../HomePage';
+// import Profile from '../Profile';
+// import ListPage from '../ListPage';
+// import SingleList from '../SingleList';
+
+
+
+
+
+ // import Error404 from '../Error404';
+
+
+var MainRouter = /*#__PURE__*/function (_Component) {
+  _inherits(MainRouter, _Component);
+
+  var _super = _createSuper(MainRouter);
+
+  function MainRouter() {
+    _classCallCheck(this, MainRouter);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(MainRouter, [{
+    key: "render",
+    // authChecker = () => {
+    //   isAuth().then(() => {
+    //     // if(this.props.isAuthenticated === true ) {
+    //     //   const isAuthenticated = true;
+    //     //   return isAuthenticated;
+    //     //   }
+    //     return this.props.isAuthenticated
+    //   });
+    // };
+    // static propTypes = {
+    //   isAuthenticated: PropTypes.bool.isRequired,
+    // }
+    value: function render() {
+      console.log(this.props.auth.isAuthenticated);
+      console.log(this.props.isAuthenticated);
+
+      if (this.props.isAuthenticated === true || this.props.isAuthenticated === false) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRoute__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/chat",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/(|login|register)/",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__["default"], null);
+      }
+    }
+  }]);
+
+  return MainRouter;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    //Maps state to redux store as props
+    isAuthenticated: state.auth.isAuthenticated
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(MainRouter)));
+
+/***/ }),
+
+/***/ "./resources/js/components/router/ProtectedRoute.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/router/ProtectedRoute.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+function ProtectedRoute(_ref) {
+  var Component = _ref.component,
+      isAuthenticated = _ref.isAuthenticated,
+      rest = _objectWithoutProperties(_ref, ["component", "isAuthenticated"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], _extends({}, rest, {
+    render: function render(props) {
+      return isAuthenticated === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        to: {
+          pathname: '/login',
+          state: {
+            from: props.location
+          }
+        }
+      });
+    }
+  }));
+} // function ProtectedRoute({ children, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         this.props.isAuthenticated ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/login",
+//               state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (ProtectedRoute);
+
+/***/ }),
+
+/***/ "./resources/js/components/router/ProtectedRouteIfAuth.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/router/ProtectedRouteIfAuth.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+function ProtectedRoute(_ref) {
+  var Component = _ref.component,
+      isAuthenticated = _ref.isAuthenticated,
+      rest = _objectWithoutProperties(_ref, ["component", "isAuthenticated"]);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], _extends({}, rest, {
+    render: function render(props) {
+      if (isAuthenticated === false) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props);
+      } else {
+        console.log(props);
+        var loc = props.location.pathname;
+        console.log(loc);
+
+        if ((loc === '/' || loc === '/login' || loc === '/register') && props.location.state === undefined) {
+          //Redirects all routes that are root /, /login or /register to /listpage if there are no previous routes in state
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+            to: {
+              pathname: '/chat',
+              state: props.location
+            }
+          });
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+            to: {
+              pathname: props.location.state.from.pathname,
+              state: props.location
+            }
+          });
+        }
+      }
+    }
+  }));
+} // function ProtectedRoute({ children, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         this.props.isAuthenticated ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/login",
+//               state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (ProtectedRoute);
+
+/***/ }),
+
 /***/ "./resources/js/components/utils/echoHelpers.js":
 /*!******************************************************!*\
   !*** ./resources/js/components/utils/echoHelpers.js ***!
@@ -93290,7 +93644,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: false,
+  isAuthenticated: null,
   currUser: {}
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -93319,8 +93673,8 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_FAIL"]:
       localStorage.removeItem('token');
       return _objectSpread(_objectSpread({}, state), {}, {
-        user: null,
-        isAuthenticated: false
+        isAuthenticated: false,
+        user: null
       });
 
     default:
