@@ -93361,11 +93361,26 @@ var MainRouter = /*#__PURE__*/function (_Component) {
     //   isAuthenticated: PropTypes.bool.isRequired,
     // }
     value: function render() {
+      console.log(this.props.auth.isAuthenticated);
       console.log(this.props.isAuthenticated);
-      console.log(this.props.user);
 
       if (this.props.isAuthenticated === true || this.props.isAuthenticated === false) {
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRoute__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/chat",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/(|login|register)/",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/",
+          component: _Chat__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_5__["default"], null);
       }
@@ -93378,12 +93393,11 @@ var MainRouter = /*#__PURE__*/function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     //Maps state to redux store as props
-    isAuthenticated: state.auth.isAuthenticated,
-    auth: state.auth.user
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(MainRouter));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(MainRouter)));
 
 /***/ }),
 
