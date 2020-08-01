@@ -37,7 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'stderr'],
             'ignore_exceptions' => false,
         ],
 
@@ -75,9 +75,19 @@ return [
         'stderr' => [
             'driver' => 'monolog',
             'handler' => StreamHandler::class,
+            'tap' => [App\Logging\CustomizeFormatter::class],
             'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
-                'stream' => 'php://stderr',
+                'stream' => 'php://stdout',
+            ],
+            'level' => 'debug',
+        ],
+
+        'stdout' => [
+            'driver' => 'monolog',
+            'handler' => StreamHandler::class,
+            'with' => [
+                'stream' => 'php://stdout',
             ],
         ],
 
