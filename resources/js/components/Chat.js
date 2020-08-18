@@ -16,6 +16,7 @@ import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
 import ChatRoomUsersList from './ChatRoomUsersList';
+import CreateChannelModal from './CreateChannelModal';
 
 
     class Chat extends Component {
@@ -128,7 +129,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
             <Col xs="3">
               <h3>Channels</h3>
                <Col> <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
-               <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="7" key="7"><b> + Create New Channel</b></Button>
+               <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
           <br></br>
           </Col>
                 <h3>Direct Message</h3>
