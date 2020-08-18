@@ -4,16 +4,24 @@
 
 ### Immediate
 
-- Add Create Channel modal and functionality
-- Add Online/Offline status and Typing events support.
+- Add Create Channel modal and functionality.
+- Add support for user made channels, public and private/invite-only.
+- Notification system to accept/reject invites and request
 
 ### Later
 
-- Add search all users functionality
+- Add search all users functionality.
+- Add search all channels functionality.
 - Add Friends list for DM.
+- User Avatar uploading features
 - Add User profiles which are hyper linked.
-- Add support for user made channels, public and private/invite-only.
-- Unread messages notification
+- Unread messages notification.
+- UI Design using SASS
+- Responsiveness using SASS
+
+### Maybe 
+
+- Add Online/Offline status and Typing events support.
 
 ### Done
 
