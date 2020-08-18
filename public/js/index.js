@@ -92516,7 +92516,11 @@ var Chat = /*#__PURE__*/function (_Component) {
         onClick: this.channelSelect.bind(this, this.fakeGeneralChannel),
         id: "5",
         key: "5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        onClick: this.channelSelect.bind(this, this.fakeGeneralChannel),
+        id: "5",
+        key: "5"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " + Create New Channel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__["default"], {
         dmUsers: this.props.dmUsers,
         currUser: this.props.currUser,
         dmSelect: this.dmSelect
@@ -93934,8 +93938,8 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/Shawn/Projects/WebDev/laravel-react-realtime-chat/resources/js/index.js */"./resources/js/index.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/Shawn/Projects/WebDev/laravel-react-realtime-chat/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/shawn/webdev/laravel-react-realtime-chat/resources/js/index.js */"./resources/js/index.js");
+module.exports = __webpack_require__(/*! /home/shawn/webdev/laravel-react-realtime-chat/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

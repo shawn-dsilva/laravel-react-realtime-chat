@@ -128,6 +128,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
             <Col xs="3">
               <h3>Channels</h3>
                <Col> <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
+               <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> + Create New Channel</b></Button>
           <br></br>
           </Col>
                 <h3>Direct Message</h3>
