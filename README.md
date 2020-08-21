@@ -25,6 +25,7 @@
 
 ### Done
 
+- Basic Chat UI refactor with custom css on Bootstrap components
 - Finish AuthGuard/ProtectedRoutes functionality in React
 - Chat component loads successfully upon Login
 - Input box clears on submit
