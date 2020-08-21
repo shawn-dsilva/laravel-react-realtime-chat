@@ -17,6 +17,7 @@ import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
+import '../../css/custom.css';
 
 
     class Chat extends Component {
@@ -123,31 +124,34 @@ import CreateChannelModal from './CreateChannelModal';
 
       render () {
         return (
-          <div>
-          <Container fluid="true">
-             <Row>
-            <Col xs="3">
+          <Container fluid="true" >
+             <Row className="fullHeight">
+            <Col xs="2" className="sidenav">
               <h3>Channels</h3>
-               <Col> <Button onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
+               <Col> <Button color="link" onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
                <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
           <br></br>
           </Col>
                 <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
           </Col>
-              <Col xs="6">
-                <h1>Chat Homepage</h1>
+              <Col xs="7" className="chatMainContainer">
+              <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
+               <Row className="chatDisplay">
+
                     <ChatMessageList messages={this.props.messages}/>
-                  <InputGroup>
+                    </Row>
+                    <Row className="chatInput">
+              <InputGroup  >
                 <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />
                   <InputGroupAddon addonType="append"><Button onClick={this.sendMessageWrapper}>Send </Button></InputGroupAddon>
                 </InputGroup>
+                </Row>
               </Col>
             <ChatRoomUsersList usersInRoom={this.props.usersInRoom}/>
             </Row>
           </Container>
-          </div>
         )
       }
     }

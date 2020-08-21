@@ -10,7 +10,7 @@ export const ChatDmUsersList = (props) => {
     const userList = users.map((value, index) => {
         return (
             <Col key={index}>
-                <Button
+                <Button color="link"
                     onClick={() => dmSelect(value.id)}
                     id={value.id}>
                     <b>{value.name}</b>

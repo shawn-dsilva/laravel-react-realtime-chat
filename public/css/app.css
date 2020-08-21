@@ -10928,3 +10928,7 @@ a.text-dark:focus {
   }
 }
 
+.sidenav {
+  border-right: solid 3px grey;
+}
+

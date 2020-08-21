@@ -1,0 +1,26 @@
+.sidenav {
+    border-right: solid 1px grey;
+}
+
+.usersInRoom {
+    border-left: solid 1px grey;
+}
+
+html,body, #root, .container-true, .fullHeight {
+    height:100%!important;
+    overflow-x:hidden;
+}
+
+.chatMainContainer {
+    max-width:68%;
+    flex: 0 0 68%;
+    display:flex;
+    flex-direction: column;
+}
+
+.chatInput {
+    margin-top:auto;
+    padding:0.5rem;
+    border-top: 1px solid grey;
+}
+
