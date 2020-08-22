@@ -138,10 +138,7 @@ import '../../css/custom.css';
               <Col xs="7" className="chatMainContainer">
               <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
-               <Row className="chatDisplay">
-
-                    <ChatMessageList messages={this.props.messages}/>
-                    </Row>
+                    <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
               <InputGroup  >
                 <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />

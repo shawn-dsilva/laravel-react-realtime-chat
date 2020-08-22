@@ -6926,7 +6926,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow-x:hidden;\n}\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n}\n\n.chatInput {\n    margin-top:auto;\n    padding:0.5rem;\n    border-top: 1px solid grey;\n}\n\n", ""]);
+exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 100%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    height:6%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n}", ""]);
 
 // exports
 
@@ -93230,11 +93230,10 @@ var Chat = /*#__PURE__*/function (_Component) {
         className: "chatMainContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.onLogout
-      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
-        className: "chatDisplay"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        messages: this.props.messages
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        messages: this.props.messages,
+        currUser: this.props.currUser
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "chatInput"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["InputGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
         onChange: this.onChange,
@@ -93361,12 +93360,22 @@ function ChatMessageList(props) {
         className: "text-primary"
       }, value.message), " the channel");
     } else {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
-        key: index
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+      if (value.user.name !== props.currUser.name) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+          className: "chatNotUserMsg",
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+          className: "chatUserMsg",
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+      }
     }
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, messagelist);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+    className: "chatDisplay"
+  }, messagelist);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ChatMessageList);
