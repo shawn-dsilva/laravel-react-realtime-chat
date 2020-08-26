@@ -5,13 +5,24 @@ class CreateChannelModal extends Component {
 
   state = {
     toggle:false,
-    modal:false
+    modal:false,
+    channelName:"",
+    description:"",
+    type:"",
+    visible:true,
+
   }
 
   toggle = () => {
     this.setState({ modal : !this.state.modal});
   }
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
+  onCheck = () => {
+    this.setState({ visible : !this.state.visible});
+  }
   render() {
     return (
       <div>
@@ -47,23 +58,25 @@ class CreateChannelModal extends Component {
           </FormText>
         </FormGroup>
         <FormGroup tag="fieldset">
-            <Label>Privacy/Visibility</Label>
+            <Label>Access Permissions</Label>
           <FormGroup check>
             <Label check>
               <Input type="radio" name="type"  value="public" onChange={this.onChange} />{' '}
-              Anyone can join your channel, and can be invited to join your channel.
+              Anyone can join your channel, and can be invited to join your channel.(<span className="danger">PUBLIC</span>)
             </Label>
           </FormGroup>
           <FormGroup check>
             <Label check>
               <Input type="radio" name="type" value="private" onChange={this.onChange} />{' '}
-              Your channel can only be joined by others by your invitation.
+              Your channel can only be joined by others by your invitation.(<span className="success">PRIVATE</span>)
             </Label>
           </FormGroup>
         </FormGroup>
+        <Label>Search Visibility</Label>
+
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" name="visibility" value="invisible"  onChange={this.onChange} />{' '}
+            <Input type="checkbox" name="visible" onChange={this.onCheck} />{' '}
             Make Channel Private
           </Label>
           <FormText color="muted">
