@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { CreateChannel } from '../actions/authActions';
 
 class CreateChannelModal extends Component {
 
@@ -10,8 +13,12 @@ class CreateChannelModal extends Component {
     description:"",
     type:"",
     visible:true,
-
   }
+
+  static propTypes = {
+    CreateChannel: PropTypes.func.isRequired
+  }
+
 
   toggle = () => {
     this.setState({ modal : !this.state.modal});
@@ -23,6 +30,15 @@ class CreateChannelModal extends Component {
   onCheck = () => {
     this.setState({ visible : !this.state.visible});
   }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { channelName, description, type, visible } = this.state;
+
+    const channelData =  { channelName, description, type, visible };
+    this.props.login(channelData);
+  }
+
   render() {
     return (
       <div>
@@ -99,4 +115,5 @@ class CreateChannelModal extends Component {
   
 }
 
-export default CreateChannelModal;
+
+export default connect( {}, {CreateChannel})(CreateChannelModal);
