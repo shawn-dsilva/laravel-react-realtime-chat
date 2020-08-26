@@ -4,8 +4,9 @@
 
 ### Immediate
 
-- Add Create Channel modal and functionality.
 - Add support for user made channels, public and private/invite-only.
+- List of Pubilc Channels
+- Invite to channel by URL system
 - Notification system to accept/reject invites and request
 
 ### Later
@@ -25,6 +26,7 @@
 
 ### Done
 
+- Add Create Channel modal and functionality.
 - Basic Chat UI refactor with custom css on Bootstrap components
 - Finish AuthGuard/ProtectedRoutes functionality in React
 - Chat component loads successfully upon Login
