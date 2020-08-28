@@ -8,7 +8,8 @@ import {
     GET_DM_USERS,
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
-    SET_SELECTED_CHANNEL
+    SET_SELECTED_CHANNEL,
+    CREATE_CHANNEL_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     selectedChannel:{},
     usersInRoom:[],
     dmUsers:[],
-    currUser:{}
+    currUser:{},
+    channels:[]
 
 };
 
@@ -74,6 +76,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 selectedChannel: action.payload
+            };
+        case CREATE_CHANNEL_SUCCESS:
+            return {
+                 ...state,
+                channels: state.channels.concat(action.payload)
             };
         default:
             return state;

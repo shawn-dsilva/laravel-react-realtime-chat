@@ -9,7 +9,8 @@ import {
     ADD_MESSAGE,
     SET_USERS_IN_ROOM,
     ADD_USER_TO_ROOM,
-    USER_LEAVES_ROOM
+    USER_LEAVES_ROOM,
+    CREATE_CHANNEL_SUCCESS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -177,3 +178,15 @@ export const channelSelect = id => {
             });
     };
 };
+
+
+export const CreateChannel = channelData => {
+    axios
+        .post("/api/createchannel", channelData, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log(res.data);
+            const channel = res.data;
+            dispatch({ type: CREATE_CHANNEL_SUCCESS, payload: channel });
+        })
+        .catch(err => {});
+}

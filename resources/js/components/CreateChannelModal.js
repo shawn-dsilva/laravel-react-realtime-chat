@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { CreateChannel } from '../actions/authActions';
+import { CreateChannel } from '../actions/chatActions';
 
 class CreateChannelModal extends Component {
 
