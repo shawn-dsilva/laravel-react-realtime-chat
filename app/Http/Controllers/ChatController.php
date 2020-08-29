@@ -65,4 +65,9 @@ class ChatController extends Controller
 
         }
     }
+
+    public function createChannel(Request $request) {
+
+        return response()->json($request);
+    }
 }

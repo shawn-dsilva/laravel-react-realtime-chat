@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getMessages, dmSelectAction, channelSelect */
+/*! exports provided: getDmUsers, getMessages, dmSelectAction, channelSelect, CreateChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92740,6 +92740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -92919,6 +92920,20 @@ var channelSelect = function channelSelect(id) {
     });
   };
 };
+var CreateChannel = function CreateChannel(channelData) {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/createchannel", channelData, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log(res.data);
+      var channel = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["CREATE_CHANNEL_SUCCESS"],
+        payload: channel
+      });
+    })["catch"](function (err) {});
+  };
+};
 
 /***/ }),
 
@@ -92960,7 +92975,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92988,6 +93003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_USER_TO_ROOM", function() { return ADD_USER_TO_ROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_LEAVES_ROOM", function() { return USER_LEAVES_ROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CHANNEL", function() { return SET_SELECTED_CHANNEL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_CHANNEL_SUCCESS", function() { return CREATE_CHANNEL_SUCCESS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93011,6 +93027,7 @@ var GET_DM_USERS = 'GET_DM_USERS';
 var ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 var USER_LEAVES_ROOM = 'USER_LEAVES_ROOM';
 var SET_SELECTED_CHANNEL = 'SET_SELECTED_CHANNEL';
+var CREATE_CHANNEL_SUCCESS = 'CREATE_CHANNEL_SUCCESS';
 
 /***/ }),
 
@@ -93429,7 +93446,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93508,6 +93525,7 @@ var CreateChannelModal = /*#__PURE__*/function (_Component) {
           description = _this$state.description,
           type = _this$state.type,
           visible = _this$state.visible;
+      console.log("in form submit function");
       var channelData = {
         channelName: channelName,
         description: description,
@@ -93515,7 +93533,7 @@ var CreateChannelModal = /*#__PURE__*/function (_Component) {
         visible: visible
       };
 
-      _this.props.login(channelData);
+      _this.props.CreateChannel(channelData);
     });
 
     return _this;
@@ -93536,6 +93554,7 @@ var CreateChannelModal = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", null, "Create A New Channel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
         color: "info"
       }, "You can create a new channel using this modal, you will be the owner of the channel and can invite or remove members, set visibility/privacy settings etc."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+        id: "create-channel",
         onSubmit: this.onSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         "for": "channelName"
@@ -93596,8 +93615,8 @@ var CreateChannelModal = /*#__PURE__*/function (_Component) {
       }), ' ', "Make Channel Private"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormText"], {
         color: "muted"
       }, "Check this box to make your channel not visible in searches and undiscoverable in the public channels list.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Leave unchecked for public visibility")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-        color: "primary",
-        onClick: this.toggle
+        form: "create-channel",
+        color: "primary"
       }, "Create Channel"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         color: "danger",
         onClick: this.toggle
@@ -93612,8 +93631,8 @@ _defineProperty(CreateChannelModal, "propTypes", {
   CreateChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired
 });
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])({}, {
-  CreateChannel: _actions_authActions__WEBPACK_IMPORTED_MODULE_4__["CreateChannel"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
+  CreateChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["CreateChannel"]
 })(CreateChannelModal));
 
 /***/ }),
@@ -94632,7 +94651,8 @@ var initialState = {
   selectedChannel: {},
   usersInRoom: [],
   dmUsers: [],
-  currUser: {}
+  currUser: {},
+  channels: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -94689,6 +94709,12 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CHANNEL"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         selectedChannel: action.payload
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["CREATE_CHANNEL_SUCCESS"]:
+      console.log("in create channel success branch");
+      return _objectSpread(_objectSpread({}, state), {}, {
+        channels: state.channels.concat(action.payload)
       });
 
     default:

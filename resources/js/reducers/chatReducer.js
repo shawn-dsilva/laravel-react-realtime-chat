@@ -78,6 +78,7 @@ export default function(state = initialState, action) {
                 selectedChannel: action.payload
             };
         case CREATE_CHANNEL_SUCCESS:
+            console.log("in create channel success branch");
             return {
                  ...state,
                 channels: state.channels.concat(action.payload)

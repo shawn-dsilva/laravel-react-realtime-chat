@@ -35,6 +35,6 @@ Route::group([
     Route::get('messages/{channel_id}', 'ChatController@getMessages');
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');
-
+    Route::post('createchannel', 'ChatController@createChannel');
 
 });

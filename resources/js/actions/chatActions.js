@@ -180,7 +180,7 @@ export const channelSelect = id => {
 };
 
 
-export const CreateChannel = channelData => {
+export const CreateChannel = channelData => (dispatch,getState) => {
     axios
         .post("/api/createchannel", channelData, makeHeaders(getState), {withCredentials:true})
         .then(res => {

@@ -34,9 +34,9 @@ class CreateChannelModal extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { channelName, description, type, visible } = this.state;
-
+    console.log("in form submit function");
     const channelData =  { channelName, description, type, visible };
-    this.props.login(channelData);
+    this.props.CreateChannel(channelData);
   }
 
   render() {
@@ -50,7 +50,7 @@ class CreateChannelModal extends Component {
           You can create a new channel using this modal, you will be the owner of the channel
           and can invite or remove members, set visibility/privacy settings etc.
         </Alert>
-        <Form onSubmit={this.onSubmit}>
+        <Form id="create-channel" onSubmit={this.onSubmit}>
         <FormGroup>
           <Label for="channelName">Channel Name</Label>
           <Input type="channelName" name="channelName" id="channelName" 
@@ -105,7 +105,7 @@ class CreateChannelModal extends Component {
    
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Create Channel</Button>{' '}
+            <Button form="create-channel" color="primary" >Create Channel</Button>{' '}
             <Button color="danger" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
@@ -116,4 +116,4 @@ class CreateChannelModal extends Component {
 }
 
 
-export default connect( {}, {CreateChannel})(CreateChannelModal);
+export default connect( null, {CreateChannel})(CreateChannelModal);
