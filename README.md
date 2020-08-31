@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Refactor direct message feature to it's own table rather than channels table
 - Add support for user made channels, public and private/invite-only.
 - List of Pubilc Channels
 - Invite to channel by URL system
