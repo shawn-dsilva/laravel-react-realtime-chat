@@ -4,7 +4,6 @@
 
 ### Immediate
 
-- Refactor direct message feature to it's own table rather than channels table
 - Add support for user made channels, public and private/invite-only.
 - List of Pubilc Channels
 - Invite to channel by URL system
@@ -36,3 +35,7 @@
 - Add Laravel-Echo and Laravel-Websockets side auth logic for DMs
 - Add token in constructor to prevent repetition.
 - Rework message model to include channel ID
+
+### CANCELLED
+
+<del>Refactor direct message feature to it's own table rather than channels table</del>
