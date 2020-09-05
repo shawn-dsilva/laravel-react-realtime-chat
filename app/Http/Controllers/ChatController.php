@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Channel;
+use App\Details;
 
 class ChatController extends Controller
 {
@@ -68,6 +69,11 @@ class ChatController extends Controller
 
     public function createChannel(Request $request) {
 
+        $detail = new Details;
+        $detail->name = $request->name;
+        $detail->desc = $request->desc;
+        $detail->visible = $request->visible;
+        $detail->type = $request->type;
         return response()->json($request);
     }
 }

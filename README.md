@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Channel Details table for Channels table
 - Add support for user made channels, public and private/invite-only.
 - List of Pubilc Channels
 - Invite to channel by URL system

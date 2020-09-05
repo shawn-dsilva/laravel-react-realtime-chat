@@ -94049,8 +94049,13 @@ var Main = /*#__PURE__*/function (_Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_router_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_9__["default"], {
           isAuthenticated: this.props.isAuthenticated,
           exact: true,
-          path: "/(|login|register)/",
+          path: "/(|login)/",
           component: _Login__WEBPACK_IMPORTED_MODULE_2__["default"]
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_router_ProtectedRouteIfAuth__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          isAuthenticated: this.props.isAuthenticated,
+          exact: true,
+          path: "/register",
+          component: _Register__WEBPACK_IMPORTED_MODULE_3__["default"]
         }));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_7__["default"], null);

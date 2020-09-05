@@ -17,7 +17,8 @@ export class Main extends Component {
     return (
       <Switch>
         <ProtectedRoute isAuthenticated={this.props.isAuthenticated} exact path="/chat" component={Chat} />
-        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/(|login|register)/" component={Login} />
+        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/(|login)/" component={Login} />
+        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/register" component={Register} />
 
       </Switch>
     )
