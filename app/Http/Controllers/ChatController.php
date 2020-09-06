@@ -29,6 +29,16 @@ class ChatController extends Controller
         return Message::where("channel_id", $channel_id)->with('user')->get();
     }
 
+    public function getSubscribedChannels(Request $request) {
+        $user = auth()->user()->id;
+        $channels = Channel::whereHas('users', function($q) use ($user) {
+                $q->where('user_id',$user  );
+        })->join('details', 'channels.id', '=', 'details.channel_id')
+        ->select('channels.id', 'details.name')->get();
+
+        return response()->json($channels);
+    }
+
     public function sendMessage(Request $request)
     {
         $message = auth()->user()->messages()->create([
@@ -46,12 +56,13 @@ class ChatController extends Controller
         $receiver = $request->receiver;
 
 
-        $channelIsFound = Channel::where('type', 'dm')->whereHas('users', function($q) use ($sender) {
+        $channelIsFound = Channel::whereHas('users', function($q) use ($sender) {
              $q->where('user_id',$sender  );
         })->whereHas('users', function($q) use ($receiver) {
             $q->where('user_id',$receiver);
         })->first();
-
+        error_log("CHANNEL FOUND");
+        error_log($channelIsFound);
         if(!empty($channelIsFound)) {
             $channel = $channelIsFound;
             return response()->json($channel);
@@ -69,11 +80,30 @@ class ChatController extends Controller
 
     public function createChannel(Request $request) {
 
+        $user = auth()->user()->id;
+
+        $channel = new Channel;
+        $channel->type = "channel";
+        $channel->name = "channel";
+        $channel->save();
+        $channelId = $channel->id;
+        $channel->users()->attach($user);
+
         $detail = new Details;
-        $detail->name = $request->name;
-        $detail->desc = $request->desc;
+        $detail->name = $request->channelName;
+        $detail->desc = $request->description;
         $detail->visible = $request->visible;
         $detail->type = $request->type;
-        return response()->json($request);
+        $detail->owner_id = $user;
+        $detail->channel_id = $channelId;
+        $detail->image = "nothing";
+        $detail->save();
+
+        $createdChannel = Channel::where('channels.id', $channelId)
+        ->join('details', 'channels.id', '=', 'details.channel_id')
+        ->select('channels.id', 'details.name')->first();
+
+         return response()->json($createdChannel);
     }
+
 }
