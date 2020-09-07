@@ -33,6 +33,7 @@ Route::group([
 ], function() {
     Route::post('messages', 'ChatController@sendMessage');
     Route::get('messages/{channel_id}', 'ChatController@getMessages');
+    Route::get('getchannels', 'ChatController@getSubscribedChannels');
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');
     Route::post('createchannel', 'ChatController@createChannel');

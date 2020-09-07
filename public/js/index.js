@@ -92731,12 +92731,13 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getMessages, dmSelectAction, channelSelect, CreateChannel */
+/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChannels", function() { return getChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
@@ -92786,6 +92787,19 @@ var getDmUsers = function getDmUsers() {
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_DM_USERS"],
         payload: users
+      });
+    })["catch"](function (err) {});
+  };
+};
+var getChannels = function getChannels() {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getchannels", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      var channels = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_CHANNELS"],
+        payload: channels
       });
     })["catch"](function (err) {});
   };
@@ -92975,7 +92989,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93004,6 +93018,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_LEAVES_ROOM", function() { return USER_LEAVES_ROOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CHANNEL", function() { return SET_SELECTED_CHANNEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_CHANNEL_SUCCESS", function() { return CREATE_CHANNEL_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CHANNELS", function() { return GET_CHANNELS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93028,6 +93043,7 @@ var ADD_USER_TO_ROOM = 'ADD_USER_TO_ROOM';
 var USER_LEAVES_ROOM = 'USER_LEAVES_ROOM';
 var SET_SELECTED_CHANNEL = 'SET_SELECTED_CHANNEL';
 var CREATE_CHANNEL_SUCCESS = 'CREATE_CHANNEL_SUCCESS';
+var GET_CHANNELS = 'GET_CHANNELS';
 
 /***/ }),
 
@@ -93095,10 +93111,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
 /* harmony import */ var _ChatMessageList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ChatMessageList */ "./resources/js/components/ChatMessageList.js");
 /* harmony import */ var _ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ChatDmUserList */ "./resources/js/components/ChatDmUserList.js");
-/* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
-/* harmony import */ var _CreateChannelModal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CreateChannelModal */ "./resources/js/components/CreateChannelModal.js");
-/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
-/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _ChatChannelsList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ChatChannelsList */ "./resources/js/components/ChatChannelsList.js");
+/* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
+/* harmony import */ var _CreateChannelModal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CreateChannelModal */ "./resources/js/components/CreateChannelModal.js");
+/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
+/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_11__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93122,6 +93139,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -93214,6 +93232,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       // console.log(this.props.location.state.token);
       Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
       this.props.getDmUsers();
+      this.props.getChannels();
       this.channelSelect(this.fakeGeneralChannel);
     }
   }, {
@@ -93236,7 +93255,11 @@ var Chat = /*#__PURE__*/function (_Component) {
         onClick: this.channelSelect.bind(this, this.fakeGeneralChannel),
         id: "5",
         key: "5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateChannelModal__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatChannelsList__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        channels: this.props.channels,
+        currUser: this.props.currUser,
+        channelSelect: this.channelSelect
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateChannelModal__WEBPACK_IMPORTED_MODULE_10__["default"], {
         buttonLabel: "+ Create New Channel"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Direct Message"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatDmUserList__WEBPACK_IMPORTED_MODULE_7__["default"], {
         dmUsers: this.props.dmUsers,
@@ -93261,7 +93284,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         addonType: "append"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: this.sendMessageWrapper
-      }, "Send "))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }, "Send "))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_9__["default"], {
         usersInRoom: this.props.usersInRoom
       })));
     }
@@ -93273,6 +93296,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 _defineProperty(Chat, "propTypes", {
   // isAuth: PropTypes.func.isRequired,
   getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  getChannels: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
@@ -93292,6 +93316,7 @@ var mapStateToProps = function mapStateToProps(state) {
     message: state.chat.message,
     usersInRoom: state.chat.usersInRoom,
     dmUsers: state.chat.dmUsers,
+    channels: state.chat.channels,
     currUser: state.auth.currUser,
     selectedChannel: state.chat.selectedChannel
   };
@@ -93299,10 +93324,46 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
   getDmUsers: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getDmUsers"],
+  getChannels: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getChannels"],
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"]
 })(Chat));
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatChannelsList.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/ChatChannelsList.js ***!
+  \*****************************************************/
+/*! exports provided: ChatChannelsList, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChatChannelsList", function() { return ChatChannelsList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+
+
+var ChatChannelsList = function ChatChannelsList(props) {
+  var channels = props.channels; // console.log(typeof(channels));
+
+  var channelSelect = props.channelSelect;
+  console.log("in channels list");
+  console.log(channels);
+  var channelList = channels.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "link",
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, channelList);
+};
+/* harmony default export */ __webpack_exports__["default"] = (ChatChannelsList);
 
 /***/ }),
 
@@ -93327,6 +93388,7 @@ var ChatDmUsersList = function ChatDmUsersList(props) {
   }); // console.log(typeof(users));
 
   var dmSelect = props.dmSelect;
+  console.log(users);
   var userList = users.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
       key: index
@@ -94709,6 +94771,11 @@ var initialState = {
         usersInRoom: state.usersInRoom.filter(function (user) {
           return user.id !== action.payload.id;
         })
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_CHANNELS"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        channels: action.payload
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CHANNEL"]:

@@ -9,7 +9,8 @@ import {
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
     SET_SELECTED_CHANNEL,
-    CREATE_CHANNEL_SUCCESS
+    CREATE_CHANNEL_SUCCESS,
+    GET_CHANNELS
 } from "../actions/types";
 
 const initialState = {
@@ -71,6 +72,11 @@ export default function(state = initialState, action) {
                 usersInRoom: state.usersInRoom.filter(
                     user => user.id !== action.payload.id
                 )
+            };
+        case GET_CHANNELS:
+            return {
+                ...state,
+                channels: action.payload
             };
         case SET_SELECTED_CHANNEL:
             return {

@@ -10,7 +10,8 @@ import {
     SET_USERS_IN_ROOM,
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
-    CREATE_CHANNEL_SUCCESS
+    CREATE_CHANNEL_SUCCESS,
+    GET_CHANNELS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -54,6 +55,16 @@ export const getDmUsers = () => (dispatch, getState) => {
             console.log(res.data);
             const users = res.data;
             dispatch({ type: GET_DM_USERS, payload: users });
+        })
+        .catch(err => {});
+};
+
+export const getChannels = () => (dispatch, getState) => {
+    axios
+        .get("/api/getchannels", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const channels = res.data;
+            dispatch({ type: GET_CHANNELS, payload: channels });
         })
         .catch(err => {});
 };

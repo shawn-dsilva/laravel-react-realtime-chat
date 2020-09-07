@@ -3,16 +3,17 @@
 import React from "react";
 import { Col, Button } from "reactstrap";
 
-export const ChatDmUsersList = (props) => {
-    const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
-    // console.log(typeof(users));
-  const { dmSelect } = props;
-  console.log(users);
-    const userList = users.map((value, index) => {
+export const ChatChannelsList = (props) => {
+    const channels = props.channels;
+    // console.log(typeof(channels));
+  const { channelSelect } = props;
+  console.log("in channels list");
+  console.log(channels);
+    const channelList = channels.map((value, index) => {
         return (
             <Col key={index}>
                 <Button color="link"
-                    onClick={() => dmSelect(value.id)}
+
                     id={value.id}>
                     <b>{value.name}</b>
                 </Button>
@@ -24,9 +25,9 @@ export const ChatDmUsersList = (props) => {
 
     return (
       <div>
-        {userList}
+        {channelList}
       </div>
     )
 };
 
-export default ChatDmUsersList;
+export default ChatChannelsList;

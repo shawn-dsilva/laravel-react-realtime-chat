@@ -11,10 +11,11 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
+import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
@@ -35,6 +36,7 @@ import '../../css/custom.css';
       static propTypes = {
         // isAuth: PropTypes.func.isRequired,
         getDmUsers: PropTypes.func.isRequired,
+        getChannels: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
@@ -67,7 +69,7 @@ import '../../css/custom.css';
           echoInit(this.myToken);
 
           this.props.getDmUsers();
-
+          this.props.getChannels();
           this.channelSelect(this.fakeGeneralChannel);
 
 
@@ -129,6 +131,8 @@ import '../../css/custom.css';
             <Col xs="2" className="sidenav">
               <h3>Channels</h3>
                <Col> <Button color="link" onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
+               <ChatChannelsList channels={this.props.channels} currUser={this.props.currUser} channelSelect={this.channelSelect} />
+
                <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
           <br></br>
           </Col>
@@ -160,8 +164,9 @@ import '../../css/custom.css';
       message:state.chat.message,
       usersInRoom: state.chat.usersInRoom,
       dmUsers: state.chat.dmUsers,
+      channels: state.chat.channels,
       currUser:state.auth.currUser,
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {getDmUsers, getMessages,dmSelectAction, channelSelect})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect})(Chat);
