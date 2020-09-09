@@ -64,6 +64,7 @@ html,body, #root, .container-true, .fullHeight {
     border-bottom-left-radius: 15px;
     margin: 0.5rem 0 0.5rem 0;
     margin-left:auto;
+    flex-grow: 0;
 }
 
 .chatNotUserMsg {
@@ -77,4 +78,5 @@ html,body, #root, .container-true, .fullHeight {
     border-bottom-right-radius: 15px;
     margin: 0.5rem 0 0.5rem 0;
     margin-right:auto;
+    flex-grow: 0;
 }
