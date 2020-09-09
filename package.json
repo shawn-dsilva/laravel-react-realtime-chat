@@ -9,7 +9,8 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "server": "php artisan websockets:serve & php artisan serve ",
-        "all":"concurrently \"npm run server\" \"npm run watch\""
+        "all":"concurrently \"npm run server\" \"npm run watch\"",
+        "nobs":"concurrently \"npm run dev\" \"npm run server\""
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.10.1",

@@ -119,7 +119,7 @@ import '../../css/custom.css';
       sendMessageWrapper = (e) => {
         e.stopPropagation();
         console.log(this.state.message);
-        sendMessage(this.state.message, this.props.selectedChannel.id)
+        sendMessage(this.state.message, this.props.selectedChannel.id, this.props.selectedChannel.type)
         this.setState({ message:'' });
 
       }

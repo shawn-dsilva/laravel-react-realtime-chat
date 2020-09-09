@@ -34,7 +34,7 @@ class ChatController extends Controller
         $channels = Channel::whereHas('users', function($q) use ($user) {
                 $q->where('user_id',$user  );
         })->join('details', 'channels.id', '=', 'details.channel_id')
-        ->select('channels.id', 'details.name')->get();
+        ->select('channels.id', 'channels.type','details.name')->get();
 
         return response()->json($channels);
     }
@@ -46,7 +46,8 @@ class ChatController extends Controller
             'channel_id' => $request->channel_id
         ]);
 
-		broadcast(new MessageSent($request->user(), $message, $request->channel_id));
+        error_log($message);
+		broadcast(new MessageSent($request->user(), $message, $request->channel_id, $request->channel_type));
 
         return ['status' => 'Message Sent!'];
     }
@@ -56,7 +57,7 @@ class ChatController extends Controller
         $receiver = $request->receiver;
 
 
-        $channelIsFound = Channel::whereHas('users', function($q) use ($sender) {
+        $channelIsFound = Channel::where('type','dm')->whereHas('users', function($q) use ($sender) {
              $q->where('user_id',$sender  );
         })->whereHas('users', function($q) use ($receiver) {
             $q->where('user_id',$receiver);

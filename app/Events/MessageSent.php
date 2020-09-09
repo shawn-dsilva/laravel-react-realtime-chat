@@ -33,18 +33,22 @@ class MessageSent implements ShouldBroadcast
 
     public $channel;
 
+    public $type;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user, $message, $channel)
+    public function __construct(User $user, $message, $channel, $type)
     {
         $this->user = $user;
 
         $this->message = $message;
 
         $this->channel = $channel;
+
+        $this->type = $type;
 
     }
 
@@ -55,9 +59,9 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        if($this->channel == 5) {
+        if($this->type === "channel") {
             return new PresenceChannel("chat.channel.".$this->channel);
-        } else {
+        } else if ($this->type === "dm") {
             return new PresenceChannel("chat.dm.".$this->channel);
         }
     }

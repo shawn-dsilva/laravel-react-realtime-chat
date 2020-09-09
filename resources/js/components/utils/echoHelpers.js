@@ -23,8 +23,8 @@ export const echoInit = token => {
     window.Echo.join("chat");
 };
 
-export const sendMessage = ( message, channel_id) => {
-    const body = JSON.stringify({ message, channel_id });
+export const sendMessage = ( message, channel_id, channel_type) => {
+    const body = JSON.stringify({ message, channel_id, channel_type });
 
     const postHeaders = {
         headers: {

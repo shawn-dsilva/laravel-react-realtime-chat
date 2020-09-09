@@ -133,7 +133,10 @@ export const dmSelectAction = id => {
 };
 
 export const channelSelect = id => {
+    window.Echo.leave("chat.channel.5");
+
     return (dispatch, getState) => {
+
         dispatch({ type: SET_SELECTED_CHANNEL, payload: id });
         const selectedChannelInState = getState().chat.selectedChannel;
 
@@ -180,6 +183,7 @@ export const channelSelect = id => {
                 }
             })
             .listen("MessageSent", event => {
+                console.log("IN FRONT END MESSAGE SENT");
                 console.log(event);
                 const message = {
                     user: event.user,

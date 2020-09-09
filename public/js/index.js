@@ -92864,6 +92864,7 @@ var dmSelectAction = function dmSelectAction(id) {
   };
 };
 var channelSelect = function channelSelect(id) {
+  window.Echo.leave("chat.channel.5");
   return function (dispatch, getState) {
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -92922,6 +92923,7 @@ var channelSelect = function channelSelect(id) {
         });
       }
     }).listen("MessageSent", function (event) {
+      console.log("IN FRONT END MESSAGE SENT");
       console.log(event);
       var message = {
         user: event.user,
@@ -93208,7 +93210,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "sendMessageWrapper", function (e) {
       e.stopPropagation();
       console.log(_this.state.message);
-      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["sendMessage"])(_this.state.message, _this.props.selectedChannel.id);
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["sendMessage"])(_this.state.message, _this.props.selectedChannel.id, _this.props.selectedChannel.type);
 
       _this.setState({
         message: ''
@@ -93359,7 +93361,7 @@ var ChatChannelsList = function ChatChannelsList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return channelSelect(value.id);
+        return channelSelect(value);
       },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
@@ -94588,10 +94590,11 @@ var echoInit = function echoInit(token) {
   };
   window.Echo.join("chat");
 };
-var sendMessage = function sendMessage(message, channel_id) {
+var sendMessage = function sendMessage(message, channel_id, channel_type) {
   var body = JSON.stringify({
     message: message,
-    channel_id: channel_id
+    channel_id: channel_id,
+    channel_type: channel_type
   });
   var postHeaders = {
     headers: {
