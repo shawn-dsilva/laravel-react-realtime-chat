@@ -16,9 +16,9 @@ class NotificationRequest extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($invoice)
     {
-        //
+        $this->invoice = $invoice;
     }
 
     /**
@@ -29,7 +29,7 @@ class NotificationRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +55,8 @@ class NotificationRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+        'invoice_id' => $this->invoice->id,
+        'amount' => $this->invoice->amount,
         ];
     }
 }
