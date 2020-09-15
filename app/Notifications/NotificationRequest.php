@@ -67,7 +67,8 @@ class NotificationRequest extends Notification
 
             case "INVT":
                 $desc = "{$this->invite->from} has invited you to join channel {$this->invite->to}!";
-
+            default:
+            break;
         }
 
         return [
