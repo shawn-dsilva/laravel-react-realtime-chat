@@ -16,9 +16,9 @@ class NotificationRequest extends Notification
      *
      * @return void
      */
-    public function __construct($invoice)
+    public function __construct($invite)
     {
-        $this->invoice = $invoice;
+        $this->invite = $invite;
     }
 
     /**
@@ -54,9 +54,25 @@ class NotificationRequest extends Notification
      */
     public function toArray($notifiable)
     {
+        $desc = "";
+
+        switch($this->invite->type) {
+            case "FRND":
+                $desc = "{$this->invite->from} wants to be friends!";
+            break;
+
+            case "JOIN":
+                $desc = "{$this->invite->from} wants to be join your channel {$this->invite->to}!";
+            break;
+
+            case "INVT":
+                $desc = "{$this->invite->from} has invited you to join channel {$this->invite->to}!";
+
+        }
+
         return [
-        'invoice_id' => $this->invoice->id,
-        'amount' => $this->invoice->amount,
+        'invite_id' => $this->invite->id,
+        'desc' => $desc,
         ];
     }
 }
