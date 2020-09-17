@@ -15,6 +15,8 @@ import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect } 
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
+import AllUsersList from './AllUsersList';
+
 import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
@@ -138,6 +140,8 @@ import '../../css/custom.css';
           </Col>
                 <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
+                <AllUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
+
           </Col>
               <Col xs="7" className="chatMainContainer">
               <h1>Chat Homepage</h1>
