@@ -10,7 +10,8 @@ import {
     USER_LEAVES_ROOM,
     SET_SELECTED_CHANNEL,
     CREATE_CHANNEL_SUCCESS,
-    GET_CHANNELS
+    GET_CHANNELS,
+    SEND_REQUEST_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
     usersInRoom:[],
     dmUsers:[],
     currUser:{},
-    channels:[]
+    channels:[],
+    requests:[]
 
 };
 
@@ -89,6 +91,12 @@ export default function(state = initialState, action) {
                  ...state,
                 channels: state.channels.concat(action.payload)
             };
+        case SEND_REQUEST_SUCCESS:
+            console.log("in create request success branch");
+            return {
+                 ...state,
+                    channels: state.requests.concat(action.payload)
+                };
         default:
             return state;
     }

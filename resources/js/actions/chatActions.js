@@ -11,7 +11,8 @@ import {
     ADD_USER_TO_ROOM,
     USER_LEAVES_ROOM,
     CREATE_CHANNEL_SUCCESS,
-    GET_CHANNELS
+    GET_CHANNELS,
+    SEND_REQUEST_SUCCESS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -202,6 +203,17 @@ export const CreateChannel = channelData => (dispatch,getState) => {
             console.log(res.data);
             const channel = res.data;
             dispatch({ type: CREATE_CHANNEL_SUCCESS, payload: channel });
+        })
+        .catch(err => {});
+}
+
+export const makeRequest = id => (dispatch,getState) => {
+    axios
+        .post("/api/makerequest", id, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log(res.data);
+            const request = res.data;
+            dispatch({ type: SEND_REQUEST_SUCCESS, payload: request });
         })
         .catch(err => {});
 }

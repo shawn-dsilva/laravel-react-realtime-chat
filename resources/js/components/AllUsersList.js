@@ -4,7 +4,7 @@ import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Col } from '
 export const AllUsersList = (props) => {
     const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
     // console.log(typeof(users));
-  const { dmSelect } = props;
+  const { sendRequest } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -19,6 +19,11 @@ export const AllUsersList = (props) => {
                 <Button color="link"
                     id={value.id}>
                     <b>{value.name}</b>
+                </Button>
+                <Button color="success"
+                    onClick={() => sendRequest(value.id)}
+                    id={value.id}>
+                    <b>Add Friend</b>
                 </Button>
                 <br></br>
             </Col>

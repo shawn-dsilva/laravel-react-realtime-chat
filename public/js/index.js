@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel */
+/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92742,6 +92742,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -92950,6 +92951,20 @@ var CreateChannel = function CreateChannel(channelData) {
     })["catch"](function (err) {});
   };
 };
+var makeRequest = function makeRequest(id) {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/makerequest", id, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log(res.data);
+      var request = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["SEND_REQUEST_SUCCESS"],
+        payload: request
+      });
+    })["catch"](function (err) {});
+  };
+};
 
 /***/ }),
 
@@ -92991,7 +93006,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93021,6 +93036,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CHANNEL", function() { return SET_SELECTED_CHANNEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_CHANNEL_SUCCESS", function() { return CREATE_CHANNEL_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CHANNELS", function() { return GET_CHANNELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEND_REQUEST_SUCCESS", function() { return SEND_REQUEST_SUCCESS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93046,6 +93062,7 @@ var USER_LEAVES_ROOM = 'USER_LEAVES_ROOM';
 var SET_SELECTED_CHANNEL = 'SET_SELECTED_CHANNEL';
 var CREATE_CHANNEL_SUCCESS = 'CREATE_CHANNEL_SUCCESS';
 var GET_CHANNELS = 'GET_CHANNELS';
+var SEND_REQUEST_SUCCESS = 'SEND_REQUEST_SUCCESS';
 
 /***/ }),
 
@@ -93126,7 +93143,7 @@ var AllUsersList = function AllUsersList(props) {
     return u.id !== props.currUser.id;
   }); // console.log(typeof(users));
 
-  var dmSelect = props.dmSelect;
+  var sendRequest = props.sendRequest;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -93144,7 +93161,13 @@ var AllUsersList = function AllUsersList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       id: value.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "success",
+      onClick: function onClick() {
+        return sendRequest(value.id);
+      },
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Add Friend")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "danger",
@@ -93314,6 +93337,11 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.dmSelectAction(id);
     }
   }, {
+    key: "sendRequest",
+    value: function sendRequest(id) {
+      this.props.makeRequest(id);
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
@@ -93341,7 +93369,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllUsersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
         dmUsers: this.props.dmUsers,
         currUser: this.props.currUser,
-        dmSelect: this.dmSelect
+        sendRequest: this.sendRequest
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "7",
         className: "chatMainContainer"
@@ -93376,6 +93404,7 @@ _defineProperty(Chat, "propTypes", {
   getChannels: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -93404,7 +93433,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getChannels: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getChannels"],
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
-  channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"]
+  channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
+  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"]
 })(Chat));
 
 /***/ }),
@@ -94800,7 +94830,8 @@ var initialState = {
   usersInRoom: [],
   dmUsers: [],
   currUser: {},
-  channels: []
+  channels: [],
+  requests: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -94868,6 +94899,12 @@ var initialState = {
       console.log("in create channel success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
         channels: state.channels.concat(action.payload)
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SEND_REQUEST_SUCCESS"]:
+      console.log("in create request success branch");
+      return _objectSpread(_objectSpread({}, state), {}, {
+        channels: state.requests.concat(action.payload)
       });
 
     default:

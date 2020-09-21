@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -41,6 +41,7 @@ import '../../css/custom.css';
         getChannels: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
+        makeRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
 
         messages: PropTypes.array.isRequired,
@@ -82,6 +83,9 @@ import '../../css/custom.css';
         this.props.dmSelectAction(id)
       }
 
+      sendRequest(id){
+        this.props.makeRequest(id)
+      }
       channelSelect = (selectedChannel, event) => {
         if(event !== undefined) {
           event.stopPropagation();
@@ -140,7 +144,7 @@ import '../../css/custom.css';
           </Col>
                 <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
-                <AllUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
+                <AllUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} sendRequest={this.sendRequest} />
 
           </Col>
               <Col xs="7" className="chatMainContainer">
@@ -173,4 +177,4 @@ import '../../css/custom.css';
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest})(Chat);
