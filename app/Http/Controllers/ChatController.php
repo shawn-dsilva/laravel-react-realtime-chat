@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Channel;
 use App\Details;
+use App\Invite;
 
 class ChatController extends Controller
 {
@@ -107,4 +108,21 @@ class ChatController extends Controller
          return response()->json($createdChannel);
     }
 
+    
+    public function createInvite(Request $request) {
+
+        $user = auth()->user()->id;
+
+        $invite = new Invite;
+        $invite->type = "FRND";
+        $invite->from_id = $user;
+        $invite->to_id = $request->id;
+        $invite->save();
+
+         return response()->json($invite);
+    }
+
+
 }
+
+
