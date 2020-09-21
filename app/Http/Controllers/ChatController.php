@@ -108,7 +108,7 @@ class ChatController extends Controller
          return response()->json($createdChannel);
     }
 
-    
+
     public function createInvite(Request $request) {
 
         $user = auth()->user()->id;
@@ -116,7 +116,7 @@ class ChatController extends Controller
         $invite = new Invite;
         $invite->type = "FRND";
         $invite->from_id = $user;
-        $invite->to_id = $request->id;
+        $invite->to_id = $request->receiver;
         $invite->save();
 
          return response()->json($invite);

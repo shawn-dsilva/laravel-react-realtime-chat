@@ -208,8 +208,11 @@ export const CreateChannel = channelData => (dispatch,getState) => {
 }
 
 export const makeRequest = id => (dispatch,getState) => {
+
+    const body = `{ "receiver": ${id} }`;
+
     axios
-        .post("/api/makerequest", id, makeHeaders(getState), {withCredentials:true})
+        .post("/api/makerequest", body, makeHeaders(getState), {withCredentials:true})
         .then(res => {
             console.log(res.data);
             const request = res.data;
