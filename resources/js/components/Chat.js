@@ -83,7 +83,7 @@ import '../../css/custom.css';
         this.props.dmSelectAction(id)
       }
 
-      sendRequest(id){
+      sendRequest = (id) =>{
         this.props.makeRequest(id)
       }
       channelSelect = (selectedChannel, event) => {

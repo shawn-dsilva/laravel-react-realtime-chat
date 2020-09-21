@@ -93270,6 +93270,10 @@ var Chat = /*#__PURE__*/function (_Component) {
       selectedChannel: ""
     });
 
+    _defineProperty(_assertThisInitialized(_this), "sendRequest", function (id) {
+      _this.props.makeRequest(id);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
       if (event !== undefined) {
         event.stopPropagation();
@@ -93335,11 +93339,6 @@ var Chat = /*#__PURE__*/function (_Component) {
     key: "dmSelect",
     value: function dmSelect(id) {
       this.props.dmSelectAction(id);
-    }
-  }, {
-    key: "sendRequest",
-    value: function sendRequest(id) {
-      this.props.makeRequest(id);
     }
   }, {
     key: "render",
