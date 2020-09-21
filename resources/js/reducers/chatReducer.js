@@ -95,7 +95,7 @@ export default function(state = initialState, action) {
             console.log("in create request success branch");
             return {
                  ...state,
-                    channels: state.requests.concat(action.payload)
+                    requests: state.requests.concat(action.payload)
                 };
         default:
             return state;

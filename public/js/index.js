@@ -94904,7 +94904,7 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["SEND_REQUEST_SUCCESS"]:
       console.log("in create request success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
-        channels: state.requests.concat(action.payload)
+        requests: state.requests.concat(action.payload)
       });
 
     default:
