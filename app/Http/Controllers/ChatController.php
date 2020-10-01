@@ -12,6 +12,7 @@ use App\User;
 use App\Channel;
 use App\Details;
 use App\Invite;
+use App\Notifications\NotificationRequest;
 
 class ChatController extends Controller
 {
@@ -119,7 +120,9 @@ class ChatController extends Controller
         $invite->to_id = $request->receiver;
         $invite->save();
 
+        $user->notify(new NotificationRequest($invite));
          return response()->json($invite);
+
     }
 
 

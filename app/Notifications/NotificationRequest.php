@@ -76,4 +76,8 @@ class NotificationRequest extends Notification
         'desc' => $desc,
         ];
     }
+
+    public function broadcastType() {
+        return 'broadcast.message';
+    }
 }
