@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Complete Notifications React/Redux front end 
 - Channel Details table for Channels table
 - Add support for user made channels, public and private/invite-only.
 - List of Pubilc Channels
