@@ -34,3 +34,8 @@ return 	User::where('id', $user->id)->whereHas('channels', function ($q) use ($c
 		$q->where('channel_id', $channel_id);
 	})->first();
 });
+
+Broadcast::channel('App.User.{id}', function ($user, $id) {
+	return (int) $user->id === (int) $id;
+});
+

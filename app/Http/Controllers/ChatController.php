@@ -112,16 +112,17 @@ class ChatController extends Controller
 
     public function createInvite(Request $request) {
 
-        $user = auth()->user()->id;
+        $userId = auth()->user()->id;
 
         $invite = new Invite;
         $invite->type = "FRND";
-        $invite->from_id = $user;
+        $invite->from_id = $userId;
         $invite->to_id = $request->receiver;
         $invite->save();
 
+        $user = User::find($userId);
         $user->notify(new NotificationRequest($invite));
-         return response()->json($invite);
+        //  return response()->json($invite);
 
     }
 

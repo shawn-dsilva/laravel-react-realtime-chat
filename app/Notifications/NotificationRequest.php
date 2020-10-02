@@ -4,8 +4,10 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Broadcast;
 
 class NotificationRequest extends Notification
 {
@@ -29,7 +31,7 @@ class NotificationRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -52,21 +54,46 @@ class NotificationRequest extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+    // public function toBroadcast($notifiable)
+    // {
+    //     $desc = "";
+
+    //     switch($this->invite->type) {
+    //         case "FRND":
+    //             $desc = "{$this->invite->from} wants to be friends!";
+    //         break;
+
+    //         case "JOIN":
+    //             $desc = "{$this->invite->from} wants to be join your channel {$this->invite->to}!";
+    //         break;
+
+    //         case "INVT":
+    //             $desc = "{$this->invite->from} has invited you to join channel {$this->invite->to}!";
+    //         default:
+    //         break;
+    //     }
+
+    //     return new BroadcastMessage ( [
+    //     'invite_id' => $this->invite->id,
+    //     'desc' => $desc,
+    //     ]);
+    // }
+
     public function toArray($notifiable)
     {
         $desc = "";
 
         switch($this->invite->type) {
             case "FRND":
-                $desc = "{$this->invite->from} wants to be friends!";
+                $desc = "{$this->invite->from_id} wants to be friends!";
             break;
 
             case "JOIN":
-                $desc = "{$this->invite->from} wants to be join your channel {$this->invite->to}!";
+                $desc = "{$this->invite->from_id} wants to be join your channel {$this->invite->to}!";
             break;
 
             case "INVT":
-                $desc = "{$this->invite->from} has invited you to join channel {$this->invite->to}!";
+                $desc = "{$this->invite->from_id} has invited you to join channel {$this->invite->to}!";
             default:
             break;
         }
@@ -75,9 +102,5 @@ class NotificationRequest extends Notification
         'invite_id' => $this->invite->id,
         'desc' => $desc,
         ];
-    }
-
-    public function broadcastType() {
-        return 'broadcast.message';
     }
 }

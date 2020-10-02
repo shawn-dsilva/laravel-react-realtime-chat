@@ -74,7 +74,7 @@ import '../../css/custom.css';
           this.props.getDmUsers();
           this.props.getChannels();
           this.channelSelect(this.fakeGeneralChannel);
-
+          this.notifChannel();
 
 
       }
@@ -91,6 +91,17 @@ import '../../css/custom.css';
           event.stopPropagation();
         }
         this.props.channelSelect(selectedChannel);
+      }
+
+      notifChannel = () => {
+        console.log("INSIDE NOTIF CHANNEL FUNCTION");
+        let userId = this.props.currUser.id;
+        console.log(userId);
+        window.Echo.private(`App.User.${userId}`)
+        .notification((notification) => {
+          console.log("NOTIFICATION BELOW");
+          console.log(notification);
+        });
       }
 
       onLogout = () => {

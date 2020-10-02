@@ -93283,6 +93283,16 @@ var Chat = /*#__PURE__*/function (_Component) {
       _this.props.channelSelect(selectedChannel);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "notifChannel", function () {
+      console.log("INSIDE NOTIF CHANNEL FUNCTION");
+      var userId = _this.props.currUser.id;
+      console.log(userId);
+      window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
+        console.log("NOTIFICATION BELOW");
+        console.log(notification);
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
       var headers = {
         headers: {
@@ -93335,6 +93345,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getDmUsers();
       this.props.getChannels();
       this.channelSelect(this.fakeGeneralChannel);
+      this.notifChannel();
     }
   }, {
     key: "dmSelect",

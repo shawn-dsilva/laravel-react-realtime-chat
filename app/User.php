@@ -46,4 +46,6 @@ class User extends Authenticatable
     public function channels() {
         return $this->belongsToMany('App\Channel', 'user_channel')->withTimestamps();
     }
+
+
 }
