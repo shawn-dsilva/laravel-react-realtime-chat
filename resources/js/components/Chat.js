@@ -21,6 +21,7 @@ import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
+import NotificationDropdown from './NotificationDropdown';
 
 
     class Chat extends Component {
@@ -163,6 +164,9 @@ import '../../css/custom.css';
               <Col xs="7" className="chatMainContainer">
               <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
+                <div className="text-right">
+                <NotificationDropdown  />
+                </div>
                     <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
               <InputGroup  >
