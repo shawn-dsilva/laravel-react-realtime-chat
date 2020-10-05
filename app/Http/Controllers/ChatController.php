@@ -120,8 +120,12 @@ class ChatController extends Controller
         $invite->to_id = $request->receiver;
         $invite->save();
 
+        $inviteJoin = Invite::find($invite->id)->join('users', 'users.id', '=', 'invites.from_id')
+    ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
+
+    error_log($inviteJoin);
         $user = User::find($userId);
-        $user->notify(new NotificationRequest($invite));
+        $user->notify(new NotificationRequest($inviteJoin));
         //  return response()->json($invite);
 
     }
