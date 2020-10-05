@@ -11,7 +11,8 @@ import {
     SET_SELECTED_CHANNEL,
     CREATE_CHANNEL_SUCCESS,
     GET_CHANNELS,
-    SEND_REQUEST_SUCCESS
+    SEND_REQUEST_SUCCESS,
+    ADD_NOTIFICATION
 } from "../actions/types";
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     dmUsers:[],
     currUser:{},
     channels:[],
-    requests:[]
+    requests:[],
+    notifications:[]
 
 };
 
@@ -96,6 +98,12 @@ export default function(state = initialState, action) {
             return {
                  ...state,
                     requests: state.requests.concat(action.payload)
+                };
+        case ADD_NOTIFICATION:
+            console.log("in create request success branch");
+            return {
+                 ...state,
+                    notifications: state.notifications.concat(action.payload)
                 };
         default:
             return state;

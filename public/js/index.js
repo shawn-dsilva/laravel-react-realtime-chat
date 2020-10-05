@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest */
+/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92743,6 +92743,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -92966,6 +92967,14 @@ var makeRequest = function makeRequest(id) {
     })["catch"](function (err) {});
   };
 };
+var addNotification = function addNotification(notification) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_NOTIFICATION"],
+      payload: notification
+    });
+  };
+};
 
 /***/ }),
 
@@ -93007,7 +93016,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93038,6 +93047,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_CHANNEL_SUCCESS", function() { return CREATE_CHANNEL_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CHANNELS", function() { return GET_CHANNELS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEND_REQUEST_SUCCESS", function() { return SEND_REQUEST_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NOTIFICATION", function() { return ADD_NOTIFICATION; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93064,6 +93074,7 @@ var SET_SELECTED_CHANNEL = 'SET_SELECTED_CHANNEL';
 var CREATE_CHANNEL_SUCCESS = 'CREATE_CHANNEL_SUCCESS';
 var GET_CHANNELS = 'GET_CHANNELS';
 var SEND_REQUEST_SUCCESS = 'SEND_REQUEST_SUCCESS';
+var ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 
 /***/ }),
 
@@ -93290,6 +93301,8 @@ var Chat = /*#__PURE__*/function (_Component) {
       window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
         console.log("NOTIFICATION BELOW");
         console.log(notification);
+
+        _this.props.addNotification(notification);
       });
     });
 
@@ -93417,6 +93430,7 @@ _defineProperty(Chat, "propTypes", {
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -93445,7 +93459,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
-  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"]
+  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"],
+  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"]
 })(Chat));
 
 /***/ }),
@@ -94842,7 +94857,8 @@ var initialState = {
   dmUsers: [],
   currUser: {},
   channels: [],
-  requests: []
+  requests: [],
+  notifications: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -94916,6 +94932,12 @@ var initialState = {
       console.log("in create request success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
         requests: state.requests.concat(action.payload)
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_NOTIFICATION"]:
+      console.log("in create request success branch");
+      return _objectSpread(_objectSpread({}, state), {}, {
+        notifications: state.notifications.concat(action.payload)
       });
 
     default:

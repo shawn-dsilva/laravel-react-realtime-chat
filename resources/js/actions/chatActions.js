@@ -12,7 +12,8 @@ import {
     USER_LEAVES_ROOM,
     CREATE_CHANNEL_SUCCESS,
     GET_CHANNELS,
-    SEND_REQUEST_SUCCESS
+    SEND_REQUEST_SUCCESS,
+    ADD_NOTIFICATION
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -219,4 +220,8 @@ export const makeRequest = id => (dispatch,getState) => {
             dispatch({ type: SEND_REQUEST_SUCCESS, payload: request });
         })
         .catch(err => {});
+}
+
+export const addNotification = notification => (dispatch, getState) => {
+    dispatch({ type: ADD_NOTIFICATION, payload: notification});
 }

@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -43,6 +43,7 @@ import '../../css/custom.css';
         dmSelectAction: PropTypes.func.isRequired,
         makeRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
+        addNotification: PropTypes.func.isRequired,
 
         messages: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
@@ -101,6 +102,7 @@ import '../../css/custom.css';
         .notification((notification) => {
           console.log("NOTIFICATION BELOW");
           console.log(notification);
+          this.props.addNotification(notification);
         });
       }
 
@@ -188,4 +190,4 @@ import '../../css/custom.css';
       selectedChannel:state.chat.selectedChannel
 
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification})(Chat);
