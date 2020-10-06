@@ -6,6 +6,21 @@ const NotificationDropdown = (props) => {
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
+  const { notifications } = props;
+
+  const notificationsList = notifications.map((value, index) => {
+    return (
+        <DropdownItem key={index}>
+            <Button color="link"
+                onClick={() => dmSelect(value.id)}
+                id={value.id}>
+                <b>{value.name}</b>
+            </Button>
+            <br></br>
+        </DropdownItem>
+    );
+});
+
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle caret>
@@ -16,6 +31,7 @@ const NotificationDropdown = (props) => {
         <DropdownItem>Notification</DropdownItem>
         <DropdownItem>Notification</DropdownItem>
         <DropdownItem>Notification</DropdownItem>
+        
         <DropdownItem divider />
         <DropdownItem>Show All Notifications</DropdownItem>
 

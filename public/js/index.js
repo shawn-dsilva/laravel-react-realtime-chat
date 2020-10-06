@@ -93403,7 +93403,9 @@ var Chat = /*#__PURE__*/function (_Component) {
         onClick: this.onLogout
       }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        notifications: this.props.notifications
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
@@ -93436,6 +93438,7 @@ _defineProperty(Chat, "propTypes", {
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  notifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
@@ -93453,7 +93456,8 @@ var mapStateToProps = function mapStateToProps(state) {
     dmUsers: state.chat.dmUsers,
     channels: state.chat.channels,
     currUser: state.auth.currUser,
-    selectedChannel: state.chat.selectedChannel
+    selectedChannel: state.chat.selectedChannel,
+    notifications: state.chat.notifications
   };
 };
 
@@ -94319,6 +94323,18 @@ var NotificationDropdown = function NotificationDropdown(props) {
     });
   };
 
+  var notifications = props.notifications;
+  var notificationsList = notifications.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Button, {
+      color: "link",
+      onClick: function onClick() {
+        return dmSelect(value.id);
+      },
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
     isOpen: dropdownOpen,
     toggle: toggle
