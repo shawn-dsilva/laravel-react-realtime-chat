@@ -28,7 +28,7 @@ const NotificationDropdown = (props) => {
 
         
         <DropdownItem divider />
-        <DropdownItem>Show All Notifications</DropdownItem>
+        <DropdownItem className="text-primary text-center">Show All Notifications</DropdownItem>
 
       </DropdownMenu>
     </Dropdown>

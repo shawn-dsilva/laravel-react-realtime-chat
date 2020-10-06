@@ -94338,7 +94338,9 @@ var NotificationDropdown = function NotificationDropdown(props) {
     divider: true
   }), notificationsList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     divider: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Show All Notifications")));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+    className: "text-primary text-center"
+  }, "Show All Notifications")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NotificationDropdown);
