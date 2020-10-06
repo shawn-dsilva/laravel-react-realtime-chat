@@ -11,7 +11,7 @@ const NotificationDropdown = (props) => {
   const notificationsList = notifications.map((value, index) => {
     return (
         <DropdownItem key={index}>
-          {value.desc}
+          <span><b>{value.sender_name}</b> {value.desc}</span>
             <br></br>
         </DropdownItem>
     );

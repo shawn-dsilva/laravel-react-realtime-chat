@@ -85,20 +85,21 @@ class NotificationRequest extends Notification
 
         switch($this->invite->type) {
             case "FRND":
-                $desc = "{$this->invite->name} wants to be friends!";
+                $desc = "wants to be friends!";
             break;
 
             case "JOIN":
-                $desc = "{$this->invite->name} wants to join your channel {$this->invite->to}!";
+                $desc = "wants to join your channel {$this->invite->to}!";
             break;
 
             case "INVT":
-                $desc = "{$this->invite->name} has invited you to join channel {$this->invite->to}!";
+                $desc = "has invited you to join channel {$this->invite->to}!";
             default:
             break;
         }
 
         return [
+        'sender_name' => $this->invite->name,
         'invite_id' => $this->invite->id,
         'desc' => $desc,
         ];
