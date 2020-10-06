@@ -11,11 +11,7 @@ const NotificationDropdown = (props) => {
   const notificationsList = notifications.map((value, index) => {
     return (
         <DropdownItem key={index}>
-            <Button color="link"
-                onClick={() => dmSelect(value.id)}
-                id={value.id}>
-                <b>{value.name}</b>
-            </Button>
+          {value.desc}
             <br></br>
         </DropdownItem>
     );
@@ -28,9 +24,8 @@ const NotificationDropdown = (props) => {
         </DropdownToggle>
       <DropdownMenu>
         <DropdownItem divider />
-        <DropdownItem>Notification</DropdownItem>
-        <DropdownItem>Notification</DropdownItem>
-        <DropdownItem>Notification</DropdownItem>
+          {notificationsList}
+
         
         <DropdownItem divider />
         <DropdownItem>Show All Notifications</DropdownItem>
