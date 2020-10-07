@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -43,6 +43,7 @@ import NotificationDropdown from './NotificationDropdown';
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
         makeRequest: PropTypes.func.isRequired,
+        acceptFriendRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
         addNotification: PropTypes.func.isRequired,
 
@@ -89,6 +90,11 @@ import NotificationDropdown from './NotificationDropdown';
       sendRequest = (id) =>{
         this.props.makeRequest(id)
       }
+
+      acceptRequest = (id) =>{
+        this.props.acceptFriendRequest(id)
+      }
+
       channelSelect = (selectedChannel, event) => {
         if(event !== undefined) {
           event.stopPropagation();
@@ -166,7 +172,7 @@ import NotificationDropdown from './NotificationDropdown';
               <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
                 <div className="text-right">
-                <NotificationDropdown notifications={this.props.notifications} />
+                <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} />
                 </div>
                     <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
@@ -196,4 +202,4 @@ import NotificationDropdown from './NotificationDropdown';
       notifications:state.chat.notifications
 
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest})(Chat);

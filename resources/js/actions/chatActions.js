@@ -13,7 +13,8 @@ import {
     CREATE_CHANNEL_SUCCESS,
     GET_CHANNELS,
     SEND_REQUEST_SUCCESS,
-    ADD_NOTIFICATION
+    ADD_NOTIFICATION,
+    ACCEPT_REQUEST_SUCCESS,
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -224,4 +225,18 @@ export const makeRequest = id => (dispatch,getState) => {
 
 export const addNotification = notification => (dispatch, getState) => {
     dispatch({ type: ADD_NOTIFICATION, payload: notification});
+}
+
+export const acceptFriendRequest = id => (dispatch,getState) => {
+
+    const body = `{ "invite_id": ${id} }`;
+
+    axios
+        .post("/api/acceptrequest", body, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log(res.data);
+            const request = res.data;
+            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+        })
+        .catch(err => {});
 }

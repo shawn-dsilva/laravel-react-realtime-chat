@@ -12,7 +12,8 @@ import {
     CREATE_CHANNEL_SUCCESS,
     GET_CHANNELS,
     SEND_REQUEST_SUCCESS,
-    ADD_NOTIFICATION
+    ADD_NOTIFICATION,
+    ACCEPT_REQUEST_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -105,6 +106,10 @@ export default function(state = initialState, action) {
                  ...state,
                     notifications: state.notifications.concat(action.payload)
                 };
+        case ACCEPT_REQUEST_SUCCESS:
+            return {
+                ...state,
+            };
         default:
             return state;
     }

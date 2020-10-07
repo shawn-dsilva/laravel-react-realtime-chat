@@ -6,11 +6,11 @@ const NotificationDropdown = (props) => {
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
-  const { notifications } = props;
+  const { notifications, acceptRequest } = props;
 
   const notificationsList = notifications.map((value, index) => {
     return (
-        <DropdownItem key={index}>
+        <DropdownItem key={index} onClick={() => acceptRequest(value.invite_id)}>
           <span><b>{value.sender_name}</b> {value.desc}</span>
             <br></br>
         </DropdownItem>
