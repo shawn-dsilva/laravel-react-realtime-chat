@@ -11,7 +11,7 @@ const NotificationDropdown = (props) => {
   const toggleModal = () => setModal(!modal);
 
   const { notifications, acceptRequest } = props;
-  //onClick={() => acceptRequest(value.invite_id)}
+
   const notificationsList = notifications.map((value, index) => {
     return (
         <DropdownItem key={index} onClick={toggleModal} >
@@ -29,10 +29,12 @@ function AcceptModal({sender_name, desc, toggleModal, modal}) {
        <Modal isOpen={modal} toggle={toggleModal} >
          <ModalHeader toggle={toggleModal}>Accept Request</ModalHeader>
          <ModalBody>
-         <span>Do you want to accept <b>{sender_name}</b>'s friend request?</span>
+         <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
      </ModalBody>
          <ModalFooter>
            <Button color="danger" onClick={toggleModal}>Close Window</Button>
+           <Button color="success" onClick={() => acceptRequest(value.invite_id)}>Accept</Button>
+
          </ModalFooter>
        </Modal>
      </div>
