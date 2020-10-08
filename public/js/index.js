@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification */
+/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification, acceptFriendRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92744,6 +92744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -92975,6 +92976,21 @@ var addNotification = function addNotification(notification) {
     });
   };
 };
+var acceptFriendRequest = function acceptFriendRequest(id) {
+  return function (dispatch, getState) {
+    var body = "{ \"invite_id\": ".concat(id, " }");
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/acceptrequest", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log(res.data);
+      var request = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
+        payload: request
+      });
+    })["catch"](function (err) {});
+  };
+};
 
 /***/ }),
 
@@ -93016,7 +93032,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93048,6 +93064,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CHANNELS", function() { return GET_CHANNELS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEND_REQUEST_SUCCESS", function() { return SEND_REQUEST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NOTIFICATION", function() { return ADD_NOTIFICATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCEPT_REQUEST_SUCCESS", function() { return ACCEPT_REQUEST_SUCCESS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93075,6 +93092,7 @@ var CREATE_CHANNEL_SUCCESS = 'CREATE_CHANNEL_SUCCESS';
 var GET_CHANNELS = 'GET_CHANNELS';
 var SEND_REQUEST_SUCCESS = 'SEND_REQUEST_SUCCESS';
 var ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+var ACCEPT_REQUEST_SUCCESS = 'ACCEPT_REQUEST_SUCCESS';
 
 /***/ }),
 
@@ -93288,6 +93306,10 @@ var Chat = /*#__PURE__*/function (_Component) {
       _this.props.makeRequest(id);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "acceptRequest", function (id) {
+      _this.props.acceptFriendRequest(id);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
       if (event !== undefined) {
         event.stopPropagation();
@@ -93404,7 +93426,8 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        notifications: this.props.notifications
+        notifications: this.props.notifications,
+        acceptRequest: this.acceptRequest
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
@@ -93435,6 +93458,7 @@ _defineProperty(Chat, "propTypes", {
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -93468,7 +93492,8 @@ var mapStateToProps = function mapStateToProps(state) {
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"],
-  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"]
+  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"],
+  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"]
 })(Chat));
 
 /***/ }),
@@ -94323,12 +94348,46 @@ var NotificationDropdown = function NotificationDropdown(props) {
     });
   };
 
-  var notifications = props.notifications;
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      modal = _useState4[0],
+      setModal = _useState4[1];
+
+  var toggleModal = function toggleModal() {
+    return setModal(!modal);
+  };
+
+  var notifications = props.notifications,
+      acceptRequest = props.acceptRequest; //onClick={() => acceptRequest(value.invite_id)}
+
   var notificationsList = notifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-      key: index
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      key: index,
+      onClick: toggleModal
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AcceptModal, {
+      sender_name: value.sender_name,
+      desc: value.desc,
+      toggleModal: toggleModal,
+      modal: modal
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
+
+  function AcceptModal(_ref) {
+    var sender_name = _ref.sender_name,
+        desc = _ref.desc,
+        toggleModal = _ref.toggleModal,
+        modal = _ref.modal;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+      isOpen: modal,
+      toggle: toggleModal
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
+      toggle: toggleModal
+    }, "Accept Request"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Do you want to accept ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, sender_name), "'s friend request?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "danger",
+      onClick: toggleModal
+    }, "Close Window"))));
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
     isOpen: dropdownOpen,
     toggle: toggle
@@ -95010,6 +95069,9 @@ var initialState = {
       return _objectSpread(_objectSpread({}, state), {}, {
         notifications: state.notifications.concat(action.payload)
       });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ACCEPT_REQUEST_SUCCESS"]:
+      return _objectSpread({}, state);
 
     default:
       return state;
