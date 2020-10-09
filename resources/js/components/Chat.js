@@ -170,7 +170,7 @@ import NotificationDropdown from './NotificationDropdown';
           </Col>
               <Col xs="7" className="chatMainContainer">
               <h1>Chat Homepage</h1>
-                <Button onClick={this.onLogout}>Logout</Button>
+                {/* <Button onClick={this.onLogout}>Logout</Button> */}
                 <div className="text-right">
                 <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/>
                 </div>

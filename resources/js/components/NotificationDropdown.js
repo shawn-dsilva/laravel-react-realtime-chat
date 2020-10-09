@@ -44,7 +44,7 @@ function AcceptModal({sender_name, desc, toggleModal, modal}) {
 
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle caret>
+      <DropdownToggle color="secondary" size="lg" outline caret>
        Notifications &nbsp;
   <Badge color="primary"> {unreadNotifs}</Badge>
         </DropdownToggle>
