@@ -13,6 +13,7 @@ import {
   DropdownItem,
   NavbarText
 } from 'reactstrap';
+import NotificationDropdown from './NotificationDropdown';
 
 const NavbarMain = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,30 +26,16 @@ const NavbarMain = (props) => {
         <NavbarBrand href="/">Laravel React Chat</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="container-fluid" navbar>
             <NavItem>
               <NavLink href="/components/">Components</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <div className="ml-auto">
+            <NotificationDropdown notifications={props.notifications} acceptRequest={props.acceptRequest} unreadNotifs={props.unreadNotifs}/>
+            </div>
           </Nav>
           <NavbarText>Simple Text</NavbarText>
         </Collapse>

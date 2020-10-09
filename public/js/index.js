@@ -6926,7 +6926,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n\n}", ""]);
+exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}", ""]);
 
 // exports
 
@@ -93396,7 +93396,11 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        notifications: this.props.notifications,
+        acceptRequest: this.acceptRequest,
+        unreadNotifs: this.props.unreadNotifs
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "2",
@@ -93425,11 +93429,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         className: "chatMainContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-right"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
-        notifications: this.props.notifications,
-        acceptRequest: this.acceptRequest,
-        unreadNotifs: this.props.unreadNotifs
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
@@ -94324,6 +94324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -94335,6 +94336,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -94362,23 +94364,19 @@ var NavbarMain = function NavbarMain(props) {
     isOpen: isOpen,
     navbar: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Nav"], {
-    className: "mr-auto",
+    className: "container-fluid",
     navbar: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     href: "/components/"
   }, "Components")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     href: "https://github.com/reactstrap/reactstrap"
-  }, "GitHub")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["UncontrolledDropdown"], {
-    nav: true,
-    inNavbar: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownToggle"], {
-    nav: true,
-    caret: true
-  }, "Options"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
-    right: true
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Option 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Option 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-    divider: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Reset")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarText"], null, "Simple Text"))));
+  }, "GitHub")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    notifications: props.notifications,
+    acceptRequest: props.acceptRequest,
+    unreadNotifs: props.unreadNotifs
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarText"], null, "Simple Text"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NavbarMain);

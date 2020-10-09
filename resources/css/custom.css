@@ -84,5 +84,5 @@ html,body, #root, .container-true, .fullHeight {
 
 .navCustom {
     border-bottom: solid 1px grey;
-
+    padding: 0 0.8rem!important;
 }

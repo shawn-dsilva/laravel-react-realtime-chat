@@ -154,7 +154,7 @@ import NavbarMain from './NavbarMain';
       render () {
         return (
           <Container fluid="true" >
-               <Row> <Col><NavbarMain/></Col></Row>
+               <Row> <Col><NavbarMain notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/></Col></Row>
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">
@@ -174,7 +174,7 @@ import NavbarMain from './NavbarMain';
               <h1>Chat Homepage</h1>
                 {/* <Button onClick={this.onLogout}>Logout</Button> */}
                 <div className="text-right">
-                <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/>
+                {/* <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/> */}
                 </div>
                     <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
