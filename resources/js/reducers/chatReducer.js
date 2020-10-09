@@ -25,7 +25,8 @@ const initialState = {
     currUser:{},
     channels:[],
     requests:[],
-    notifications:[]
+    notifications:[],
+    unreadNotifs: 0
 
 };
 
@@ -104,7 +105,8 @@ export default function(state = initialState, action) {
             console.log("in create request success branch");
             return {
                  ...state,
-                    notifications: state.notifications.concat(action.payload)
+                    notifications: state.notifications.concat(action.payload),
+                    unreadNotifs: state.unreadNotifs+1
                 };
         case ACCEPT_REQUEST_SUCCESS:
             return {

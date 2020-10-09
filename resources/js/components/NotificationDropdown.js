@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,  Badge, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const NotificationDropdown = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,7 +10,7 @@ const NotificationDropdown = (props) => {
 
   const toggleModal = () => setModal(!modal);
 
-  const { notifications, acceptRequest } = props;
+  const { notifications, acceptRequest, unreadNotifs } = props;
 
   const notificationsList = notifications.map((value, index) => {
     return (
@@ -32,8 +32,9 @@ function AcceptModal({sender_name, desc, toggleModal, modal}) {
          <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
      </ModalBody>
          <ModalFooter>
+         <Button color="success" onClick={() => acceptRequest(value.invite_id)}>Accept</Button>
+
            <Button color="danger" onClick={toggleModal}>Close Window</Button>
-           <Button color="success" onClick={() => acceptRequest(value.invite_id)}>Accept</Button>
 
          </ModalFooter>
        </Modal>
@@ -44,7 +45,8 @@ function AcceptModal({sender_name, desc, toggleModal, modal}) {
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle caret>
-       Notifications 
+       Notifications &nbsp;
+  <Badge color="primary"> {unreadNotifs}</Badge>
         </DropdownToggle>
       <DropdownMenu>
         <DropdownItem divider />

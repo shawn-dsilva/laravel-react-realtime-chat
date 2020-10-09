@@ -46,7 +46,7 @@ import NotificationDropdown from './NotificationDropdown';
         acceptFriendRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
         addNotification: PropTypes.func.isRequired,
-
+        unreadNotifs: PropTypes.number.isRequired,
         messages: PropTypes.array.isRequired,
         notifications: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
@@ -172,7 +172,7 @@ import NotificationDropdown from './NotificationDropdown';
               <h1>Chat Homepage</h1>
                 <Button onClick={this.onLogout}>Logout</Button>
                 <div className="text-right">
-                <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} />
+                <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/>
                 </div>
                     <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
@@ -199,7 +199,7 @@ import NotificationDropdown from './NotificationDropdown';
       channels: state.chat.channels,
       currUser:state.auth.currUser,
       selectedChannel:state.chat.selectedChannel,
-      notifications:state.chat.notifications
-
+      notifications:state.chat.notifications,
+      unreadNotifs: state.chat.unreadNotifs,
     });
     export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest})(Chat);

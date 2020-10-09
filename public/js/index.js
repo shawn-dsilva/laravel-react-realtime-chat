@@ -93427,7 +93427,8 @@ var Chat = /*#__PURE__*/function (_Component) {
         className: "text-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__["default"], {
         notifications: this.props.notifications,
-        acceptRequest: this.acceptRequest
+        acceptRequest: this.acceptRequest,
+        unreadNotifs: this.props.unreadNotifs
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
@@ -93461,6 +93462,7 @@ _defineProperty(Chat, "propTypes", {
   acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   notifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -93481,7 +93483,8 @@ var mapStateToProps = function mapStateToProps(state) {
     channels: state.chat.channels,
     currUser: state.auth.currUser,
     selectedChannel: state.chat.selectedChannel,
-    notifications: state.chat.notifications
+    notifications: state.chat.notifications,
+    unreadNotifs: state.chat.unreadNotifs
   };
 };
 
@@ -94358,7 +94361,8 @@ var NotificationDropdown = function NotificationDropdown(props) {
   };
 
   var notifications = props.notifications,
-      acceptRequest = props.acceptRequest;
+      acceptRequest = props.acceptRequest,
+      unreadNotifs = props.unreadNotifs;
   var notificationsList = notifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
       key: index,
@@ -94382,14 +94386,14 @@ var NotificationDropdown = function NotificationDropdown(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
       toggle: toggleModal
     }, "Accept Request"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Do you want to accept ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, sender_name), "'s friend request and add them to your Direct Message list?")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      color: "danger",
-      onClick: toggleModal
-    }, "Close Window"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "success",
       onClick: function onClick() {
         return acceptRequest(value.invite_id);
       }
-    }, "Accept"))));
+    }, "Accept"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "danger",
+      onClick: toggleModal
+    }, "Close Window"))));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
@@ -94397,7 +94401,9 @@ var NotificationDropdown = function NotificationDropdown(props) {
     toggle: toggle
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownToggle"], {
     caret: true
-  }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+  }, "Notifications \xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Badge"], {
+    color: "primary"
+  }, " ", unreadNotifs)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     divider: true
   }), notificationsList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     divider: true
@@ -94992,7 +94998,8 @@ var initialState = {
   currUser: {},
   channels: [],
   requests: [],
-  notifications: []
+  notifications: [],
+  unreadNotifs: 0
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -95071,7 +95078,8 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_NOTIFICATION"]:
       console.log("in create request success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
-        notifications: state.notifications.concat(action.payload)
+        notifications: state.notifications.concat(action.payload),
+        unreadNotifs: state.unreadNotifs + 1
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ACCEPT_REQUEST_SUCCESS"]:
