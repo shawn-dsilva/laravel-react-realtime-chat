@@ -6926,7 +6926,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 100%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    height:6%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}", ""]);
+exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n\n}", ""]);
 
 // exports
 
@@ -93242,6 +93242,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
 /* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
+/* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93265,6 +93266,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -93394,7 +93396,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "2",
@@ -94307,6 +94309,79 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps)(Main));
+
+/***/ }),
+
+/***/ "./resources/js/components/NavbarMain.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/NavbarMain.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var NavbarMain = function NavbarMain(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isOpen = _useState2[0],
+      setIsOpen = _useState2[1];
+
+  var toggle = function toggle() {
+    return setIsOpen(!isOpen);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Navbar"], {
+    color: "light",
+    light: true,
+    expand: "md",
+    className: "navCustom"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarBrand"], {
+    href: "/"
+  }, "Laravel React Chat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarToggler"], {
+    onClick: toggle
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Collapse"], {
+    isOpen: isOpen,
+    navbar: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Nav"], {
+    className: "mr-auto",
+    navbar: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    href: "/components/"
+  }, "Components")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    href: "https://github.com/reactstrap/reactstrap"
+  }, "GitHub")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["UncontrolledDropdown"], {
+    nav: true,
+    inNavbar: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownToggle"], {
+    nav: true,
+    caret: true
+  }, "Options"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
+    right: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Option 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Option 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+    divider: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, "Reset")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarText"], null, "Simple Text"))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NavbarMain);
 
 /***/ }),
 

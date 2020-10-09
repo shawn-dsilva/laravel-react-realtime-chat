@@ -22,7 +22,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
 import NotificationDropdown from './NotificationDropdown';
-
+import NavbarMain from './NavbarMain';
 
     class Chat extends Component {
 
@@ -154,7 +154,9 @@ import NotificationDropdown from './NotificationDropdown';
       render () {
         return (
           <Container fluid="true" >
-             <Row className="fullHeight">
+               <Row> <Col><NavbarMain/></Col></Row>
+               <Row className="fullHeight">
+   
             <Col xs="2" className="sidenav">
               <h3>Channels</h3>
                <Col> <Button color="link" onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
