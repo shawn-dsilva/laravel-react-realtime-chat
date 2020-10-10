@@ -137,7 +137,28 @@ class ChatController extends Controller
         $invite = Invite::find($invite_id)->first();
         return response()->json($invite);
         //  return response()->json($invite);
+        $sender = $invite->from_id;
+        $receiver = $invite->to_id;
+        $channelIsFound = Channel::where('type','dm')->whereHas('users', function($q) use ($sender) {
+            $q->where('user_id',$sender  );
+       })->whereHas('users', function($q) use ($receiver) {
+           $q->where('user_id',$receiver);
+       })->first();
+       error_log("CHANNEL FOUND");
+       error_log($channelIsFound);
+       if(!empty($channelIsFound)) {
+           $channel = $channelIsFound;
+           return response()->json($channel);
+       } else {
+           $channel = new Channel;
+           $channel->name = "dm";
+           $channel->type = "dm";
+           $channel->save();
+           $channel->users()->attach($sender);
+           $channel->users()->attach($receiver);
+           return response()->json($channel);
 
+       }
     }
 
 }
