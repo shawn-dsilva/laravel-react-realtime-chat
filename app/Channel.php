@@ -16,6 +16,8 @@ class Channel extends Model
         'name'
     ];
 
+    protected $hidden = ['pivot'];
+
     public function users() {
         return $this->belongsToMany('App\User', 'user_channel')->withTimestamps();
     }
