@@ -36,6 +36,7 @@ Route::group([
     Route::get('getchannels', 'ChatController@getSubscribedChannels');
     Route::post('makerequest', 'ChatController@createInvite');
     Route::get('acceptrequest/{invite_id}', 'ChatController@acceptInvite');
+    Route::get('getfriendslist', 'ChatController@getFriendsList');
 
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');

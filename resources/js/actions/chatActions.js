@@ -70,6 +70,14 @@ export const getChannels = () => (dispatch, getState) => {
             dispatch({ type: GET_CHANNELS, payload: channels });
         })
         .catch(err => {});
+
+        axios
+        .get("/api/getfriendslist", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log("FRIENDS LIST BELOW");
+            console.log(res.data);
+        })
+        .catch(err => {});
 };
 
 export const getMessages = selectedChannel => (dispatch, getState) => {

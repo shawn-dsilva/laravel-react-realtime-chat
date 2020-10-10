@@ -161,6 +161,17 @@ class ChatController extends Controller
        }
     }
 
+
+    public function getFriendsList(Request $request) {
+
+        $sender = auth()->user()->id;
+
+        $friends = Channel::where('type','dm')->whereHas('users', function($q) use ($sender) {
+            $q->where('user_id',$sender  );
+       })->get();
+
+           return response()->json($friends);
+
+    }
+    
 }
-
-

@@ -92805,6 +92805,12 @@ var getChannels = function getChannels() {
         payload: channels
       });
     })["catch"](function (err) {});
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getfriendslist", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log("FRIENDS LIST BELOW");
+      console.log(res.data);
+    })["catch"](function (err) {});
   };
 };
 var getMessages = function getMessages(selectedChannel) {
