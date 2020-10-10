@@ -19,7 +19,7 @@ class Channel extends Model
     protected $hidden = ['pivot'];
 
     public function users() {
-        return $this->belongsToMany('App\User', 'user_channel')->withTimestamps();
+        return $this->belongsToMany('App\User', 'user_channel')->withTimestamps()->select('name','id');
     }
 
     public static function findOrNew($sender, $receiver) {

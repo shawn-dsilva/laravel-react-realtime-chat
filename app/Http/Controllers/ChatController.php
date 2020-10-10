@@ -135,7 +135,6 @@ class ChatController extends Controller
         $userId = auth()->user()->id;
 
         $invite = Invite::find($invite_id)->first();
-        return response()->json($invite);
         //  return response()->json($invite);
         $sender = $invite->from_id;
         $receiver = $invite->to_id;
@@ -148,6 +147,7 @@ class ChatController extends Controller
        error_log($channelIsFound);
        if(!empty($channelIsFound)) {
            $channel = $channelIsFound;
+           $channel->users = $channel->users;
            return response()->json($channel);
        } else {
            $channel = new Channel;
@@ -167,7 +167,7 @@ class ChatController extends Controller
         $sender = auth()->user()->id;
 
         $friends = Channel::where('type','dm')->with(["users" => function ($query) use ($sender) {
-            $query->where("id","!=",$sender)->select("users.name","users.id");
+            $query->where("id","!=",$sender);
         }])->whereHas('users', function($q) use ($sender) {
             $q->where('user_id',$sender  );
        })->get();
