@@ -166,10 +166,13 @@ class ChatController extends Controller
 
         $sender = auth()->user()->id;
 
-        $friends = Channel::where('type','dm')->whereHas('users', function($q) use ($sender) {
+        $friends = Channel::where('type','dm')->with(["users" => function ($query) use ($sender) {
+            $query->where("id","!=",$sender);
+        }])->whereHas('users', function($q) use ($sender) {
             $q->where('user_id',$sender  );
        })->get();
 
+    // $friends = Channel::with("users")->where('type','dm')->get();
            return response()->json($friends);
 
     }
