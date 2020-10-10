@@ -92978,16 +92978,12 @@ var addNotification = function addNotification(notification) {
 };
 var acceptFriendRequest = function acceptFriendRequest(id) {
   return function (dispatch, getState) {
-    var body = "{ \"invite_id\": ".concat(id, " }");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/acceptrequest", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/acceptrequest/".concat(id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
+      console.log("FROM /acceptrequest");
       console.log(res.data);
-      var request = res.data;
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
-        payload: request
-      });
+      var request = res.data; // dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
     })["catch"](function (err) {});
   };
 };

@@ -229,14 +229,14 @@ export const addNotification = notification => (dispatch, getState) => {
 
 export const acceptFriendRequest = id => (dispatch,getState) => {
 
-    const body = `{ "invite_id": ${id} }`;
 
     axios
-        .post("/api/acceptrequest", body, makeHeaders(getState), {withCredentials:true})
+        .get(`/api/acceptrequest/${id}`, makeHeaders(getState), {withCredentials:true})
         .then(res => {
+            console.log("FROM /acceptrequest");
             console.log(res.data);
             const request = res.data;
-            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+            // dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
         })
         .catch(err => {});
 }

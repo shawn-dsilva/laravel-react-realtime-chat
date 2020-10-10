@@ -130,6 +130,15 @@ class ChatController extends Controller
 
     }
 
+    public function acceptInvite(Request $request, $invite_id) {
+
+        $userId = auth()->user()->id;
+
+        $invite = Invite::find($invite_id)->first();
+        return response()->json($invite);
+        //  return response()->json($invite);
+
+    }
 
 }
 
