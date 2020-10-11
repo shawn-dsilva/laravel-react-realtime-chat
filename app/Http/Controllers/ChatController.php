@@ -120,7 +120,7 @@ class ChatController extends Controller
         $invite->to_id = $request->receiver;
         $invite->save();
 
-        $inviteJoin = Invite::find($invite->id)->join('users', 'users.id', '=', 'invites.from_id')
+        $inviteJoin = Invite::where('invites.id',$invite->id)->join('users', 'invites.from_id', '=', 'users.id')
     ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
 
     error_log($invite);
