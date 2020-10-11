@@ -12,9 +12,9 @@ export const ChatDmUsersList = (props) => {
         return (
             <Col key={index}>
                 <Button color="link"
-                    onClick={() => dmSelect(value.id)}
-                    id={value.id}>
-                    <b>{value.name}</b>
+                    onClick={() => dmSelect(value.users[0].id)}
+                    id={value.users[0].id}>
+                    <b>{value.users[0].name}</b>
                 </Button>
                 <br></br>
             </Col>
