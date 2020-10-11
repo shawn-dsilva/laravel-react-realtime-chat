@@ -123,7 +123,9 @@ class ChatController extends Controller
         $inviteJoin = Invite::find($invite->id)->join('users', 'users.id', '=', 'invites.from_id')
     ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
 
+    error_log($invite);
     error_log($inviteJoin);
+
         $receiver = User::find($request->receiver);
         $receiver->notify(new NotificationRequest($inviteJoin));
         //  return response()->json($invite);
@@ -138,6 +140,10 @@ class ChatController extends Controller
         //  return response()->json($invite);
         $sender = $invite->from_id;
         $receiver = $invite->to_id;
+        error_log("SENDER");
+        error_log($sender);
+        error_log("RECEIVER");
+        error_log($receiver);
         $channelIsFound = Channel::where('type','dm')->whereHas('users', function($q) use ($sender) {
             $q->where('user_id',$sender  );
        })->whereHas('users', function($q) use ($receiver) {

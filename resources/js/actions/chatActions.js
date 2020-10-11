@@ -235,6 +235,8 @@ export const makeRequest = id => (dispatch,getState) => {
 
     const body = `{ "receiver": ${id} }`;
 
+    console.log("makeRequest() ID BELOW");
+    console.log(id);
     axios
         .post("/api/makerequest", body, makeHeaders(getState), {withCredentials:true})
         .then(res => {

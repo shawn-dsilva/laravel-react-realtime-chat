@@ -92978,6 +92978,8 @@ var CreateChannel = function CreateChannel(channelData) {
 var makeRequest = function makeRequest(id) {
   return function (dispatch, getState) {
     var body = "{ \"receiver\": ".concat(id, " }");
+    console.log("makeRequest() ID BELOW");
+    console.log(id);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/makerequest", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
