@@ -111,6 +111,7 @@ export default function(state = initialState, action) {
         case ACCEPT_REQUEST_SUCCESS:
             return {
                 ...state,
+                dmUsers: state.dmUsers.concat(action.payload)
             };
         default:
             return state;

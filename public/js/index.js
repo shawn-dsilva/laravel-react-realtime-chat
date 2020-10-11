@@ -92782,7 +92782,7 @@ var postHeaders = {
 
 var getDmUsers = function getDmUsers() {
   return function (dispatch, getState) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getfriendslist", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       console.log(res.data);
@@ -92989,7 +92989,11 @@ var acceptFriendRequest = function acceptFriendRequest(id) {
     }).then(function (res) {
       console.log("FROM /acceptrequest");
       console.log(res.data);
-      var request = res.data; // dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+      var request = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
+        payload: request
+      });
     })["catch"](function (err) {});
   };
 };
@@ -95161,7 +95165,9 @@ var initialState = {
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ACCEPT_REQUEST_SUCCESS"]:
-      return _objectSpread({}, state);
+      return _objectSpread(_objectSpread({}, state), {}, {
+        dmUsers: state.dmUsers.concat(action.payload)
+      });
 
     default:
       return state;
