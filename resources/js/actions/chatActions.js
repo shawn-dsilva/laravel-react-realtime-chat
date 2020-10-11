@@ -15,6 +15,7 @@ import {
     SEND_REQUEST_SUCCESS,
     ADD_NOTIFICATION,
     ACCEPT_REQUEST_SUCCESS,
+    GET_ALL_USERS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -58,6 +59,19 @@ export const getDmUsers = () => (dispatch, getState) => {
             console.log(res.data);
             const users = res.data;
             dispatch({ type: GET_DM_USERS, payload: users });
+        })
+        .catch(err => {});
+};
+
+
+export const getUsersList = () => (dispatch, getState) => {
+    axios
+        .get("/api/allusers", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log("GET ALL USERS DATA BELOW");
+            console.log(res.data);
+            const users = res.data;
+            dispatch({ type: GET_ALL_USERS, payload: users });
         })
         .catch(err => {});
 };

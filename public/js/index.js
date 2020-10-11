@@ -92731,12 +92731,13 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification, acceptFriendRequest */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification, acceptFriendRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDmUsers", function() { return getDmUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsersList", function() { return getUsersList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChannels", function() { return getChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMessages", function() { return getMessages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dmSelectAction", function() { return dmSelectAction; });
@@ -92789,6 +92790,21 @@ var getDmUsers = function getDmUsers() {
       var users = res.data;
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_DM_USERS"],
+        payload: users
+      });
+    })["catch"](function (err) {});
+  };
+};
+var getUsersList = function getUsersList() {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allusers", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log("GET ALL USERS DATA BELOW");
+      console.log(res.data);
+      var users = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_ALL_USERS"],
         payload: users
       });
     })["catch"](function (err) {});
@@ -93038,7 +93054,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93071,6 +93087,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SEND_REQUEST_SUCCESS", function() { return SEND_REQUEST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NOTIFICATION", function() { return ADD_NOTIFICATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCEPT_REQUEST_SUCCESS", function() { return ACCEPT_REQUEST_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USERS", function() { return GET_ALL_USERS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93099,6 +93116,7 @@ var GET_CHANNELS = 'GET_CHANNELS';
 var SEND_REQUEST_SUCCESS = 'SEND_REQUEST_SUCCESS';
 var ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 var ACCEPT_REQUEST_SUCCESS = 'ACCEPT_REQUEST_SUCCESS';
+var GET_ALL_USERS = 'GET_ALL_USERS';
 
 /***/ }),
 
@@ -93388,6 +93406,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       // console.log(this.props.location.state.token);
       Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
       this.props.getDmUsers();
+      this.props.getUsersList();
       this.props.getChannels();
       this.channelSelect(this.fakeGeneralChannel);
       this.notifChannel();
@@ -93427,7 +93446,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         currUser: this.props.currUser,
         dmSelect: this.dmSelect
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllUsersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        dmUsers: this.props.dmUsers,
+        dmUsers: this.props.usersList,
         currUser: this.props.currUser,
         sendRequest: this.sendRequest
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -93475,7 +93494,8 @@ _defineProperty(Chat, "propTypes", {
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
-  selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired
+  selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
+  usersList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -93490,7 +93510,8 @@ var mapStateToProps = function mapStateToProps(state) {
     currUser: state.auth.currUser,
     selectedChannel: state.chat.selectedChannel,
     notifications: state.chat.notifications,
-    unreadNotifs: state.chat.unreadNotifs
+    unreadNotifs: state.chat.unreadNotifs,
+    usersList: state.chat.usersList
   };
 };
 
@@ -93502,7 +93523,8 @@ var mapStateToProps = function mapStateToProps(state) {
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"],
   addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"],
-  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"]
+  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"],
+  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"]
 })(Chat));
 
 /***/ }),
@@ -95077,6 +95099,7 @@ var initialState = {
   selectedChannel: {},
   usersInRoom: [],
   dmUsers: [],
+  usersList: [],
   currUser: {},
   channels: [],
   requests: [],
@@ -95121,6 +95144,11 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_DM_USERS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         dmUsers: action.payload
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_USERS"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        usersList: action.payload
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_USER_TO_ROOM"]:

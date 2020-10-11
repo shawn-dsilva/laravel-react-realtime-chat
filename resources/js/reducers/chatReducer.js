@@ -13,7 +13,8 @@ import {
     GET_CHANNELS,
     SEND_REQUEST_SUCCESS,
     ADD_NOTIFICATION,
-    ACCEPT_REQUEST_SUCCESS
+    ACCEPT_REQUEST_SUCCESS,
+    GET_ALL_USERS
 } from "../actions/types";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
     selectedChannel:{},
     usersInRoom:[],
     dmUsers:[],
+    usersList:[],
     currUser:{},
     channels:[],
     requests:[],
@@ -66,6 +68,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 dmUsers: action.payload
+            };
+
+        case GET_ALL_USERS:
+            return {
+                 ...state,
+                usersList: action.payload
             };
         case ADD_USER_TO_ROOM:
             return {

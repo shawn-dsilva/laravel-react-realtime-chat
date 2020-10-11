@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -53,7 +53,8 @@ import NavbarMain from './NavbarMain';
         dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
         currUser: PropTypes.object.isRequired,
-        selectedChannel: PropTypes.object.isRequired
+        selectedChannel: PropTypes.object.isRequired,
+        usersList: PropTypes.array.isRequired
 ,
       };
 
@@ -76,6 +77,7 @@ import NavbarMain from './NavbarMain';
           echoInit(this.myToken);
 
           this.props.getDmUsers();
+          this.props.getUsersList();
           this.props.getChannels();
           this.channelSelect(this.fakeGeneralChannel);
           this.notifChannel();
@@ -167,7 +169,7 @@ import NavbarMain from './NavbarMain';
           </Col>
                 <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
-                <AllUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} sendRequest={this.sendRequest} />
+                <AllUsersList dmUsers={this.props.usersList} currUser={this.props.currUser} sendRequest={this.sendRequest} />
 
           </Col>
               <Col xs="7" className="chatMainContainer">
@@ -203,5 +205,6 @@ import NavbarMain from './NavbarMain';
       selectedChannel:state.chat.selectedChannel,
       notifications:state.chat.notifications,
       unreadNotifs: state.chat.unreadNotifs,
+      usersList: state.chat.usersList
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList})(Chat);
