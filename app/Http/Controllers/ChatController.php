@@ -136,7 +136,7 @@ class ChatController extends Controller
 
         $userId = auth()->user()->id;
 
-        $invite = Invite::find($invite_id)->first();
+        $invite = Invite::where('id',$invite_id)->first();
         //  return response()->json($invite);
         $sender = $invite->from_id;
         $receiver = $invite->to_id;
@@ -162,6 +162,8 @@ class ChatController extends Controller
            $channel->save();
            $channel->users()->attach($sender);
            $channel->users()->attach($receiver);
+           $channel->users = $channel->users;
+
            return response()->json($channel);
 
        }
