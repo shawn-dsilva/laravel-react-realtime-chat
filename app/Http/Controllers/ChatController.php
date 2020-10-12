@@ -154,6 +154,14 @@ class ChatController extends Controller
        if(!empty($channelIsFound)) {
            $channel = $channelIsFound;
            $channel->users = $channel->users;
+
+           foreach ($channel->users as $key => $element) {
+            if ($channel->users[$key]->id != $userId) {
+                $channel->users[0] = $channel->users[$key];
+            }
+        }
+            error_log($channel->users);
+
            return response()->json($channel);
        } else {
            $channel = new Channel;
@@ -164,6 +172,12 @@ class ChatController extends Controller
            $channel->users()->attach($receiver);
            $channel->users = $channel->users;
 
+           foreach ($channel->users as $key => $element) {
+            if ($channel->users[$key]->id != $userId) {
+                $channel->users[0] =$channel->users[$key];
+            }
+        }
+            error_log($channel->users);
            return response()->json($channel);
 
        }
