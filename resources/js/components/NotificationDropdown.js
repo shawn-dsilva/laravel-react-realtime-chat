@@ -22,6 +22,12 @@ const NotificationDropdown = (props) => {
     );
 });
 
+function acceptRequestWrapper(invite_id) {
+  acceptRequest(invite_id);
+  toggleModal();
+
+}
+
 function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
   return (
     <div>
@@ -32,7 +38,7 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
          <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
      </ModalBody>
          <ModalFooter>
-         <Button color="success" onClick={() => acceptRequest(invite_id)}>Accept</Button>
+         <Button color="success" onClick={() => acceptRequestWrapper(invite_id)}>Accept</Button>
 
            <Button color="danger" onClick={toggleModal}>Close Window</Button>
 
