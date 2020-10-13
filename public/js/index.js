@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, addNotification, acceptFriendRequest */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92744,6 +92744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -92992,6 +92993,21 @@ var makeRequest = function makeRequest(id) {
     })["catch"](function (err) {});
   };
 };
+var getNotifications = function getNotifications() {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/notifications", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      var notifications = res.data;
+      console.log("GET NOTIFICATIONS OUTPUT BELOW");
+      console.log(notifications);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_NOTIFICATIONS"],
+        payload: notifications
+      });
+    })["catch"](function (err) {});
+  };
+};
 var addNotification = function addNotification(notification) {
   return function (dispatch, getState) {
     dispatch({
@@ -93056,7 +93072,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93090,6 +93106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_NOTIFICATION", function() { return ADD_NOTIFICATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCEPT_REQUEST_SUCCESS", function() { return ACCEPT_REQUEST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USERS", function() { return GET_ALL_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_NOTIFICATIONS", function() { return GET_NOTIFICATIONS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93119,6 +93136,7 @@ var SEND_REQUEST_SUCCESS = 'SEND_REQUEST_SUCCESS';
 var ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 var ACCEPT_REQUEST_SUCCESS = 'ACCEPT_REQUEST_SUCCESS';
 var GET_ALL_USERS = 'GET_ALL_USERS';
+var GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
 
 /***/ }),
 
@@ -93410,6 +93428,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getDmUsers();
       this.props.getUsersList();
       this.props.getChannels();
+      this.props.getNotifications();
       this.channelSelect(this.fakeGeneralChannel);
       this.notifChannel();
     }
@@ -93486,6 +93505,7 @@ _defineProperty(Chat, "propTypes", {
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
@@ -93526,7 +93546,8 @@ var mapStateToProps = function mapStateToProps(state) {
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"],
   addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"],
   acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"],
-  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"]
+  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
+  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"]
 })(Chat));
 
 /***/ }),
@@ -95190,6 +95211,11 @@ var initialState = {
       console.log("in create request success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
         requests: state.requests.concat(action.payload)
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_NOTIFICATIONS"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        notifications: action.payload
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_NOTIFICATION"]:

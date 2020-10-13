@@ -253,6 +253,8 @@ export const getNotifications = () => (dispatch, getState) => {
         .get("/api/notifications", makeHeaders(getState), {withCredentials:true})
         .then(res => {
             const notifications = res.data;
+            console.log("GET NOTIFICATIONS OUTPUT BELOW");
+            console.log(notifications);
             dispatch({ type: GET_NOTIFICATIONS, payload: notifications });
         })
         .catch(err => {});

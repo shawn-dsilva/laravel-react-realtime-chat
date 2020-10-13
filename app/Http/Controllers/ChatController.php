@@ -198,5 +198,10 @@ class ChatController extends Controller
            return response()->json($friends);
 
     }
+
+    public function getNotifications(Request $request) {
+        return response()->json(auth()->user()->notifications()->limit(7)->get()->pluck("data"));
+
+ }
     
 }
