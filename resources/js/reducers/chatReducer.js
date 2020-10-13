@@ -14,22 +14,22 @@ import {
     SEND_REQUEST_SUCCESS,
     ADD_NOTIFICATION,
     ACCEPT_REQUEST_SUCCESS,
-    GET_ALL_USERS
+    GET_ALL_USERS,
+    GET_NOTIFICATIONS
 } from "../actions/types";
 
 const initialState = {
     messages: [],
-    message:{},
-    selectedChannel:{},
-    usersInRoom:[],
-    dmUsers:[],
-    usersList:[],
-    currUser:{},
-    channels:[],
-    requests:[],
-    notifications:[],
+    message: {},
+    selectedChannel: {},
+    usersInRoom: [],
+    dmUsers: [],
+    usersList: [],
+    currUser: {},
+    channels: [],
+    requests: [],
+    notifications: [],
     unreadNotifs: 0
-
 };
 
 export default function(state = initialState, action) {
@@ -72,7 +72,7 @@ export default function(state = initialState, action) {
 
         case GET_ALL_USERS:
             return {
-                 ...state,
+                ...state,
                 usersList: action.payload
             };
         case ADD_USER_TO_ROOM:
@@ -100,22 +100,29 @@ export default function(state = initialState, action) {
         case CREATE_CHANNEL_SUCCESS:
             console.log("in create channel success branch");
             return {
-                 ...state,
+                ...state,
                 channels: state.channels.concat(action.payload)
             };
         case SEND_REQUEST_SUCCESS:
             console.log("in create request success branch");
             return {
-                 ...state,
-                    requests: state.requests.concat(action.payload)
-                };
+                ...state,
+                requests: state.requests.concat(action.payload)
+            };
+
+        case GET_NOTIFICATIONS:
+            return {
+                ...state,
+                notifications: action.payload
+            };
+
         case ADD_NOTIFICATION:
             console.log("in create request success branch");
             return {
-                 ...state,
-                    notifications: state.notifications.concat(action.payload),
-                    unreadNotifs: state.unreadNotifs+1
-                };
+                ...state,
+                notifications: state.notifications.concat(action.payload),
+                unreadNotifs: state.unreadNotifs + 1
+            };
         case ACCEPT_REQUEST_SUCCESS:
             return {
                 ...state,

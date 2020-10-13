@@ -15,7 +15,8 @@ import {
     SEND_REQUEST_SUCCESS,
     ADD_NOTIFICATION,
     ACCEPT_REQUEST_SUCCESS,
-    GET_ALL_USERS
+    GET_ALL_USERS,
+    GET_NOTIFICATIONS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -246,6 +247,16 @@ export const makeRequest = id => (dispatch,getState) => {
         })
         .catch(err => {});
 }
+
+export const getNotifications = () => (dispatch, getState) => {
+    axios
+        .get("/api/notifications", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const notifications = res.data;
+            dispatch({ type: GET_NOTIFICATIONS, payload: notifications });
+        })
+        .catch(err => {});
+};
 
 export const addNotification = notification => (dispatch, getState) => {
     dispatch({ type: ADD_NOTIFICATION, payload: notification});
