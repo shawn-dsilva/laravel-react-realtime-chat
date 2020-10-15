@@ -37,7 +37,7 @@ const NavbarMain = (props) => {
             <NotificationDropdown notifications={props.notifications} acceptRequest={props.acceptRequest} unreadNotifs={props.unreadNotifs}/>
             </div>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <NavbarBrand color="dark">{props.username}</NavbarBrand>
         </Collapse>
       </Navbar>
     </div>

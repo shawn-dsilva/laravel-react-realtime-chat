@@ -93464,7 +93464,8 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], {
         notifications: this.props.notifications,
         acceptRequest: this.acceptRequest,
-        unreadNotifs: this.props.unreadNotifs
+        unreadNotifs: this.props.unreadNotifs,
+        username: this.props.currUser.name
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -94448,7 +94449,9 @@ var NavbarMain = function NavbarMain(props) {
     notifications: props.notifications,
     acceptRequest: props.acceptRequest,
     unreadNotifs: props.unreadNotifs
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarText"], null, "Simple Text"))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarBrand"], {
+    color: "dark"
+  }, props.username))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NavbarMain);

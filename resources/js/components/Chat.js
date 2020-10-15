@@ -172,7 +172,7 @@ import NavbarMain from './NavbarMain';
       render () {
         return (
           <Container fluid="true" >
-               <Row> <Col><NavbarMain notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/></Col></Row>
+               <Row> <Col><NavbarMain notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs} username={this.props.currUser.name}/></Col></Row>
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">
