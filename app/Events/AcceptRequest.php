@@ -10,18 +10,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AcceptRequest
+class AcceptRequest implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $friendChannel;
+    public $userId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($friendChannel, $userId)
     {
-        //
+        $this->friendChannel = $friendChannel;
+        $this->userId = $userId;
+
     }
 
     /**
@@ -31,6 +36,6 @@ class AcceptRequest
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PresenceChannel('event.acceptRequest.'.$this->userId);
     }
 }

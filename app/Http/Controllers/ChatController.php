@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Channel;
 use App\Details;
+use App\Events\AcceptRequest;
 use App\Invite;
 use App\Notifications\NotificationRequest;
 
@@ -178,6 +179,8 @@ class ChatController extends Controller
             }
         }
             error_log($channel->users);
+        broadcast(new AcceptRequest($channel, $sender));
+
            return response()->json($channel);
 
        }
