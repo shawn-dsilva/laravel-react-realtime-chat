@@ -157,12 +157,18 @@ class ChatController extends Controller
            $channel->users = $channel->users;
 
            foreach ($channel->users as $key => $element) {
-            if ($channel->users[$key]->id != $userId) {
+            if ($channel->users[$key]->id != $sender) {
                 $channel->users[0] = $channel->users[$key];
             }
         }
             error_log($channel->users);
             broadcast(new AcceptRequest($channel, $sender));
+
+            foreach ($channel->users as $key => $element) {
+                if ($channel->users[$key]->id != $userId) {
+                    $channel->users[0] = $channel->users[$key];
+                }
+            }
 
            return response()->json($channel);
        } else {
@@ -175,12 +181,19 @@ class ChatController extends Controller
            $channel->users = $channel->users;
 
            foreach ($channel->users as $key => $element) {
+            if ($channel->users[$key]->id != $sender) {
+                $channel->users[0] = $channel->users[$key];
+            }
+        }
+
+            error_log($channel->users);
+        broadcast(new AcceptRequest($channel, $sender));
+
+        foreach ($channel->users as $key => $element) {
             if ($channel->users[$key]->id != $userId) {
                 $channel->users[0] =$channel->users[$key];
             }
         }
-            error_log($channel->users);
-        broadcast(new AcceptRequest($channel, $sender));
 
            return response()->json($channel);
 
