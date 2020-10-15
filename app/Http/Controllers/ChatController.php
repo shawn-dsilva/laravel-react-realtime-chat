@@ -162,6 +162,7 @@ class ChatController extends Controller
             }
         }
             error_log($channel->users);
+            broadcast(new AcceptRequest($channel, $sender));
 
            return response()->json($channel);
        } else {

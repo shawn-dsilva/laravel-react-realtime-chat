@@ -277,3 +277,9 @@ export const acceptFriendRequest = id => (dispatch,getState) => {
         })
         .catch(err => {});
 }
+
+export const addUserToDmList = data => (dispatch,getState) => {
+
+            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+
+};

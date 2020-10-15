@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92747,6 +92747,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUserToDmList", function() { return addUserToDmList; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93029,6 +93030,14 @@ var acceptFriendRequest = function acceptFriendRequest(id) {
         payload: request
       });
     })["catch"](function (err) {});
+  };
+};
+var addUserToDmList = function addUserToDmList(data) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
+      payload: data
+    });
   };
 };
 
@@ -93376,6 +93385,15 @@ var Chat = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "eventChannel", function () {
+      window.Echo.join("event.acceptRequest.".concat(_this.props.currUser.id)).listen("AcceptRequest", function (event) {
+        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+        console.log(event);
+
+        _this.props.addUserToDmList(event);
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
       var headers = {
         headers: {
@@ -93429,6 +93447,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getUsersList();
       this.props.getChannels();
       this.props.getNotifications();
+      this.eventChannel();
       this.channelSelect(this.fakeGeneralChannel);
       this.notifChannel();
     }
@@ -93506,6 +93525,7 @@ _defineProperty(Chat, "propTypes", {
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
@@ -93547,7 +93567,8 @@ var mapStateToProps = function mapStateToProps(state) {
   addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"],
   acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"],
   getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
-  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"]
+  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"],
+  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addUserToDmList"]
 })(Chat));
 
 /***/ }),

@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -44,6 +44,7 @@ import NavbarMain from './NavbarMain';
         dmSelectAction: PropTypes.func.isRequired,
         makeRequest: PropTypes.func.isRequired,
         getNotifications: PropTypes.func.isRequired,
+        addUserToDmList: PropTypes.func.isRequired,
 
         acceptFriendRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
@@ -82,6 +83,7 @@ import NavbarMain from './NavbarMain';
           this.props.getUsersList();
           this.props.getChannels();
           this.props.getNotifications();
+          this.eventChannel();
           this.channelSelect(this.fakeGeneralChannel);
           this.notifChannel();
 
@@ -120,15 +122,12 @@ import NavbarMain from './NavbarMain';
       }
 
       eventChannel = () => {
-        window.Echo.join(`chat.dm.${this.props.currUser.id}`).listen(
+        window.Echo.join(`event.acceptRequest.${this.props.currUser.id}`).listen(
           "AcceptRequest",
           event => {
               console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
               console.log(event);
-              const message = {
-                  user: event.user,
-                  message: event.message.message
-              };
+              this.props.addUserToDmList(event);
           }
       );
       }
@@ -222,6 +221,6 @@ import NavbarMain from './NavbarMain';
       selectedChannel:state.chat.selectedChannel,
       notifications:state.chat.notifications,
       unreadNotifs: state.chat.unreadNotifs,
-      usersList: state.chat.usersList
+      usersList: state.chat.usersList,
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList})(Chat);

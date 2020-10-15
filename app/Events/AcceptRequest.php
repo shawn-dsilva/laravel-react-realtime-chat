@@ -29,6 +29,10 @@ class AcceptRequest implements ShouldBroadcast
 
     }
 
+    public function broadcastWith() {
+        return [ '0' => $this->friendChannel];
+    }
+
     /**
      * Get the channels the event should broadcast on.
      *
