@@ -119,6 +119,20 @@ import NavbarMain from './NavbarMain';
         });
       }
 
+      eventChannel = () => {
+        window.Echo.join(`chat.dm.${this.props.currUser.id}`).listen(
+          "AcceptRequest",
+          event => {
+              console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+              console.log(event);
+              const message = {
+                  user: event.user,
+                  message: event.message.message
+              };
+          }
+      );
+      }
+
       onLogout = () => {
 
             const headers = {
