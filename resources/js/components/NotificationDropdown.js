@@ -10,7 +10,7 @@ const NotificationDropdown = (props) => {
 
   const toggleModal = () => setModal(!modal);
 
-  const { notifications, acceptRequest, unreadNotifs } = props;
+  const { notifications, acceptRequest, getAllNotifications, unreadNotifs } = props;
 
   const notificationsList = notifications.map((value, index) => {
     return (
@@ -25,7 +25,12 @@ const NotificationDropdown = (props) => {
 function acceptRequestWrapper(invite_id) {
   acceptRequest(invite_id);
   toggleModal();
+}
 
+function getAllNotificationsWrapper() {
+  getAllNotifications();
+  AllNotificationsModal();
+  toggleModal();
 }
 
 function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
@@ -90,7 +95,7 @@ function AllNotificationsModal({allNotifications}) {
 
         
         <DropdownItem divider />
-        <DropdownItem className="text-primary text-center">Show All Notifications</DropdownItem>
+        <DropdownItem className="text-primary text-center"  onClick={() => getAllNotificationsWrapper()}>Show All Notifications</DropdownItem>
 
       </DropdownMenu>
     </Dropdown>

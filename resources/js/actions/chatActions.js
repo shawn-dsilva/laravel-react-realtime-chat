@@ -16,7 +16,8 @@ import {
     ADD_NOTIFICATION,
     ACCEPT_REQUEST_SUCCESS,
     GET_ALL_USERS,
-    GET_NOTIFICATIONS
+    GET_NOTIFICATIONS,
+    GET_ALL_NOTIFICATIONS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -282,4 +283,16 @@ export const addUserToDmList = data => (dispatch,getState) => {
 
             dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
 
+};
+
+export const getAllNotifications = () => (dispatch, getState) => {
+    axios
+        .get("/api/allnotifications", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const notifications = res.data;
+            console.log("GET ALL NOTIFICATIONS OUTPUT BELOW");
+            console.log(notifications);
+            dispatch({ type: GET_ALL_NOTIFICATIONS, payload: notifications });
+        })
+        .catch(err => {});
 };

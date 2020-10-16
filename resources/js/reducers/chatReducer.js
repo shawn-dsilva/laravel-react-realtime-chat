@@ -29,7 +29,8 @@ const initialState = {
     channels: [],
     requests: [],
     notifications: [],
-    unreadNotifs: 0
+    unreadNotifs: 0,
+    allNotifications: [],
 };
 
 export default function(state = initialState, action) {
@@ -114,6 +115,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 notifications: action.payload
+            };
+
+        case GET_ALL_NOTIFICATIONS:
+            return {
+                ...state,
+                allNotifications: action.payload
             };
 
         case ADD_NOTIFICATION:
