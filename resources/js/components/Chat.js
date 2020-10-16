@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -45,13 +45,15 @@ import NavbarMain from './NavbarMain';
         makeRequest: PropTypes.func.isRequired,
         getNotifications: PropTypes.func.isRequired,
         addUserToDmList: PropTypes.func.isRequired,
-
+        getAllNotifications: PropTypes.func.isRequired,
         acceptFriendRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
         addNotification: PropTypes.func.isRequired,
         unreadNotifs: PropTypes.number.isRequired,
         messages: PropTypes.array.isRequired,
         notifications: PropTypes.array.isRequired,
+        allNotifications: PropTypes.array.isRequired,
+
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
@@ -172,7 +174,7 @@ import NavbarMain from './NavbarMain';
       render () {
         return (
           <Container fluid="true" >
-               <Row> <Col><NavbarMain notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs} username={this.props.currUser.name}/></Col></Row>
+               <Row> <Col><NavbarMain notifications={this.props.notifications} allNotifications={this.props.allNotifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs} username={this.props.currUser.name} getAllNotifications={this.props.getAllNotifications}/></Col></Row>
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">
@@ -222,5 +224,6 @@ import NavbarMain from './NavbarMain';
       notifications:state.chat.notifications,
       unreadNotifs: state.chat.unreadNotifs,
       usersList: state.chat.usersList,
+      allNotifications: state.chat.allNotifications
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications})(Chat);

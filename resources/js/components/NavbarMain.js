@@ -34,7 +34,7 @@ const NavbarMain = (props) => {
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
             <div className="ml-auto">
-            <NotificationDropdown notifications={props.notifications} acceptRequest={props.acceptRequest} unreadNotifs={props.unreadNotifs}/>
+            <NotificationDropdown notifications={props.notifications} allNotifications={props.allNotifications} acceptRequest={props.acceptRequest} unreadNotifs={props.unreadNotifs} getAllNotifications={props.getAllNotifications} />
             </div>
           </Nav>
           <NavbarBrand color="dark">{props.username}</NavbarBrand>

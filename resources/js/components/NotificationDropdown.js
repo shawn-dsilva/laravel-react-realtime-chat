@@ -7,10 +7,12 @@ const NotificationDropdown = (props) => {
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   const [modal, setModal] = useState(false);
+  const [modalAN, setANModal] = useState(false);
 
   const toggleModal = () => setModal(!modal);
+  const toggleModalAN = () => setANModal(!modalAN);
 
-  const { notifications, acceptRequest, getAllNotifications, unreadNotifs } = props;
+  const { notifications, allNotifications, acceptRequest, getAllNotifications, unreadNotifs } = props;
 
   const notificationsList = notifications.map((value, index) => {
     return (
@@ -22,6 +24,16 @@ const NotificationDropdown = (props) => {
     );
 });
 
+
+const allNotificationsList = allNotifications.map((value, index) => {
+  return (
+      <DropdownItem key={index} onClick={toggleModal} >
+        <b>{value.sender_name}</b> {value.desc}
+          <br></br>
+      </DropdownItem>
+  );
+})
+
 function acceptRequestWrapper(invite_id) {
   acceptRequest(invite_id);
   toggleModal();
@@ -29,8 +41,7 @@ function acceptRequestWrapper(invite_id) {
 
 function getAllNotificationsWrapper() {
   getAllNotifications();
-  AllNotificationsModal();
-  toggleModal();
+  toggleModalAN();
 }
 
 function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
@@ -53,29 +64,19 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
  )
 }
 
-function AllNotificationsModal({allNotifications}) {
-
-  const allNotificationsList = allNotifications.map((value, index) => {
-    return (
-        <DropdownItem key={index} onClick={toggleModal} >
-          <b>{value.sender_name}</b> {value.desc}
-          <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id}/>
-            <br></br>
-        </DropdownItem>
-    );
-});
+function AllNotificationsModal({modalAN, toggleModalAN}) {
 
   return (
     <div>
 
-       <Modal isOpen={modal} toggle={toggleModal} >
-         <ModalHeader toggle={toggleModal}>All Notifications</ModalHeader>
+       <Modal isOpen={modalAN} toggle={toggleModalAN} >
+         <ModalHeader toggle={toggleModalAN}>All Notifications</ModalHeader>
          <ModalBody>
             {allNotificationsList}
      </ModalBody>
          <ModalFooter>
 
-           <Button color="danger" onClick={toggleModal}>Close Window</Button>
+           <Button color="danger" onClick={toggleModalAN}>Close Window</Button>
 
          </ModalFooter>
        </Modal>
@@ -95,7 +96,8 @@ function AllNotificationsModal({allNotifications}) {
 
         
         <DropdownItem divider />
-        <DropdownItem className="text-primary text-center"  onClick={() => getAllNotificationsWrapper()}>Show All Notifications</DropdownItem>
+        <DropdownItem className="text-primary text-center"  onClick={getAllNotificationsWrapper}>Show All Notifications</DropdownItem>
+  <AllNotificationsModal modalAN={modalAN} toggleModalAN={toggleModalAN}/>
 
       </DropdownMenu>
     </Dropdown>

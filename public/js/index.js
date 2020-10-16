@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92748,6 +92748,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUserToDmList", function() { return addUserToDmList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93040,6 +93041,21 @@ var addUserToDmList = function addUserToDmList(data) {
     });
   };
 };
+var getAllNotifications = function getAllNotifications() {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/allnotifications", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      var notifications = res.data;
+      console.log("GET ALL NOTIFICATIONS OUTPUT BELOW");
+      console.log(notifications);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["GET_ALL_NOTIFICATIONS"],
+        payload: notifications
+      });
+    })["catch"](function (err) {});
+  };
+};
 
 /***/ }),
 
@@ -93081,7 +93097,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93116,6 +93132,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCEPT_REQUEST_SUCCESS", function() { return ACCEPT_REQUEST_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USERS", function() { return GET_ALL_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_NOTIFICATIONS", function() { return GET_NOTIFICATIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_NOTIFICATIONS", function() { return GET_ALL_NOTIFICATIONS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93146,6 +93163,7 @@ var ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 var ACCEPT_REQUEST_SUCCESS = 'ACCEPT_REQUEST_SUCCESS';
 var GET_ALL_USERS = 'GET_ALL_USERS';
 var GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
+var GET_ALL_NOTIFICATIONS = 'GET_ALL_NOTIFICATIONS';
 
 /***/ }),
 
@@ -93463,9 +93481,11 @@ var Chat = /*#__PURE__*/function (_Component) {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], {
         notifications: this.props.notifications,
+        allNotifications: this.props.allNotifications,
         acceptRequest: this.acceptRequest,
         unreadNotifs: this.props.unreadNotifs,
-        username: this.props.currUser.name
+        username: this.props.currUser.name,
+        getAllNotifications: this.props.getAllNotifications
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -93527,12 +93547,14 @@ _defineProperty(Chat, "propTypes", {
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   notifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
@@ -93554,7 +93576,8 @@ var mapStateToProps = function mapStateToProps(state) {
     selectedChannel: state.chat.selectedChannel,
     notifications: state.chat.notifications,
     unreadNotifs: state.chat.unreadNotifs,
-    usersList: state.chat.usersList
+    usersList: state.chat.usersList,
+    allNotifications: state.chat.allNotifications
   };
 };
 
@@ -93569,7 +93592,8 @@ var mapStateToProps = function mapStateToProps(state) {
   acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"],
   getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"],
-  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addUserToDmList"]
+  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addUserToDmList"],
+  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getAllNotifications"]
 })(Chat));
 
 /***/ }),
@@ -94447,8 +94471,10 @@ var NavbarMain = function NavbarMain(props) {
     className: "ml-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
     notifications: props.notifications,
+    allNotifications: props.allNotifications,
     acceptRequest: props.acceptRequest,
-    unreadNotifs: props.unreadNotifs
+    unreadNotifs: props.unreadNotifs,
+    getAllNotifications: props.getAllNotifications
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarBrand"], {
     color: "dark"
   }, props.username))));
@@ -94502,12 +94528,23 @@ var NotificationDropdown = function NotificationDropdown(props) {
       modal = _useState4[0],
       setModal = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      modalAN = _useState6[0],
+      setANModal = _useState6[1];
+
   var toggleModal = function toggleModal() {
     return setModal(!modal);
   };
 
+  var toggleModalAN = function toggleModalAN() {
+    return setANModal(!modalAN);
+  };
+
   var notifications = props.notifications,
+      allNotifications = props.allNotifications,
       acceptRequest = props.acceptRequest,
+      getAllNotifications = props.getAllNotifications,
       unreadNotifs = props.unreadNotifs;
   var notificationsList = notifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
@@ -94521,10 +94558,21 @@ var NotificationDropdown = function NotificationDropdown(props) {
       invite_id: value.invite_id
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
+  var allNotificationsList = allNotifications.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+      key: index,
+      onClick: toggleModal
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  });
 
   function acceptRequestWrapper(invite_id) {
     acceptRequest(invite_id);
     toggleModal();
+  }
+
+  function getAllNotificationsWrapper() {
+    getAllNotifications();
+    toggleModalAN();
   }
 
   function AcceptModal(_ref) {
@@ -94549,6 +94597,20 @@ var NotificationDropdown = function NotificationDropdown(props) {
     }, "Close Window"))));
   }
 
+  function AllNotificationsModal(_ref2) {
+    var modalAN = _ref2.modalAN,
+        toggleModalAN = _ref2.toggleModalAN;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+      isOpen: modalAN,
+      toggle: toggleModalAN
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
+      toggle: toggleModalAN
+    }, "All Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, allNotificationsList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "danger",
+      onClick: toggleModalAN
+    }, "Close Window"))));
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Dropdown"], {
     isOpen: dropdownOpen,
     toggle: toggle
@@ -94564,8 +94626,12 @@ var NotificationDropdown = function NotificationDropdown(props) {
   }), notificationsList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
     divider: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-    className: "text-primary text-center"
-  }, "Show All Notifications")));
+    className: "text-primary text-center",
+    onClick: getAllNotificationsWrapper
+  }, "Show All Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AllNotificationsModal, {
+    modalAN: modalAN,
+    toggleModalAN: toggleModalAN
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NotificationDropdown);
@@ -95156,7 +95222,8 @@ var initialState = {
   channels: [],
   requests: [],
   notifications: [],
-  unreadNotifs: 0
+  unreadNotifs: 0,
+  allNotifications: []
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -95240,6 +95307,11 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_NOTIFICATIONS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         notifications: action.payload
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_NOTIFICATIONS"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        allNotifications: action.payload
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_NOTIFICATION"]:

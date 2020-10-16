@@ -15,7 +15,8 @@ import {
     ADD_NOTIFICATION,
     ACCEPT_REQUEST_SUCCESS,
     GET_ALL_USERS,
-    GET_NOTIFICATIONS
+    GET_NOTIFICATIONS,
+    GET_ALL_NOTIFICATIONS
 } from "../actions/types";
 
 const initialState = {

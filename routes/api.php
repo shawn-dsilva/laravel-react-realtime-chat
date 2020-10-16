@@ -38,6 +38,8 @@ Route::group([
     Route::get('acceptrequest/{invite_id}', 'ChatController@acceptInvite');
     Route::get('getfriendslist', 'ChatController@getFriendsList');
     Route::get('notifications', 'ChatController@getNotifications');
+    Route::get('allnotifications', 'ChatController@getAllNotifications');
+
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');
     Route::post('createchannel', 'ChatController@createChannel');
