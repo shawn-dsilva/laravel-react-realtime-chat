@@ -4,7 +4,7 @@
 
 ### Immediate
 
-- AcceptRequest event fired to sender when receiver accepts friend request, AcceptRequest adds receiver to sender's DM list
+- Notification on click only opens an AcceptModal with that particular Notification's data
 - Complete Notifications React/Redux front end 
 - Channel Details table for Channels table
 - Add support for user made channels, public and private/invite-only.
@@ -27,8 +27,10 @@
 
 - Add Online/Offline status and Typing events support.
 
+
 ### Done
 
+- AcceptRequest event fired to sender when receiver accepts friend request, AcceptRequest adds receiver to sender's DM list
 - Add Create Channel modal and functionality.
 - Basic Chat UI refactor with custom css on Bootstrap components
 - Finish AuthGuard/ProtectedRoutes functionality in React
