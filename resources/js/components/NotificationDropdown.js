@@ -48,6 +48,36 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
  )
 }
 
+function AllNotificationsModal({allNotifications}) {
+
+  const allNotificationsList = allNotifications.map((value, index) => {
+    return (
+        <DropdownItem key={index} onClick={toggleModal} >
+          <b>{value.sender_name}</b> {value.desc}
+          <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id}/>
+            <br></br>
+        </DropdownItem>
+    );
+});
+
+  return (
+    <div>
+
+       <Modal isOpen={modal} toggle={toggleModal} >
+         <ModalHeader toggle={toggleModal}>All Notifications</ModalHeader>
+         <ModalBody>
+            {allNotificationsList}
+     </ModalBody>
+         <ModalFooter>
+
+           <Button color="danger" onClick={toggleModal}>Close Window</Button>
+
+         </ModalFooter>
+       </Modal>
+     </div>
+ )
+}
+
   return (
     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle color="secondary" size="lg" outline caret>
