@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications, markAsRead } from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -53,13 +53,13 @@ import NavbarMain from './NavbarMain';
         messages: PropTypes.array.isRequired,
         notifications: PropTypes.array.isRequired,
         allNotifications: PropTypes.array.isRequired,
-
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
         currUser: PropTypes.object.isRequired,
         selectedChannel: PropTypes.object.isRequired,
-        usersList: PropTypes.array.isRequired
+        usersList: PropTypes.array.isRequired,
+        markAsRead: PropTypes.func.isRequired
 ,
       };
 
@@ -226,4 +226,4 @@ import NavbarMain from './NavbarMain';
       usersList: state.chat.usersList,
       allNotifications: state.chat.allNotifications
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications, markAsRead})(Chat);

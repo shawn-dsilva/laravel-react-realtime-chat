@@ -16,7 +16,8 @@ import {
     ACCEPT_REQUEST_SUCCESS,
     GET_ALL_USERS,
     GET_NOTIFICATIONS,
-    GET_ALL_NOTIFICATIONS
+    GET_ALL_NOTIFICATIONS,
+    NOTIF_MARK_AS_READ
 } from "../actions/types";
 
 const initialState = {
@@ -137,6 +138,11 @@ export default function(state = initialState, action) {
                 ...state,
                 dmUsers: state.dmUsers.concat(action.payload)
             };
+        case NOTIF_MARK_AS_READ:
+            return {
+                ...state,
+                undreadNotifs: state.undreadNotifs - 1
+            }
         default:
             return state;
     }

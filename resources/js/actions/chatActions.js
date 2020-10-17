@@ -17,7 +17,8 @@ import {
     ACCEPT_REQUEST_SUCCESS,
     GET_ALL_USERS,
     GET_NOTIFICATIONS,
-    GET_ALL_NOTIFICATIONS
+    GET_ALL_NOTIFICATIONS,
+    NOTIF_MARK_AS_READ
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -296,3 +297,14 @@ export const getAllNotifications = () => (dispatch, getState) => {
         })
         .catch(err => {});
 };
+
+export const markAsRead = (id) => (dispatch, getState) => {
+    axios
+    .get(`/api/markasread/${id}`, makeHeaders(getState), {withCredentials:true})
+    .then(res => {
+        console.log("MARK AS READ OUTPUT BELOW");
+        console.log(res.data);
+        dispatch({ type: NOTIF_MARK_AS_READ, payload: res.data });
+    })
+    .catch(err => {});
+}

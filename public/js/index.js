@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92749,6 +92749,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUserToDmList", function() { return addUserToDmList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markAsRead", function() { return markAsRead; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93056,6 +93057,20 @@ var getAllNotifications = function getAllNotifications() {
     })["catch"](function (err) {});
   };
 };
+var markAsRead = function markAsRead(id) {
+  return function (dispatch, getState) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/markasread/".concat(id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log("MARK AS READ OUTPUT BELOW");
+      console.log(res.data);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["NOTIF_MARK_AS_READ"],
+        payload: res.data
+      });
+    })["catch"](function (err) {});
+  };
+};
 
 /***/ }),
 
@@ -93097,7 +93112,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93133,6 +93148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USERS", function() { return GET_ALL_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_NOTIFICATIONS", function() { return GET_NOTIFICATIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_NOTIFICATIONS", function() { return GET_ALL_NOTIFICATIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOTIF_MARK_AS_READ", function() { return NOTIF_MARK_AS_READ; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93164,6 +93180,7 @@ var ACCEPT_REQUEST_SUCCESS = 'ACCEPT_REQUEST_SUCCESS';
 var GET_ALL_USERS = 'GET_ALL_USERS';
 var GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
 var GET_ALL_NOTIFICATIONS = 'GET_ALL_NOTIFICATIONS';
+var NOTIF_MARK_AS_READ = 'NOTIF_MARK_AS_READ';
 
 /***/ }),
 
@@ -93560,7 +93577,8 @@ _defineProperty(Chat, "propTypes", {
   message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
-  usersList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired
+  usersList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
+  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -93593,7 +93611,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"],
   addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addUserToDmList"],
-  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getAllNotifications"]
+  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getAllNotifications"],
+  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["markAsRead"]
 })(Chat));
 
 /***/ }),
@@ -95340,6 +95359,11 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ACCEPT_REQUEST_SUCCESS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
         dmUsers: state.dmUsers.concat(action.payload)
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["NOTIF_MARK_AS_READ"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        undreadNotifs: state.undreadNotifs - 1
       });
 
     default:
