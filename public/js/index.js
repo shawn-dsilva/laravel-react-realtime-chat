@@ -94557,7 +94557,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
       onClick: function onClick() {
         return acceptModalWrapper(value);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.data.sender_name), " ", value.data.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
   var allNotificationsList = allNotifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
@@ -94565,7 +94565,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
       onClick: function onClick() {
         return acceptModalWrapper(value);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.data.sender_name), " ", value.data.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
 
   function acceptRequestWrapper(invite_id) {
@@ -94579,7 +94579,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
   }
 
   function acceptModalWrapper(value) {
-    setValue(value);
+    setValue(value.data);
     toggleModal();
   }
 

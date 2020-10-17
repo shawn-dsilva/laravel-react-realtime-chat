@@ -19,7 +19,7 @@ const NotificationDropdown = (props) => {
   const notificationsList = notifications.map((value, index) => {
     return (
         <DropdownItem key={index} onClick={() => acceptModalWrapper(value)} >
-          <b>{value.sender_name}</b> {value.desc}
+          <b>{value.data.sender_name}</b> {value.data.desc}
             <br></br>
         </DropdownItem>
     );
@@ -29,7 +29,7 @@ const NotificationDropdown = (props) => {
 const allNotificationsList = allNotifications.map((value, index) => {
   return (
       <DropdownItem key={index} onClick={() => acceptModalWrapper(value)} >
-        <b>{value.sender_name}</b> {value.desc}
+          <b>{value.data.sender_name}</b> {value.data.desc}
           <br></br>
       </DropdownItem>
   );
@@ -46,7 +46,7 @@ function getAllNotificationsWrapper() {
 }
 
 function acceptModalWrapper(value) {
-  setValue(value);
+  setValue(value.data);
   toggleModal();
 }
 
