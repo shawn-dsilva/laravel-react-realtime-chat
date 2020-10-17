@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Add Read/Unread logic and UI functionality to notifications
 - Complete Notifications React/Redux front end 
 - Channel Details table for Channels table
 - Add support for user made channels, public and private/invite-only.
