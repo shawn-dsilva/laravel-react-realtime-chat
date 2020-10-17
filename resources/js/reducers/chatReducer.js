@@ -115,7 +115,8 @@ export default function(state = initialState, action) {
         case GET_NOTIFICATIONS:
             return {
                 ...state,
-                notifications: action.payload
+                notifications: action.payload.notifications,
+                unreadNotifs: action.payload.unread_count
             };
 
         case GET_ALL_NOTIFICATIONS:

@@ -95321,7 +95321,8 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_NOTIFICATIONS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
-        notifications: action.payload
+        notifications: action.payload.notifications,
+        unreadNotifs: action.payload.unread_count
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_NOTIFICATIONS"]:
