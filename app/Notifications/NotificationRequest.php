@@ -31,7 +31,7 @@ class NotificationRequest extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','broadcast'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -48,6 +48,7 @@ class NotificationRequest extends Notification
                     ->line('Thank you for using our application!');
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -56,19 +57,21 @@ class NotificationRequest extends Notification
      */
     // public function toBroadcast($notifiable)
     // {
+    //     $id = \Laravel\Spark\Notification::whereUserId($notifiable->id)->latest()->first()->id;
+
     //     $desc = "";
 
     //     switch($this->invite->type) {
     //         case "FRND":
-    //             $desc = "{$this->invite->from} wants to be friends!";
+    //             $desc = "wants to be friends!";
     //         break;
 
     //         case "JOIN":
-    //             $desc = "{$this->invite->from} wants to be join your channel {$this->invite->to}!";
+    //             $desc = "wants to join your channel {$this->invite->to}!";
     //         break;
 
     //         case "INVT":
-    //             $desc = "{$this->invite->from} has invited you to join channel {$this->invite->to}!";
+    //             $desc = "has invited you to join channel {$this->invite->to}!";
     //         default:
     //         break;
     //     }
@@ -76,6 +79,7 @@ class NotificationRequest extends Notification
     //     return new BroadcastMessage ( [
     //     'invite_id' => $this->invite->id,
     //     'desc' => $desc,
+    //     'id' => $id,
     //     ]);
     // }
 
@@ -102,6 +106,7 @@ class NotificationRequest extends Notification
         'sender_name' => $this->invite->name,
         'invite_id' => $this->invite->id,
         'desc' => $desc,
+        'id' => $this->id,
         ];
     }
 }

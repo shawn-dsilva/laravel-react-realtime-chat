@@ -95356,8 +95356,14 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_NOTIFICATION"]:
       console.log("in create request success branch");
+      console.log(action.payload);
+      var payload = {
+        data: action.payload,
+        id: action.payload.id,
+        read_at: null
+      };
       return _objectSpread(_objectSpread({}, state), {}, {
-        notifications: state.notifications.concat(action.payload),
+        notifications: state.notifications.concat(payload),
         unreadNotifs: state.unreadNotifs + 1
       });
 

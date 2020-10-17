@@ -128,9 +128,11 @@ export default function(state = initialState, action) {
 
         case ADD_NOTIFICATION:
             console.log("in create request success branch");
+            console.log(action.payload);
+            const payload = {data: action.payload, id: action.payload.id, read_at:null}
             return {
                 ...state,
-                notifications: state.notifications.concat(action.payload),
+                notifications: state.notifications.concat(payload),
                 unreadNotifs: state.unreadNotifs + 1
             };
         case ACCEPT_REQUEST_SUCCESS:
