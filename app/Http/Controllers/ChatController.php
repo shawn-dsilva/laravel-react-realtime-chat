@@ -223,6 +223,11 @@ class ChatController extends Controller
     }
 
     public function getAllNotifications(Request $request) {
-        return response()->json(auth()->user()->notifications()->get(['data','read_at']));
+        return response()->json(auth()->user()->notifications()->get(['data','read_at', 'id']));
+    }
+
+    public function markNotificationAsRead(Request $request, $id) {
+        auth()->user()->unreadNotifications()->find($id)->markAsRead();
+        return response()->json(auth()->user()->notifications()->where('id',$id)->get(['data','read_at', 'id']));
     }
 }

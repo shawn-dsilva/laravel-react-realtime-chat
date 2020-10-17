@@ -139,10 +139,11 @@ export default function(state = initialState, action) {
                 dmUsers: state.dmUsers.concat(action.payload)
             };
         case NOTIF_MARK_AS_READ:
+            console.log(action.payload);
             return {
                 ...state,
-                undreadNotifs: state.undreadNotifs - 1
-            }
+                unreadNotifs: state.unreadNotifs - 1
+            };
         default:
             return state;
     }

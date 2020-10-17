@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,  Badge, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { markAsRead } from '../actions/chatActions';
 
 const NotificationDropdown = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -14,7 +15,7 @@ const NotificationDropdown = (props) => {
   const toggleModal = () => setModal(!modal);
   const toggleModalAN = () => setANModal(!modalAN);
 
-  const { notifications, allNotifications, acceptRequest, getAllNotifications, unreadNotifs } = props;
+  const { notifications, allNotifications, acceptRequest, getAllNotifications, unreadNotifs, markAsRead } = props;
 
   const notificationsList = notifications.map((value, index) => {
     return (
@@ -46,6 +47,7 @@ function getAllNotificationsWrapper() {
 }
 
 function acceptModalWrapper(value) {
+  markAsRead(value.id);
   setValue(value.data);
   toggleModal();
 }

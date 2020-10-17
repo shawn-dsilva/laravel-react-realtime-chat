@@ -93063,7 +93063,6 @@ var markAsRead = function markAsRead(id) {
       withCredentials: true
     }).then(function (res) {
       console.log("MARK AS READ OUTPUT BELOW");
-      console.log(res.data);
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_2__["NOTIF_MARK_AS_READ"],
         payload: res.data
@@ -93497,6 +93496,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], {
+        markAsRead: this.props.markAsRead,
         notifications: this.props.notifications,
         allNotifications: this.props.allNotifications,
         acceptRequest: this.acceptRequest,
@@ -94489,6 +94489,7 @@ var NavbarMain = function NavbarMain(props) {
   }, "GitHub")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    markAsRead: props.markAsRead,
     notifications: props.notifications,
     allNotifications: props.allNotifications,
     acceptRequest: props.acceptRequest,
@@ -94515,6 +94516,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -94526,6 +94528,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -94569,7 +94572,8 @@ var NotificationDropdown = function NotificationDropdown(props) {
       allNotifications = props.allNotifications,
       acceptRequest = props.acceptRequest,
       getAllNotifications = props.getAllNotifications,
-      unreadNotifs = props.unreadNotifs;
+      unreadNotifs = props.unreadNotifs,
+      markAsRead = props.markAsRead;
   var notificationsList = notifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
       className: value.read_at ? "read" : "unread",
@@ -94599,6 +94603,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
   }
 
   function acceptModalWrapper(value) {
+    markAsRead(value.id);
     setValue(value.data);
     toggleModal();
   }
@@ -95362,8 +95367,9 @@ var initialState = {
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["NOTIF_MARK_AS_READ"]:
+      console.log(action.payload);
       return _objectSpread(_objectSpread({}, state), {}, {
-        undreadNotifs: state.undreadNotifs - 1
+        unreadNotifs: state.unreadNotifs - 1
       });
 
     default:

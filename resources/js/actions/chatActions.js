@@ -303,7 +303,6 @@ export const markAsRead = (id) => (dispatch, getState) => {
     .get(`/api/markasread/${id}`, makeHeaders(getState), {withCredentials:true})
     .then(res => {
         console.log("MARK AS READ OUTPUT BELOW");
-        console.log(res.data);
         dispatch({ type: NOTIF_MARK_AS_READ, payload: res.data });
     })
     .catch(err => {});
