@@ -94533,6 +94533,11 @@ var NotificationDropdown = function NotificationDropdown(props) {
       modalAN = _useState6[0],
       setANModal = _useState6[1];
 
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      value = _useState8[0],
+      setValue = _useState8[1];
+
   var toggleModal = function toggleModal() {
     return setModal(!modal);
   };
@@ -94549,14 +94554,10 @@ var NotificationDropdown = function NotificationDropdown(props) {
   var notificationsList = notifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
       key: index,
-      onClick: toggleModal
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AcceptModal, {
-      sender_name: value.sender_name,
-      desc: value.desc,
-      toggleModal: toggleModal,
-      modal: modal,
-      invite_id: value.invite_id
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      onClick: function onClick() {
+        return acceptModalWrapper(value);
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.sender_name), " ", value.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
   var allNotificationsList = allNotifications.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
@@ -94573,6 +94574,11 @@ var NotificationDropdown = function NotificationDropdown(props) {
   function getAllNotificationsWrapper() {
     getAllNotifications();
     toggleModalAN();
+  }
+
+  function acceptModalWrapper(value) {
+    setValue(value);
+    toggleModal();
   }
 
   function AcceptModal(_ref) {
@@ -94631,6 +94637,12 @@ var NotificationDropdown = function NotificationDropdown(props) {
   }, "Show All Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AllNotificationsModal, {
     modalAN: modalAN,
     toggleModalAN: toggleModalAN
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AcceptModal, {
+    sender_name: value.sender_name,
+    desc: value.desc,
+    toggleModal: toggleModal,
+    modal: modal,
+    invite_id: value.invite_id
   })));
 };
 
