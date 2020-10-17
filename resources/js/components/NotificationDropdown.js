@@ -28,7 +28,7 @@ const NotificationDropdown = (props) => {
 
 const allNotificationsList = allNotifications.map((value, index) => {
   return (
-      <DropdownItem key={index} onClick={toggleModal} >
+      <DropdownItem key={index} onClick={() => acceptModalWrapper(value)} >
         <b>{value.sender_name}</b> {value.desc}
           <br></br>
       </DropdownItem>
