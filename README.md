@@ -4,13 +4,11 @@
 
 ### Immediate
 
-- Add Read/Unread logic and UI functionality to notifications
-- Complete Notifications React/Redux front end 
-- Channel Details table for Channels table
+- Channel join/invite requests and notifications.
+- Channel Details table UI for Channels table
 - Add support for user made channels, public and private/invite-only.
 - List of Pubilc Channels
 - Invite to channel by URL system
-- Notification system to accept/reject invites and request
 
 ### Later
 
@@ -30,6 +28,9 @@
 
 ### Done
 
+- Complete Notifications React/Redux front end 
+- Notification system to accept/reject invites and request
+- Add Read/Unread logic and UI functionality to notifications
 - Notification on click only opens an AcceptModal with that particular Notification's data
 - AcceptRequest event fired to sender when receiver accepts friend request, AcceptRequest adds receiver to sender's DM list
 - Add Create Channel modal and functionality.
