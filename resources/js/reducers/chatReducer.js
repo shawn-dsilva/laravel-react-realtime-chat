@@ -144,7 +144,16 @@ export default function(state = initialState, action) {
             console.log(action.payload);
             return {
                 ...state,
-                unreadNotifs: state.unreadNotifs - 1
+                unreadNotifs: state.unreadNotifs - 1,
+                notifications: state.notifications.map((notification) => {
+                    if(notification.data.id == action.payload[0].data.id) {
+                        console.log(notification);
+                        notification.read_at = action.payload[0].read_at;
+                        return notification;
+                    } else {
+                        return notification;
+                    }
+                })
             };
         default:
             return state;

@@ -95375,7 +95375,16 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["NOTIF_MARK_AS_READ"]:
       console.log(action.payload);
       return _objectSpread(_objectSpread({}, state), {}, {
-        unreadNotifs: state.unreadNotifs - 1
+        unreadNotifs: state.unreadNotifs - 1,
+        notifications: state.notifications.map(function (notification) {
+          if (notification.data.id == action.payload[0].data.id) {
+            console.log(notification);
+            notification.read_at = action.payload[0].read_at;
+            return notification;
+          } else {
+            return notification;
+          }
+        })
       });
 
     default:
