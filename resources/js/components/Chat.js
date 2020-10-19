@@ -84,10 +84,7 @@ import NavbarMain from './NavbarMain';
           this.props.getDmUsers();
           this.props.getUsersList();
           this.props.getChannels();
-          this.props.getNotifications();
-          this.eventChannel();
           this.channelSelect(this.fakeGeneralChannel);
-          this.notifChannel();
 
 
       }
@@ -111,52 +108,7 @@ import NavbarMain from './NavbarMain';
         this.props.channelSelect(selectedChannel);
       }
 
-      notifChannel = () => {
-        console.log("INSIDE NOTIF CHANNEL FUNCTION");
-        let userId = this.props.currUser.id;
-        console.log(userId);
-        window.Echo.private(`App.User.${userId}`)
-        .notification((notification) => {
-          console.log("NOTIFICATION BELOW");
-          console.log(notification);
-          this.props.addNotification(notification);
-        });
-      }
-
-      eventChannel = () => {
-        window.Echo.join(`event.acceptRequest.${this.props.currUser.id}`).listen(
-          "AcceptRequest",
-          event => {
-              console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-              console.log(event);
-              this.props.addUserToDmList(event);
-          }
-      );
-      }
-
-      onLogout = () => {
-
-            const headers = {
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization":"Bearer "+this.myToken
-              }
-            };
-
-            axios.get("/api/auth/logout", headers)
-              .then((res) =>{
-                if(res.status === 200) {
-                  window.Echo.disconnect();
-                  localStorage.removeItem("LRC_Token");
-                  // this.setState({
-                  //   redirect: true
-                  // })
-                  this.props.history.push("/login");
-                 }
-              })
-              .catch((err) => {
-              });
-      }
+      
 
       onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -174,7 +126,7 @@ import NavbarMain from './NavbarMain';
       render () {
         return (
           <Container fluid="true" >
-               <Row> <Col><NavbarMain markAsRead={this.props.markAsRead} notifications={this.props.notifications} allNotifications={this.props.allNotifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs} username={this.props.currUser.name} getAllNotifications={this.props.getAllNotifications}/></Col></Row>
+               <Row> <Col><NavbarMain /></Col></Row>
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">

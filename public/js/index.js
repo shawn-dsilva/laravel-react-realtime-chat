@@ -93404,46 +93404,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       _this.props.channelSelect(selectedChannel);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "notifChannel", function () {
-      console.log("INSIDE NOTIF CHANNEL FUNCTION");
-      var userId = _this.props.currUser.id;
-      console.log(userId);
-      window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
-        console.log("NOTIFICATION BELOW");
-        console.log(notification);
-
-        _this.props.addNotification(notification);
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "eventChannel", function () {
-      window.Echo.join("event.acceptRequest.".concat(_this.props.currUser.id)).listen("AcceptRequest", function (event) {
-        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-        console.log(event);
-
-        _this.props.addUserToDmList(event);
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
-      var headers = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + _this.myToken
-        }
-      };
-      axios.get("/api/auth/logout", headers).then(function (res) {
-        if (res.status === 200) {
-          window.Echo.disconnect();
-          localStorage.removeItem("LRC_Token"); // this.setState({
-          //   redirect: true
-          // })
-
-          _this.props.history.push("/login");
-        }
-      })["catch"](function (err) {});
-    });
-
     _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
       _this.setState(_defineProperty({}, e.target.name, e.target.value));
     });
@@ -93474,10 +93434,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getDmUsers();
       this.props.getUsersList();
       this.props.getChannels();
-      this.props.getNotifications();
-      this.eventChannel();
       this.channelSelect(this.fakeGeneralChannel);
-      this.notifChannel();
     }
   }, {
     key: "dmSelect",
@@ -93489,15 +93446,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], {
-        markAsRead: this.props.markAsRead,
-        notifications: this.props.notifications,
-        allNotifications: this.props.allNotifications,
-        acceptRequest: this.acceptRequest,
-        unreadNotifs: this.props.unreadNotifs,
-        username: this.props.currUser.name,
-        getAllNotifications: this.props.getAllNotifications
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "2",
@@ -94436,6 +94385,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94464,6 +94418,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+
 var NavbarMain = /*#__PURE__*/function (_Component) {
   _inherits(NavbarMain, _Component);
 
@@ -94476,6 +94434,54 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
+    _defineProperty(_assertThisInitialized(_this), "sendRequest", function (id) {
+      _this.props.makeRequest(id);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "acceptRequest", function (id) {
+      _this.props.acceptFriendRequest(id);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "notifChannel", function () {
+      console.log("INSIDE NOTIF CHANNEL FUNCTION");
+      var userId = _this.props.currUser.id;
+      console.log(userId);
+      window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
+        console.log("NOTIFICATION BELOW");
+        console.log(notification);
+
+        _this.props.addNotification(notification);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "eventChannel", function () {
+      window.Echo.join("event.acceptRequest.".concat(_this.props.currUser.id)).listen("AcceptRequest", function (event) {
+        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+        console.log(event);
+
+        _this.props.addUserToDmList(event);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
+      var headers = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + _this.myToken
+        }
+      };
+      axios.get("/api/auth/logout", headers).then(function (res) {
+        if (res.status === 200) {
+          window.Echo.disconnect();
+          localStorage.removeItem("LRC_Token"); // this.setState({
+          //   redirect: true
+          // })
+
+          _this.props.history.push("/login");
+        }
+      })["catch"](function (err) {});
+    });
+
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
       _this.setState({
         isOpen: !_this.state.isOpen
@@ -94485,10 +94491,22 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     _this.state = {
       isOpen: false
     };
+    _this.myToken = localStorage.token;
+    window.token = localStorage.LRC_Token;
     return _this;
   }
 
   _createClass(NavbarMain, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // this.props.isAuth();
+      // console.log(this.props.location.state.token);
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
+      this.props.getNotifications();
+      this.eventChannel();
+      this.notifChannel();
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Navbar"], {
@@ -94516,7 +94534,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
         markAsRead: this.props.markAsRead,
         notifications: this.props.notifications,
         allNotifications: this.props.allNotifications,
-        acceptRequest: this.props.acceptRequest,
+        acceptRequest: this.props.acceptFriendRequest,
         unreadNotifs: this.props.unreadNotifs,
         getAllNotifications: this.props.getAllNotifications
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavbarBrand"], {
@@ -94528,7 +94546,39 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
   return NavbarMain;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (NavbarMain);
+_defineProperty(NavbarMain, "propTypes", {
+  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number.isRequired,
+  notifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
+  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
+  currUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
+  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired
+});
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    //Maps state to redux store as props
+    currUser: state.auth.currUser,
+    notifications: state.chat.notifications,
+    unreadNotifs: state.chat.unreadNotifs,
+    allNotifications: state.chat.allNotifications
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
+  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["makeRequest"],
+  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["addNotification"],
+  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["acceptFriendRequest"],
+  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["getNotifications"],
+  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["addUserToDmList"],
+  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["getAllNotifications"],
+  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["markAsRead"]
+})(NavbarMain));
 
 /***/ }),
 
