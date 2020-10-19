@@ -68,7 +68,7 @@ import NavbarMain from './NavbarMain';
         super(props);
         this.myToken = localStorage.token;
         window.token = localStorage.LRC_Token;
-        this.fakeGeneralChannel = { "id": 5, "type": "channel"};
+        this.fakeGeneralChannel = 5;
         this.dmSelect = this.dmSelect.bind(this);
 
     }

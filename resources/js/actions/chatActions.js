@@ -102,7 +102,7 @@ export const getMessages = selectedChannel => (dispatch, getState) => {
     console.log(selectedChannel);
 
     axios
-        .get(`/api/messages/${selectedChannel.id}`, makeHeaders(getState), {withCredentials:true})
+        .get(`/api/messages/${selectedChannel}`, makeHeaders(getState), {withCredentials:true})
         .then(res => {
             console.log("GET MESSAGES OUTPUT BELOW");
             console.log(res.data);
@@ -112,7 +112,7 @@ export const getMessages = selectedChannel => (dispatch, getState) => {
         .catch(err => {});
 };
 
-export const dmSelectAction = id => {
+export const dmSelectAction = channel_id => {
     return (dispatch, getState) => {
         // Leave general channel
 
@@ -123,15 +123,11 @@ export const dmSelectAction = id => {
         // It will be returned, else a new chatroom will be created
         // for only these two users and  returned
 
-        const body = `{ "receiver": ${id} }`;
-        axios
-            .post("/api/directmessage", body, makeHeaders(getState), {withCredentials:true})
-            .then(res => {
-                // selectedChannel state is set to chatroom/channel object in response
-                dispatch({ type: SET_SELECTED_CHANNEL, payload: res.data });
+                channel = { "id": channel_id, "type":"dm"};
+                dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
 
                 // Join the chatroom in Echo
-                window.Echo.join(`chat.dm.${res.data.id}`).listen(
+                window.Echo.join(`chat.dm.${channel_id}`).listen(
                     "MessageSent",
                     event => {
                         console.log(event);
@@ -148,27 +144,21 @@ export const dmSelectAction = id => {
                 const selectedChannel = state.chat.selectedChannel;
 
                 //getMessages(selectedChannel) works only inside dispatch()
-                dispatch(getMessages(selectedChannel));
-            })
-            .catch(err => {
-                // const errors = err.response.data.errors;
-                // console.log(errors);
-                // Object.values(errors).map( error => {
-                //   console.log(error.toString());
-                // });
-            });
+                dispatch(getMessages(selectedChannel.id));
     };
 };
 
-export const channelSelect = id => {
+export const channelSelect = channel_id => {
     window.Echo.leave("chat.channel.5");
 
     return (dispatch, getState) => {
 
-        dispatch({ type: SET_SELECTED_CHANNEL, payload: id });
+        const channel = { "id": channel_id, "type":"channel"};
+
+        dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
         const selectedChannelInState = getState().chat.selectedChannel;
 
-        dispatch(getMessages(selectedChannelInState));
+        dispatch(getMessages(selectedChannelInState.id));
 
         window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
             .here(users => {

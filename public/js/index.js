@@ -92837,7 +92837,7 @@ var getMessages = function getMessages(selectedChannel) {
   return function (dispatch, getState) {
     console.log("CURRENTLY SELECTED CHANNEL BELOW");
     console.log(selectedChannel);
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel.id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/messages/".concat(selectedChannel), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       console.log("GET MESSAGES OUTPUT BELOW");
@@ -92850,7 +92850,7 @@ var getMessages = function getMessages(selectedChannel) {
     })["catch"](function (err) {});
   };
 };
-var dmSelectAction = function dmSelectAction(id) {
+var dmSelectAction = function dmSelectAction(channel_id) {
   return function (dispatch, getState) {
     // Leave general channel
     window.Echo.leave("chat.channel.5"); // Make Post request containing ID of recepient.
@@ -92858,49 +92858,46 @@ var dmSelectAction = function dmSelectAction(id) {
     // It will be returned, else a new chatroom will be created
     // for only these two users and  returned
 
-    var body = "{ \"receiver\": ".concat(id, " }");
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/directmessage", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
-      withCredentials: true
-    }).then(function (res) {
-      // selectedChannel state is set to chatroom/channel object in response
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
-        payload: res.data
-      }); // Join the chatroom in Echo
-
-      window.Echo.join("chat.dm.".concat(res.data.id)).listen("MessageSent", function (event) {
-        console.log(event);
-        var message = {
-          user: event.user,
-          message: event.message.message
-        };
-        dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
-          payload: message
-        });
-      }); // Get current updated State
-
-      var state = getState();
-      var selectedChannel = state.chat.selectedChannel; //getMessages(selectedChannel) works only inside dispatch()
-
-      dispatch(getMessages(selectedChannel));
-    })["catch"](function (err) {// const errors = err.response.data.errors;
-      // console.log(errors);
-      // Object.values(errors).map( error => {
-      //   console.log(error.toString());
-      // });
-    });
-  };
-};
-var channelSelect = function channelSelect(id) {
-  window.Echo.leave("chat.channel.5");
-  return function (dispatch, getState) {
+    channel = {
+      "id": channel_id,
+      "type": "dm"
+    };
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
-      payload: id
+      payload: channel
+    }); // Join the chatroom in Echo
+
+    window.Echo.join("chat.dm.".concat(channel_id)).listen("MessageSent", function (event) {
+      console.log(event);
+      var message = {
+        user: event.user,
+        message: event.message.message
+      };
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
+        payload: message
+      });
+    }); // Get current updated State
+
+    var state = getState();
+    var selectedChannel = state.chat.selectedChannel; //getMessages(selectedChannel) works only inside dispatch()
+
+    dispatch(getMessages(selectedChannel.id));
+  };
+};
+var channelSelect = function channelSelect(channel_id) {
+  window.Echo.leave("chat.channel.5");
+  return function (dispatch, getState) {
+    var channel = {
+      "id": channel_id,
+      "type": "channel"
+    };
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
+      payload: channel
     });
     var selectedChannelInState = getState().chat.selectedChannel;
-    dispatch(getMessages(selectedChannelInState));
+    dispatch(getMessages(selectedChannelInState.id));
     window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
       users.forEach(function (user) {
         return user.name += "FROM.HERE()";
@@ -93463,10 +93460,7 @@ var Chat = /*#__PURE__*/function (_Component) {
 
     _this.myToken = localStorage.token;
     window.token = localStorage.LRC_Token;
-    _this.fakeGeneralChannel = {
-      "id": 5,
-      "type": "channel"
-    };
+    _this.fakeGeneralChannel = 5;
     _this.dmSelect = _this.dmSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -93676,6 +93670,7 @@ var ChatDmUsersList = function ChatDmUsersList(props) {
   }); // console.log(typeof(users));
 
   var dmSelect = props.dmSelect;
+  console.log("FROM CHATDMUSERSLIST ");
   console.log(users);
   var userList = users.map(function (value, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
@@ -93683,7 +93678,7 @@ var ChatDmUsersList = function ChatDmUsersList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return dmSelect(value.users[0].id);
+        return dmSelect(value.id);
       },
       id: value.users[0].id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.users[0].name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
