@@ -4,7 +4,6 @@
 
 ### Immediate
 
-- Fix dmSelectAction to work with friends list
 - Refactor NotificationDropdown and Navbar logic,actions,state into NavBarMain; make NavbarMain redux connect component
 
 - Channel join/invite requests and notifications.
@@ -31,6 +30,7 @@
 
 ### Done
 
+- Fix dmSelectAction to work with friends list
 - Complete Notifications React/Redux front end 
 - Notification system to accept/reject invites and request
 - Add Read/Unread logic and UI functionality to notifications
