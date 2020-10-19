@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {Component} from 'react';
 import {
   Collapse,
   Navbar,
@@ -15,17 +15,28 @@ import {
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
 
-const NavbarMain = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+class NavbarMain extends Component { 
 
-  const toggle = () => setIsOpen(!isOpen);
+constructor(props) {
+  super(props);
+  this.state = {
+    isOpen: false
+  }
 
+}
+
+toggle = () => {
+  this.setState({
+    isOpen: !this.state.isOpen
+  })
+}
+render() {
   return (
     <div>
       <Navbar color="light" light expand="md" className="navCustom">
         <NavbarBrand href="/">Laravel React Chat</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="container-fluid" navbar>
             <NavItem>
               <NavLink href="/components/">Components</NavLink>
@@ -34,14 +45,18 @@ const NavbarMain = (props) => {
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
             <div className="ml-auto">
-            <NotificationDropdown markAsRead={props.markAsRead}  notifications={props.notifications} allNotifications={props.allNotifications} acceptRequest={props.acceptRequest} unreadNotifs={props.unreadNotifs} getAllNotifications={props.getAllNotifications} />
+            <NotificationDropdown markAsRead={this.props.markAsRead}  notifications={this.props.notifications} allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptRequest} unreadNotifs={this.props.unreadNotifs} getAllNotifications={this.props.getAllNotifications} />
             </div>
           </Nav>
-          <NavbarBrand color="dark">{props.username}</NavbarBrand>
+          <NavbarBrand color="dark">{this.props.username}</NavbarBrand>
         </Collapse>
       </Navbar>
     </div>
   );
+}
+  
+
+
 }
 
 export default NavbarMain;
