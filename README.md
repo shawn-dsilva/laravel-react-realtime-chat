@@ -4,8 +4,6 @@
 
 ### Immediate
 
-- Refactor NotificationDropdown and Navbar logic,actions,state into NavBarMain; make NavbarMain redux connect component
-
 - Channel join/invite requests and notifications.
 - Channel Details table UI for Channels table
 - Add support for user made channels, public and private/invite-only.
@@ -30,6 +28,7 @@
 
 ### Done
 
+- Refactor NotificationDropdown and Navbar logic,actions,state into NavBarMain; make NavbarMain redux connect component
 - Fix dmSelectAction to work with friends list
 - Complete Notifications React/Redux front end 
 - Notification system to accept/reject invites and request
