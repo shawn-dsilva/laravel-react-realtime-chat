@@ -7,6 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -140,8 +141,21 @@ render() {
              allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptFriendRequest}
               unreadNotifs={this.props.unreadNotifs} getAllNotifications={this.props.getAllNotifications} />
             </div>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                <NavbarBrand>
+              {this.props.currUser.name}
+              </NavbarBrand>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem onClick={this.onLogout}>
+                Logout
+                </DropdownItem>
+                
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </Nav>
-          <NavbarBrand color="dark">{this.props.username}</NavbarBrand>
+
         </Collapse>
       </Navbar>
     </div>
