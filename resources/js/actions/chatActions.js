@@ -123,7 +123,7 @@ export const dmSelectAction = channel_id => {
         // It will be returned, else a new chatroom will be created
         // for only these two users and  returned
 
-                channel = { "id": channel_id, "type":"dm"};
+                const channel = { "id": channel_id, "type":"dm"};
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
 
                 // Join the chatroom in Echo

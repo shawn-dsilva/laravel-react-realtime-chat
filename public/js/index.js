@@ -92858,7 +92858,7 @@ var dmSelectAction = function dmSelectAction(channel_id) {
     // It will be returned, else a new chatroom will be created
     // for only these two users and  returned
 
-    channel = {
+    var channel = {
       "id": channel_id,
       "type": "dm"
     };
