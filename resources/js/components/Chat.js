@@ -111,13 +111,9 @@ import NavbarMain from './NavbarMain';
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">
-              <h3>Channels</h3>
-               <Col> <Button color="link" onClick={this.channelSelect.bind(this, this.fakeGeneralChannel)} id="5" key="5"><b> General</b></Button>
+             
                <ChatChannelsList channels={this.props.channels} currUser={this.props.currUser} channelSelect={this.channelSelect} />
 
-               <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
-          <br></br>
-          </Col>
                 <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
                 <AllUsersList dmUsers={this.props.usersList} currUser={this.props.currUser} sendRequest={this.sendRequest} />

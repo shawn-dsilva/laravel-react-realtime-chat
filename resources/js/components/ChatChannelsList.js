@@ -2,6 +2,8 @@
 
 import React from "react";
 import { Col, Button } from "reactstrap";
+import CreateChannelModal from './CreateChannelModal';
+
 
 export const ChatChannelsList = (props) => {
     const channels = props.channels;
@@ -25,8 +27,13 @@ export const ChatChannelsList = (props) => {
 
     return (
       <div>
+      <h3>Channels</h3>
+       <Col> <Button color="link" onClick={() => channelSelect(5)} id="5" key="5"><b> General</b></Button>
         {channelList}
-      </div>
+       <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
+  <br></br>
+  </Col>
+  </div>
     )
 };
 
