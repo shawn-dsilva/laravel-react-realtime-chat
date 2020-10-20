@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Miscellaneous Chat.js refactoring and cleanup
 - Channel join/invite requests and notifications.
 - Channel Details table UI for Channels table
 - Add support for user made channels, public and private/invite-only.
