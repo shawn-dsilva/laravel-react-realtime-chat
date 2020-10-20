@@ -22,6 +22,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
 import NavbarMain from './NavbarMain';
+import ChatInputBox from './ChatInputBox';
 
     class Chat extends Component {
 
@@ -106,33 +107,42 @@ import NavbarMain from './NavbarMain';
 
       render () {
         return (
-          <Container fluid="true" >
-               <NavbarMain />
-               <Row className="fullHeight">
-   
-            <Col xs="2" className="sidenav">
-             
-               <ChatChannelsList channels={this.props.channels} currUser={this.props.currUser} channelSelect={this.channelSelect} />
+            <Container fluid="true">
+                <NavbarMain />
+                <Row className="fullHeight">
+                    <Col xs="2" className="sidenav">
+                        <ChatChannelsList
+                            channels={this.props.channels}
+                            currUser={this.props.currUser}
+                            channelSelect={this.channelSelect}
+                        />
 
-                <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
-                <AllUsersList dmUsers={this.props.usersList} currUser={this.props.currUser} sendRequest={this.sendRequest} />
+                        <ChatDmUsersList
+                            dmUsers={this.props.dmUsers}
+                            currUser={this.props.currUser}
+                            dmSelect={this.dmSelect}
+                        />
+                        <AllUsersList
+                            dmUsers={this.props.usersList}
+                            currUser={this.props.currUser}
+                            sendRequest={this.sendRequest}
+                        />
+                    </Col>
+                    <Col xs="7" className="chatMainContainer">
+                        <h1>Chat Homepage</h1>
 
-          </Col>
-              <Col xs="7" className="chatMainContainer">
-              <h1>Chat Homepage</h1>
-
-                    <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
-                    <Row className="chatInput">
-              <InputGroup  >
-                <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />
-                  <InputGroupAddon addonType="append"><Button onClick={this.sendMessageWrapper}>Send </Button></InputGroupAddon>
-                </InputGroup>
+                        <ChatMessageList
+                            messages={this.props.messages}
+                            currUser={this.props.currUser}
+                        />
+                        <ChatInputBox
+                            selectedChannel={this.props.selectedChannel}
+                        />
+                    </Col>
+                    <ChatRoomUsersList usersInRoom={this.props.usersInRoom} />
                 </Row>
-              </Col>
-            <ChatRoomUsersList usersInRoom={this.props.usersInRoom}/>
-            </Row>
-          </Container>
-        )
+            </Container>
+        );
       }
     }
 
