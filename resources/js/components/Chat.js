@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications, markAsRead } from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, getUsersList} from '../actions/chatActions';
 import { echoInit, sendMessage } from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -21,7 +21,6 @@ import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
-import NotificationDropdown from './NotificationDropdown';
 import NavbarMain from './NavbarMain';
 
     class Chat extends Component {
@@ -42,25 +41,14 @@ import NavbarMain from './NavbarMain';
         getChannels: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
-        makeRequest: PropTypes.func.isRequired,
-        getNotifications: PropTypes.func.isRequired,
-        addUserToDmList: PropTypes.func.isRequired,
-        getAllNotifications: PropTypes.func.isRequired,
-        acceptFriendRequest: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
-        addNotification: PropTypes.func.isRequired,
-        unreadNotifs: PropTypes.number.isRequired,
         messages: PropTypes.array.isRequired,
-        notifications: PropTypes.array.isRequired,
-        allNotifications: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
         currUser: PropTypes.object.isRequired,
         selectedChannel: PropTypes.object.isRequired,
         usersList: PropTypes.array.isRequired,
-        markAsRead: PropTypes.func.isRequired
-,
       };
 
 
@@ -93,13 +81,6 @@ import NavbarMain from './NavbarMain';
         this.props.dmSelectAction(id)
       }
 
-      sendRequest = (id) =>{
-        this.props.makeRequest(id)
-      }
-
-      acceptRequest = (id) =>{
-        this.props.acceptFriendRequest(id)
-      }
 
       channelSelect = (selectedChannel, event) => {
         if(event !== undefined) {
@@ -173,9 +154,6 @@ import NavbarMain from './NavbarMain';
       channels: state.chat.channels,
       currUser:state.auth.currUser,
       selectedChannel:state.chat.selectedChannel,
-      notifications:state.chat.notifications,
-      unreadNotifs: state.chat.unreadNotifs,
       usersList: state.chat.usersList,
-      allNotifications: state.chat.allNotifications
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect, makeRequest, addNotification, acceptFriendRequest, getUsersList, getNotifications, addUserToDmList, getAllNotifications, markAsRead})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect,  getUsersList})(Chat);

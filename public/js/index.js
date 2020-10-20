@@ -93325,8 +93325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateChannelModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CreateChannelModal */ "./resources/js/components/CreateChannelModal.js");
 /* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
 /* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
-/* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
+/* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93366,7 +93365,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var Chat = /*#__PURE__*/function (_Component) {
   _inherits(Chat, _Component);
 
@@ -93386,14 +93384,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       allUsers: [],
       currUser: "",
       selectedChannel: ""
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "sendRequest", function (id) {
-      _this.props.makeRequest(id);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "acceptRequest", function (id) {
-      _this.props.acceptFriendRequest(id);
     });
 
     _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
@@ -93446,7 +93436,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_14__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_13__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "2",
@@ -93504,24 +93494,14 @@ _defineProperty(Chat, "propTypes", {
   getChannels: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
-  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
-  notifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
-  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   usersInRoom: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   dmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
   message: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
   selectedChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.object.isRequired,
-  usersList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
-  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired
+  usersList: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -93535,10 +93515,7 @@ var mapStateToProps = function mapStateToProps(state) {
     channels: state.chat.channels,
     currUser: state.auth.currUser,
     selectedChannel: state.chat.selectedChannel,
-    notifications: state.chat.notifications,
-    unreadNotifs: state.chat.unreadNotifs,
-    usersList: state.chat.usersList,
-    allNotifications: state.chat.allNotifications
+    usersList: state.chat.usersList
   };
 };
 
@@ -93548,14 +93525,7 @@ var mapStateToProps = function mapStateToProps(state) {
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
-  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["makeRequest"],
-  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addNotification"],
-  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["acceptFriendRequest"],
-  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
-  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getNotifications"],
-  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["addUserToDmList"],
-  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getAllNotifications"],
-  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["markAsRead"]
+  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"]
 })(Chat));
 
 /***/ }),
