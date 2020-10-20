@@ -107,24 +107,20 @@ import NavbarMain from './NavbarMain';
       render () {
         return (
           <Container fluid="true" >
-               <Row> <Col><NavbarMain /></Col></Row>
+               <NavbarMain />
                <Row className="fullHeight">
    
             <Col xs="2" className="sidenav">
              
                <ChatChannelsList channels={this.props.channels} currUser={this.props.currUser} channelSelect={this.channelSelect} />
 
-                <h3>Direct Message</h3>
                 <ChatDmUsersList dmUsers={this.props.dmUsers} currUser={this.props.currUser} dmSelect={this.dmSelect} />
                 <AllUsersList dmUsers={this.props.usersList} currUser={this.props.currUser} sendRequest={this.sendRequest} />
 
           </Col>
               <Col xs="7" className="chatMainContainer">
               <h1>Chat Homepage</h1>
-                {/* <Button onClick={this.onLogout}>Logout</Button> */}
-                <div className="text-right">
-                {/* <NotificationDropdown notifications={this.props.notifications} acceptRequest={this.acceptRequest} unreadNotifs={this.props.unreadNotifs}/> */}
-                </div>
+
                     <ChatMessageList messages={this.props.messages} currUser={this.props.currUser}/>
                     <Row className="chatInput">
               <InputGroup  >

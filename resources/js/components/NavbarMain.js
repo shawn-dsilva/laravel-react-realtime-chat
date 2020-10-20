@@ -12,7 +12,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText, 
+  Row,
+  Col
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
 import { connect }from 'react-redux';
@@ -124,7 +126,7 @@ toggle = () => {
 }
 render() {
   return (
-    <div>
+    <Row> <Col>
       <Navbar color="light" light expand="md" className="navCustom">
         <NavbarBrand href="/">Laravel React Chat</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
@@ -158,7 +160,8 @@ render() {
 
         </Collapse>
       </Navbar>
-    </div>
+      </Col>
+      </Row>
   );
 }
   
