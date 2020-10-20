@@ -12,14 +12,13 @@
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, getUsersList} from '../actions/chatActions';
-import { echoInit, sendMessage } from './utils/echoHelpers';
+import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
 import AllUsersList from './AllUsersList';
 
 import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
-import CreateChannelModal from './CreateChannelModal';
 import '../../css/custom.css';
 import NavbarMain from './NavbarMain';
 import ChatInputBox from './ChatInputBox';
@@ -28,7 +27,6 @@ import ChatInputBox from './ChatInputBox';
 
         state = {
           messages:[],
-          message:"",
           users: [],
           allUsers: [],
           currUser:"",
@@ -37,7 +35,6 @@ import ChatInputBox from './ChatInputBox';
       }
 
       static propTypes = {
-        // isAuth: PropTypes.func.isRequired,
         getDmUsers: PropTypes.func.isRequired,
         getChannels: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
@@ -91,19 +88,6 @@ import ChatInputBox from './ChatInputBox';
       }
 
       
-
-      onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-      };
-
-      // Calls action to register user
-      sendMessageWrapper = (e) => {
-        e.stopPropagation();
-        console.log(this.state.message);
-        sendMessage(this.state.message, this.props.selectedChannel.id, this.props.selectedChannel.type)
-        this.setState({ message:'' });
-
-      }
 
       render () {
         return (

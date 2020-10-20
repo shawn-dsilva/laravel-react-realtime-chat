@@ -93322,11 +93322,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AllUsersList__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AllUsersList */ "./resources/js/components/AllUsersList.js");
 /* harmony import */ var _ChatChannelsList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ChatChannelsList */ "./resources/js/components/ChatChannelsList.js");
 /* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
-/* harmony import */ var _CreateChannelModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CreateChannelModal */ "./resources/js/components/CreateChannelModal.js");
-/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
-/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
-/* harmony import */ var _ChatInputBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ChatInputBox */ "./resources/js/components/ChatInputBox.js");
+/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../css/custom.css */ "./resources/css/custom.css");
+/* harmony import */ var _css_custom_css__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_css_custom_css__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
+/* harmony import */ var _ChatInputBox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ChatInputBox */ "./resources/js/components/ChatInputBox.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93366,7 +93365,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var Chat = /*#__PURE__*/function (_Component) {
   _inherits(Chat, _Component);
 
@@ -93381,7 +93379,6 @@ var Chat = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "state", {
       messages: [],
-      message: "",
       users: [],
       allUsers: [],
       currUser: "",
@@ -93394,20 +93391,6 @@ var Chat = /*#__PURE__*/function (_Component) {
       }
 
       _this.props.channelSelect(selectedChannel);
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "sendMessageWrapper", function (e) {
-      e.stopPropagation();
-      console.log(_this.state.message);
-      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["sendMessage"])(_this.state.message, _this.props.selectedChannel.id, _this.props.selectedChannel.type);
-
-      _this.setState({
-        message: ''
-      });
     });
 
     _this.myToken = localStorage.token;
@@ -93438,7 +93421,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_13__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NavbarMain__WEBPACK_IMPORTED_MODULE_12__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], {
         className: "fullHeight"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "2",
@@ -93461,7 +93444,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_13__["default"], {
         selectedChannel: this.props.selectedChannel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_10__["default"], {
         usersInRoom: this.props.usersInRoom
@@ -93473,7 +93456,6 @@ var Chat = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(Chat, "propTypes", {
-  // isAuth: PropTypes.func.isRequired,
   getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getChannels: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
