@@ -94434,11 +94434,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
-/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94462,6 +94463,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -94550,7 +94552,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       // this.props.isAuth();
       // console.log(this.props.location.state.token);
-      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_5__["echoInit"])(this.myToken);
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_6__["echoInit"])(this.myToken);
       this.props.getNotifications();
       this.eventChannel();
       this.notifChannel();
@@ -94573,9 +94575,11 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Nav"], {
         className: "container-fluid",
         navbar: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-        href: "/components/"
-      }, "Components")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AllUsersList, {
+        dmUsers: this.props.usersList,
+        currUser: this.props.currUser,
+        sendRequest: this.sendRequest
+      }), "            "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
         href: "https://github.com/reactstrap/reactstrap"
       }, "GitHub")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ml-auto"
@@ -94604,17 +94608,18 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(NavbarMain, "propTypes", {
-  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number.isRequired,
-  notifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
-  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array.isRequired,
-  currUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
-  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired
+  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number.isRequired,
+  notifications: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array.isRequired,
+  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array.isRequired,
+  currUser: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.object.isRequired,
+  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+  usersList: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.array.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -94623,18 +94628,19 @@ var mapStateToProps = function mapStateToProps(state) {
     currUser: state.auth.currUser,
     notifications: state.chat.notifications,
     unreadNotifs: state.chat.unreadNotifs,
-    allNotifications: state.chat.allNotifications
+    allNotifications: state.chat.allNotifications,
+    usersList: state.chat.usersList
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
-  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["makeRequest"],
-  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["addNotification"],
-  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["acceptFriendRequest"],
-  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["getNotifications"],
-  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["addUserToDmList"],
-  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["getAllNotifications"],
-  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_6__["markAsRead"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
+  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["makeRequest"],
+  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["addNotification"],
+  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["acceptFriendRequest"],
+  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["getNotifications"],
+  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["addUserToDmList"],
+  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["getAllNotifications"],
+  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_7__["markAsRead"]
 })(NavbarMain));
 
 /***/ }),

@@ -17,6 +17,7 @@ import {
   Col
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
+import ChatRoomUsersList from './ChatRoomUsersList';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
@@ -37,7 +38,8 @@ class NavbarMain extends Component {
     notifications: PropTypes.array.isRequired,
     allNotifications: PropTypes.array.isRequired,
     currUser: PropTypes.object.isRequired,
-    markAsRead: PropTypes.func.isRequired
+    markAsRead: PropTypes.func.isRequired,
+    usersList: PropTypes.array.isRequired
   ,
   };
 
@@ -133,8 +135,11 @@ render() {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="container-fluid" navbar>
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
+            <AllUsersList
+                            dmUsers={this.props.usersList}
+                            currUser={this.props.currUser}
+                            sendRequest={this.sendRequest}
+                        />            </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
@@ -175,7 +180,8 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   currUser:state.auth.currUser,
   notifications:state.chat.notifications,
   unreadNotifs: state.chat.unreadNotifs,
-  allNotifications: state.chat.allNotifications
+  allNotifications: state.chat.allNotifications,
+  usersList: state.chat.usersList
 });
 
 export default connect(mapStateToProps, { makeRequest, addNotification, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead})(NavbarMain);
