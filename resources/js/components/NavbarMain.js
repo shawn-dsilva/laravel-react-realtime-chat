@@ -17,7 +17,7 @@ import {
   Col
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
-import ChatRoomUsersList from './ChatRoomUsersList';
+import AllUsersList from './AllUsersList';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';

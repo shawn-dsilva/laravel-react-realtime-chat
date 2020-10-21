@@ -93434,10 +93434,6 @@ var Chat = /*#__PURE__*/function (_Component) {
         dmUsers: this.props.dmUsers,
         currUser: this.props.currUser,
         dmSelect: this.dmSelect
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllUsersList__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        dmUsers: this.props.usersList,
-        currUser: this.props.currUser,
-        sendRequest: this.sendRequest
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "7",
         className: "chatMainContainer"
@@ -94434,7 +94430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
 /* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
-/* harmony import */ var _ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChatRoomUsersList */ "./resources/js/components/ChatRoomUsersList.js");
+/* harmony import */ var _AllUsersList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllUsersList */ "./resources/js/components/AllUsersList.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
@@ -94575,7 +94571,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Nav"], {
         className: "container-fluid",
         navbar: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(AllUsersList, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["NavItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllUsersList__WEBPACK_IMPORTED_MODULE_3__["default"], {
         dmUsers: this.props.usersList,
         currUser: this.props.currUser,
         sendRequest: this.sendRequest

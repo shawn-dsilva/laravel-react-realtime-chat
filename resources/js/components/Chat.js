@@ -106,11 +106,6 @@ import ChatInputBox from './ChatInputBox';
                             currUser={this.props.currUser}
                             dmSelect={this.dmSelect}
                         />
-                        <AllUsersList
-                            dmUsers={this.props.usersList}
-                            currUser={this.props.currUser}
-                            sendRequest={this.sendRequest}
-                        />
                     </Col>
                     <Col xs="7" className="chatMainContainer">
                         <h1>Chat Homepage</h1>
