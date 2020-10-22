@@ -23,9 +23,12 @@ export const AllChannelsList = (props) => {
                                 <b>{value.name}</b>
                             </Button>
                         </CardTitle>
+                        <CardSubtitle>{value.type} channel</CardSubtitle>
                         <CardText>
                             {value.desc}
                         </CardText>
+                        <CardSubtitle>Visible : {value.visible ? "Yes": "No"}</CardSubtitle>
+
                         <Button
                             color="success"
                             onClick={() => sendRequest(value.id)}
