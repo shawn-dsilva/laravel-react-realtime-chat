@@ -145,7 +145,7 @@ render() {
                         />            </NavItem>
             <NavItem className="pl-3">
             <AllChannelsList
-                            channels={this.props.channels}
+                            channels={this.props.allChannels}
                             currUser={this.props.currUser}
                             sendRequest={this.sendRequest}
                         /> 
@@ -189,7 +189,8 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   unreadNotifs: state.chat.unreadNotifs,
   allNotifications: state.chat.allNotifications,
   usersList: state.chat.usersList,
-  channels: state.chat.channels
+  channels: state.chat.channels,
+  allChannels: state.chat.allChannels,
 });
 
 export default connect(mapStateToProps, { makeRequest, addNotification, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead})(NavbarMain);

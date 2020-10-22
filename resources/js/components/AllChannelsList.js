@@ -31,8 +31,8 @@ export const AllChannelsList = (props) => {
                             onClick={() => sendRequest(value.id)}
                             id={value.id}
                         >
-                            <b>Request to Join</b>
-                        </Button>{" "}
+                            <b> + Request to Join</b>
+                        </Button>
                     </CardBody>
                 </Card>
 

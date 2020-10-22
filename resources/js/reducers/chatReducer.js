@@ -17,7 +17,8 @@ import {
     GET_ALL_USERS,
     GET_NOTIFICATIONS,
     GET_ALL_NOTIFICATIONS,
-    NOTIF_MARK_AS_READ
+    NOTIF_MARK_AS_READ,
+    GET_ALL_CHANNELS
 } from "../actions/types";
 
 const initialState = {
@@ -29,10 +30,11 @@ const initialState = {
     usersList: [],
     currUser: {},
     channels: [],
+    allChannels: [],
     requests: [],
     notifications: [],
     unreadNotifs: 0,
-    allNotifications: [],
+    allNotifications: []
 };
 
 export default function(state = initialState, action) {
@@ -95,6 +97,12 @@ export default function(state = initialState, action) {
                 ...state,
                 channels: action.payload
             };
+
+        case GET_ALL_CHANNELS:
+            return {
+                ...state,
+                allChannels: action.payload
+            };
         case SET_SELECTED_CHANNEL:
             return {
                 ...state,
@@ -129,7 +137,11 @@ export default function(state = initialState, action) {
         case ADD_NOTIFICATION:
             console.log("in create request success branch");
             console.log(action.payload);
-            const payload = {data: action.payload, id: action.payload.id, read_at:null}
+            const payload = {
+                data: action.payload,
+                id: action.payload.id,
+                read_at: null
+            };
             return {
                 ...state,
                 notifications: state.notifications.concat(payload),
@@ -145,8 +157,8 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 unreadNotifs: state.unreadNotifs - 1,
-                notifications: state.notifications.map((notification) => {
-                    if(notification.data.id == action.payload[0].data.id) {
+                notifications: state.notifications.map(notification => {
+                    if (notification.data.id == action.payload[0].data.id) {
                         console.log(notification);
                         notification.read_at = action.payload[0].read_at;
                         return notification;

@@ -18,7 +18,8 @@ import {
     GET_ALL_USERS,
     GET_NOTIFICATIONS,
     GET_ALL_NOTIFICATIONS,
-    NOTIF_MARK_AS_READ
+    NOTIF_MARK_AS_READ,
+    GET_ALL_CHANNELS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -85,6 +86,14 @@ export const getChannels = () => (dispatch, getState) => {
         .then(res => {
             const channels = res.data;
             dispatch({ type: GET_CHANNELS, payload: channels });
+        })
+        .catch(err => {});
+
+        axios
+        .get("/api/getallchannels", makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const channels = res.data;
+            dispatch({ type: GET_ALL_CHANNELS, payload: channels });
         })
         .catch(err => {});
 
