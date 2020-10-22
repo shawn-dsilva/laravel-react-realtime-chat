@@ -18,6 +18,8 @@ import {
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
 import AllUsersList from './AllUsersList';
+import AllChannelsList from './AllChannelsList';
+
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
@@ -39,7 +41,8 @@ class NavbarMain extends Component {
     allNotifications: PropTypes.array.isRequired,
     currUser: PropTypes.object.isRequired,
     markAsRead: PropTypes.func.isRequired,
-    usersList: PropTypes.array.isRequired
+    usersList: PropTypes.array.isRequired,
+    channels: PropTypes.array.isRequired
   ,
   };
 
@@ -140,8 +143,12 @@ render() {
                             currUser={this.props.currUser}
                             sendRequest={this.sendRequest}
                         />            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+            <NavItem className="pl-3">
+            <AllChannelsList
+                            channels={this.props.channels}
+                            currUser={this.props.currUser}
+                            sendRequest={this.sendRequest}
+                        /> 
             </NavItem>
             <div className="ml-auto">
             <NotificationDropdown markAsRead={this.props.markAsRead}  notifications={this.props.notifications}
@@ -181,7 +188,8 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   notifications:state.chat.notifications,
   unreadNotifs: state.chat.unreadNotifs,
   allNotifications: state.chat.allNotifications,
-  usersList: state.chat.usersList
+  usersList: state.chat.usersList,
+  channels: state.chat.channels
 });
 
 export default connect(mapStateToProps, { makeRequest, addNotification, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead})(NavbarMain);
