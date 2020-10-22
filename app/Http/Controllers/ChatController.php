@@ -37,7 +37,17 @@ class ChatController extends Controller
         $channels = Channel::whereHas('users', function($q) use ($user) {
                 $q->where('user_id',$user  );
         })->join('details', 'channels.id', '=', 'details.channel_id')
-        ->select('channels.id', 'channels.type','details.name')->get();
+        ->select('channels.id', 'channels.type','details.name', 'details.desc')->get();
+
+        return response()->json($channels);
+    }
+
+    public function getAllChannels(Request $request) {
+        $user = auth()->user()->id;
+        $channels = Channel::whereHas('users', function($q) use ($user) {
+                $q->where('user_id',$user  );
+        })->join('details', 'channels.id', '=', 'details.channel_id')
+        ->select('channels.id', 'channels.type','details.name', 'details.desc')->get();
 
         return response()->json($channels);
     }
