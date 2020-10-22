@@ -23,6 +23,7 @@ export const AllChannelsList = (props) => {
                                 <b>{value.name}</b>
                             </Button>
                         </CardTitle>
+                        <b>Owner: </b> {value.owner}
                         <CardSubtitle>{value.type} channel</CardSubtitle>
                         <CardText>
                             {value.desc}
