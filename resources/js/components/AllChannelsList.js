@@ -24,11 +24,11 @@ export const AllChannelsList = (props) => {
                             </Button>
                         </CardTitle>
                         <b>Owner: </b> {value.owner}
-                        <CardSubtitle>{value.type} channel</CardSubtitle>
+                        <CardSubtitle><b>Type: </b>{value.type} channel</CardSubtitle>
                         <CardText>
-                            {value.desc}
+                            <b>Channel Description: </b>{value.desc}
                         </CardText>
-                        <CardSubtitle>Visible : {value.visible ? "Yes": "No"}</CardSubtitle>
+                        <CardSubtitle><b>Visible : </b>{value.visible ? "Yes": "No"}</CardSubtitle>
 
                         <Button
                             color="success"
