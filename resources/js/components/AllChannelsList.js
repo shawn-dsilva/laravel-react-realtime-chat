@@ -52,6 +52,10 @@ export const AllChannelsList = (props) => {
           <Modal isOpen={modal} toggle={toggle} >
             <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
             <ModalBody>
+                <p>
+                    This modal lists all the channels created by users on this site, it would not be
+                    present in a production app, and is present here only for debug purposes
+                </p>
         {channelList}
         </ModalBody>
             <ModalFooter>
