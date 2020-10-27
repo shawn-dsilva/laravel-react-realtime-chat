@@ -249,6 +249,22 @@ export const makeRequest = id => (dispatch,getState) => {
         .catch(err => {});
 }
 
+export const joinChannelRequest = id => (dispatch,getState) => {
+
+    const body = `{ "receiver": ${id} }`;
+
+    console.log("makeRequest() ID BELOW");
+    console.log(id);
+    axios
+        .post("/api/joinchannel", body, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            console.log(res.data);
+            const request = res.data;
+            dispatch({ type: SEND_REQUEST_SUCCESS, payload: request });
+        })
+        .catch(err => {});
+}
+
 export const getNotifications = () => (dispatch, getState) => {
     axios
         .get("/api/notifications", makeHeaders(getState), {withCredentials:true})
