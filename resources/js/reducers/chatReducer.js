@@ -18,7 +18,8 @@ import {
     GET_NOTIFICATIONS,
     GET_ALL_NOTIFICATIONS,
     NOTIF_MARK_AS_READ,
-    GET_ALL_CHANNELS
+    GET_ALL_CHANNELS,
+    ADD_CHANNEL_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -109,6 +110,7 @@ export default function(state = initialState, action) {
                 selectedChannel: action.payload
             };
         case CREATE_CHANNEL_SUCCESS:
+        case ADD_CHANNEL_SUCCESS:
             console.log("in create channel success branch");
             return {
                 ...state,

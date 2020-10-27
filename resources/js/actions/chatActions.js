@@ -19,7 +19,8 @@ import {
     GET_NOTIFICATIONS,
     GET_ALL_NOTIFICATIONS,
     NOTIF_MARK_AS_READ,
-    GET_ALL_CHANNELS
+    GET_ALL_CHANNELS,
+    ADD_CHANNEL_SUCCESS
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -260,7 +261,7 @@ export const joinChannelRequest = id => (dispatch,getState) => {
         .then(res => {
             console.log(res.data);
             const request = res.data;
-            dispatch({ type: SEND_REQUEST_SUCCESS, payload: request });
+            dispatch({ type: ADD_CHANNEL_SUCCESS, payload: request });
         })
         .catch(err => {});
 }
