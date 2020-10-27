@@ -238,4 +238,34 @@ class ChatController extends Controller
         auth()->user()->unreadNotifications()->find($id)->markAsRead();
         return response()->json(auth()->user()->notifications()->where('id',$id)->get(['data','read_at', 'id']));
     }
+
+    public function joinChannel(Request $request) {
+
+        $userId = auth()->user()->id;
+
+        $channel = Channel::where('type','channel')->where('id', $request->id)
+        ->join('details', 'channels.id', '=', 'details.channel_id' )
+        ->select('channels.id as channel_id', 'channels.type as channel_type','details.name', 'users.name as owner',
+        'details.desc', 'details.type as detail_type', 'details.visible')->get();
+
+        if($channel['detail_type'] == 'public') {
+            return response()->json($channel);
+        }
+    //     $invite = new Invite;
+    //     $invite->type = "FRND";
+    //     $invite->from_id = $userId;
+    //     $invite->to_id = $request->receiver;
+    //     $invite->save();
+
+    //     $inviteJoin = Invite::where('invites.id',$invite->id)->join('users', 'invites.from_id', '=', 'users.id')
+    // ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
+
+    // error_log($invite);
+    // error_log($inviteJoin);
+
+    //     $receiver = User::find($request->receiver);
+    //     $receiver->notify(new NotificationRequest($inviteJoin));
+        //  return response()->json($invite);
+
+    }
 }

@@ -44,5 +44,6 @@ Route::group([
     Route::post('directmessage', 'ChatController@directMessage');
     Route::get('allusers', 'AuthController@allUsersList');
     Route::post('createchannel', 'ChatController@createChannel');
+    Route::post('joinchannel', 'ChatController@joinChannel');
 
 });

@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92744,6 +92744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "channelSelect", function() { return channelSelect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinChannelRequest", function() { return joinChannelRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
@@ -93002,6 +93003,23 @@ var makeRequest = function makeRequest(id) {
     })["catch"](function (err) {});
   };
 };
+var joinChannelRequest = function joinChannelRequest(id, type) {
+  return function (dispatch, getState) {
+    var body = "{ \"receiver\": ".concat(id, " , \"type\": ").concat(type, "}");
+    console.log("makeRequest() ID BELOW");
+    console.log(id);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/joinchannel", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      console.log(res.data);
+      var request = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+        payload: request
+      });
+    })["catch"](function (err) {});
+  };
+};
 var getNotifications = function getNotifications() {
   return function (dispatch, getState) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/notifications", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
@@ -93117,7 +93135,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS, ADD_CHANNEL_SUCCESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93155,6 +93173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_NOTIFICATIONS", function() { return GET_ALL_NOTIFICATIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOTIF_MARK_AS_READ", function() { return NOTIF_MARK_AS_READ; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_CHANNELS", function() { return GET_ALL_CHANNELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_CHANNEL_SUCCESS", function() { return ADD_CHANNEL_SUCCESS; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93188,6 +93207,7 @@ var GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
 var GET_ALL_NOTIFICATIONS = 'GET_ALL_NOTIFICATIONS';
 var NOTIF_MARK_AS_READ = 'NOTIF_MARK_AS_READ';
 var GET_ALL_CHANNELS = 'GET_ALL_CHANNELS';
+var ADD_CHANNEL_SUCCESS = 'ADD_CHANNEL_SUCCESS';
 
 /***/ }),
 
@@ -93266,7 +93286,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AllChannelsList = function AllChannelsList(props) {
   var channels = props.channels; // console.log(typeof(channels));
 
-  var sendRequest = props.sendRequest;
+  var joinChannelRequest = props.joinChannelRequest;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -93287,7 +93307,7 @@ var AllChannelsList = function AllChannelsList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Owner: "), " ", value.owner, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardSubtitle"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Type: "), value.type, " channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardText"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Channel Description: "), value.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["CardSubtitle"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Visible : "), value.visible ? "Yes" : "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "success",
       onClick: function onClick() {
-        return sendRequest(value.id);
+        return joinChannelRequest(value.id, value.type);
       },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " + Request to Join")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
@@ -94571,6 +94591,10 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       _this.props.makeRequest(id);
     });
 
+    _defineProperty(_assertThisInitialized(_this), "joinChannelRequestWrapper", function (id, type) {
+      _this.props.joinChannelRequest(id, type);
+    });
+
     _defineProperty(_assertThisInitialized(_this), "acceptRequest", function (id) {
       _this.props.acceptFriendRequest(id);
     });
@@ -94706,7 +94730,8 @@ _defineProperty(NavbarMain, "propTypes", {
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired,
   markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   usersList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired
+  channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
+  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -94729,7 +94754,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
   addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addUserToDmList"],
   getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
-  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"]
+  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"],
+  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"]
 })(NavbarMain));
 
 /***/ }),
@@ -95568,6 +95594,7 @@ var initialState = {
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["CREATE_CHANNEL_SUCCESS"]:
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_CHANNEL_SUCCESS"]:
       console.log("in create channel success branch");
       return _objectSpread(_objectSpread({}, state), {}, {
         channels: state.channels.concat(action.payload)
