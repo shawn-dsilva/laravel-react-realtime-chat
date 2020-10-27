@@ -152,7 +152,7 @@ render() {
             <AllChannelsList
                             channels={this.props.allChannels}
                             currUser={this.props.currUser}
-                            sendRequest={this.sendRequest}
+                            joinChannelRequest={this.joinChannelRequestWrapper}
                         /> 
             </NavItem>
             <div className="ml-auto">

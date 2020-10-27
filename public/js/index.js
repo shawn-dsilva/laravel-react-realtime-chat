@@ -93005,18 +93005,14 @@ var makeRequest = function makeRequest(id) {
 };
 var joinChannelRequest = function joinChannelRequest(id, type) {
   return function (dispatch, getState) {
-    var body = "{ \"receiver\": ".concat(id, " , \"type\": ").concat(type, "}");
+    var body = "{ \"receiver\": ".concat(id, "}");
     console.log("makeRequest() ID BELOW");
     console.log(id);
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/joinchannel", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       console.log(res.data);
-      var request = res.data;
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
-        payload: request
-      });
+      var request = res.data; // dispatch({ type: ADD_CHANNEL_SUCCESS, payload: request });
     })["catch"](function (err) {});
   };
 };
@@ -94690,7 +94686,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AllChannelsList__WEBPACK_IMPORTED_MODULE_4__["default"], {
         channels: this.props.allChannels,
         currUser: this.props.currUser,
-        sendRequest: this.sendRequest
+        joinChannelRequest: this.joinChannelRequestWrapper
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "ml-auto"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__["default"], {
