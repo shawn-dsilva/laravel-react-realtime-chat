@@ -93012,7 +93012,11 @@ var joinChannelRequest = function joinChannelRequest(id, type) {
       withCredentials: true
     }).then(function (res) {
       console.log(res.data);
-      var request = res.data; // dispatch({ type: ADD_CHANNEL_SUCCESS, payload: request });
+      var request = res.data;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+        payload: request
+      });
     })["catch"](function (err) {});
   };
 };

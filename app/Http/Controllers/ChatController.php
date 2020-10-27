@@ -246,11 +246,11 @@ class ChatController extends Controller
         $channel = Channel::where('channels.type','channel')->where('channels.id', $request->receiver)
         ->join('details', 'channels.id', '=', 'details.channel_id' )
         ->select('channels.id as channel_id', 'channels.type as channel_type','details.name',
-        'details.desc', 'details.type as detail_type', 'details.visible')->get();
+        'details.desc', 'details.type as detail_type', 'details.visible')->first();
 
-        // if($channel['detail_type'] == 'public') {
+        if($channel['detail_type'] == 'public') {
             return response()->json($channel);
-        // }
+        }
     //     $invite = new Invite;
     //     $invite->type = "FRND";
     //     $invite->from_id = $userId;

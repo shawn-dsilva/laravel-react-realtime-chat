@@ -261,7 +261,7 @@ export const joinChannelRequest = (id, type) => (dispatch,getState) => {
         .then(res => {
             console.log(res.data);
             const request = res.data;
-            // dispatch({ type: ADD_CHANNEL_SUCCESS, payload: request });
+            dispatch({ type: ADD_CHANNEL_SUCCESS, payload: request });
         })
         .catch(err => {});
 }
