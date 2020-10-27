@@ -5,7 +5,7 @@ import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Col, Card, C
 export const AllChannelsList = (props) => {
     const channels = props.channels;
     // console.log(typeof(channels));
-  const { sendRequest } = props;
+  const { joinChannelRequest } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -32,7 +32,7 @@ export const AllChannelsList = (props) => {
 
                         <Button
                             color="success"
-                            onClick={() => sendRequest(value.id)}
+                            onClick={() => joinChannelRequest(value.id, value.type)}
                             id={value.id}
                         >
                             <b> + Request to Join</b>

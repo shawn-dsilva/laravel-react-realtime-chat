@@ -250,9 +250,9 @@ export const makeRequest = id => (dispatch,getState) => {
         .catch(err => {});
 }
 
-export const joinChannelRequest = id => (dispatch,getState) => {
+export const joinChannelRequest = (id, type) => (dispatch,getState) => {
 
-    const body = `{ "receiver": ${id} }`;
+    const body = `{ "receiver": ${id} , "type": ${type}}`;
 
     console.log("makeRequest() ID BELOW");
     console.log(id);
