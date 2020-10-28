@@ -253,6 +253,8 @@ class ChatController extends Controller
             $channelWithData->users()->attach($userId);
             return response()->json($channelWithData);
         } else {
+
+        // Creat new Invite of type JOIN for channel join request
         $invite = new Invite;
         $invite->type = "JOIN";
         $invite->from_id = $userId;
@@ -265,8 +267,13 @@ class ChatController extends Controller
         error_log($invite);
         error_log($inviteJoin);
 
-        $receiver = User::find($request->receiver);
-        $receiver->notify(new NotificationRequest($inviteJoin));
+        // Get the ID of the channel owner
+        $owner = Channel::where('channels.id' ,$request->receiver)->join('details', 'channels.id', '=', 'details.channel_id' )
+        ->select('details.owner_id')->first();
+
+        // Send Notification to Owner about the join request
+        $owner->notify(new NotificationRequest($inviteJoin));
+
          return response()->json("Join Request Sent");
 
         }
