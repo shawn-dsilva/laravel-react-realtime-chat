@@ -252,22 +252,24 @@ class ChatController extends Controller
             // $channel = Channel::where('channels.type','channel')->where('channels.id', $request->receiver)->first();
             $channelWithData->users()->attach($userId);
             return response()->json($channelWithData);
+        } else {
+        $invite = new Invite;
+        $invite->type = "JOIN";
+        $invite->from_id = $userId;
+        $invite->to_id = $request->receiver;
+        $invite->save();
+
+        $inviteJoin = Invite::where('invites.id',$invite->id)->join('users', 'invites.from_id', '=', 'users.id')
+        ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
+
+        error_log($invite);
+        error_log($inviteJoin);
+
+        $receiver = User::find($request->receiver);
+        $receiver->notify(new NotificationRequest($inviteJoin));
+         return response()->json("Join Request Sent");
+
         }
-    //     $invite = new Invite;
-    //     $invite->type = "FRND";
-    //     $invite->from_id = $userId;
-    //     $invite->to_id = $request->receiver;
-    //     $invite->save();
-
-    //     $inviteJoin = Invite::where('invites.id',$invite->id)->join('users', 'invites.from_id', '=', 'users.id')
-    // ->select('users.name', 'invites.id','invites.from_id', 'invites.to_id', 'invites.type')->first();
-
-    // error_log($invite);
-    // error_log($inviteJoin);
-
-    //     $receiver = User::find($request->receiver);
-    //     $receiver->notify(new NotificationRequest($inviteJoin));
-        //  return response()->json($invite);
-
+    
     }
 }
