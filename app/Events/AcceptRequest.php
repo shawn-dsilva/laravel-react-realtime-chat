@@ -12,7 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class AcceptRequest implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    //use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
 
     public $friendChannel;
     public $userId;
