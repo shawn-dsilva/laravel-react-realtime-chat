@@ -4,11 +4,8 @@
 
 ### Immediate
 
-- Miscellaneous Chat.js refactoring and cleanup
-- Channel join/invite requests and notifications.
+- Cleanup of join channel request and accept request functionality with better solution
 - Channel Details table UI for Channels table
-- Add support for user made channels, public and private/invite-only.
-- List of Pubilc Channels
 - Invite to channel by URL system
 
 ### Later
@@ -29,6 +26,10 @@
 
 ### Done
 
+- List of Pubilc Channels
+- Add support for user made channels, public and private/invite-only.
+- Miscellaneous Chat.js refactoring and cleanup
+- Channel join/invite requests and notifications.
 - Refactor NotificationDropdown and Navbar logic,actions,state into NavBarMain; make NavbarMain redux connect component
 - Fix dmSelectAction to work with friends list
 - Complete Notifications React/Redux front end 
