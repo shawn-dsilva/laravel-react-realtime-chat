@@ -32,7 +32,8 @@ class AcceptRequest implements ShouldBroadcast
     }
 
     public function broadcastWith() {
-        return [ '0' => $this->friendChannel];
+        return [ '0' => $this->friendChannel,
+                '1' => $this->type];
     }
 
     /**

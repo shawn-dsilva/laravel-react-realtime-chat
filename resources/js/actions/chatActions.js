@@ -266,6 +266,12 @@ export const joinChannelRequest = (id, type) => (dispatch,getState) => {
         .catch(err => {});
 }
 
+export const addChannel = (channel) => (dispatch,getState) => {
+
+    dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+
+}
+
 export const getNotifications = () => (dispatch, getState) => {
     axios
         .get("/api/notifications", makeHeaders(getState), {withCredentials:true})

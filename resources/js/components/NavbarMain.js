@@ -24,7 +24,7 @@ import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
-import { makeRequest, addNotification, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
+import { makeRequest, addNotification, acceptFriendRequest, addChannel, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
 
 class NavbarMain extends Component { 
 
@@ -36,6 +36,7 @@ class NavbarMain extends Component {
     getAllNotifications: PropTypes.func.isRequired,
     acceptFriendRequest: PropTypes.func.isRequired,
     addNotification: PropTypes.func.isRequired,
+    addChannel: PropTypes.func.isRequired,
     unreadNotifs: PropTypes.number.isRequired,
     notifications: PropTypes.array.isRequired,
     allNotifications: PropTypes.array.isRequired,
@@ -100,7 +101,11 @@ eventChannel = () => {
     event => {
         console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
         console.log(event);
-        this.props.addUserToDmList(event);
+        if(event[1] == 'FRND') {
+          this.props.addUserToDmList(event);
+        } else {
+          this.props.addChannel(event);
+        }
     }
 );
 }
@@ -198,4 +203,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest, addNotification, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);
+export default connect(mapStateToProps, { makeRequest, addNotification, addChannel, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);

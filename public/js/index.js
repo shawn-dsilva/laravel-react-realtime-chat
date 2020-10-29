@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, addChannel, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92745,6 +92745,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinChannelRequest", function() { return joinChannelRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addChannel", function() { return addChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
@@ -93018,6 +93019,14 @@ var joinChannelRequest = function joinChannelRequest(id, type) {
         payload: request
       });
     })["catch"](function (err) {});
+  };
+};
+var addChannel = function addChannel(channel) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+      payload: channel
+    });
   };
 };
 var getNotifications = function getNotifications() {
@@ -94616,7 +94625,11 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
         console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
         console.log(event);
 
-        _this.props.addUserToDmList(event);
+        if (event[1] == 'FRND') {
+          _this.props.addUserToDmList(event);
+        } else {
+          _this.props.addChannel(event);
+        }
       });
     });
 
@@ -94724,6 +94737,7 @@ _defineProperty(NavbarMain, "propTypes", {
   getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
+  addChannel: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.number.isRequired,
   notifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
@@ -94750,6 +94764,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, {
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["makeRequest"],
   addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addNotification"],
+  addChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addChannel"],
   acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["acceptFriendRequest"],
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
   addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addUserToDmList"],
