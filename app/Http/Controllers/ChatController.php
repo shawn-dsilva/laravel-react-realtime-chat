@@ -233,14 +233,18 @@ class ChatController extends Controller
 
         // $channel = Channel::where('id', $invite->to_id)->first();
 
-        $channel = Channel::where('id', $invite->to_id)->join('details', 'channels.id', '=', 'details.channel_id')
+        $channelWithData = Channel::where('channels.id', $invite->to_id)->join('details', 'channels.id', '=', 'details.channel_id')
         ->select('channels.id', 'channels.type', 'details.name', 'details.desc')->first();
 
-        
-        $channel->users()->attach($user);
-        broadcast(new AcceptRequest($channel, $user, 'JOIN'));
+        $channel = $channelWithData;
 
-        return $channel;
+        $details = Details::where('channel_id', $invite->to_id)->first();
+        // $channel->users()->attach($user);
+        error_log('CHANNEL DATA BELOW');
+        error_log($channel);
+        broadcast(new AcceptRequest($details, $user, 'JOIN'));
+
+        return $channelWithData;
        
     }
     public function getFriendsList(Request $request)
