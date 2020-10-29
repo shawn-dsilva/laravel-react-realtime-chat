@@ -246,7 +246,7 @@ class ChatController extends Controller
         $channelWithData = Channel::where('channels.type','channel')->where('channels.id', $request->receiver)
         ->join('details', 'channels.id', '=', 'details.channel_id' )
         ->select('channels.id', 'channels.type as channel_type','details.name',
-        'details.desc', 'details.type as detail_type', 'details.visible')->first();
+        'details.desc', 'details.type as detail_type', 'details.visible', 'details.owner_id')->first();
 
         if($channelWithData['detail_type'] == 'public') {
             // $channel = Channel::where('channels.type','channel')->where('channels.id', $request->receiver)->first();
@@ -268,9 +268,7 @@ class ChatController extends Controller
         error_log($inviteJoin);
 
         // Get the ID of the channel owner
-        $owner = Channel::where('channels.id' ,$request->receiver)->join('details', 'channels.id', '=', 'details.channel_id' )
-        ->select('details.owner_id')->first();
-
+        $owner = User::where('id', $channelWithData['owner_id'])->first();
         // Send Notification to Owner about the join request
         $owner->notify(new NotificationRequest($inviteJoin));
 
