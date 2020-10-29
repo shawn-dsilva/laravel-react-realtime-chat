@@ -152,10 +152,15 @@ class ChatController extends Controller
 
         $invite = Invite::where('id', $invite_id)->first();
         //  return response()->json($invite);
+        if($invite['type'] == 'FRND') {
+            $channel = $this->acceptFriendRequest($invite, $userId);
 
-        $channel = $this->acceptFriendRequest($invite, $userId);
+            return response()->json($channel);
+        } else if ($invite['type'] == 'JOIN') {
+            $channel = $this->acceptJoinRequest($invite, $userId);
 
-        return response()->json($channel);
+            return response()->json($channel);
+        }
 
     }
 
