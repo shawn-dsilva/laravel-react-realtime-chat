@@ -16,16 +16,18 @@ class AcceptRequest implements ShouldBroadcast
 
     public $friendChannel;
     public $userId;
+    public $type;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($friendChannel, $userId)
+    public function __construct($friendChannel, $userId, $type)
     {
         $this->friendChannel = $friendChannel;
         $this->userId = $userId;
+        $this->type = $type;
 
     }
 

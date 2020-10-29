@@ -189,7 +189,7 @@ class ChatController extends Controller
                 }
             }
             error_log($channel->users);
-            broadcast(new AcceptRequest($channel, $sender));
+            broadcast(new AcceptRequest($channel, $sender, 'FRND'));
 
             foreach ($channel->users as $key => $element) {
                 if ($channel->users[$key]->id != $userId) {
@@ -214,7 +214,7 @@ class ChatController extends Controller
             }
 
             error_log($channel->users);
-            broadcast(new AcceptRequest($channel, $sender));
+            broadcast(new AcceptRequest($channel, $sender, 'FRND'));
 
             foreach ($channel->users as $key => $element) {
                 if ($channel->users[$key]->id != $userId) {
@@ -226,7 +226,23 @@ class ChatController extends Controller
         }
     }
 
+    public function acceptJoinRequest($invite, $userId)
+    {
+        $user = $invite->from_id;
+        $privateChannel = $invite->to_id;
 
+        // $channel = Channel::where('id', $invite->to_id)->first();
+
+        $channel = Channel::where('id', $invite->to_id)->join('details', 'channels.id', '=', 'details.channel_id')
+        ->select('channels.id', 'channels.type', 'details.name', 'details.desc')->first();
+
+        
+        $channel->users()->attach($user);
+        broadcast(new AcceptRequest($channel, $user, 'JOIN'));
+
+        return $channel;
+       
+    }
     public function getFriendsList(Request $request)
     {
 
