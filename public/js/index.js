@@ -93014,10 +93014,13 @@ var joinChannelRequest = function joinChannelRequest(id, type) {
     }).then(function (res) {
       console.log(res.data);
       var request = res.data;
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
-        payload: request
-      });
+
+      if (request != 'Join Request Sent') {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+          payload: request
+        });
+      }
     })["catch"](function (err) {});
   };
 };

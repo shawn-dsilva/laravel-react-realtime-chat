@@ -242,6 +242,10 @@ class ChatController extends Controller
         // $channel->users()->attach($user);
         error_log('CHANNEL DATA BELOW');
         error_log($channel);
+        
+        // TODO Attach requesting user to channel
+
+        // Add Channel to requesters channel list
         broadcast(new AcceptRequest($channelWithDataNew, $user, 'JOIN'));
 
         return $channelWithDataNew;
