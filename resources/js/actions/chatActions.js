@@ -297,7 +297,10 @@ export const acceptFriendRequest = id => (dispatch,getState) => {
             console.log("FROM /acceptrequest");
             console.log(res.data);
             const request = res.data;
-            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+            if(response.type != 'private' ) {
+                dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+            }
+
         })
         .catch(err => {});
 }

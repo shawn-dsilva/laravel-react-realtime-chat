@@ -93060,10 +93060,13 @@ var acceptFriendRequest = function acceptFriendRequest(id) {
       console.log("FROM /acceptrequest");
       console.log(res.data);
       var request = res.data;
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
-        payload: request
-      });
+
+      if (response.type != 'private') {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
+          payload: request
+        });
+      }
     })["catch"](function (err) {});
   };
 };
