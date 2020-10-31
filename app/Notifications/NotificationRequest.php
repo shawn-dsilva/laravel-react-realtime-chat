@@ -93,11 +93,11 @@ class NotificationRequest extends Notification
             break;
 
             case "JOIN":
-                $desc = "wants to join your channel {$this->invite->to}!";
+                $desc = "wants to join your channel {$this->invite->recv_name}!";
             break;
 
             case "INVT":
-                $desc = "has invited you to join channel {$this->invite->to}!";
+                $desc = "has invited you to join channel {$this->invite->recv_name}!";
             default:
             break;
         }

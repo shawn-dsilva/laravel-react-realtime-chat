@@ -52,17 +52,18 @@ function acceptModalWrapper(value) {
   toggleModal();
 }
 
-function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_channel}) {
+function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_channel,type }) {
   return (
     <div>
 
        <Modal isOpen={modal} toggle={toggleModal} >
          <ModalHeader toggle={toggleModal}>Accept Request</ModalHeader>
          <ModalBody>
-           {recv_channel}
+         {recv_channel}
           <span><b>{sender_name}</b> {desc}</span>
           <br></br>
-         <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
+          { type != 'JOIN' ? <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span> :
+          <span>Do you want to accept <b>{sender_name}</b>'s join request and add them to your channel {recv_channel} ?</span> }
      </ModalBody>
          <ModalFooter>
          <Button color="success" onClick={() => acceptRequestWrapper(invite_id)}>Accept</Button>
@@ -109,7 +110,7 @@ function AllNotificationsModal({modalAN, toggleModalAN}) {
         <DropdownItem divider />
         <DropdownItem className="text-primary text-center"  onClick={getAllNotificationsWrapper}>Show All Notifications</DropdownItem>
   <AllNotificationsModal modalAN={modalAN} toggleModalAN={toggleModalAN}/>
-  <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id} recv_channel={value.recv_channel}/> 
+  <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id} recv_channel={value.recv_channel} type={value.type}/> 
 
       </DropdownMenu>
     </Dropdown>
