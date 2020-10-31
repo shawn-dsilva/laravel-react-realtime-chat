@@ -62,7 +62,7 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_cha
          {recv_channel}
           <span><b>{sender_name}</b> {desc}</span>
           <br></br>
-          { type != 'JOIN' ? <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span> :
+          { request_type != 'JOIN' ? <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span> :
           <span>Do you want to accept <b>{sender_name}</b>'s join request and add them to your channel {recv_channel} ?</span> }
      </ModalBody>
          <ModalFooter>

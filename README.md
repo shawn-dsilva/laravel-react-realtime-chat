@@ -4,7 +4,7 @@
 
 ### Immediate
 
-- Cleanup of join channel request and accept request functionality with better solution
+- Fix channel joining.
 - Channel Details table UI for Channels table
 - Invite to channel by URL system
 
@@ -26,6 +26,8 @@
 
 ### Done
 
+- Misc fixes of Notifications, Invite Object and Friend/Join request.
+- Cleanup of join channel request and accept request functionality with better solution
 - List of Pubilc Channels
 - Add support for user made channels, public and private/invite-only.
 - Miscellaneous Chat.js refactoring and cleanup
