@@ -316,7 +316,8 @@ class ChatController extends Controller
             $invite->save();
 
             $inviteJoin = Invite::where('invites.id', $invite->id)->join('users', 'invites.from_id', '=', 'users.id')
-                ->select('users.name', 'invites.id', 'invites.from_id', 'invites.to_id', 'invites.type')->first();
+            ->join('details', 'invites.to_id', '=', 'details.channel_id')
+                ->select('users.name', 'invites.id', 'invites.from_id', 'invites.to_id', 'invites.type', 'details.name as recv_name')->first();
 
             error_log($invite);
             error_log($inviteJoin);
