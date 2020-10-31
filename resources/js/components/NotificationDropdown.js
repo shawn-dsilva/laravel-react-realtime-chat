@@ -59,6 +59,8 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id}) {
        <Modal isOpen={modal} toggle={toggleModal} >
          <ModalHeader toggle={toggleModal}>Accept Request</ModalHeader>
          <ModalBody>
+          <span><b>{sender_name}</b> {desc}</span>
+          <br></br>
          <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
      </ModalBody>
          <ModalFooter>

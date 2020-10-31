@@ -105,6 +105,7 @@ class NotificationRequest extends Notification
         return [
         'sender_name' => $this->invite->name,
         'invite_id' => $this->invite->id,
+        'type' => $this->invite->type,
         'desc' => $desc,
         'id' => $this->id,
         ];
