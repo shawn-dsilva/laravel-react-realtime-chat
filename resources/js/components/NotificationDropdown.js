@@ -52,7 +52,7 @@ function acceptModalWrapper(value) {
   toggleModal();
 }
 
-function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_channel,type }) {
+function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_channel,request_type }) {
   return (
     <div>
 
@@ -110,7 +110,7 @@ function AllNotificationsModal({modalAN, toggleModalAN}) {
         <DropdownItem divider />
         <DropdownItem className="text-primary text-center"  onClick={getAllNotificationsWrapper}>Show All Notifications</DropdownItem>
   <AllNotificationsModal modalAN={modalAN} toggleModalAN={toggleModalAN}/>
-  <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id} recv_channel={value.recv_channel} type={value.type}/> 
+  <AcceptModal sender_name={value.sender_name} desc={value.desc} toggleModal={toggleModal} modal={modal} invite_id={value.invite_id} recv_channel={value.recv_channel} request_type={value.request_type}/> 
 
       </DropdownMenu>
     </Dropdown>

@@ -94892,7 +94892,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
         modal = _ref.modal,
         invite_id = _ref.invite_id,
         recv_channel = _ref.recv_channel,
-        type = _ref.type;
+        request_type = _ref.request_type;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
       isOpen: modal,
       toggle: toggleModal
@@ -94950,7 +94950,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
     modal: modal,
     invite_id: value.invite_id,
     recv_channel: value.recv_channel,
-    type: value.type
+    request_type: value.request_type
   })));
 };
 
