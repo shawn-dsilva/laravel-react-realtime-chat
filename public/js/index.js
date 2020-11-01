@@ -92861,7 +92861,7 @@ var getMessages = function getMessages(selectedChannel) {
     })["catch"](function (err) {});
   };
 };
-var dmSelectAction = function dmSelectAction(channel_id) {
+var dmSelectAction = function dmSelectAction(channel_id, username) {
   return function (dispatch, getState) {
     // Leave general channel
     window.Echo.leave("chat.channel.5"); // Make Post request containing ID of recepient.
@@ -92871,7 +92871,8 @@ var dmSelectAction = function dmSelectAction(channel_id) {
 
     var channel = {
       "id": channel_id,
-      "type": "dm"
+      "type": "dm",
+      "name": username
     };
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -92896,12 +92897,13 @@ var dmSelectAction = function dmSelectAction(channel_id) {
     dispatch(getMessages(selectedChannel.id));
   };
 };
-var channelSelect = function channelSelect(channel_id) {
+var channelSelect = function channelSelect(channel_id, channel_name) {
   window.Echo.leave("chat.channel.5");
   return function (dispatch, getState) {
     var channel = {
       "id": channel_id,
-      "type": "channel"
+      "type": "channel",
+      "name": channel_name
     };
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -93504,12 +93506,12 @@ var Chat = /*#__PURE__*/function (_Component) {
       selectedChannel: ""
     });
 
-    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, event) {
+    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, channelName, event) {
       if (event !== undefined) {
         event.stopPropagation();
       }
 
-      _this.props.channelSelect(selectedChannel);
+      _this.props.channelSelect(selectedChannel, channelName);
     });
 
     _this.myToken = localStorage.token;
@@ -93528,12 +93530,12 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getDmUsers();
       this.props.getUsersList();
       this.props.getChannels();
-      this.channelSelect(this.fakeGeneralChannel);
+      this.channelSelect(this.fakeGeneralChannel, 'General');
     }
   }, {
     key: "dmSelect",
-    value: function dmSelect(id) {
-      this.props.dmSelectAction(id);
+    value: function dmSelect(id, name) {
+      this.props.dmSelectAction(id, name);
     }
   }, {
     key: "render",
@@ -93556,7 +93558,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
         xs: "7",
         className: "chatMainContainer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Chat Homepage"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.selectedChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -93640,7 +93642,7 @@ var ChatChannelsList = function ChatChannelsList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return channelSelect(value.id);
+        return channelSelect(value.id, value.name);
       },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
@@ -93689,7 +93691,7 @@ var ChatDmUsersList = function ChatDmUsersList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return dmSelect(value.id);
+        return dmSelect(value.id, value.users[0].name);
       },
       id: value.users[0].id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.users[0].name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));

@@ -70,21 +70,21 @@ import ChatInputBox from './ChatInputBox';
           this.props.getDmUsers();
           this.props.getUsersList();
           this.props.getChannels();
-          this.channelSelect(this.fakeGeneralChannel);
+          this.channelSelect(this.fakeGeneralChannel, 'General');
 
 
       }
 
-      dmSelect(id){
-        this.props.dmSelectAction(id)
+      dmSelect(id, name){
+        this.props.dmSelectAction(id, name)
       }
 
 
-      channelSelect = (selectedChannel, event) => {
+      channelSelect = (selectedChannel, channelName, event) => {
         if(event !== undefined) {
           event.stopPropagation();
         }
-        this.props.channelSelect(selectedChannel);
+        this.props.channelSelect(selectedChannel, channelName);
       }
 
       
@@ -108,7 +108,7 @@ import ChatInputBox from './ChatInputBox';
                         />
                     </Col>
                     <Col xs="7" className="chatMainContainer">
-                        <h1>Chat Homepage</h1>
+        <h1>{this.props.selectedChannel.name}</h1>
 
                         <ChatMessageList
                             messages={this.props.messages}

@@ -122,7 +122,7 @@ export const getMessages = selectedChannel => (dispatch, getState) => {
         .catch(err => {});
 };
 
-export const dmSelectAction = channel_id => {
+export const dmSelectAction = (channel_id, username) => {
     return (dispatch, getState) => {
         // Leave general channel
 
@@ -133,7 +133,7 @@ export const dmSelectAction = channel_id => {
         // It will be returned, else a new chatroom will be created
         // for only these two users and  returned
 
-                const channel = { "id": channel_id, "type":"dm"};
+                const channel = { "id": channel_id, "type":"dm", "name":username};
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
 
                 // Join the chatroom in Echo
@@ -158,12 +158,12 @@ export const dmSelectAction = channel_id => {
     };
 };
 
-export const channelSelect = channel_id => {
+export const channelSelect = (channel_id, channel_name) => {
     window.Echo.leave("chat.channel.5");
 
     return (dispatch, getState) => {
 
-        const channel = { "id": channel_id, "type":"channel"};
+        const channel = { "id": channel_id, "type":"channel", "name": channel_name};
 
         dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
         const selectedChannelInState = getState().chat.selectedChannel;
