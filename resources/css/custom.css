@@ -90,3 +90,8 @@ html,body, #root, .container-true, .fullHeight {
 .unread {
     background-color: rgb(225, 243, 255)!important;
 }
+
+.channelName {
+    border-bottom: grey 2px solid;
+    padding: 0.8rem;
+}

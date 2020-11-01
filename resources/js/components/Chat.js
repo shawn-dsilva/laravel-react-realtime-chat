@@ -108,7 +108,7 @@ import ChatInputBox from './ChatInputBox';
                         />
                     </Col>
                     <Col xs="7" className="chatMainContainer">
-        <h1>{this.props.selectedChannel.name}</h1>
+        <h1 className="channelName">{this.props.selectedChannel.name}</h1>
 
                         <ChatMessageList
                             messages={this.props.messages}
