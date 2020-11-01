@@ -148,7 +148,6 @@ export const dmSelectAction = (channel_id, username) => {
                         dispatch({ type: ADD_MESSAGE, payload: message });
                     }
                 );
-
                 // Get current updated State
                 const state = getState();
                 const selectedChannel = state.chat.selectedChannel;
