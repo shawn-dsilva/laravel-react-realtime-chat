@@ -24,7 +24,7 @@ import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
-import { makeRequest, addNotification, acceptFriendRequest, addChannel, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
+import { makeRequest, addNotification, acceptRequest, addChannel, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
 
 class NavbarMain extends Component { 
 
@@ -34,7 +34,7 @@ class NavbarMain extends Component {
     getNotifications: PropTypes.func.isRequired,
     addUserToDmList: PropTypes.func.isRequired,
     getAllNotifications: PropTypes.func.isRequired,
-    acceptFriendRequest: PropTypes.func.isRequired,
+    acceptRequest: PropTypes.func.isRequired,
     addNotification: PropTypes.func.isRequired,
     addChannel: PropTypes.func.isRequired,
     unreadNotifs: PropTypes.number.isRequired,
@@ -80,7 +80,7 @@ joinChannelRequestWrapper = (id, type) => {
 }
 
 acceptRequest = (id) =>{
-  this.props.acceptFriendRequest(id)
+  this.props.acceptRequest(id)
 }
 
 notifChannel = () => {
@@ -162,7 +162,7 @@ render() {
             </NavItem>
             <div className="ml-auto">
             <NotificationDropdown markAsRead={this.props.markAsRead}  notifications={this.props.notifications}
-             allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptFriendRequest}
+             allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptRequest}
               unreadNotifs={this.props.unreadNotifs} getAllNotifications={this.props.getAllNotifications} />
             </div>
             <UncontrolledDropdown nav inNavbar>
@@ -203,4 +203,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest, addNotification, addChannel, acceptFriendRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);
+export default connect(mapStateToProps, { makeRequest, addNotification, addChannel, acceptRequest, getNotifications, addUserToDmList, getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);

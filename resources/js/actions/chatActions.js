@@ -290,11 +290,11 @@ export const addNotification = notification => (dispatch, getState) => {
     dispatch({ type: ADD_NOTIFICATION, payload: notification});
 }
 
-export const acceptFriendRequest = id => (dispatch,getState) => {
+export const acceptRequest = id => (dispatch,getState) => {
 
 
     axios
-        .get(`/api/acceptrequest/${id}`, makeHeaders(getState), {withCredentials:true})
+        .get(`/api/acceptinvite/${id}`, makeHeaders(getState), {withCredentials:true})
         .then(res => {
             console.log("FROM /acceptrequest");
             console.log(res.data);

@@ -36,7 +36,7 @@ Route::group([
     Route::get('getchannels', 'ChatController@getSubscribedChannels');
     Route::get('getallchannels', 'ChatController@getAllChannels');
     Route::post('makerequest', 'ChatController@createInvite');
-    Route::get('acceptrequest/{invite_id}', 'ChatController@acceptInvite');
+    Route::get('acceptinvite/{invite_id}', 'ChatController@acceptInvite');
     Route::get('getfriendslist', 'ChatController@getFriendsList');
     Route::get('notifications', 'ChatController@getNotifications');
     Route::get('allnotifications', 'ChatController@getAllNotifications');

@@ -92731,7 +92731,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, addChannel, getNotifications, addNotification, acceptFriendRequest, addUserToDmList, getAllNotifications, markAsRead */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, addChannel, getNotifications, addNotification, acceptRequest, addUserToDmList, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92748,7 +92748,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addChannel", function() { return addChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptFriendRequest", function() { return acceptFriendRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptRequest", function() { return acceptRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUserToDmList", function() { return addUserToDmList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markAsRead", function() { return markAsRead; });
@@ -93055,9 +93055,9 @@ var addNotification = function addNotification(notification) {
     });
   };
 };
-var acceptFriendRequest = function acceptFriendRequest(id) {
+var acceptRequest = function acceptRequest(id) {
   return function (dispatch, getState) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/acceptrequest/".concat(id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/acceptinvite/".concat(id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       console.log("FROM /acceptrequest");
@@ -94611,7 +94611,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "acceptRequest", function (id) {
-      _this.props.acceptFriendRequest(id);
+      _this.props.acceptRequest(id);
     });
 
     _defineProperty(_assertThisInitialized(_this), "notifChannel", function () {
@@ -94716,7 +94716,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
         markAsRead: this.props.markAsRead,
         notifications: this.props.notifications,
         allNotifications: this.props.allNotifications,
-        acceptRequest: this.props.acceptFriendRequest,
+        acceptRequest: this.props.acceptRequest,
         unreadNotifs: this.props.unreadNotifs,
         getAllNotifications: this.props.getAllNotifications
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["UncontrolledDropdown"], {
@@ -94741,7 +94741,7 @@ _defineProperty(NavbarMain, "propTypes", {
   getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  acceptFriendRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
+  acceptRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   addNotification: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   addChannel: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.number.isRequired,
@@ -94771,7 +94771,7 @@ var mapStateToProps = function mapStateToProps(state) {
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["makeRequest"],
   addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addNotification"],
   addChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addChannel"],
-  acceptFriendRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["acceptFriendRequest"],
+  acceptRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["acceptRequest"],
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
   addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addUserToDmList"],
   getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
