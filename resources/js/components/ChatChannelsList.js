@@ -28,7 +28,8 @@ export const ChatChannelsList = (props) => {
     return (
       <div>
       <h3>Channels</h3>
-       <Col> <Button color="link" onClick={() => channelSelect(5)} id="5" key="5"><b> General</b></Button>
+       <Col> <Button color="link" onClick={() => channelSelect(5, 'General')} id="5" key="5"><b> General</b></Button>
+       <hr></hr>
         {channelList}
        <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
   <br></br>

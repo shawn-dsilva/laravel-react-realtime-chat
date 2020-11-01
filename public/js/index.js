@@ -92898,8 +92898,9 @@ var dmSelectAction = function dmSelectAction(channel_id, username) {
   };
 };
 var channelSelect = function channelSelect(channel_id, channel_name) {
-  window.Echo.leave("chat.channel.5");
   return function (dispatch, getState) {
+    var prevId = getState().chat.selectedChannel.id;
+    window.Echo.leave("chat.channel.".concat(prevId));
     var channel = {
       "id": channel_id,
       "type": "channel",
@@ -93650,11 +93651,11 @@ var ChatChannelsList = function ChatChannelsList(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "link",
     onClick: function onClick() {
-      return channelSelect(5);
+      return channelSelect(5, 'General');
     },
     id: "5",
     key: "5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), channelList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateChannelModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, " General")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), channelList, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CreateChannelModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
     buttonLabel: "+ Create New Channel"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
 };

@@ -158,9 +158,10 @@ export const dmSelectAction = (channel_id, username) => {
 };
 
 export const channelSelect = (channel_id, channel_name) => {
-    window.Echo.leave("chat.channel.5");
 
     return (dispatch, getState) => {
+        const prevId = getState().chat.selectedChannel.id;
+        window.Echo.leave(`chat.channel.${prevId}`);
 
         const channel = { "id": channel_id, "type":"channel", "name": channel_name};
 
