@@ -1,3 +1,15 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+html,body, #root, .container-true, .fullHeight {
+    height:100%!important;
+    overflow:hidden;
+    background:white;
+    font-family: 'Inter', sans-serif!important;
+
+}
+
 .sidenav {
     border-right: solid 1px grey;
 }
@@ -5,13 +17,6 @@
 .usersInRoom {
     border-left: solid 1px grey;
 }
-
-html,body, #root, .container-true, .fullHeight {
-    height:100%!important;
-    overflow:hidden;
-    background:white;
-}
-
 
 .chatMainContainer {
     max-width:68%;
@@ -94,4 +99,5 @@ html,body, #root, .container-true, .fullHeight {
 .channelName {
     border-bottom: grey 2px solid;
     padding: 0.8rem;
+    font-size:1.8rem;
 }

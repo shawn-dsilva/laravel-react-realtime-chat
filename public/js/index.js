@@ -6923,10 +6923,10 @@ module.exports = exports['default'];
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap);", ""]);
 
 // module
-exports.push([module.i, ".sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n}\n\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n}", ""]);
+exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n}", ""]);
 
 // exports
 
@@ -93568,14 +93568,14 @@ var Chat = /*#__PURE__*/function (_Component) {
           fontSize: "1.8rem",
           color: "orange"
         }
-      }, "Channel ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, " Channel # ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         style: {
           fontWeight: "900",
           textTransform: 'uppercase',
           fontSize: "1.8rem",
           color: "blue"
         }
-      }, " User "), this.props.selectedChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, "User @ "), this.props.selectedChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_13__["default"], {

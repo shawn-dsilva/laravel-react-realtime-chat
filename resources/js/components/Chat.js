@@ -108,7 +108,9 @@ import ChatInputBox from './ChatInputBox';
                         />
                     </Col>
                     <Col xs="7" className="chatMainContainer">
-        <h1 className="channelName">{this.props.selectedChannel.type ==  'channel' ? <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}>Channel </span> : <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}> User </span> }
+        <h1 className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
+        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
+        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
           {this.props.selectedChannel.name}</h1>
 
                         <ChatMessageList
