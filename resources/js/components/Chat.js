@@ -16,7 +16,7 @@ import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
 import AllUsersList from './AllUsersList';
-
+import ChannelDescDropdown from './ChannelDescDropdown';
 import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import '../../css/custom.css';
@@ -108,10 +108,11 @@ import ChatInputBox from './ChatInputBox';
                         />
                     </Col>
                     <Col xs="7" className="chatMainContainer">
-        <h1 className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
+        <div className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
-          {this.props.selectedChannel.name}</h1>
+          {this.props.selectedChannel.name}
+          <ChannelDescDropdown/></div>
 
                         <ChatMessageList
                             messages={this.props.messages}
