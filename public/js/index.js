@@ -6927,7 +6927,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=In
 exports.push([module.i, "@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n}", ""]);
+exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.sidenav {\n    border-right: solid 1px grey;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n}\n\n.chatMainContainer {\n    max-width:68%;\n    flex: 0 0 68%;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n}\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.7rem;\n    height:8%;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    scrollbar-width: thin;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n    display:flex;\n}\n\n.channelDescButton {\n    font-size:1.2rem;\n    background-color: white!important;\n    border:none;\n    color:#6c757d!important;\n}\n\n.popover {\n    max-width: 25%!important;\n}", ""]);
 
 // exports
 
@@ -93466,17 +93466,26 @@ var ChannelDescDropdown = function ChannelDescDropdown(props) {
       marginLeft: "auto"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+    className: "channelDescButton",
     id: "Popover1",
     type: "button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     "class": "fa fa-info-circle",
     "aria-hidden": "true"
-  }), "About Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
+  }), "\xA0 About Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
     placement: "bottom",
     isOpen: popoverOpen,
     target: "Popover1",
     toggle: toggle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["PopoverHeader"], null, "Channel Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["PopoverBody"], null, "Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["PopoverHeader"], {
+    style: {
+      fontSize: "1.5rem"
+    }
+  }, "Channel Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["PopoverBody"], {
+    style: {
+      fontSize: "1rem"
+    }
+  }, "Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ChannelDescDropdown);

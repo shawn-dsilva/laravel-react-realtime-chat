@@ -100,4 +100,16 @@ html,body, #root, .container-true, .fullHeight {
     border-bottom: grey 2px solid;
     padding: 0.8rem;
     font-size:1.8rem;
+    display:flex;
+}
+
+.channelDescButton {
+    font-size:1.2rem;
+    background-color: white!important;
+    border:none;
+    color:#6c757d!important;
+}
+
+.popover {
+    max-width: 25%!important;
 }
