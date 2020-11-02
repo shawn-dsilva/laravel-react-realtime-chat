@@ -4,8 +4,7 @@
 
 ### Immediate
 
-- Fix channel joining.
-- Channel Details table UI for Channels table
+- Invite users to channel if you're channel owner functionality
 - Invite to channel by URL system
 
 ### Later
@@ -26,6 +25,8 @@
 
 ### Done
 
+- Channel Details table UI for Channels table
+- Fix channel joining.
 - Misc fixes of Notifications, Invite Object and Friend/Join request.
 - Cleanup of join channel request and accept request functionality with better solution
 - List of Pubilc Channels
