@@ -10,7 +10,7 @@ const ChannelDescDropdown = (props) => {
   return (
     <div style={{marginLeft:"auto"}}>
       <Button className="channelDescButton" id="Popover1" type="button">
-      <i class="fa fa-info-circle" aria-hidden="true"></i>
+      <i className="fa fa-info-circle" aria-hidden="true"></i>
         &nbsp;
         About Channel
       </Button>

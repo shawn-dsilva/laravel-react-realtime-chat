@@ -93471,7 +93471,7 @@ var ChannelDescDropdown = function ChannelDescDropdown(props) {
     id: "Popover1",
     type: "button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "fa fa-info-circle",
+    className: "fa fa-info-circle",
     "aria-hidden": "true"
   }), "\xA0 About Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Popover"], {
     placement: "bottom",
