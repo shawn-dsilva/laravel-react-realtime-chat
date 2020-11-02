@@ -92898,14 +92898,15 @@ var dmSelectAction = function dmSelectAction(channel_id, username) {
     dispatch(getMessages(selectedChannel.id));
   };
 };
-var channelSelect = function channelSelect(channel_id, channel_name) {
+var channelSelect = function channelSelect(channel_id, channel_name, desc) {
   return function (dispatch, getState) {
     var prevId = getState().chat.selectedChannel.id;
     window.Echo.leave("chat.channel.".concat(prevId));
     var channel = {
       "id": channel_id,
       "type": "channel",
-      "name": channel_name
+      "name": channel_name,
+      "desc": desc
     };
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -93485,7 +93486,7 @@ var ChannelDescDropdown = function ChannelDescDropdown(props) {
     style: {
       fontSize: "1rem"
     }
-  }, "Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.")));
+  }, props.desc)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ChannelDescDropdown);
@@ -93579,12 +93580,12 @@ var Chat = /*#__PURE__*/function (_Component) {
       selectedChannel: ""
     });
 
-    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, channelName, event) {
+    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, channelName, desc, event) {
       if (event !== undefined) {
         event.stopPropagation();
       }
 
-      _this.props.channelSelect(selectedChannel, channelName);
+      _this.props.channelSelect(selectedChannel, channelName, desc);
     });
 
     _this.myToken = localStorage.token;
@@ -93603,7 +93604,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       this.props.getDmUsers();
       this.props.getUsersList();
       this.props.getChannels();
-      this.channelSelect(this.fakeGeneralChannel, 'General');
+      this.channelSelect(this.fakeGeneralChannel, 'General', 'A public channel where all users can chat');
     }
   }, {
     key: "dmSelect",
@@ -93647,7 +93648,9 @@ var Chat = /*#__PURE__*/function (_Component) {
           fontSize: "1.8rem",
           color: "blue"
         }
-      }, "User @ "), this.props.selectedChannel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, "User @ "), this.props.selectedChannel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        desc: this.props.selectedChannel.desc
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -93731,7 +93734,7 @@ var ChatChannelsList = function ChatChannelsList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return channelSelect(value.id, value.name);
+        return channelSelect(value.id, value.name, value.desc);
       },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
@@ -93739,7 +93742,7 @@ var ChatChannelsList = function ChatChannelsList(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "link",
     onClick: function onClick() {
-      return channelSelect(5, 'General');
+      return channelSelect(5, 'General', 'A public channel where all users can chat');
     },
     id: "5",
     key: "5"

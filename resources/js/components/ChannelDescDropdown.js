@@ -16,7 +16,7 @@ const ChannelDescDropdown = (props) => {
       </Button>
       <Popover placement="bottom" isOpen={popoverOpen} target="Popover1" toggle={toggle}>
         <PopoverHeader style={{fontSize:"1.5rem"}}>Channel Description</PopoverHeader>
-        <PopoverBody style={{fontSize:"1rem"}}>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>
+        <PopoverBody style={{fontSize:"1rem"}}>{props.desc}</PopoverBody>
       </Popover>
     </div>
   );
