@@ -93561,7 +93561,21 @@ var Chat = /*#__PURE__*/function (_Component) {
         className: "chatMainContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "channelName"
-      }, this.props.selectedChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, this.props.selectedChannel.type == 'channel' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: {
+          fontWeight: "900",
+          textTransform: 'uppercase',
+          fontSize: "1.8rem",
+          color: "orange"
+        }
+      }, "Channel ") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        style: {
+          fontWeight: "900",
+          textTransform: 'uppercase',
+          fontSize: "1.8rem",
+          color: "blue"
+        }
+      }, " User "), this.props.selectedChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_13__["default"], {
