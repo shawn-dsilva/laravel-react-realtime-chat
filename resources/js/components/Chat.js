@@ -81,11 +81,11 @@ import InviteUsersModal from './InviteUsersModal';
       }
 
 
-      channelSelect = (selectedChannel, channelName, desc, event) => {
+      channelSelect = (selectedChannel, channelName, desc,  owner_id, owner, event) => {
         if(event !== undefined) {
           event.stopPropagation();
         }
-        this.props.channelSelect(selectedChannel, channelName, desc);
+        this.props.channelSelect(selectedChannel, channelName, desc, owner_id, owner);
       }
 
       

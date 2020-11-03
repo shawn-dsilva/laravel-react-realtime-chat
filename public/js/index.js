@@ -93584,12 +93584,12 @@ var Chat = /*#__PURE__*/function (_Component) {
       selectedChannel: ""
     });
 
-    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, channelName, desc, event) {
+    _defineProperty(_assertThisInitialized(_this), "channelSelect", function (selectedChannel, channelName, desc, owner_id, owner, event) {
       if (event !== undefined) {
         event.stopPropagation();
       }
 
-      _this.props.channelSelect(selectedChannel, channelName, desc);
+      _this.props.channelSelect(selectedChannel, channelName, desc, owner_id, owner);
     });
 
     _this.myToken = localStorage.token;
