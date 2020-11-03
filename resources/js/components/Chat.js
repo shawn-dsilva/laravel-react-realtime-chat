@@ -22,6 +22,7 @@ import ChatRoomUsersList from './ChatRoomUsersList';
 import '../../css/custom.css';
 import NavbarMain from './NavbarMain';
 import ChatInputBox from './ChatInputBox';
+import InviteUsersModal from './InviteUsersModal';
 
     class Chat extends Component {
 
@@ -112,7 +113,9 @@ import ChatInputBox from './ChatInputBox';
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
           {this.props.selectedChannel.name}
-          <ChannelDescDropdown desc={this.props.selectedChannel.desc}/></div>
+          <ChannelDescDropdown desc={this.props.selectedChannel.desc}/>
+          <InviteUsersModal buttonLabel={'+ Invite Users'}/>
+          </div>
 
                         <ChatMessageList
                             messages={this.props.messages}
