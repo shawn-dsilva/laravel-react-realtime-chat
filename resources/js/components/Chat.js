@@ -114,7 +114,8 @@ import InviteUsersModal from './InviteUsersModal';
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
           {this.props.selectedChannel.name}
           <ChannelDescDropdown desc={this.props.selectedChannel.desc}/>
-          <InviteUsersModal buttonLabel={'+ Invite Users'}/>
+          { this.props.currUser.id == this.props.selectedChannel.owner_id ? <InviteUsersModal buttonLabel={'+ Invite Users'}/> : null}
+          
           </div>
 
                         <ChatMessageList

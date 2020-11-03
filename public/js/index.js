@@ -93654,9 +93654,9 @@ var Chat = /*#__PURE__*/function (_Component) {
         }
       }, "User @ "), this.props.selectedChannel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
         desc: this.props.selectedChannel.desc
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      }), this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
         buttonLabel: '+ Invite Users'
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
