@@ -15,7 +15,7 @@ export const ChatChannelsList = (props) => {
         return (
             <Col key={index}>
                 <Button color="link"
-                    onClick={() => channelSelect(value.id, value.name, value.desc)}
+                    onClick={() => channelSelect(value.id, value.name, value.desc, value.owner_id, value.owner)}
                     id={value.id}>
                     <b>{value.name}</b>
                 </Button>

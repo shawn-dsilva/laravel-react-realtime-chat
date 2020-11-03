@@ -157,13 +157,13 @@ export const dmSelectAction = (channel_id, username) => {
     };
 };
 
-export const channelSelect = (channel_id, channel_name, desc) => {
+export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) => {
 
     return (dispatch, getState) => {
         const prevId = getState().chat.selectedChannel.id;
         window.Echo.leave(`chat.channel.${prevId}`);
 
-        const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc};
+        const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc, "owner_id":owner_id, "owner":owner};
 
         dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
         const selectedChannelInState = getState().chat.selectedChannel;

@@ -92898,7 +92898,7 @@ var dmSelectAction = function dmSelectAction(channel_id, username) {
     dispatch(getMessages(selectedChannel.id));
   };
 };
-var channelSelect = function channelSelect(channel_id, channel_name, desc) {
+var channelSelect = function channelSelect(channel_id, channel_name, desc, owner_id, owner) {
   return function (dispatch, getState) {
     var prevId = getState().chat.selectedChannel.id;
     window.Echo.leave("chat.channel.".concat(prevId));
@@ -92906,7 +92906,9 @@ var channelSelect = function channelSelect(channel_id, channel_name, desc) {
       "id": channel_id,
       "type": "channel",
       "name": channel_name,
-      "desc": desc
+      "desc": desc,
+      "owner_id": owner_id,
+      "owner": owner
     };
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
@@ -93738,7 +93740,7 @@ var ChatChannelsList = function ChatChannelsList(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "link",
       onClick: function onClick() {
-        return channelSelect(value.id, value.name, value.desc);
+        return channelSelect(value.id, value.name, value.desc, value.owner_id, value.owner);
       },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
