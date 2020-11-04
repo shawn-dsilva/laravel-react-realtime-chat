@@ -20,13 +20,13 @@ const InviteUsersModal = (props) => {
 
         <Col key={index}>
             <Button color="link"
-                id={value.id}>
-                <b>{value.name}</b>
+                id={value.users[0].id}>
+              <b>{value.users[0].name}</b>
             </Button>
             <Button color="success"
                 // onClick={() => sendRequest(value.id)}
                 id={value.id}>
-                <b>Add Friend</b>
+                <b>Invite User</b>
             </Button>
             <br></br>
         </Col>
@@ -40,9 +40,10 @@ const InviteUsersModal = (props) => {
       <Button color="success" onClick={toggle}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Invite Users to your Channel</ModalHeader>
+
         <ModalBody>
           Select Users you wish to invite to your channel
-
+          <h1>Friends</h1>
           {userList}
         </ModalBody>
         <ModalFooter>
