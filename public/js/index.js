@@ -93655,7 +93655,9 @@ var Chat = /*#__PURE__*/function (_Component) {
       }, "User @ "), this.props.selectedChannel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
         desc: this.props.selectedChannel.desc
       }), this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
-        buttonLabel: '+ Invite Users'
+        buttonLabel: '+ Invite Users',
+        dmUsers: this.props.dmUsers,
+        currUser: this.props.currUser
       }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
@@ -94222,7 +94224,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var InviteUsersModal = function InviteUsersModal(props) {
   var buttonLabel = props.buttonLabel,
-      className = props.className;
+      className = props.className,
+      dmUsers = props.dmUsers,
+      currUser = props.currUser;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -94233,6 +94237,21 @@ var InviteUsersModal = function InviteUsersModal(props) {
     return setModal(!modal);
   };
 
+  var users = dmUsers.filter(function (u) {
+    return u.id !== currUser.id;
+  });
+  var userList = users.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "link",
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      color: "success" // onClick={() => sendRequest(value.id)}
+      ,
+      id: value.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Add Friend")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "success",
     onClick: toggle
@@ -94242,7 +94261,7 @@ var InviteUsersModal = function InviteUsersModal(props) {
     className: className
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
     toggle: toggle
-  }, "Invite Users to your Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, "Select Users you wish to invite to your channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }, "Invite Users to your Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, "Select Users you wish to invite to your channel", userList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "primary",
     onClick: toggle
   }, "Send Invites"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {

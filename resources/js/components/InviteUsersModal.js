@@ -1,15 +1,39 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter , Col} from 'reactstrap';
 
 const InviteUsersModal = (props) => {
   const {
     buttonLabel,
-    className
+    className,
+    dmUsers,
+    currUser
   } = props;
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  const users = dmUsers.filter(u => u.id !== currUser.id);
+
+  const userList = users.map((value, index) => {
+    return (
+
+        <Col key={index}>
+            <Button color="link"
+                id={value.id}>
+                <b>{value.name}</b>
+            </Button>
+            <Button color="success"
+                // onClick={() => sendRequest(value.id)}
+                id={value.id}>
+                <b>Add Friend</b>
+            </Button>
+            <br></br>
+        </Col>
+      
+    );
+});
+
 
   return (
     <div>
@@ -18,6 +42,8 @@ const InviteUsersModal = (props) => {
         <ModalHeader toggle={toggle}>Invite Users to your Channel</ModalHeader>
         <ModalBody>
           Select Users you wish to invite to your channel
+
+          {userList}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>Send Invites</Button>{' '}
