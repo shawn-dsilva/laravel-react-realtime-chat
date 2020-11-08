@@ -350,15 +350,9 @@ class ChatController extends Controller
             'invites.type', 'details.name as recv_name')->first();
 
 
-            error_log($invite);
-            error_log($inviteJoin);
-
             $receiver = User::where('id', $request->receiver)->first();
-            error_log($request->receiver);
             $receiver->notify(new NotificationRequest($inviteJoin));
-
-            $channel = Details::where('details.channel_id', $request->channel_id)->get();
-            return response()->json($channel);
+            return response()->json("Invite Sent Successfully");
         
     }
   
