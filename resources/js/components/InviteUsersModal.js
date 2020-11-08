@@ -26,8 +26,8 @@ const InviteUsersModal = (props) => {
               <b>{value.users[0].name}</b>
             </Button>
             <Button color="success"
-                onClick={() => inviteToChannel(value.id, selectedChannel.id)}
-                id={value.id}>
+                onClick={() => inviteToChannel(value.users[0].id, selectedChannel.id)}
+                id={value.users[0].id}>
                 <b>Invite User</b>
             </Button>
             <br></br>

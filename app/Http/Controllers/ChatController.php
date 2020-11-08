@@ -337,23 +337,25 @@ class ChatController extends Controller
 
         $userId = auth()->user()->id;
 
-            // $invite = new Invite;
-            // $invite->type = "INVT";
-            // $invite->from_id = $request->channel_id;
-            // $invite->to_id = $request->receiver;
-            // $invite->save();
+            $invite = new Invite;
+            $invite->type = "INVT";
+            $invite->from_id = $request->channel_id;
+            $invite->to_id = $request->receiver;
+            $invite->save();
 
-            // $inviteJoin = Invite::where('invites.id', $invite->id)
-            // ->join('users', 'invites.from_id', '=', 'users.id')
-            // ->join('details', 'invites.to_id', '=', 'details.channel_id')
-            // ->select('channels.id', 'channels.type', 'details.name', 'users.name as owner', 'details.desc', 'details.type', 'details.visible', 'details.owner_id as owner_id')->get();
+            $inviteJoin = Invite::where('invites.id', $invite->id)
+            ->join('details', 'invites.from_id', '=', 'details.channel_id')
+            ->join('users', 'details.owner_id', '=', 'users.id')
+            ->select('users.name', 'invites.id', 'invites.from_id', 'invites.to_id', 
+            'invites.type', 'details.name as recv_name')->first();
 
-            // error_log($invite);
-            // error_log($inviteJoin);
 
-            // $receiver = User::where('id', $request->receiver)->first();
+            error_log($invite);
+            error_log($inviteJoin);
 
-            // $receiver->notify(new NotificationRequest($inviteJoin));
+            $receiver = User::where('id', $request->receiver)->first();
+            error_log($request->receiver);
+            $receiver->notify(new NotificationRequest($inviteJoin));
 
             $channel = Details::where('details.channel_id', $request->channel_id)->get();
             return response()->json($channel);
