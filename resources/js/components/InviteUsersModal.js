@@ -47,7 +47,7 @@ const InviteUsersModal = (props) => {
 
         <ModalBody>
           Select Users you wish to invite to your channel
-          Friends
+          <h5>Friends</h5>
           {userList}
         </ModalBody>
         <ModalFooter>

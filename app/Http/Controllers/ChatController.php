@@ -337,45 +337,27 @@ class ChatController extends Controller
 
         $userId = auth()->user()->id;
 
-        // $channelWithData = Channel::where('channels.type', 'channel')->where('channels.id', $request->receiver)
-        //     ->join('details', 'channels.id', '=', 'details.channel_id')
-        //     ->select(
-        //         'channels.id',
-        //         'channels.type as channel_type',
-        //         'details.name',
-        //         'details.desc',
-        //         'details.type as detail_type',
-        //         'details.visible',
-        //         'details.owner_id'
-        //     )->first();
+            // $invite = new Invite;
+            // $invite->type = "INVT";
+            // $invite->from_id = $request->channel_id;
+            // $invite->to_id = $request->receiver;
+            // $invite->save();
 
-        // if ($channelWithData['detail_type'] == 'public') {
-        //     // $channel = Channel::where('channels.type','channel')->where('channels.id', $request->receiver)->first();
-        //     $channelWithData->users()->attach($userId);
-        //     return response()->json($channelWithData);
-        // } else {
+            // $inviteJoin = Invite::where('invites.id', $invite->id)
+            // ->join('users', 'invites.from_id', '=', 'users.id')
+            // ->join('details', 'invites.to_id', '=', 'details.channel_id')
+            // ->select('channels.id', 'channels.type', 'details.name', 'users.name as owner', 'details.desc', 'details.type', 'details.visible', 'details.owner_id as owner_id')->get();
 
-        //     // Creat new Invite of type JOIN for channel join request
-        //     $invite = new Invite;
-        //     $invite->type = "JOIN";
-        //     $invite->from_id = $userId;
-        //     $invite->to_id = $request->receiver;
-        //     $invite->save();
+            // error_log($invite);
+            // error_log($inviteJoin);
 
-        //     $inviteJoin = Invite::where('invites.id', $invite->id)->join('users', 'invites.from_id', '=', 'users.id')
-        //     ->join('details', 'invites.to_id', '=', 'details.channel_id')
-        //         ->select('users.name', 'invites.id', 'invites.from_id', 'invites.to_id', 'invites.type', 'details.name as recv_name')->first();
+            // $receiver = User::where('id', $request->receiver)->first();
 
-        //     error_log($invite);
-        //     error_log($inviteJoin);
+            // $receiver->notify(new NotificationRequest($inviteJoin));
 
-        //     // Get the ID of the channel owner
-        //     $owner = User::where('id', $channelWithData['owner_id'])->first();
-        //     // Send Notification to Owner about the join request
-        //     $owner->notify(new NotificationRequest($inviteJoin));
-
-            return response()->json("Invite Request Sent");
-        //}
+            $channel = Details::where('details.channel_id', $request->channel_id)->get();
+            return response()->json($channel);
+        
     }
   
 }

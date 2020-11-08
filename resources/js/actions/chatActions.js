@@ -270,7 +270,7 @@ export const joinChannelRequest = (id, type) => (dispatch,getState) => {
 
 export const inviteToChannel = (user_id, channel_id) => (dispatch,getState) => {
 
-    const body = `{ receiver: ${user_id}, channel_id: ${channel_id}}`;
+    const body = { receiver: user_id, channel_id: channel_id};
 
     axios
         .post("/api/invitetochannel", body, makeHeaders(getState), {withCredentials:true})
