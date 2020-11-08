@@ -268,6 +268,22 @@ export const joinChannelRequest = (id, type) => (dispatch,getState) => {
         .catch(err => {});
 }
 
+export const inviteToChannel = (user_id, channel_id) => (dispatch,getState) => {
+
+    const body = `{ receiver: ${user_id}, channel_id: ${channel_id}}`;
+
+    axios
+        .post("/api/invitetochannel", body, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const response = res.data;
+            console.log("INVITE TO CHANNEL RESPONSE BELOW")
+            console.log(response)
+        })
+        .catch(err => {});
+}
+
+
+
 export const addChannel = (channel) => (dispatch,getState) => {
 
     dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
