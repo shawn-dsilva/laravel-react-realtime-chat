@@ -11,7 +11,7 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, getUsersList} from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, getUsersList, inviteToChannel} from '../actions/chatActions';
 import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -39,6 +39,7 @@ import InviteUsersModal from './InviteUsersModal';
         getDmUsers: PropTypes.func.isRequired,
         getChannels: PropTypes.func.isRequired,
         getMessages: PropTypes.func.isRequired,
+        inviteToChannel: PropTypes.func.isRequired,
         dmSelectAction: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
         messages: PropTypes.array.isRequired,
@@ -114,7 +115,9 @@ import InviteUsersModal from './InviteUsersModal';
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
           {this.props.selectedChannel.name}
           <ChannelDescDropdown desc={this.props.selectedChannel.desc}/>
-          { this.props.currUser.id == this.props.selectedChannel.owner_id ? <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} currUser={this.props.currUser} /> : null}
+          { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
+          <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} 
+          currUser={this.props.currUser} selectedChannel={this.props.selectedChannel} inviteToChannel={this.props.inviteToChannel} /> : null}
           
           </div>
 
@@ -145,4 +148,4 @@ import InviteUsersModal from './InviteUsersModal';
       selectedChannel:state.chat.selectedChannel,
       usersList: state.chat.usersList,
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect,  getUsersList})(Chat);
+    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect,  getUsersList, inviteToChannel})(Chat);
