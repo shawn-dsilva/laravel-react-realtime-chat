@@ -45,5 +45,7 @@ Route::group([
     Route::get('allusers', 'AuthController@allUsersList');
     Route::post('createchannel', 'ChatController@createChannel');
     Route::post('joinchannel', 'ChatController@joinChannel');
+    Route::post('invitetochannel', 'ChatController@inviteToChannel');
+
 
 });
