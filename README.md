@@ -4,14 +4,13 @@
 
 ### Immediate
 
-- Invite users to channel if you're channel owner functionality
+- Accept invitation to channel from channel owner functionality
 - Invite to channel by URL system
 
 ### Later
 
 - Add search all users functionality.
 - Add search all channels functionality.
-- Add Friends list for DM.
 - User Avatar uploading features
 - Add User profiles which are hyper linked.
 - Unread messages notification.
@@ -25,11 +24,13 @@
 
 ### Done
 
+- Invite users to channel if you're channel owner functionality
 - Channel Details table UI for Channels table
 - Fix channel joining.
 - Misc fixes of Notifications, Invite Object and Friend/Join request.
 - Cleanup of join channel request and accept request functionality with better solution
 - List of Pubilc Channels
+- Add Friends list for DM.
 - Add support for user made channels, public and private/invite-only.
 - Miscellaneous Chat.js refactoring and cleanup
 - Channel join/invite requests and notifications.
