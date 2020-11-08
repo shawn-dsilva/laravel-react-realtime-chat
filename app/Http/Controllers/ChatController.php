@@ -375,6 +375,8 @@ class ChatController extends Controller
         //     $owner->notify(new NotificationRequest($inviteJoin));
 
             return response()->json("Invite Request Sent");
-        }
+        //}
     }
+  
 }
+

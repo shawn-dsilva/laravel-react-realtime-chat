@@ -92732,7 +92732,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, addChannel, getNotifications, addNotification, acceptRequest, addUserToDmList, getAllNotifications, markAsRead */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, addChannel, getNotifications, addNotification, acceptRequest, addUserToDmList, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92746,6 +92746,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateChannel", function() { return CreateChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinChannelRequest", function() { return joinChannelRequest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inviteToChannel", function() { return inviteToChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addChannel", function() { return addChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
@@ -93028,6 +93029,18 @@ var joinChannelRequest = function joinChannelRequest(id, type) {
           payload: request
         });
       }
+    })["catch"](function (err) {});
+  };
+};
+var inviteToChannel = function inviteToChannel(user_id, channel_id) {
+  return function (dispatch, getState) {
+    var body = "{ receiver: ".concat(user_id, ", channel_id: ").concat(channel_id, "}");
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/invitetochannel", body, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {
+      var response = res.data;
+      console.log("INVITE TO CHANNEL RESPONSE BELOW");
+      console.log(response);
     })["catch"](function (err) {});
   };
 };
@@ -93657,7 +93670,9 @@ var Chat = /*#__PURE__*/function (_Component) {
       }), this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
         buttonLabel: '+ Invite Users',
         dmUsers: this.props.dmUsers,
-        currUser: this.props.currUser
+        currUser: this.props.currUser,
+        selectedChannel: this.props.selectedChannel,
+        inviteToChannel: this.props.inviteToChannel
       }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
         currUser: this.props.currUser
@@ -93676,6 +93691,7 @@ _defineProperty(Chat, "propTypes", {
   getDmUsers: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getChannels: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   getMessages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
+  inviteToChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   dmSelectAction: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   channelSelect: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired,
   messages: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array.isRequired,
@@ -93708,7 +93724,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getMessages: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getMessages"],
   dmSelectAction: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["dmSelectAction"],
   channelSelect: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["channelSelect"],
-  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"]
+  getUsersList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["getUsersList"],
+  inviteToChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["inviteToChannel"]
 })(Chat));
 
 /***/ }),
@@ -94226,7 +94243,9 @@ var InviteUsersModal = function InviteUsersModal(props) {
   var buttonLabel = props.buttonLabel,
       className = props.className,
       dmUsers = props.dmUsers,
-      currUser = props.currUser;
+      currUser = props.currUser,
+      selectedChannel = props.selectedChannel,
+      inviteToChannel = props.inviteToChannel;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -94247,8 +94266,10 @@ var InviteUsersModal = function InviteUsersModal(props) {
       color: "link",
       id: value.users[0].id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.users[0].name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
-      color: "success" // onClick={() => sendRequest(value.id)}
-      ,
+      color: "success",
+      onClick: function onClick() {
+        return inviteToChannel(value.id, selectedChannel.id);
+      },
       id: value.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "Invite User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
@@ -94261,7 +94282,7 @@ var InviteUsersModal = function InviteUsersModal(props) {
     className: className
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
     toggle: toggle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Invite Users to your Channel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, "Select Users you wish to invite to your channel", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Friends"), userList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  }, "Invite Users to your Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, "Select Users you wish to invite to your channel Friends", userList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     color: "primary",
     onClick: toggle
   }, "Send Invites"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {

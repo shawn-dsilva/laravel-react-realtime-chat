@@ -43,11 +43,11 @@ const InviteUsersModal = (props) => {
     <div>
       <Button color="success" onClick={toggle}>{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}><h1>Invite Users to your Channel</h1></ModalHeader>
+        <ModalHeader toggle={toggle}>Invite Users to your Channel</ModalHeader>
 
         <ModalBody>
           Select Users you wish to invite to your channel
-          <h2>Friends</h2>
+          Friends
           {userList}
         </ModalBody>
         <ModalFooter>
