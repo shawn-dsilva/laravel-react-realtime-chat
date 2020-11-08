@@ -53,6 +53,21 @@ function acceptModalWrapper(value) {
 }
 
 function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_channel,request_type }) {
+
+  let msg = '';
+  switch(request_type) {
+    case 'FRND':
+      msg = <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
+      break;
+    case 'JOIN':
+      msg = <span>Do you want to accept <b>{sender_name}</b>'s join request and add them to your channel {recv_channel} ?</span>;
+      break;
+      case 'INVT':
+      msg = <span>Do you want to accept <b>{sender_name}</b>'s invite and join their channel {recv_channel} ?</span>;
+      break;
+    default:
+        null;
+  }
   return (
     <div>
 
@@ -62,8 +77,8 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_cha
          {recv_channel}
           <span><b>{sender_name}</b> {desc}</span>
           <br></br>
-          { request_type != 'JOIN' ? <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span> :
-          <span>Do you want to accept <b>{sender_name}</b>'s join request and add them to your channel {recv_channel} ?</span> }
+          <br></br>
+          {msg}
      </ModalBody>
          <ModalFooter>
          <Button color="success" onClick={() => acceptRequestWrapper(invite_id)}>Accept</Button>
