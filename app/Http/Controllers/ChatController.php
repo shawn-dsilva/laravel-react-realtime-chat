@@ -161,6 +161,11 @@ class ChatController extends Controller
             $channel = $this->acceptJoinRequest($invite, $userId);
 
             return response()->json($channel);
+        } else if ($invite['type'] == 'INVT') {
+            $channel = $this->acceptJoinRequest($invite, $userId);
+
+            return response()->json($channel);
+
         }
 
     }
@@ -253,6 +258,33 @@ class ChatController extends Controller
         return $channelWithDataNew;
        
     }
+
+    public function acceptInviteRequest($invite, $userId) {
+        $channel_id = $invite->from_id;
+        $user_id = $invite->to_id;
+
+        // $channel_id = Channel::where('id', $invite->to_id)->first();
+
+        $channelWithDataNew = Channel::where('channels.id', $channel_id)->join('details', 'channels.id', '=', 'details.channel_id')
+        ->select('details.*')->first();
+
+        $channel = $channelWithDataNew;
+
+        $details = Details::where('channel_id', $channel)->first();
+        // $channel->users()->attach($user);
+        error_log('CHANNEL DATA BELOW');
+        error_log($channel);
+        
+        // TODO Attach requesting user to channel
+        $channel->users()->attach($user_id);
+
+        // Add Channel to requesters channel list
+        broadcast(new AcceptRequest($channelWithDataNew, $user_id, 'INVT'));
+
+        return $channelWithDataNew;
+    }
+
+
     public function getFriendsList(Request $request)
     {
 
