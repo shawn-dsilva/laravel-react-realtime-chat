@@ -306,7 +306,7 @@ export const addNotification = notification => (dispatch, getState) => {
     dispatch({ type: ADD_NOTIFICATION, payload: notification});
 }
 
-export const acceptRequest = id => (dispatch,getState) => {
+export const acceptRequest = (id, type ) => (dispatch,getState) => {
 
 
     axios
@@ -314,9 +314,12 @@ export const acceptRequest = id => (dispatch,getState) => {
         .then(res => {
             console.log("FROM /acceptrequest");
             console.log(res.data);
-            const request = res.data;
+            const response = res.data;
             if(response.type != 'private' ) {
-                dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: request });
+                dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: response });
+            } else if (type == 'INVT') {
+                dispatch({ type: ADD_CHANNEL_SUCCESS, payload: response });
+
             }
 
         })
