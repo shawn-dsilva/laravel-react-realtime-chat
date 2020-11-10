@@ -146,7 +146,7 @@ class ChatController extends Controller
 
     }
 
-    public function acceptInvite(Request $request, $invite_id)
+    public function acceptRequest(Request $request, $invite_id)
     {
 
         $userId = auth()->user()->id;
