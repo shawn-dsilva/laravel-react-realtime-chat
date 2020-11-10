@@ -36,8 +36,8 @@ const allNotificationsList = allNotifications.map((value, index) => {
   );
 })
 
-function acceptRequestWrapper(invite_id) {
-  acceptRequest(invite_id);
+function acceptRequestWrapper(invite_id, type) {
+  acceptRequest(invite_id, type);
   toggleModal();
 }
 
@@ -81,7 +81,7 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_cha
           {msg}
      </ModalBody>
          <ModalFooter>
-         <Button color="success" onClick={() => acceptRequestWrapper(invite_id)}>Accept</Button>
+         <Button color="success" onClick={() => acceptRequestWrapper(invite_id, request_type)}>Accept</Button>
 
            <Button color="danger" onClick={toggleModal}>Close Window</Button>
 
