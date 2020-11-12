@@ -93078,19 +93078,24 @@ var addNotification = function addNotification(notification) {
     });
   };
 };
-var acceptRequest = function acceptRequest(id) {
+var acceptRequest = function acceptRequest(id, type) {
   return function (dispatch, getState) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/acceptinvite/".concat(id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       console.log("FROM /acceptrequest");
       console.log(res.data);
-      var request = res.data;
+      var response = res.data;
 
       if (response.type != 'private') {
         dispatch({
           type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
-          payload: request
+          payload: response
+        });
+      } else if (type == 'INVT') {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+          payload: response
         });
       }
     })["catch"](function (err) {});
@@ -95072,8 +95077,8 @@ var NotificationDropdown = function NotificationDropdown(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.data.sender_name), " ", value.data.desc, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
   });
 
-  function acceptRequestWrapper(invite_id) {
-    acceptRequest(invite_id);
+  function acceptRequestWrapper(invite_id, type) {
+    acceptRequest(invite_id, type);
     toggleModal();
   }
 
@@ -95123,7 +95128,7 @@ var NotificationDropdown = function NotificationDropdown(props) {
     }, "Accept Request"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, recv_channel, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, sender_name), " ", desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), msg), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "success",
       onClick: function onClick() {
-        return acceptRequestWrapper(invite_id);
+        return acceptRequestWrapper(invite_id, request_type);
       }
     }, "Accept"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       color: "danger",
