@@ -4,7 +4,7 @@
 
 ### Immediate
 
-- Accept invitation to channel from channel owner functionality
+- Fix Laravel WebSocket auth issues on first time login
 - Invite to channel by URL system
 
 ### Later
@@ -24,6 +24,7 @@
 
 ### Done
 
+- Accept invitation to channel from channel owner functionality
 - Invite users to channel if you're channel owner functionality
 - Channel Details table UI for Channels table
 - Fix channel joining.
