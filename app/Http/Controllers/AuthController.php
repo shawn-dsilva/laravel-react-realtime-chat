@@ -75,6 +75,7 @@ class AuthController extends Controller
         $token->save();
         return response()->json([
             'user' => $request->user(),
+            'token' => $tokenResult->accessToken,
             ],200)->cookie('jwt', $tokenResult->accessToken, 3600);
     }
 

@@ -92600,7 +92600,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _statusActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./statusActions */ "./resources/js/actions/statusActions.js");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+/* harmony import */ var _components_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./types */ "./resources/js/actions/types.js");
+
 
 
  //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -92613,12 +92615,12 @@ var getUser = function getUser() {
       withCredentials: true
     }).then(function (res) {
       return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_SUCCESS"],
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["AUTH_SUCCESS"],
         payload: res.data
       });
     })["catch"](function (err) {
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["AUTH_FAIL"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["AUTH_FAIL"]
       });
     });
   };
@@ -92644,18 +92646,18 @@ var register = function register(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/register", body, headers).then(function (res) {
       dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(res.data, res.status, 'REGISTER_SUCCESS'));
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["REGISTER_SUCCESS"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["REGISTER_SUCCESS"]
       });
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
       });
     })["catch"](function (err) {
       dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(err.response.data, err.response.status, 'REGISTER_FAIL'));
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["REGISTER_FAIL"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["REGISTER_FAIL"]
       });
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
       });
     });
   };
@@ -92664,7 +92666,7 @@ var register = function register(_ref) {
 var login = function login(_ref2, history) {
   var email = _ref2.email,
       password = _ref2.password;
-  return function (dispatch) {
+  return function (dispatch, getState) {
     // Headers
     var headers = {
       headers: {
@@ -92679,11 +92681,11 @@ var login = function login(_ref2, history) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/login", body, headers).then(function (res) {
       console.log(res.data);
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["LOGIN_SUCCESS"],
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["LOGIN_SUCCESS"],
         payload: res.data
       });
       dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_LOADING"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
       });
       dispatch(getUser());
       dispatch(history.push("/chat"));
@@ -92702,7 +92704,7 @@ var logout = function logout() {
       withCredentials: true
     }).then(function (res) {
       return dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["LOGOUT_SUCCESS"]
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["LOGOUT_SUCCESS"]
       });
     })["catch"](function (err) {
       console.log(err);

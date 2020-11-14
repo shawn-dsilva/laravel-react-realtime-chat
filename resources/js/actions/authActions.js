@@ -1,6 +1,6 @@
 import axios from "axios";
 import { returnStatus } from "./statusActions";
-
+import {echoInit} from "./../components/utils/echoHelpers";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -67,7 +67,7 @@ export const register = ({ name, email, password }) => (dispatch) => {
 };
 
 //Login User
-export const login = ({ email, password }, history) => (dispatch) => {
+export const login = ({ email, password }, history) => (dispatch, getState) => {
   // Headers
   const headers = {
     headers: {
