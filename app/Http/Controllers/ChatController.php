@@ -270,7 +270,10 @@ class ChatController extends Controller
         $channelWithDataNew = Channel::where('channels.id', $channel_id)->join('details', 'channels.id', '=', 'details.channel_id')
         ->select('details.*')->first();
 
-        $channel = Channel::where('id', $channel_id)->first();
+        $channel = Channel::where('id', $channel_id)
+        ->join('details', 'channels.id', '=', 'details.channel_id')
+        ->join('users', 'users.id', '=', 'details.owner_id')
+        ->select('channels.id as id', 'channels.type', 'details.name', 'users.name as owner', 'details.desc', 'details.type', 'details.visible', 'details.owner_id as owner_id')->first();
 
         // $details = Details::where('channel_id', $channel)->first();
         // $channel->users()->attach($user);
