@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Fix/Refactor notifChannel and eventChannel as Redux actions
 - Fix Logout functionality
 - Invite to channel by URL system
 
