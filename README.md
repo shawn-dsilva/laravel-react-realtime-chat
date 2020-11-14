@@ -4,7 +4,7 @@
 
 ### Immediate
 
-- Fix Laravel WebSocket auth issues on first time login
+- Fix Logout functionality
 - Invite to channel by URL system
 
 ### Later
@@ -24,6 +24,7 @@
 
 ### Done
 
+- Fix Laravel WebSocket auth issues on first time login
 - Accept invitation to channel from channel owner functionality
 - Invite users to channel if you're channel owner functionality
 - Channel Details table UI for Channels table
