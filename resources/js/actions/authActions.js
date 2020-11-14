@@ -89,6 +89,11 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
       });
       dispatch({ type: IS_LOADING });
       dispatch(getUser());
+
+      // Initializes echo with token received upon login
+      const state = getState();
+      const token = state.auth.token;
+      echoInit(token);
       dispatch(history.push("/chat"));
     }
     )

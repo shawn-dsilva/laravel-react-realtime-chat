@@ -92687,7 +92687,11 @@ var login = function login(_ref2, history) {
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
       });
-      dispatch(getUser());
+      dispatch(getUser()); // Initializes echo with token received upon login
+
+      var state = getState();
+      var token = state.auth.token;
+      Object(_components_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_2__["echoInit"])(token);
       dispatch(history.push("/chat"));
     })["catch"](function (err) {// dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
       // dispatch({
