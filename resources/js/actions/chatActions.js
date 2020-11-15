@@ -284,12 +284,6 @@ export const inviteToChannel = (user_id, channel_id) => (dispatch,getState) => {
 
 
 
-export const addChannel = (channel) => (dispatch,getState) => {
-
-    dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
-
-}
-
 export const getNotifications = () => (dispatch, getState) => {
     axios
         .get("/api/notifications", makeHeaders(getState), {withCredentials:true})
@@ -302,9 +296,7 @@ export const getNotifications = () => (dispatch, getState) => {
         .catch(err => {});
 };
 
-export const addNotification = notification => (dispatch, getState) => {
-    dispatch({ type: ADD_NOTIFICATION, payload: notification});
-}
+
 
 export const acceptRequest = (id, type ) => (dispatch,getState) => {
 
@@ -326,11 +318,6 @@ export const acceptRequest = (id, type ) => (dispatch,getState) => {
         .catch(err => {});
 }
 
-export const addUserToDmList = data => (dispatch,getState) => {
-
-            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
-
-};
 
 export const getAllNotifications = () => (dispatch, getState) => {
     axios
@@ -353,3 +340,26 @@ export const markAsRead = (id) => (dispatch, getState) => {
     })
     .catch(err => {});
 }
+
+export const initNotifAndEventChannel = () => (dispatch, getState) => {
+        let userId = getState().auth.currUser.id;
+
+        window.Echo.private(`App.User.${userId}`)
+        .notification((notification) => {
+          console.log("NOTIFICATION BELOW");
+          console.log(notification);
+          dispatch({ type: ADD_NOTIFICATION, payload: notification});
+        });
+      
+        window.Echo.join(`event.acceptRequest.${userId}`).listen(
+          "AcceptRequest",
+          event => {
+              console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+              console.log(event);
+              if(event[1] == 'FRND') {
+                dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+            } else {
+                dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+            }
+          }
+};

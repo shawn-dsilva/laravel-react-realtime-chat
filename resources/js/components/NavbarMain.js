@@ -67,8 +67,7 @@ componentDidMount () {
 
   echoInit(this.myToken);
   this.props.getNotifications();
-  this.eventChannel();
-  this.notifChannel();
+  this.props.initNotifAndEventChannel();
 
 }
 
@@ -84,31 +83,7 @@ acceptRequest = (id) =>{
   this.props.acceptRequest(id)
 }
 
-notifChannel = () => {
-  console.log("INSIDE NOTIF CHANNEL FUNCTION");
-  let userId = this.props.currUser.id;
-  console.log(userId);
-  window.Echo.private(`App.User.${userId}`)
-  .notification((notification) => {
-    console.log("NOTIFICATION BELOW");
-    console.log(notification);
-    this.props.addNotification(notification);
-  });
-}
 
-eventChannel = () => {
-  window.Echo.join(`event.acceptRequest.${this.props.currUser.id}`).listen(
-    "AcceptRequest",
-    event => {
-        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-        console.log(event);
-        if(event[1] == 'FRND') {
-          this.props.addUserToDmList(event);
-        } else {
-          this.props.addChannel(event);
-        }
-    }
-);
 }
 
 onLogout = () => {
