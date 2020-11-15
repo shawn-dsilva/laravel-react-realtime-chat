@@ -4,6 +4,8 @@
 
 ### Immediate
 
+- Add initNotificationAndEventChannels() functionality to getUser() in authActions
+- Cleanup initNotificationAndEventChannel from chatActions and NavbarMain
 - Fix/Refactor notifChannel and eventChannel as Redux actions
 - Fix Logout functionality
 - Invite to channel by URL system
