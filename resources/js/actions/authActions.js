@@ -10,6 +10,9 @@ import {
   AUTH_FAIL,
   LOGOUT_SUCCESS,
   IS_LOADING,
+  ADD_NOTIFICATION,
+  ACCEPT_REQUEST_SUCCESS,
+  ADD_CHANNEL_SUCCESS
 } from "./types";
 
 
@@ -17,21 +20,47 @@ import {
 // Uncomment the above with the baseurl where you host this app in prod, leave as-is for development
 
 //Check if user is already logged in
-export const getUser = () => (dispatch) => {
+export const getUser = () => (dispatch, getState) => {
 
   axios
   .get("/api/auth/user",{withCredentials:true})
-  .then((res) =>
+  .then((res) =>{
     dispatch({
       type: AUTH_SUCCESS,
       payload: res.data
     })
-  )
+    
+    const state = getState();  
+  const userId = state.auth.currUser.id;
+  console.log("CURR USER FROM AUTH ACTIONS");
+
+  console.log(userId);
+  window.Echo.private(`App.User.${userId}`)
+  .notification((notification) => {
+    console.log("NOTIFICATION BELOW");
+    console.log(notification);
+    dispatch({ type: ADD_NOTIFICATION, payload: notification});
+  });
+
+  window.Echo.join(`event.acceptRequest.${userId}`).listen(
+    "AcceptRequest",
+    event => {
+        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+        console.log(event);
+        if(event[1] == 'FRND') {
+          dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+      } else {
+          dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+      }
+    });
+  })
   .catch((err) => {
     dispatch({
       type: AUTH_FAIL
     });
   });
+
+  
 
 }
 
@@ -92,9 +121,11 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
 
       // Initializes echo with token received upon login
       const state = getState();
-      const token = state.auth.token;
-      echoInit(token);
-      dispatch(history.push("/chat"));
+      // const token = state.auth.token;
+      // echoInit(token);
+      // dispatch(history.push("/chat"));
+
+      
     }
     )
     .catch((err) => {

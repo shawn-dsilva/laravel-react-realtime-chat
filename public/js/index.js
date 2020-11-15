@@ -92610,13 +92610,41 @@ __webpack_require__.r(__webpack_exports__);
 //Check if user is already logged in
 
 var getUser = function getUser() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/user", {
       withCredentials: true
     }).then(function (res) {
-      return dispatch({
+      dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_3__["AUTH_SUCCESS"],
         payload: res.data
+      });
+      var state = getState();
+      var userId = state.auth.currUser.id;
+      console.log("CURR USER FROM AUTH ACTIONS");
+      console.log(userId);
+      window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
+        console.log("NOTIFICATION BELOW");
+        console.log(notification);
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_3__["ADD_NOTIFICATION"],
+          payload: notification
+        });
+      });
+      window.Echo.join("event.acceptRequest.".concat(userId)).listen("AcceptRequest", function (event) {
+        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+        console.log(event);
+
+        if (event[1] == 'FRND') {
+          dispatch({
+            type: _types__WEBPACK_IMPORTED_MODULE_3__["ACCEPT_REQUEST_SUCCESS"],
+            payload: data
+          });
+        } else {
+          dispatch({
+            type: _types__WEBPACK_IMPORTED_MODULE_3__["ADD_CHANNEL_SUCCESS"],
+            payload: channel
+          });
+        }
       });
     })["catch"](function (err) {
       dispatch({
@@ -92689,10 +92717,9 @@ var login = function login(_ref2, history) {
       });
       dispatch(getUser()); // Initializes echo with token received upon login
 
-      var state = getState();
-      var token = state.auth.token;
-      Object(_components_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_2__["echoInit"])(token);
-      dispatch(history.push("/chat"));
+      var state = getState(); // const token = state.auth.token;
+      // echoInit(token);
+      // dispatch(history.push("/chat"));
     })["catch"](function (err) {// dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
       // dispatch({
       //   type: LOGIN_FAIL
@@ -93118,32 +93145,24 @@ var markAsRead = function markAsRead(id) {
   };
 };
 var initNotifAndEventChannel = function initNotifAndEventChannel() {
-  return function (dispatch, getState) {
-    var userId = getState().auth.currUser.id;
-    window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
-      console.log("NOTIFICATION BELOW");
-      console.log(notification);
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_NOTIFICATION"],
-        payload: notification
-      });
-    });
-    window.Echo.join("event.acceptRequest.".concat(userId)).listen("AcceptRequest", function (event) {
-      console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-      console.log(event);
-
-      if (event[1] == 'FRND') {
-        dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
-          payload: data
-        });
-      } else {
-        dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
-          payload: channel
-        });
-      }
-    });
+  return function (dispatch, getState) {// let userId = getState().auth.currUser.id;
+    // window.Echo.private(`App.User.${userId}`)
+    // .notification((notification) => {
+    //   console.log("NOTIFICATION BELOW");
+    //   console.log(notification);
+    //   dispatch({ type: ADD_NOTIFICATION, payload: notification});
+    // });
+    // window.Echo.join(`event.acceptRequest.${userId}`).listen(
+    //   "AcceptRequest",
+    //   event => {
+    //       console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+    //       console.log(event);
+    //       if(event[1] == 'FRND') {
+    //         dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+    //     } else {
+    //         dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+    //     }
+    //   });
   };
 };
 
