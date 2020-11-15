@@ -1,4 +1,10 @@
 import Echo from "laravel-echo";
+import {
+    ADD_NOTIFICATION,
+    ACCEPT_REQUEST_SUCCESS,
+    ADD_CHANNEL_SUCCESS
+} from "./../../actions/types";
+
 
 export const echoInit = token => {
     window.Pusher = require("pusher-js");
@@ -45,3 +51,24 @@ export const sendMessage = ( message, channel_id, channel_type) => {
             });
         });
 };
+
+export const initNotificationAndEventChannels = (userId, dispatch ) => {
+    window.Echo.private(`App.User.${userId}`)
+    .notification((notification) => {
+      console.log("NOTIFICATION BELOW");
+      console.log(notification);
+      dispatch({ type: ADD_NOTIFICATION, payload: notification});
+    });
+  
+    window.Echo.join(`event.acceptRequest.${userId}`).listen(
+      "AcceptRequest",
+      event => {
+          console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+          console.log(event);
+          if(event[1] == 'FRND') {
+            dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+        } else {
+            dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+        }
+      });
+}
