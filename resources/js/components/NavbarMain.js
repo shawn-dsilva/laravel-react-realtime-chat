@@ -24,7 +24,7 @@ import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
-import { makeRequest, addNotification, acceptRequest, addChannel, getNotifications, addUserToDmList, 
+import { makeRequest, acceptRequest,  getNotifications, 
   getAllNotifications, markAsRead, joinChannelRequest, initNotifAndEventChannel } from '../actions/chatActions';
 
 class NavbarMain extends Component { 
@@ -33,11 +33,8 @@ class NavbarMain extends Component {
 
     makeRequest: PropTypes.func.isRequired,
     getNotifications: PropTypes.func.isRequired,
-    addUserToDmList: PropTypes.func.isRequired,
     getAllNotifications: PropTypes.func.isRequired,
     acceptRequest: PropTypes.func.isRequired,
-    addNotification: PropTypes.func.isRequired,
-    addChannel: PropTypes.func.isRequired,
     unreadNotifs: PropTypes.number.isRequired,
     notifications: PropTypes.array.isRequired,
     allNotifications: PropTypes.array.isRequired,
@@ -84,7 +81,6 @@ acceptRequest = (id) =>{
 }
 
 
-}
 
 onLogout = () => {
 
@@ -179,6 +175,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest, addNotification, addChannel, acceptRequest, 
-  getNotifications, addUserToDmList, getAllNotifications,
-   markAsRead, joinChannelRequest, initNotifAndEventChannel})(NavbarMain);
+export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest, initNotifAndEventChannel})(NavbarMain);

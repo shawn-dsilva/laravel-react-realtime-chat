@@ -361,5 +361,5 @@ export const initNotifAndEventChannel = () => (dispatch, getState) => {
             } else {
                 dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
             }
-          }
-};
+          });
+}

@@ -92738,7 +92738,7 @@ var makeHeaders = function makeHeaders(getState) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, addChannel, getNotifications, addNotification, acceptRequest, addUserToDmList, getAllNotifications, markAsRead */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, getNotifications, acceptRequest, getAllNotifications, markAsRead, initNotifAndEventChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92753,13 +92753,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeRequest", function() { return makeRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinChannelRequest", function() { return joinChannelRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inviteToChannel", function() { return inviteToChannel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addChannel", function() { return addChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotifications", function() { return getNotifications; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addNotification", function() { return addNotification; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptRequest", function() { return acceptRequest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addUserToDmList", function() { return addUserToDmList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markAsRead", function() { return markAsRead; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initNotifAndEventChannel", function() { return initNotifAndEventChannel; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93053,14 +93051,6 @@ var inviteToChannel = function inviteToChannel(user_id, channel_id) {
     })["catch"](function (err) {});
   };
 };
-var addChannel = function addChannel(channel) {
-  return function (dispatch, getState) {
-    dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
-      payload: channel
-    });
-  };
-};
 var getNotifications = function getNotifications() {
   return function (dispatch, getState) {
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/notifications", Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
@@ -93074,14 +93064,6 @@ var getNotifications = function getNotifications() {
         payload: notifications
       });
     })["catch"](function (err) {});
-  };
-};
-var addNotification = function addNotification(notification) {
-  return function (dispatch, getState) {
-    dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_NOTIFICATION"],
-      payload: notification
-    });
   };
 };
 var acceptRequest = function acceptRequest(id, type) {
@@ -93105,14 +93087,6 @@ var acceptRequest = function acceptRequest(id, type) {
         });
       }
     })["catch"](function (err) {});
-  };
-};
-var addUserToDmList = function addUserToDmList(data) {
-  return function (dispatch, getState) {
-    dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
-      payload: data
-    });
   };
 };
 var getAllNotifications = function getAllNotifications() {
@@ -93141,6 +93115,35 @@ var markAsRead = function markAsRead(id) {
         payload: res.data
       });
     })["catch"](function (err) {});
+  };
+};
+var initNotifAndEventChannel = function initNotifAndEventChannel() {
+  return function (dispatch, getState) {
+    var userId = getState().auth.currUser.id;
+    window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
+      console.log("NOTIFICATION BELOW");
+      console.log(notification);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_NOTIFICATION"],
+        payload: notification
+      });
+    });
+    window.Echo.join("event.acceptRequest.".concat(userId)).listen("AcceptRequest", function (event) {
+      console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+      console.log(event);
+
+      if (event[1] == 'FRND') {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ACCEPT_REQUEST_SUCCESS"],
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_SUCCESS"],
+          payload: channel
+        });
+      }
+    });
   };
 };
 
@@ -94828,31 +94831,6 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       _this.props.acceptRequest(id);
     });
 
-    _defineProperty(_assertThisInitialized(_this), "notifChannel", function () {
-      console.log("INSIDE NOTIF CHANNEL FUNCTION");
-      var userId = _this.props.currUser.id;
-      console.log(userId);
-      window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
-        console.log("NOTIFICATION BELOW");
-        console.log(notification);
-
-        _this.props.addNotification(notification);
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "eventChannel", function () {
-      window.Echo.join("event.acceptRequest.".concat(_this.props.currUser.id)).listen("AcceptRequest", function (event) {
-        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-        console.log(event);
-
-        if (event[1] == 'FRND') {
-          _this.props.addUserToDmList(event);
-        } else {
-          _this.props.addChannel(event);
-        }
-      });
-    });
-
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
       var headers = {
         headers: {
@@ -94893,8 +94871,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       // console.log(this.props.location.state.token);
       Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_7__["echoInit"])(this.myToken);
       this.props.getNotifications();
-      this.eventChannel();
-      this.notifChannel();
+      this.props.initNotifAndEventChannel();
     }
   }, {
     key: "render",
@@ -94953,11 +94930,8 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
 _defineProperty(NavbarMain, "propTypes", {
   makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  addUserToDmList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   acceptRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  addNotification: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  addChannel: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.number.isRequired,
   notifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
@@ -94965,7 +94939,8 @@ _defineProperty(NavbarMain, "propTypes", {
   markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   usersList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
+  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
+  initNotifAndEventChannel: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -94983,14 +94958,12 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, {
   makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["makeRequest"],
-  addNotification: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addNotification"],
-  addChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addChannel"],
   acceptRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["acceptRequest"],
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
-  addUserToDmList: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["addUserToDmList"],
   getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
   markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"],
-  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"]
+  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"],
+  initNotifAndEventChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["initNotifAndEventChannel"]
 })(NavbarMain));
 
 /***/ }),
