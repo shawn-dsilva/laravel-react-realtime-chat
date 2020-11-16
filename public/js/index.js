@@ -92770,7 +92770,7 @@ var initNotificationAndEventChannels = function initNotificationAndEventChannels
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, getNotifications, acceptRequest, getAllNotifications, markAsRead, initNotifAndEventChannel */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, getNotifications, acceptRequest, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92789,7 +92789,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptRequest", function() { return acceptRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markAsRead", function() { return markAsRead; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initNotifAndEventChannel", function() { return initNotifAndEventChannel; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93147,27 +93146,6 @@ var markAsRead = function markAsRead(id) {
         payload: res.data
       });
     })["catch"](function (err) {});
-  };
-};
-var initNotifAndEventChannel = function initNotifAndEventChannel() {
-  return function (dispatch, getState) {// let userId = getState().auth.currUser.id;
-    // window.Echo.private(`App.User.${userId}`)
-    // .notification((notification) => {
-    //   console.log("NOTIFICATION BELOW");
-    //   console.log(notification);
-    //   dispatch({ type: ADD_NOTIFICATION, payload: notification});
-    // });
-    // window.Echo.join(`event.acceptRequest.${userId}`).listen(
-    //   "AcceptRequest",
-    //   event => {
-    //       console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-    //       console.log(event);
-    //       if(event[1] == 'FRND') {
-    //         dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
-    //     } else {
-    //         dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
-    //     }
-    //   });
   };
 };
 
@@ -94895,7 +94873,6 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       // console.log(this.props.location.state.token);
       Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_7__["echoInit"])(this.myToken);
       this.props.getNotifications();
-      this.props.initNotifAndEventChannel();
     }
   }, {
     key: "render",
@@ -94963,8 +94940,7 @@ _defineProperty(NavbarMain, "propTypes", {
   markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   usersList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  initNotifAndEventChannel: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
+  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -94986,8 +94962,7 @@ var mapStateToProps = function mapStateToProps(state) {
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
   getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
   markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"],
-  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"],
-  initNotifAndEventChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["initNotifAndEventChannel"]
+  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"]
 })(NavbarMain));
 
 /***/ }),

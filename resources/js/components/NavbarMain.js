@@ -25,7 +25,7 @@ import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
 import { makeRequest, acceptRequest,  getNotifications, 
-  getAllNotifications, markAsRead, joinChannelRequest, initNotifAndEventChannel } from '../actions/chatActions';
+  getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
 
 class NavbarMain extends Component { 
 
@@ -43,7 +43,6 @@ class NavbarMain extends Component {
     usersList: PropTypes.array.isRequired,
     channels: PropTypes.array.isRequired,
     joinChannelRequest: PropTypes.func.isRequired,
-    initNotifAndEventChannel: PropTypes.func.isRequired,
   };
 
 constructor(props) {
@@ -64,8 +63,6 @@ componentDidMount () {
 
   echoInit(this.myToken);
   this.props.getNotifications();
-  this.props.initNotifAndEventChannel();
-
 }
 
 sendRequest = (id) =>{
@@ -175,4 +172,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest, initNotifAndEventChannel})(NavbarMain);
+export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);
