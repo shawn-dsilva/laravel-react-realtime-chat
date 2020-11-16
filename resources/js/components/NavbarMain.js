@@ -136,9 +136,7 @@ render() {
             </div>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                <NavbarBrand>
               {this.props.currUser.name}
-              </NavbarBrand>
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem onClick={this.onLogout}>
