@@ -4,9 +4,6 @@
 
 ### Immediate
 
-- Add initNotificationAndEventChannels() functionality to getUser() in authActions
-- Cleanup initNotificationAndEventChannel from chatActions and NavbarMain
-- Fix/Refactor notifChannel and eventChannel as Redux actions
 - Fix Logout functionality
 - Invite to channel by URL system
 
@@ -27,6 +24,9 @@
 
 ### Done
 
+- Add initNotificationAndEventChannels() functionality to getUser() in authActions
+- Cleanup initNotificationAndEventChannel from chatActions and NavbarMain
+- Fix/Refactor notifChannel and eventChannel as Redux actions
 - Fix Laravel WebSocket auth issues on first time login
 - Accept invitation to channel from channel owner functionality
 - Invite users to channel if you're channel owner functionality
