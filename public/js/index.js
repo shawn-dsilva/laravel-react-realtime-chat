@@ -92622,11 +92622,12 @@ var getUser = function getUser() {
       var userId = state.auth.currUser.id;
       console.log("CURR USER FROM AUTH ACTIONS");
       console.log(userId);
-      Object(_components_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_2__["initNotificationAndEventChannels"])(userId, dispatch);
+      initNotificationAndEventChannels(userId, dispatch);
     })["catch"](function (err) {
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_3__["AUTH_FAIL"]
       });
+      console.log(err);
     });
   };
 }; //Register New User
@@ -92734,6 +92735,33 @@ var makeHeaders = function makeHeaders(getState) {
   // }
 
   return headersObj;
+};
+
+var initNotificationAndEventChannels = function initNotificationAndEventChannels(userId, dispatch) {
+  window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
+    console.log("NOTIFICATION BELOW");
+    console.log(notification);
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_3__["ADD_NOTIFICATION"],
+      payload: notification
+    });
+  });
+  window.Echo.join("event.acceptRequest.".concat(userId)).listen("AcceptRequest", function (event) {
+    console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+    console.log(event);
+
+    if (event[1] == 'FRND') {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["ACCEPT_REQUEST_SUCCESS"],
+        payload: data
+      });
+    } else {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["ADD_CHANNEL_SUCCESS"],
+        payload: channel
+      });
+    }
+  });
 };
 
 /***/ }),
@@ -95578,17 +95606,14 @@ function ProtectedRoute(_ref) {
 /*!******************************************************!*\
   !*** ./resources/js/components/utils/echoHelpers.js ***!
   \******************************************************/
-/*! exports provided: echoInit, sendMessage, initNotificationAndEventChannels */
+/*! exports provided: echoInit, sendMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "echoInit", function() { return echoInit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendMessage", function() { return sendMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initNotificationAndEventChannels", function() { return initNotificationAndEventChannels; });
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../actions/types */ "./resources/js/actions/types.js");
-
 
 var echoInit = function echoInit(token) {
   window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
@@ -95628,32 +95653,6 @@ var sendMessage = function sendMessage(message, channel_id, channel_type) {
     Object.values(errors).map(function (error) {
       console.log(error.toString());
     });
-  });
-};
-var initNotificationAndEventChannels = function initNotificationAndEventChannels(userId, dispatch) {
-  window.Echo["private"]("App.User.".concat(userId)).notification(function (notification) {
-    console.log("NOTIFICATION BELOW");
-    console.log(notification);
-    dispatch({
-      type: _actions_types__WEBPACK_IMPORTED_MODULE_1__["ADD_NOTIFICATION"],
-      payload: notification
-    });
-  });
-  window.Echo.join("event.acceptRequest.".concat(userId)).listen("AcceptRequest", function (event) {
-    console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
-    console.log(event);
-
-    if (event[1] == 'FRND') {
-      dispatch({
-        type: _actions_types__WEBPACK_IMPORTED_MODULE_1__["ACCEPT_REQUEST_SUCCESS"],
-        payload: data
-      });
-    } else {
-      dispatch({
-        type: _actions_types__WEBPACK_IMPORTED_MODULE_1__["ADD_CHANNEL_SUCCESS"],
-        payload: channel
-      });
-    }
   });
 };
 

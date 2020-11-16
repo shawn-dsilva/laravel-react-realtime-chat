@@ -1,6 +1,6 @@
 import axios from "axios";
 import { returnStatus } from "./statusActions";
-import {echoInit, initNotificationAndEventChannels} from "./../components/utils/echoHelpers";
+import {echoInit} from "./../components/utils/echoHelpers";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -41,6 +41,7 @@ export const getUser = () => (dispatch, getState) => {
     dispatch({
       type: AUTH_FAIL
     });
+    console.log(err);
   });
 
   
@@ -154,3 +155,25 @@ export const makeHeaders = (getState) => {
 
   return headersObj;
 };
+
+
+const initNotificationAndEventChannels = (userId, dispatch  ) => {
+  window.Echo.private(`App.User.${userId}`)
+  .notification((notification) => {
+    console.log("NOTIFICATION BELOW");
+    console.log(notification);
+    dispatch({ type: ADD_NOTIFICATION, payload: notification});
+  });
+
+  window.Echo.join(`event.acceptRequest.${userId}`).listen(
+    "AcceptRequest",
+    event => {
+        console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
+        console.log(event);
+        if(event[1] == 'FRND') {
+          dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+      } else {
+          dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+      }
+    });
+}
