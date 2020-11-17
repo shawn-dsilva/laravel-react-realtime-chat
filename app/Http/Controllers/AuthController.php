@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -89,7 +90,7 @@ class AuthController extends Controller
         $request->user()->token()->revoke();
         return response()->json([
             'message' => 'Successfully logged out'
-        ], 200);
+        ], 200)->cookie(Cookie::forget('jwt'));
     }
 
     /**
