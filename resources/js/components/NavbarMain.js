@@ -26,6 +26,7 @@ import { echoInit } from './utils/echoHelpers';
 
 import { makeRequest, acceptRequest,  getNotifications, 
   getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
+import {logout} from '../actions/authActions';
 
 class NavbarMain extends Component { 
 
@@ -40,6 +41,7 @@ class NavbarMain extends Component {
     allNotifications: PropTypes.array.isRequired,
     currUser: PropTypes.object.isRequired,
     markAsRead: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     usersList: PropTypes.array.isRequired,
     channels: PropTypes.array.isRequired,
     joinChannelRequest: PropTypes.func.isRequired,
@@ -81,26 +83,28 @@ acceptRequest = (id) =>{
 
 onLogout = () => {
 
-      const headers = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization":"Bearer "+this.myToken
-        }
-      };
+      // const headers = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Authorization":"Bearer "+this.myToken
+      //   }
+      // };
 
-      axios.get("/api/auth/logout", headers)
-        .then((res) =>{
-          if(res.status === 200) {
-            window.Echo.disconnect();
-            localStorage.removeItem("LRC_Token");
-            // this.setState({
-            //   redirect: true
-            // })
-            this.props.history.push("/login");
-           }
-        })
-        .catch((err) => {
-        });
+      // axios.get("/api/auth/logout", headers)
+      //   .then((res) =>{
+      //     if(res.status === 200) {
+      //       window.Echo.disconnect();
+      //       localStorage.removeItem("LRC_Token");
+      //       // this.setState({
+      //       //   redirect: true
+      //       // })
+      //       this.props.history.push("/login");
+      //      }
+      //   })
+      //   .catch((err) => {
+      //   });
+
+
 }
 
 toggle = () => {
@@ -170,4 +174,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest})(NavbarMain);
+export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest, logout})(NavbarMain);
