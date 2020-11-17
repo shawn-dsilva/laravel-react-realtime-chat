@@ -4,7 +4,8 @@
 
 ### Immediate
 
-- Fix Logout functionality
+- Users currently online in chatroom only for chatrooms, UI element can be hidden
+- Add Online/Offline status and Typing events support.
 - Invite to channel by URL system
 
 ### Later
@@ -17,13 +18,9 @@
 - UI Design using SASS
 - Responsiveness using SASS
 
-### Maybe 
-
-- Add Online/Offline status and Typing events support.
-
-
 ### Done
 
+- Fix Logout functionality
 - Add initNotificationAndEventChannels() functionality to getUser() in authActions
 - Cleanup initNotificationAndEventChannel from chatActions and NavbarMain
 - Fix/Refactor notifChannel and eventChannel as Redux actions
