@@ -92709,7 +92709,7 @@ var login = function login(_ref2, history) {
 
 var logout = function logout() {
   return function (dispatch) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/users/logout", {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/auth/logout", {
       withCredentials: true
     }).then(function (res) {
       return dispatch({
@@ -94775,6 +94775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
 /* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94798,6 +94799,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -94834,22 +94836,26 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
-      var headers = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + _this.myToken
-        }
-      };
-      axios.get("/api/auth/logout", headers).then(function (res) {
-        if (res.status === 200) {
-          window.Echo.disconnect();
-          localStorage.removeItem("LRC_Token"); // this.setState({
-          //   redirect: true
-          // })
-
-          _this.props.history.push("/login");
-        }
-      })["catch"](function (err) {});
+      // const headers = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Authorization":"Bearer "+this.myToken
+      //   }
+      // };
+      // axios.get("/api/auth/logout", headers)
+      //   .then((res) =>{
+      //     if(res.status === 200) {
+      //       window.Echo.disconnect();
+      //       localStorage.removeItem("LRC_Token");
+      //       // this.setState({
+      //       //   redirect: true
+      //       // })
+      //       this.props.history.push("/login");
+      //      }
+      //   })
+      //   .catch((err) => {
+      //   });
+      _this.props.logout();
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
@@ -94938,6 +94944,7 @@ _defineProperty(NavbarMain, "propTypes", {
   allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired,
   markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
+  logout: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
   usersList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
   joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
@@ -94962,7 +94969,8 @@ var mapStateToProps = function mapStateToProps(state) {
   getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
   getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
   markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"],
-  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"]
+  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"],
+  logout: _actions_authActions__WEBPACK_IMPORTED_MODULE_9__["logout"]
 })(NavbarMain));
 
 /***/ }),

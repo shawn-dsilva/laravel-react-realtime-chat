@@ -104,7 +104,7 @@ onLogout = () => {
       //   .catch((err) => {
       //   });
 
-
+  this.props.logout();
 }
 
 toggle = () => {

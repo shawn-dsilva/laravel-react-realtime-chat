@@ -125,7 +125,7 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
 export const logout = () => (dispatch) => {
 
     axios
-    .delete("/api/users/logout", { withCredentials: true })
+    .get("/api/auth/logout", { withCredentials: true })
     .then((res) =>
       dispatch({
         type: LOGOUT_SUCCESS,
