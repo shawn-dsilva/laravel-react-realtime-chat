@@ -94836,25 +94836,6 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onLogout", function () {
-      // const headers = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Authorization":"Bearer "+this.myToken
-      //   }
-      // };
-      // axios.get("/api/auth/logout", headers)
-      //   .then((res) =>{
-      //     if(res.status === 200) {
-      //       window.Echo.disconnect();
-      //       localStorage.removeItem("LRC_Token");
-      //       // this.setState({
-      //       //   redirect: true
-      //       // })
-      //       this.props.history.push("/login");
-      //      }
-      //   })
-      //   .catch((err) => {
-      //   });
       _this.props.logout();
     });
 
@@ -95715,6 +95696,7 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_FAIL"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_FAIL"]:
       localStorage.removeItem('token');
+      window.Echo.disconnect();
       return _objectSpread(_objectSpread({}, state), {}, {
         isAuthenticated: false,
         user: null

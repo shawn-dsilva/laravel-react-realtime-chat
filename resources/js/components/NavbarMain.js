@@ -83,27 +83,6 @@ acceptRequest = (id) =>{
 
 onLogout = () => {
 
-      // const headers = {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Authorization":"Bearer "+this.myToken
-      //   }
-      // };
-
-      // axios.get("/api/auth/logout", headers)
-      //   .then((res) =>{
-      //     if(res.status === 200) {
-      //       window.Echo.disconnect();
-      //       localStorage.removeItem("LRC_Token");
-      //       // this.setState({
-      //       //   redirect: true
-      //       // })
-      //       this.props.history.push("/login");
-      //      }
-      //   })
-      //   .catch((err) => {
-      //   });
-
   this.props.logout();
 }
 
