@@ -10,10 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserOnline
+class UserOnline implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
 
+    public $user;
     /**
      * Create a new event instance.
      *
@@ -31,6 +32,7 @@ class UserOnline
      */
     public function broadcastOn()
     {
+        error_log("IN USERONLINE EVENT");
         return new PresenceChannel('chat');
     }
 }

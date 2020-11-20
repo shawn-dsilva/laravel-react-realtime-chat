@@ -95607,8 +95607,9 @@ var echoInit = function echoInit(token) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/online", headersObj, {
       withCredentials: true
     });
-  }).listen('UserOnline', function (user) {
-    console.log(user.name + " IS ONLINE ");
+  }).listen('UserOnline', function (event) {
+    console.log(event.user.name + " IS ONLINE ");
+    console.log(event.user);
   });
 };
 var sendMessage = function sendMessage(message, channel_id, channel_type) {

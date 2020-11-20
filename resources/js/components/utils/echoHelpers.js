@@ -35,8 +35,9 @@ export const echoInit = token => {
         axios
         .get(`/api/online`, headersObj, {withCredentials:true})
     })
-    .listen('UserOnline', (user) => {
-        console.log(user.name+" IS ONLINE ");
+    .listen('UserOnline', (event) => {
+        console.log(event.user.name+" IS ONLINE ");
+        console.log(event.user);
     });
 };
 

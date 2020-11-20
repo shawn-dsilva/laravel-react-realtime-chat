@@ -399,8 +399,6 @@ class ChatController extends Controller
   
     public function isOnline(Request $request) {
         $user = auth()->user();
-        error_log("IN IS ONLINE");
-        error_log($user);
         broadcast(new UserOnline($user));
 
     }
