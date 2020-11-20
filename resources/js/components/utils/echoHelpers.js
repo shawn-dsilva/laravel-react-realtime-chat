@@ -22,7 +22,10 @@ export const echoInit = token => {
         }
     };
 
-    window.Echo.join("chat");
+    window.Echo.join("chat")
+    .joining((user) => {
+        console.log(user.name+" IS ONLINE ");
+    });
 };
 
 export const sendMessage = ( message, channel_id, channel_type) => {

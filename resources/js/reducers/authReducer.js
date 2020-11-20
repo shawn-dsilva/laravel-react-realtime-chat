@@ -42,7 +42,7 @@ export default function (state = initialState, action) {
     case REGISTER_FAIL:
     case AUTH_FAIL:
       localStorage.removeItem('token');
-      window.Echo.disconnect();
+      // window.Echo.disconnect();
       return {
         ...state,
         isAuthenticated: false,

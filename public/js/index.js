@@ -95595,7 +95595,9 @@ var echoInit = function echoInit(token) {
       Authorization: "Bearer " + token
     }
   };
-  window.Echo.join("chat");
+  window.Echo.join("chat").joining(function (user) {
+    console.log(user.name + " IS ONLINE ");
+  });
 };
 var sendMessage = function sendMessage(message, channel_id, channel_type) {
   var body = JSON.stringify({
@@ -95695,8 +95697,8 @@ var initialState = {
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_SUCCESS"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_FAIL"]:
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["AUTH_FAIL"]:
-      localStorage.removeItem('token');
-      window.Echo.disconnect();
+      localStorage.removeItem('token'); // window.Echo.disconnect();
+
       return _objectSpread(_objectSpread({}, state), {}, {
         isAuthenticated: false,
         user: null
