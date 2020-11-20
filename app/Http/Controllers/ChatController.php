@@ -12,6 +12,7 @@ use App\User;
 use App\Channel;
 use App\Details;
 use App\Events\AcceptRequest;
+use App\Events\UserOnline;
 use App\Invite;
 use App\Notifications\NotificationRequest;
 
@@ -396,5 +397,12 @@ class ChatController extends Controller
         
     }
   
+    public function isOnline(Request $request) {
+        $user = auth()->user();
+        error_log("IN IS ONLINE");
+        error_log($user);
+        broadcast(new UserOnline($user));
+
+    }
 }
 

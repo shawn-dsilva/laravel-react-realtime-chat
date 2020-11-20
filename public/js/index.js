@@ -95578,6 +95578,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "echoInit", function() { return echoInit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendMessage", function() { return sendMessage; });
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var echoInit = function echoInit(token) {
   window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
@@ -95596,6 +95599,15 @@ var echoInit = function echoInit(token) {
     }
   };
   window.Echo.join("chat").joining(function (user) {
+    var headersObj = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/online", headersObj, {
+      withCredentials: true
+    });
+  }).listen('UserOnline', function (user) {
     console.log(user.name + " IS ONLINE ");
   });
 };
@@ -95611,7 +95623,7 @@ var sendMessage = function sendMessage(message, channel_id, channel_type) {
       "Content-Type": "application/json"
     }
   };
-  axios.post("/api/messages", body, postHeaders).then(function (res) {
+  axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/messages", body, postHeaders).then(function (res) {
     console.log(res);
   })["catch"](function (err) {
     var errors = err.response.data.errors;

@@ -1,4 +1,5 @@
 import Echo from "laravel-echo";
+import axios from "axios";
 
 
 
@@ -24,6 +25,17 @@ export const echoInit = token => {
 
     window.Echo.join("chat")
     .joining((user) => {
+
+        const headersObj = {
+            headers: {
+              'Content-type': 'application/json'
+            }
+          };
+
+        axios
+        .get(`/api/online`, headersObj, {withCredentials:true})
+    })
+    .listen('UserOnline', (user) => {
         console.log(user.name+" IS ONLINE ");
     });
 };
