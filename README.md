@@ -4,6 +4,7 @@
 
 ### Immediate
 
+- Add table to store online status of users upon user going online to check online status.
 - Users currently online in chatroom only for chatrooms, UI element can be hidden
 - Add Online/Offline status and Typing events support.
 - Invite to channel by URL system
