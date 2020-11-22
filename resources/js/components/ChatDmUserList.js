@@ -16,6 +16,7 @@ export const ChatDmUsersList = (props) => {
                     onClick={() => dmSelect(value.id, value.users[0].name)}
                     id={value.users[0].id}>
                     <b>{value.users[0].name}</b>
+                    <div className={ value.users[0].is_online ? "online" : "offline"}></div>
                 </Button>
                 <br></br>
             </Col>

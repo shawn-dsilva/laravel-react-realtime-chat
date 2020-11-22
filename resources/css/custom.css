@@ -113,3 +113,12 @@ html,body, #root, .container-true, .fullHeight {
 .popover {
     max-width: 25%!important;
 }
+
+.online {
+    height: 5px;
+    width: 5px;
+    border: solid 5px greenyellow;
+    border-radius: 50%;
+    display:inline-block;
+    margin:0 5px;
+}
