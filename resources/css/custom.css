@@ -122,3 +122,12 @@ html,body, #root, .container-true, .fullHeight {
     display:inline-block;
     margin:0 5px;
 }
+
+.offline {
+    height: 5px;
+    width: 5px;
+    border: solid 5px lightgrey;
+    border-radius: 50%;
+    display:inline-block;
+    margin:0 5px;
+}
