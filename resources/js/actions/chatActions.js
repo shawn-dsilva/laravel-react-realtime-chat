@@ -21,7 +21,6 @@ import {
     NOTIF_MARK_AS_READ,
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
-    IS_ONLINE
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -340,8 +339,4 @@ export const markAsRead = (id) => (dispatch, getState) => {
         dispatch({ type: NOTIF_MARK_AS_READ, payload: res.data });
     })
     .catch(err => {});
-}
-
-export const isOnlineAction = (id) => (dispatch) => {
-    dispatch({ type: IS_ONLINE, payload: id});
 }

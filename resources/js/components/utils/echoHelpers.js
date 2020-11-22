@@ -1,7 +1,7 @@
 import Echo from "laravel-echo";
 import axios from "axios";
-
-
+import store from "../../store";
+import { IS_ONLINE } from "../../actions/types";
 
 export const echoInit = token => {
     window.Pusher = require("pusher-js");
@@ -38,6 +38,7 @@ export const echoInit = token => {
     .listen('UserOnline', (event) => {
         console.log(event.user.name+" IS ONLINE ");
         console.log(event.user);
+        store.dispatch({ type: IS_ONLINE, payload: event.user.id});
     });
 };
 

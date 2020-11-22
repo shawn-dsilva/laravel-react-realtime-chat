@@ -92770,7 +92770,7 @@ var initNotificationAndEventChannels = function initNotificationAndEventChannels
 /*!*********************************************!*\
   !*** ./resources/js/actions/chatActions.js ***!
   \*********************************************/
-/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, getNotifications, acceptRequest, getAllNotifications, markAsRead, isOnlineAction */
+/*! exports provided: getDmUsers, getUsersList, getChannels, getMessages, dmSelectAction, channelSelect, CreateChannel, makeRequest, joinChannelRequest, inviteToChannel, getNotifications, acceptRequest, getAllNotifications, markAsRead */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92789,7 +92789,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "acceptRequest", function() { return acceptRequest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotifications", function() { return getAllNotifications; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markAsRead", function() { return markAsRead; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOnlineAction", function() { return isOnlineAction; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authActions */ "./resources/js/actions/authActions.js");
@@ -93147,14 +93146,6 @@ var markAsRead = function markAsRead(id) {
         payload: res.data
       });
     })["catch"](function (err) {});
-  };
-};
-var isOnlineAction = function isOnlineAction(id) {
-  return function (dispatch) {
-    dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["IS_ONLINE"],
-      payload: id
-    });
   };
 };
 
@@ -95591,6 +95582,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store */ "./resources/js/store.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/types */ "./resources/js/actions/types.js");
+
+
 
 
 var echoInit = function echoInit(token) {
@@ -95621,6 +95616,10 @@ var echoInit = function echoInit(token) {
   }).listen('UserOnline', function (event) {
     console.log(event.user.name + " IS ONLINE ");
     console.log(event.user);
+    _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch({
+      type: _actions_types__WEBPACK_IMPORTED_MODULE_3__["IS_ONLINE"],
+      payload: event.user.id
+    });
   });
 };
 var sendMessage = function sendMessage(message, channel_id, channel_type) {
@@ -95898,9 +95897,11 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["IS_ONLINE"]:
       return _objectSpread(_objectSpread({}, state), {}, {
-        dmUsers: state.dmUsers.map(function (channel) {
-          if (channel.users[0].id == action.payload) {
-            channe.users[0].is_online = 1;
+        dmUsers: state.dmUsers.map(function (dmuser) {
+          if (dmuser.users[0].id == action.payload) {
+            dmuser.users[0].is_online = 1;
+          } else {
+            return dmuser;
           }
         })
       });
