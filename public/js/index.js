@@ -95903,7 +95903,7 @@ var initialState = {
           if (dmuser.users[0].id == action.payload) {
             dmuser.users[0].is_online = 1;
           } else {
-            dmusers.users[0].is_online = 0;
+            dmuser.users[0].is_online = 0;
             return dmuser;
           }
         })
