@@ -405,7 +405,16 @@ class ChatController extends Controller
     }
 
     public function listOnlineUsers() {
-        Cache::get('user-is-online');
+
+        $userId = auth()->user()->id;
+
+        //TODO
+        // Use userId to get all users in friends list
+        // run Cache::get('user-is-online-'.$friendId) in a loop
+        // store results in an array
+        // send results in response
+        
+        Cache::get('user-is-online-');
     }
 }
 
