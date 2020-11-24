@@ -15,6 +15,7 @@ use App\Events\AcceptRequest;
 use App\Events\UserOnline;
 use App\Invite;
 use App\Notifications\NotificationRequest;
+use Illuminate\Support\Facades\Cache;
 
 class ChatController extends Controller
 {
@@ -401,6 +402,10 @@ class ChatController extends Controller
         $user = auth()->user();
         broadcast(new UserOnline($user));
 
+    }
+
+    public function listOnlineUsers() {
+        Cache::get('user-is-online');
     }
 }
 
