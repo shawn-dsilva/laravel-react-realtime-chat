@@ -306,6 +306,7 @@ class ChatController extends Controller
             $q->where('user_id', $sender);
         })->get();
 
+        $this->listOnlineUsers($friends);
         // $friends = Channel::with("users")->where('type','dm')->get();
         return response()->json($friends);
     }
@@ -404,17 +405,20 @@ class ChatController extends Controller
 
     }
 
-    public function listOnlineUsers() {
+    public function listOnlineUsers($users) {
 
-        $userId = auth()->user()->id;
 
         //TODO
         // Use userId to get all users in friends list
         // run Cache::get('user-is-online-'.$friendId) in a loop
         // store results in an array
         // send results in response
-        
-        Cache::get('user-is-online-');
+        error_log('IN LISTONLINEUSERS FUNCTION');
+        foreach( $users as $channel) {
+            $userId = $channel->users[0]->id;
+            error_log(Cache::get('user-is-online-'.$userId));
+
+        }
     }
 }
 
