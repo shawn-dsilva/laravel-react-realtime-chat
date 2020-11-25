@@ -18,7 +18,10 @@ class LastUserActivity
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()) {
+        $user = Auth::user();
+        error_log($user);
+        if(Auth::user()) {
+            error_log("IN LASTUSERACTIVITY MIDDLEWARE");
             $expiresAt = Carbon::now()->addMinutes(1);
             Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
         }

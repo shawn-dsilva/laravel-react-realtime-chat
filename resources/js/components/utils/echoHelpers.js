@@ -24,22 +24,22 @@ export const echoInit = token => {
     };
 
     window.Echo.join("chat")
-    .joining((user) => {
+    // .joining((user) => {
 
-        const headersObj = {
-            headers: {
-              'Content-type': 'application/json'
-            }
-          };
+    //     const headersObj = {
+    //         headers: {
+    //           'Content-type': 'application/json'
+    //         }
+    //       };
 
-        axios
-        .get(`/api/online`, headersObj, {withCredentials:true})
-    })
-    .listen('UserOnline', (event) => {
-        console.log(event.user.name+" IS ONLINE ");
-        console.log(event.user);
-        store.dispatch({ type: IS_ONLINE, payload: event.user.id});
-    });
+    //     axios
+    //     .get(`/api/online`, headersObj, {withCredentials:true})
+    // });
+    // // .listen('UserOnline', (event) => {
+    // //     console.log(event.user.name+" IS ONLINE ");
+    // //     console.log(event.user);
+    // //     store.dispatch({ type: IS_ONLINE, payload: event.user.id});
+    // // });
 };
 
 export const sendMessage = ( message, channel_id, channel_type) => {

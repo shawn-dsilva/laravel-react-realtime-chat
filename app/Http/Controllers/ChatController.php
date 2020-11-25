@@ -416,8 +416,9 @@ class ChatController extends Controller
         error_log('IN LISTONLINEUSERS FUNCTION');
         foreach( $users as $channel) {
             $userId = $channel->users[0]->id;
+            $userData = $channel->users[0];
+            Cache::put('user-is-online-' . $userId, $userData);
             error_log(Cache::get('user-is-online-'.$userId));
-
         }
     }
 }
