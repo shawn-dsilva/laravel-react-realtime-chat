@@ -4,9 +4,9 @@
 
 ### Immediate
 
-- Add table to store online status of users upon user going online to check online status.
+- Add scrollbars for channels and dm user lists 
 - Users currently online in chatroom only for chatrooms, UI element can be hidden
-- Add Online/Offline status and Typing events support.
+- Typing events support.
 - Invite to channel by URL system
 
 ### Later
@@ -21,6 +21,8 @@
 
 ### Done
 
+- Add Online Offline user status support
+- Add table to store online status of users upon user going online to check online status.
 - Fix Logout functionality
 - Add initNotificationAndEventChannels() functionality to getUser() in authActions
 - Cleanup initNotificationAndEventChannel from chatActions and NavbarMain
