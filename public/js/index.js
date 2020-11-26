@@ -95606,20 +95606,23 @@ var echoInit = function echoInit(token) {
       Authorization: "Bearer " + token
     }
   };
-  window.Echo.join("chat"); // .joining((user) => {
-  //     const headersObj = {
-  //         headers: {
-  //           'Content-type': 'application/json'
-  //         }
-  //       };
-  //     axios
-  //     .get(`/api/online`, headersObj, {withCredentials:true})
-  // });
-  // // .listen('UserOnline', (event) => {
-  // //     console.log(event.user.name+" IS ONLINE ");
-  // //     console.log(event.user);
-  // //     store.dispatch({ type: IS_ONLINE, payload: event.user.id});
-  // // });
+  window.Echo.join("chat").joining(function (user) {
+    var headersObj = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/online", headersObj, {
+      withCredentials: true
+    });
+  }).listen('UserOnline', function (event) {
+    console.log(event.user.name + " IS ONLINE ");
+    console.log(event.user);
+    _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch({
+      type: _actions_types__WEBPACK_IMPORTED_MODULE_3__["IS_ONLINE"],
+      payload: event.user.id
+    });
+  });
 };
 var sendMessage = function sendMessage(message, channel_id, channel_type) {
   var body = JSON.stringify({
@@ -95895,12 +95898,13 @@ var initialState = {
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["IS_ONLINE"]:
+      console.log(action.payload);
       return _objectSpread(_objectSpread({}, state), {}, {
         dmUsers: state.dmUsers.map(function (dmuser) {
           if (dmuser.users[0].id == action.payload) {
             dmuser.users[0].is_online = 1;
+            return dmuser;
           } else {
-            dmuser.users[0].is_online = 0;
             return dmuser;
           }
         })
