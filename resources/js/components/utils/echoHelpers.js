@@ -42,6 +42,7 @@ export const echoInit = token => {
             }
           };
 
+          console.log("IN LEAVING ");
         axios
         .get(`/api/offline`, headersObj, {withCredentials:true})
     })

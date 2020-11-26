@@ -13,6 +13,7 @@ use App\Channel;
 use App\Details;
 use App\Events\AcceptRequest;
 use App\Events\UserOnline;
+use App\Events\UserOffline;
 use App\Invite;
 use App\Notifications\NotificationRequest;
 use Illuminate\Support\Facades\Cache;
@@ -432,8 +433,9 @@ class ChatController extends Controller
     public function isOffline(Request $request) {
         $user = auth()->user();
         $userId = auth()->user()->id;
+        error_log("IN ISOFFLINE");
         Cache::forget('user-is-online-'.$userId);
-        broadcast(new UserOnline($user));
+        broadcast(new UserOffline($user));
 
     }
 }

@@ -95623,6 +95623,7 @@ var echoInit = function echoInit(token) {
         'Content-type': 'application/json'
       }
     };
+    console.log("IN LEAVING ");
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/offline", headersObj, {
       withCredentials: true
     });
@@ -95934,9 +95935,10 @@ var initialState = {
       return _objectSpread(_objectSpread({}, state), {}, {
         dmUsers: state.dmUsers.map(function (dmuser) {
           if (dmuser.users[0].id == action.payload) {
-            dmuser.users[0].is_online = 1;
+            dmuser.users[0].is_online = 0;
             return dmuser;
           } else {
+            dmuser.users[0].is_online = 0;
             return dmuser;
           }
         })

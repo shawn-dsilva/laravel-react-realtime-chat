@@ -183,20 +183,21 @@ export default function(state = initialState, action) {
                         return dmuser;
                     }
                 })
-            }
+            };
         case IS_OFFLINE:
             console.log(action.payload);
             return {
                 ...state,
                 dmUsers: state.dmUsers.map(dmuser => {
                     if(dmuser.users[0].id == action.payload) {
-                        dmuser.users[0].is_online = 1;
+                        dmuser.users[0].is_online = 0;
                         return dmuser;
                     } else {
+                        dmuser.users[0].is_online = 0;
                         return dmuser;
                     }
                 })
-            }    
+            };    
         default:
             return state;
     }
