@@ -38,6 +38,7 @@ Route::group([
     Route::post('makerequest', 'ChatController@createInvite');
     Route::get('acceptinvite/{invite_id}', 'ChatController@acceptRequest');
     Route::get('online', 'ChatController@isOnline');
+    Route::get('offline', 'ChatController@isOffline');
     Route::get('getfriendslist', 'ChatController@getFriendsList');
     Route::get('notifications', 'ChatController@getNotifications');
     Route::get('allnotifications', 'ChatController@getAllNotifications');

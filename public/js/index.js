@@ -93189,7 +93189,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS, ADD_CHANNEL_SUCCESS, IS_ONLINE */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS, ADD_CHANNEL_SUCCESS, IS_ONLINE, IS_OFFLINE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -93229,6 +93229,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_CHANNELS", function() { return GET_ALL_CHANNELS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_CHANNEL_SUCCESS", function() { return ADD_CHANNEL_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IS_ONLINE", function() { return IS_ONLINE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IS_OFFLINE", function() { return IS_OFFLINE; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -93264,6 +93265,7 @@ var NOTIF_MARK_AS_READ = 'NOTIF_MARK_AS_READ';
 var GET_ALL_CHANNELS = 'GET_ALL_CHANNELS';
 var ADD_CHANNEL_SUCCESS = 'ADD_CHANNEL_SUCCESS';
 var IS_ONLINE = 'IS_ONLINE';
+var IS_OFFLINE = 'IS_OFFLINE';
 
 /***/ }),
 
@@ -95615,6 +95617,15 @@ var echoInit = function echoInit(token) {
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/online", headersObj, {
       withCredentials: true
     });
+  }).leaving(function (user) {
+    var headersObj = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/offline", headersObj, {
+      withCredentials: true
+    });
   }).listen('UserOnline', function (event) {
     console.log(event.user.name + " IS ONLINE ");
     console.log(event.user);
@@ -95622,7 +95633,15 @@ var echoInit = function echoInit(token) {
       type: _actions_types__WEBPACK_IMPORTED_MODULE_3__["IS_ONLINE"],
       payload: event.user.id
     });
+  }).listen('UserOffline', function (event) {
+    console.log(event.user.name + " IS OFFLINE ");
+    console.log(event.user);
+    _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch({
+      type: _actions_types__WEBPACK_IMPORTED_MODULE_3__["IS_OFFLINE"],
+      payload: event.user.id
+    });
   });
+  ;
 };
 var sendMessage = function sendMessage(message, channel_id, channel_type) {
   var body = JSON.stringify({
@@ -95898,6 +95917,19 @@ var initialState = {
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["IS_ONLINE"]:
+      console.log(action.payload);
+      return _objectSpread(_objectSpread({}, state), {}, {
+        dmUsers: state.dmUsers.map(function (dmuser) {
+          if (dmuser.users[0].id == action.payload) {
+            dmuser.users[0].is_online = 1;
+            return dmuser;
+          } else {
+            return dmuser;
+          }
+        })
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["IS_OFFLINE"]:
       console.log(action.payload);
       return _objectSpread(_objectSpread({}, state), {}, {
         dmUsers: state.dmUsers.map(function (dmuser) {

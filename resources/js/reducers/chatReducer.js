@@ -20,7 +20,8 @@ import {
     NOTIF_MARK_AS_READ,
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
-    IS_ONLINE
+    IS_ONLINE,
+    IS_OFFLINE
 } from "../actions/types";
 
 const initialState = {
@@ -183,6 +184,19 @@ export default function(state = initialState, action) {
                     }
                 })
             }
+        case IS_OFFLINE:
+            console.log(action.payload);
+            return {
+                ...state,
+                dmUsers: state.dmUsers.map(dmuser => {
+                    if(dmuser.users[0].id == action.payload) {
+                        dmuser.users[0].is_online = 1;
+                        return dmuser;
+                    } else {
+                        return dmuser;
+                    }
+                })
+            }    
         default:
             return state;
     }

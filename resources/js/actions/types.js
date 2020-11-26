@@ -33,3 +33,4 @@ export const NOTIF_MARK_AS_READ = 'NOTIF_MARK_AS_READ';
 export const GET_ALL_CHANNELS = 'GET_ALL_CHANNELS';
 export const ADD_CHANNEL_SUCCESS = 'ADD_CHANNEL_SUCCESS';
 export const IS_ONLINE = 'IS_ONLINE';
+export const IS_OFFLINE = 'IS_OFFLINE';

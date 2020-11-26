@@ -1,7 +1,7 @@
 import Echo from "laravel-echo";
 import axios from "axios";
 import store from "../../store";
-import { IS_ONLINE } from "../../actions/types";
+import { IS_ONLINE, IS_OFFLINE } from "../../actions/types";
 
 export const echoInit = token => {
     window.Pusher = require("pusher-js");
@@ -35,11 +35,26 @@ export const echoInit = token => {
         axios
         .get(`/api/online`, headersObj, {withCredentials:true})
     })
+    .leaving((user) => {
+        const headersObj = {
+            headers: {
+              'Content-type': 'application/json'
+            }
+          };
+
+        axios
+        .get(`/api/offline`, headersObj, {withCredentials:true})
+    })
     .listen('UserOnline', (event) => {
         console.log(event.user.name+" IS ONLINE ");
         console.log(event.user);
         store.dispatch({ type: IS_ONLINE, payload: event.user.id});
-    });
+    }) 
+    .listen('UserOffline', (event) => {
+        console.log(event.user.name+" IS OFFLINE ");
+        console.log(event.user);
+        store.dispatch({ type: IS_OFFLINE, payload: event.user.id});
+    });;
 };
 
 export const sendMessage = ( message, channel_id, channel_type) => {
