@@ -95624,7 +95624,7 @@ var echoInit = function echoInit(token) {
       }
     };
     console.log("IN LEAVING ");
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/offline", headersObj, {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/offline/".concat(user.id), headersObj, {
       withCredentials: true
     });
   }).listen('UserOnline', function (event) {
@@ -95938,7 +95938,6 @@ var initialState = {
             dmuser.users[0].is_online = 0;
             return dmuser;
           } else {
-            dmuser.users[0].is_online = 0;
             return dmuser;
           }
         })

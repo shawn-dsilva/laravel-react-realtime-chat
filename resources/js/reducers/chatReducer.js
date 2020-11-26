@@ -193,7 +193,6 @@ export default function(state = initialState, action) {
                         dmuser.users[0].is_online = 0;
                         return dmuser;
                     } else {
-                        dmuser.users[0].is_online = 0;
                         return dmuser;
                     }
                 })

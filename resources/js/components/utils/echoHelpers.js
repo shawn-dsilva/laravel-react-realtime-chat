@@ -44,7 +44,7 @@ export const echoInit = token => {
 
           console.log("IN LEAVING ");
         axios
-        .get(`/api/offline`, headersObj, {withCredentials:true})
+        .get(`/api/offline/${user.id}`, headersObj, {withCredentials:true})
     })
     .listen('UserOnline', (event) => {
         console.log(event.user.name+" IS ONLINE ");

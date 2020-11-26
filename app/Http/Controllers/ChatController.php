@@ -430,11 +430,10 @@ class ChatController extends Controller
         return $users;
     }
 
-    public function isOffline(Request $request) {
-        $user = auth()->user();
-        $userId = auth()->user()->id;
+    public function isOffline(Request $request , $user_id) {
+        $user['id'] = $user_id;
         error_log("IN ISOFFLINE");
-        Cache::forget('user-is-online-'.$userId);
+        Cache::forget('user-is-online-'.$user_id);
         broadcast(new UserOffline($user));
 
     }
