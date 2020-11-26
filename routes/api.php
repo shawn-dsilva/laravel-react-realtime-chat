@@ -21,7 +21,7 @@ Route::group([
     Route::post('register', 'AuthController@register');
 
     Route::group([
-      'middleware' => 'auth:api'
+      'middleware' => ['auth:api', 'auth.online']
     ], function() {
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');

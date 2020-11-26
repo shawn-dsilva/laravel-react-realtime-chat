@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 
-class LastUserActivity
+class LastUserActivity 
 {
     /**
      * Handle an incoming request.
@@ -18,12 +18,12 @@ class LastUserActivity
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
-        error_log($user);
-        if(Auth::user()) {
-            error_log("IN LASTUSERACTIVITY MIDDLEWARE");
+        if(Auth::check()) {
             $expiresAt = Carbon::now()->addMinutes(1);
-            Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
+            error_log("IN LASTUSERACTIVITY MIDDLEWARE");
+            error_log(Auth::user()->id);
+            $userData = Auth::user();
+            Cache::put('user-is-online-' . Auth::user()->id, $userData, $expiresAt);
         }
         return $next($request);
     }
