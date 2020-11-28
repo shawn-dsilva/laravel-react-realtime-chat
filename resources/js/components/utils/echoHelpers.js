@@ -24,6 +24,10 @@ export const echoInit = token => {
     };
 
     window.Echo.join("chat")
+    .here((users) => {
+        console.log(" IN HERE INSIDE ECHOHELPERS CHAT");
+        console.log(users);
+    })
     .joining((user) => {
 
         const headersObj = {

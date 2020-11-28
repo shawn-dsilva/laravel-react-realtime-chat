@@ -114,7 +114,11 @@ import InviteUsersModal from './InviteUsersModal';
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
           {this.props.selectedChannel.name}
+
+
           <ChannelDescDropdown desc={this.props.selectedChannel.desc}/>
+
+          
           { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
           <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} 
           currUser={this.props.currUser} selectedChannel={this.props.selectedChannel} inviteToChannel={this.props.inviteToChannel} /> : null}
@@ -129,7 +133,7 @@ import InviteUsersModal from './InviteUsersModal';
                             selectedChannel={this.props.selectedChannel}
                         />
                     </Col>
-                    <ChatRoomUsersList usersInRoom={this.props.usersInRoom} />
+                    { this.props.selectedChannel.type == 'channel' ? <ChatRoomUsersList usersInRoom={this.props.usersInRoom} /> : null}
                 </Row>
             </Container>
         );
