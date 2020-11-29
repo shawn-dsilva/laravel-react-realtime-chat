@@ -18,6 +18,8 @@ html,body, #root, .container-true, .fullHeight {
 .usersInRoom {
     border-left: solid 1px grey;
     max-width: 20%;
+    display:block;
+    overflow: hidden;
 }
 
 .chatMainContainer {
@@ -138,6 +140,7 @@ html,body, #root, .container-true, .fullHeight {
     overflow-y: auto;
     max-height:50%;
     padding:1rem;
+    display:block
 }
 
 .dmuser {
