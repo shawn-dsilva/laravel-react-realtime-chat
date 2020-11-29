@@ -132,3 +132,7 @@ html,body, #root, .container-true, .fullHeight {
     display:inline-block;
     margin:0 5px;
 }
+
+.sidepane {
+    overflow-y: auto;
+}

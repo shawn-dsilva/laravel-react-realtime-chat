@@ -15,7 +15,7 @@ export const AllChannelsList = (props) => {
   console.log(channels);
     const channelList = channels.map((value, index) => {
         return (
-            <Col key={index}>
+            <Col  key={index}>
                 <Card>
                     <CardBody>
                         <CardTitle>

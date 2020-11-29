@@ -26,7 +26,7 @@ export const ChatChannelsList = (props) => {
 
 
     return (
-      <div>
+      <div className="sidepane" >
       <h3>Channels</h3>
        <Col> <Button color="link" onClick={() => channelSelect(5, 'General', 'A public channel where all users can chat')} id="5" key="5"><b> General</b></Button>
        <hr></hr>
