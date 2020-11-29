@@ -12,6 +12,7 @@ html,body, #root, .container-true, .fullHeight {
 
 .sidenav {
     border-right: solid 1px grey;
+    display: block;
 }
 
 .usersInRoom {
@@ -135,4 +136,18 @@ html,body, #root, .container-true, .fullHeight {
 
 .sidepane {
     overflow-y: auto;
+    max-height:50%;
+    padding:1rem;
+}
+
+.dmuser {
+    padding:0.8rem;
+}
+
+.channelElement {
+    padding:0.5rem;
+}
+
+.channelElement button {
+    text-align: left;
 }

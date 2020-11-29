@@ -13,7 +13,7 @@ export const ChatChannelsList = (props) => {
   console.log(channels);
     const channelList = channels.map((value, index) => {
         return (
-            <Col key={index}>
+            <Col className="channelElement" key={index}>
                 <Button color="link"
                     onClick={() => channelSelect(value.id, value.name, value.desc, value.owner_id, value.owner)}
                     id={value.id}>
@@ -28,11 +28,12 @@ export const ChatChannelsList = (props) => {
     return (
       <div className="sidepane" >
       <h3>Channels</h3>
+      <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
+      <br></br>
+
        <Col> <Button color="link" onClick={() => channelSelect(5, 'General', 'A public channel where all users can chat')} id="5" key="5"><b> General</b></Button>
        <hr></hr>
         {channelList}
-       <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
-  <br></br>
   </Col>
   </div>
     )

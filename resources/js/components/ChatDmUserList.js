@@ -11,7 +11,7 @@ export const ChatDmUsersList = (props) => {
   console.log(users);
     const userList = users.map((value, index) => {
         return (
-            <Col key={index}>
+            <Col className="dmuser" key={index}>
                 <Button color="link"
                     onClick={() => dmSelect(value.id, value.users[0].name)}
                     id={value.users[0].id}>
@@ -27,8 +27,8 @@ export const ChatDmUsersList = (props) => {
     return (
       <div className="sidepane">
       <h3>Direct Message</h3>
-
-        {userList}
+      <Col>{userList}</Col>
+        
       </div>
     )
 };
