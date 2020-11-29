@@ -26,7 +26,7 @@ export const ChatChannelsList = (props) => {
 
 
     return (
-      <div className="sidepane" >
+      <div className="sidepaneChannel" >
       <h3>Channels</h3>
       <CreateChannelModal buttonLabel={"+ Create New Channel"}/>
       <br></br>
