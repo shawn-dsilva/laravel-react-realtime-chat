@@ -142,6 +142,11 @@ html,body, #root, .container-true, .fullHeight {
     display: flex;
     flex-direction: column;
 }
+
+.sidepaneParent h3 {
+    border-bottom: 1px lightgrey solid;
+    padding-bottom:0.7rem;
+}
 .sidepaneDm {
     overflow-y: auto;
     display:block
