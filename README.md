@@ -4,7 +4,6 @@
 
 ### Immediate
 
-- Add scrollbars for channels and dm user lists 
 - Users currently online in chatroom only for chatrooms, UI element can be hidden
 - Typing events support.
 - Invite to channel by URL system
@@ -21,6 +20,7 @@
 
 ### Done
 
+- Add scrollbars for channels and dm user lists 
 - Add Online Offline user status support
 - Add table to store online status of users upon user going online to check online status.
 - Fix Logout functionality
