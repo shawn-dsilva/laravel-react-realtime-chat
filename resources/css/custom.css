@@ -141,14 +141,14 @@ html,body, #root, .container-true, .fullHeight {
 }
 .sidepaneDm {
     overflow-y: auto;
-    height:45vh;
+    height:40vh;
     /* margin:1rem; */
     display:block
 }
 
 .sidepaneChannel {
     overflow-y: auto;
-    height:45vh;
+    height:44vh;
     margin:1rem;
     display:block
 }
