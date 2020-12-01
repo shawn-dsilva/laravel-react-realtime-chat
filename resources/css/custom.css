@@ -138,18 +138,18 @@ html,body, #root, .container-true, .fullHeight {
 
 .sidepaneParent {
     margin:1rem;
+    height:45vh;
+    display: flex;
+    flex-direction: column;
 }
 .sidepaneDm {
     overflow-y: auto;
     height:40vh;
-    /* margin:1rem; */
     display:block
 }
 
 .sidepaneChannel {
     overflow-y: auto;
-    height:44vh;
-    margin:1rem;
     display:block
 }
 
