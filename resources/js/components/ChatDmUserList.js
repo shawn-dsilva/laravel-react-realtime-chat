@@ -25,10 +25,11 @@ export const ChatDmUsersList = (props) => {
 
 
     return (
-      <div className="sidepaneDm">
+        <div>
       <h3>Direct Message</h3>
-      <Col>{userList}</Col>
-        
+            <div className="sidepaneDm">
+            <Col>{userList}</Col>
+            </div>
       </div>
     )
 };
