@@ -11,7 +11,7 @@ export const ChatDmUsersList = (props) => {
   console.log(users);
     const userList = users.map((value, index) => {
         return (
-            <Col className="dmuser" key={index}>
+            <div className="dmuser" key={index}>
                 <Button color="link"
                     onClick={() => dmSelect(value.id, value.users[0].name)}
                     id={value.users[0].id}>
@@ -19,7 +19,7 @@ export const ChatDmUsersList = (props) => {
                     <div className={ value.users[0].is_online ? "online" : "offline"}></div>
                 </Button>
                 <br></br>
-            </Col>
+            </div>
         );
     });
 
@@ -28,7 +28,7 @@ export const ChatDmUsersList = (props) => {
         <div className="sidepaneParent">
       <h3>Direct Message</h3>
             <div className="sidepaneDm">
-            <Col>{userList}</Col>
+            <div>{userList}</div>
             </div>
       </div>
     )

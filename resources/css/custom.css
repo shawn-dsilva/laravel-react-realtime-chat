@@ -144,7 +144,6 @@ html,body, #root, .container-true, .fullHeight {
 }
 .sidepaneDm {
     overflow-y: auto;
-    height:40vh;
     display:block
 }
 
