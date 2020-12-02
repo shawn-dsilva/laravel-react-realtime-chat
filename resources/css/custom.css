@@ -29,7 +29,6 @@ html,body, #root, .container-true, .fullHeight {
 .chatMainContainer {
     min-width:70%;
     max-width: 83%;
-    padding: 1rem;
     margin:0;
     flex: 1 0;
     display:flex;
@@ -42,8 +41,8 @@ html,body, #root, .container-true, .fullHeight {
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     padding:0.3rem;
-    padding-bottom:0.7rem;
-    height:8%;
+    padding-bottom:0.3rem;
+    height:7%;
 }
 
 .chatInput input {
