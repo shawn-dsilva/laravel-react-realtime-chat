@@ -18,13 +18,16 @@ html,body, #root, .container-true, .fullHeight {
 .usersInRoom {
     border-left: solid 1px grey;
     max-width: 20%;
-    display:block;
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
     overflow: hidden;
 }
 
 .chatMainContainer {
-    max-width:80%;
-    flex: 1 0 68%;
+    min-width:70%;
+    max-width: 99%;
+    flex: 1 0;
     display:flex;
     flex-direction: column;
     max-height: 95%;

@@ -109,7 +109,7 @@ import InviteUsersModal from './InviteUsersModal';
                             dmSelect={this.dmSelect}
                         />
                     </Col>
-                    <Col xs="7" className="chatMainContainer">
+                    <Col className="chatMainContainer">
         <div className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
         <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
