@@ -16,7 +16,7 @@ export const ChatRoomUsersList = props => {
     return (
         <Col xs="1" className="usersInRoom">
             <h3>In This Room</h3>
-            <h5>Active </h5>
+            <h5>Active ( {users.length} )</h5>
             <ul>{userInRoomList}</ul>
             <h5>Offline</h5>
         </Col>
