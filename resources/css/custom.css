@@ -21,6 +21,7 @@ html,body, #root, .container-true, .fullHeight {
     border-left: solid 1px grey;
     max-width: 20%;
     display:flex;
+    padding:1rem;
     flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
