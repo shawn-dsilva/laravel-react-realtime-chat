@@ -437,5 +437,10 @@ class ChatController extends Controller
         broadcast(new UserOffline($user));
 
     }
+
+    public function getChannelsUsers($channel_id) {
+        $users = Channel::where("type","channel")->where('id',$channel_id)->with(["users"])->get();
+        return response()->json($users);
+    }
 }
 

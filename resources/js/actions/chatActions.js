@@ -168,11 +168,16 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
         dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
         const selectedChannelInState = getState().chat.selectedChannel;
 
+        axios.get(`/api/getusers/${channel_id}`, makeHeaders(getState), {withCredentials:true})
+        .then ( res => {
+
+        })
+        
         dispatch(getMessages(selectedChannelInState.id));
 
         window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
             .here(users => {
-                users.forEach(user => (user.name += "FROM.HERE()"));
+                // users.forEach(user => (user.name += "FROM.HERE()"));
                 dispatch({ type: SET_USERS_IN_ROOM, payload: users });
             })
             .joining(user => {
