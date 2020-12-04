@@ -92952,7 +92952,13 @@ var channelSelect = function channelSelect(channel_id, channel_name, desc, owner
     var selectedChannelInState = getState().chat.selectedChannel;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getusers/".concat(channel_id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
-    }).then(function (res) {});
+    }).then(function (res) {
+      var users = res.data[0].users;
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_USERS"],
+        payload: users
+      });
+    });
     dispatch(getMessages(selectedChannelInState.id));
     window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
       // users.forEach(user => (user.name += "FROM.HERE()"));
@@ -95955,6 +95961,11 @@ var initialState = {
             return dmuser;
           }
         })
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_CHANNEL_USERS"]:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        selectedChannel: state.selectedChannel.users = action.payload
       });
 
     default:

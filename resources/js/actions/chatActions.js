@@ -21,6 +21,7 @@ import {
     NOTIF_MARK_AS_READ,
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
+    ADD_CHANNEL_USERS,
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -170,7 +171,8 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
 
         axios.get(`/api/getusers/${channel_id}`, makeHeaders(getState), {withCredentials:true})
         .then ( res => {
-
+            const users = res.data[0].users;
+            dispatch({ type: ADD_CHANNEL_USERS, payload : users})
         })
         
         dispatch(getMessages(selectedChannelInState.id));
