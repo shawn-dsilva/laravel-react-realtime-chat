@@ -201,7 +201,10 @@ export default function(state = initialState, action) {
         case ADD_CHANNEL_USERS:
             return {
                 ...state,
-                selectedChannel: state.selectedChannel.users = action.payload
+                selectedChannel: {
+                    ...state.selectedChannel,
+                    users: action.payload
+                }
             } 
         default:
             return state;

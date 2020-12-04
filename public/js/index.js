@@ -95965,7 +95965,9 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_CHANNEL_USERS"]:
       return _objectSpread(_objectSpread({}, state), {}, {
-        selectedChannel: state.selectedChannel.users = action.payload
+        selectedChannel: _objectSpread(_objectSpread({}, state.selectedChannel), {}, {
+          users: action.payload
+        })
       });
 
     default:
