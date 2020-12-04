@@ -92950,6 +92950,9 @@ var channelSelect = function channelSelect(channel_id, channel_name, desc, owner
       payload: channel
     });
     var selectedChannelInState = getState().chat.selectedChannel;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getusers/".concat(channel_id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+      withCredentials: true
+    }).then(function (res) {});
     dispatch(getMessages(selectedChannelInState.id));
     window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
       // users.forEach(user => (user.name += "FROM.HERE()"));
