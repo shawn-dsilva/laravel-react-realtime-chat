@@ -21,7 +21,8 @@ import {
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
     IS_ONLINE,
-    IS_OFFLINE
+    IS_OFFLINE,
+    ADD_CHANNEL_USERS
 } from "../actions/types";
 
 const initialState = {
@@ -196,7 +197,12 @@ export default function(state = initialState, action) {
                         return dmuser;
                     }
                 })
-            };    
+            };   
+        case ADD_CHANNEL_USERS:
+            return {
+                ...state,
+                currChannel: state.currChannel.concat(action.payload)
+            } 
         default:
             return state;
     }
