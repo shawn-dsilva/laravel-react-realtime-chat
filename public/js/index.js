@@ -94036,20 +94036,31 @@ var ChatRoomUsersList = function ChatRoomUsersList(props) {
   console.log("ALL USERS OUTPUT BELOW");
   console.log(allUsers);
   var userInRoomList = onlineUsers.map(function (value, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
   });
-  var offlineUsers = allUsers.filter(function (user) {
-    onlineUsers.forEach(function (value) {
-      if (value.id == user.id) {
-        return user.name;
+
+  function remove_duplicates(allUsers, onlineUsers) {
+    for (var i = 0, len = onlineUsers.length; i < len; i++) {
+      for (var j = 0, len2 = allUsers.length; j < len2; j++) {
+        if (allUsers[j].id === onlineUsers[i].id) {
+          allUsers.splice(j, 1);
+          len2 = allUsers.length;
+        }
       }
-    });
-  });
+    }
+
+    return allUsers;
+    console.log(a);
+    console.log(b);
+  }
+
+  var offlineUsers = remove_duplicates(allUsers, onlineUsers);
+  console.log("VARR OFFLINE USERS OUTPUT BELOW");
   console.log(offlineUsers);
   offlineUsers = offlineUsers.map(function (value, index) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
   });

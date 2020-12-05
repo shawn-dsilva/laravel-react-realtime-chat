@@ -8,24 +8,38 @@ export const ChatRoomUsersList = props => {
     console.log(allUsers);
     const userInRoomList = onlineUsers.map((value, index) => {
         return (
-            <span key={index}>
+            <div key={index}>
                 <b>{value.name}</b>
-            </span>
+            </div>
         );
     });
 
-    let offlineUsers = allUsers.forEach((user) => {
-       var index =  onlineUsers.findIndex(value => value.id == user.id )
-       allUsers.splice(index, 1);
-    });
+    function remove_duplicates(allUsers, onlineUsers) {
 
+        for(var i = 0, len = onlineUsers.length; i < len; i++) {
+            for( var j = 0, len2 = allUsers.length; j < len2; j++) {
+                if (allUsers[j].id === onlineUsers[i].id) {
+                     allUsers.splice(j, 1);
+                     len2=allUsers.length;
+                }
+            }
+        }
+
+        return allUsers;
+
+        console.log(a);
+        console.log(b);
+      }
+
+    let offlineUsers = remove_duplicates( allUsers, onlineUsers)
+    console.log("VARR OFFLINE USERS OUTPUT BELOW");
     console.log(offlineUsers);
-    
+
      offlineUsers = offlineUsers.map((value, index) => {
         return (
-            <span key={index}>
+            <div key={index}>
                 <b>{value.name}</b>
-            </span>
+            </div>
         );
     });
    
