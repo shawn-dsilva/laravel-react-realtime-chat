@@ -10,7 +10,7 @@ export const ChatRoomUsersList = props => {
         return (
             <div key={index}>
                 <div className="online"></div>
-                <b>{value.name}</b>
+                <b className="online-text">{value.name}</b>
             </div>
         );
     });
@@ -40,7 +40,7 @@ export const ChatRoomUsersList = props => {
         return (
             <div key={index}>
                 <div className="offline"></div>
-                <b>{value.name}</b>
+                <b className="offline-text" >{value.name}</b>
             </div>
         );
     });

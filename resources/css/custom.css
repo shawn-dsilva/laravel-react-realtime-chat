@@ -177,3 +177,14 @@ html,body, #root, .container-true, .fullHeight {
 .channelElement button {
     text-align: left;
 }
+
+.online-text {
+color:green;
+font-size:1rem;
+}
+
+.offline-text {
+color:grey;
+font-size:1rem;
+
+}
