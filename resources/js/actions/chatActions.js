@@ -164,20 +164,20 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
         const prevId = getState().chat.selectedChannel.id;
         window.Echo.leave(`chat.channel.${prevId}`);
 
-        const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc, "owner_id":owner_id, "owner":owner};
 
-        dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
-        const selectedChannelInState = getState().chat.selectedChannel;
-
+        
         axios.get(`/api/getusers/${channel_id}`, makeHeaders(getState), {withCredentials:true})
         .then ( res => {
             const users = res.data[0].users;
-            dispatch({ type: ADD_CHANNEL_USERS, payload : users})
-        })
-        
-        dispatch(getMessages(selectedChannelInState.id));
+            const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc, "owner_id":owner_id, "owner":owner, "users":users};
 
-        window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
+            dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
+            // dispatch({ type: ADD_CHANNEL_USERS, payload : users})
+            const selectedChannelInState = getState().chat.selectedChannel;
+
+            dispatch(getMessages(selectedChannelInState.id));
+
+            window.Echo.join(`chat.channel.${selectedChannelInState.id}`)
             .here(users => {
                 // users.forEach(user => (user.name += "FROM.HERE()"));
                 dispatch({ type: SET_USERS_IN_ROOM, payload: users });
@@ -226,6 +226,9 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 };
                 dispatch({ type: ADD_MESSAGE, payload: message });
             });
+        })
+        
+       
     };
 };
 

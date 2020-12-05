@@ -133,7 +133,7 @@ import InviteUsersModal from './InviteUsersModal';
                             selectedChannel={this.props.selectedChannel}
                         />
                     </Col>
-                    { this.props.selectedChannel.type == 'channel' ? <ChatRoomUsersList usersInRoom={this.props.usersInRoom} /> : null}
+                    { this.props.selectedChannel.type == 'channel' ? <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} /> : null}
                 </Row>
             </Container>
         );

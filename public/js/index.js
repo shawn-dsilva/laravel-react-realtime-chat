@@ -92937,87 +92937,85 @@ var channelSelect = function channelSelect(channel_id, channel_name, desc, owner
   return function (dispatch, getState) {
     var prevId = getState().chat.selectedChannel.id;
     window.Echo.leave("chat.channel.".concat(prevId));
-    var channel = {
-      "id": channel_id,
-      "type": "channel",
-      "name": channel_name,
-      "desc": desc,
-      "owner_id": owner_id,
-      "owner": owner
-    };
-    dispatch({
-      type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
-      payload: channel
-    });
-    var selectedChannelInState = getState().chat.selectedChannel;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/getusers/".concat(channel_id), Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       var users = res.data[0].users;
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_CHANNEL_USERS"],
-        payload: users
-      });
-    });
-    dispatch(getMessages(selectedChannelInState.id));
-    window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
-      // users.forEach(user => (user.name += "FROM.HERE()"));
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_USERS_IN_ROOM"],
-        payload: users
-      });
-    }).joining(function (user) {
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_USER_TO_ROOM"],
-        payload: user
-      }); // this.setState( function (state, props) {
-      //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
-      //   if(isInState) {
-      //     return state;
-      //   } else {
-      //     return [...this.state.users, user ]
-      //   }
-      // });
-
-      var message = {
-        user: user,
-        message: "Joined",
-        status: true
+      var channel = {
+        "id": channel_id,
+        "type": "channel",
+        "name": channel_name,
+        "desc": desc,
+        "owner_id": owner_id,
+        "owner": owner,
+        "users": users
       };
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_SELECTED_CHANNEL"],
+        payload: channel
+      }); // dispatch({ type: ADD_CHANNEL_USERS, payload : users})
 
-      if (selectedChannelInState.type === "channel") {
+      var selectedChannelInState = getState().chat.selectedChannel;
+      dispatch(getMessages(selectedChannelInState.id));
+      window.Echo.join("chat.channel.".concat(selectedChannelInState.id)).here(function (users) {
+        // users.forEach(user => (user.name += "FROM.HERE()"));
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["SET_USERS_IN_ROOM"],
+          payload: users
+        });
+      }).joining(function (user) {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_USER_TO_ROOM"],
+          payload: user
+        }); // this.setState( function (state, props) {
+        //   const isInState = state.users.some( (existingUser) => existingUser.id === user.id);
+        //   if(isInState) {
+        //     return state;
+        //   } else {
+        //     return [...this.state.users, user ]
+        //   }
+        // });
+
+        var message = {
+          user: user,
+          message: "Joined",
+          status: true
+        };
+
+        if (selectedChannelInState.type === "channel") {
+          dispatch({
+            type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
+            payload: message
+          });
+        }
+      }).leaving(function (user) {
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_2__["USER_LEAVES_ROOM"],
+          payload: user
+        });
+        var message = {
+          user: user,
+          message: "Left",
+          status: true
+        };
+
+        if (selectedChannelInState.type === "channel") {
+          dispatch({
+            type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
+            payload: message
+          });
+        }
+      }).listen("MessageSent", function (event) {
+        console.log("IN FRONT END MESSAGE SENT");
+        console.log(event);
+        var message = {
+          user: event.user,
+          message: event.message.message
+        };
         dispatch({
           type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
           payload: message
         });
-      }
-    }).leaving(function (user) {
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["USER_LEAVES_ROOM"],
-        payload: user
-      });
-      var message = {
-        user: user,
-        message: "Left",
-        status: true
-      };
-
-      if (selectedChannelInState.type === "channel") {
-        dispatch({
-          type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
-          payload: message
-        });
-      }
-    }).listen("MessageSent", function (event) {
-      console.log("IN FRONT END MESSAGE SENT");
-      console.log(event);
-      var message = {
-        user: event.user,
-        message: event.message.message
-      };
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_2__["ADD_MESSAGE"],
-        payload: message
       });
     });
   };
@@ -93709,6 +93707,7 @@ var Chat = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
         selectedChannel: this.props.selectedChannel
       })), this.props.selectedChannel.type == 'channel' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        selectedChannel: this.props.selectedChannel,
         usersInRoom: this.props.usersInRoom
       }) : null));
     }
@@ -94032,17 +94031,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ChatRoomUsersList = function ChatRoomUsersList(props) {
-  var users = props.usersInRoom;
-  var userInRoomList = users.map(function (value, index) {
-    console.log(value);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  var onlineUsers = props.usersInRoom;
+  var allUsers = props.selectedChannel.users;
+  console.log("ALL USERS OUTPUT BELOW");
+  console.log(allUsers);
+  var userInRoomList = onlineUsers.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
+  });
+  var offlineUsers = allUsers.filter(function (user) {
+    onlineUsers.forEach(function (value) {
+      if (value.id == user.id) {
+        return user.name;
+      }
+    });
+  });
+  console.log(offlineUsers);
+  offlineUsers = offlineUsers.map(function (value, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       key: index
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.name));
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     xs: "1",
     className: "usersInRoom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "In This Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Active ( ", users.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userInRoomList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Offline"));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "In This Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Active ( ", onlineUsers.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userInRoomList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Offline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, offlineUsers));
 };
 /* harmony default export */ __webpack_exports__["default"] = (ChatRoomUsersList);
 
