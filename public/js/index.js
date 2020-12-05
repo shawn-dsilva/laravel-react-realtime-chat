@@ -94033,6 +94033,7 @@ __webpack_require__.r(__webpack_exports__);
 var ChatRoomUsersList = function ChatRoomUsersList(props) {
   var onlineUsers = props.usersInRoom;
   var allUsers = props.selectedChannel.users;
+  var allUsersLen = allUsers.length;
   console.log("ALL USERS OUTPUT BELOW");
   console.log(allUsers);
   var userInRoomList = onlineUsers.map(function (value, index) {
@@ -94045,7 +94046,7 @@ var ChatRoomUsersList = function ChatRoomUsersList(props) {
     }, value.name));
   });
 
-  function remove_duplicates(allUsers, onlineUsers) {
+  function processOfflineUsersArray(allUsers, onlineUsers) {
     for (var i = 0, len = onlineUsers.length; i < len; i++) {
       for (var j = 0, len2 = allUsers.length; j < len2; j++) {
         if (allUsers[j].id === onlineUsers[i].id) {
@@ -94060,7 +94061,7 @@ var ChatRoomUsersList = function ChatRoomUsersList(props) {
     console.log(b);
   }
 
-  var offlineUsers = remove_duplicates(allUsers, onlineUsers);
+  var offlineUsers = processOfflineUsersArray(allUsers, onlineUsers);
   console.log("VARR OFFLINE USERS OUTPUT BELOW");
   console.log(offlineUsers);
   offlineUsers = offlineUsers.map(function (value, index) {
@@ -94075,7 +94076,7 @@ var ChatRoomUsersList = function ChatRoomUsersList(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
     xs: "1",
     className: "usersInRoom"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "In This Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Active ( ", onlineUsers.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userInRoomList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Offline ( ", offlineUsers.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, offlineUsers));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "In This Room "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Active ( ", onlineUsers.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, userInRoomList), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Offline ( ", offlineUsers.length, " )"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, offlineUsers));
 };
 /* harmony default export */ __webpack_exports__["default"] = (ChatRoomUsersList);
 
