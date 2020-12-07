@@ -58,7 +58,8 @@ import InviteUsersModal from './InviteUsersModal';
         window.token = localStorage.LRC_Token;
         this.fakeGeneralChannel = 5;
         this.dmSelect = this.dmSelect.bind(this);
-
+        this.state = { isOpen : true};
+        // this.onClickUsersInRoom = this.onClickUsersInRoom.bind(this);
     }
 
       componentDidMount () {
@@ -82,6 +83,9 @@ import InviteUsersModal from './InviteUsersModal';
       }
 
 
+      onClickUsersInRoom = () => {
+        this.setState({isOpen: !this.state.isOpen});
+      }
       channelSelect = (selectedChannel, channelName, desc,  owner_id, owner, event) => {
         if(event !== undefined) {
           event.stopPropagation();
@@ -118,6 +122,8 @@ import InviteUsersModal from './InviteUsersModal';
 
           {this.props.selectedChannel.type == 'channel' ? <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> : null}
 
+          <Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
+ &nbsp; Users In Room</Button>
           
           { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
           <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} 
@@ -134,6 +140,7 @@ import InviteUsersModal from './InviteUsersModal';
                         />
                     </Col>
                     { this.props.selectedChannel.type == 'channel' ? <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} /> : null}
+                    {console.log(this.state.isOpen)}
                 </Row>
             </Container>
         );
