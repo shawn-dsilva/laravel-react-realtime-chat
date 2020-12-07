@@ -93693,9 +93693,9 @@ var Chat = /*#__PURE__*/function (_Component) {
           fontSize: "1.8rem",
           color: "blue"
         }
-      }, "User @ "), this.props.selectedChannel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, "User @ "), this.props.selectedChannel.name, this.props.selectedChannel.type == 'channel' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
         desc: this.props.selectedChannel.desc
-      }), this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      }) : null, this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
         buttonLabel: '+ Invite Users',
         dmUsers: this.props.dmUsers,
         currUser: this.props.currUser,

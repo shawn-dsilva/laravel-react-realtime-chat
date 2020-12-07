@@ -116,7 +116,7 @@ import InviteUsersModal from './InviteUsersModal';
           {this.props.selectedChannel.name}
 
 
-          <ChannelDescDropdown desc={this.props.selectedChannel.desc}/>
+          {this.props.selectedChannel.type == 'channel' ? <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> : null}
 
           
           { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
