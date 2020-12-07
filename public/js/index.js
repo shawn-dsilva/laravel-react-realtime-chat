@@ -93566,6 +93566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NavbarMain__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./NavbarMain */ "./resources/js/components/NavbarMain.js");
 /* harmony import */ var _ChatInputBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ChatInputBox */ "./resources/js/components/ChatInputBox.js");
 /* harmony import */ var _InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./InviteUsersModal */ "./resources/js/components/InviteUsersModal.js");
+/* harmony import */ var _LoadingSpinner__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./LoadingSpinner */ "./resources/js/components/LoadingSpinner.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -93589,6 +93590,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -93646,7 +93648,7 @@ var Chat = /*#__PURE__*/function (_Component) {
     _this.fakeGeneralChannel = 5;
     _this.dmSelect = _this.dmSelect.bind(_assertThisInitialized(_this));
     _this.state = {
-      isOpen: true
+      isOpen: false
     }; // this.onClickUsersInRoom = this.onClickUsersInRoom.bind(this);
 
     return _this;
@@ -93672,6 +93674,21 @@ var Chat = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this2 = this;
+
+      var usersInThisRoom;
+      var isOpen = this.state.isOpen;
+
+      if (this.props.selectedChannel.type == "channel") {
+        if (isOpen) {
+          console.log("IN IS OPEN FUNCTION");
+          usersInThisRoom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            selectedChannel: this.props.selectedChannel,
+            usersInRoom: this.props.usersInRoom
+          });
+        } else {
+          usersInThisRoom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LoadingSpinner__WEBPACK_IMPORTED_MODULE_16__["default"], null);
+        }
+      }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: "true"
@@ -93726,10 +93743,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
         selectedChannel: this.props.selectedChannel
-      })), this.props.selectedChannel.type == 'channel' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        selectedChannel: this.props.selectedChannel,
-        usersInRoom: this.props.usersInRoom
-      }) : null, console.log(this.state.isOpen)));
+      })), usersInThisRoom, console.log(this.state.isOpen)));
     }
   }]);
 

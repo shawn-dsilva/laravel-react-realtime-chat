@@ -23,6 +23,7 @@ import '../../css/custom.css';
 import NavbarMain from './NavbarMain';
 import ChatInputBox from './ChatInputBox';
 import InviteUsersModal from './InviteUsersModal';
+import LoadingSpinner from './LoadingSpinner'
 
     class Chat extends Component {
 
@@ -58,7 +59,7 @@ import InviteUsersModal from './InviteUsersModal';
         window.token = localStorage.LRC_Token;
         this.fakeGeneralChannel = 5;
         this.dmSelect = this.dmSelect.bind(this);
-        this.state = { isOpen : true};
+        this.state = { isOpen : false};
         // this.onClickUsersInRoom = this.onClickUsersInRoom.bind(this);
     }
 
@@ -96,6 +97,17 @@ import InviteUsersModal from './InviteUsersModal';
       
 
       render () {
+
+        let usersInThisRoom;
+        let isOpen = this.state.isOpen;
+         if(this.props.selectedChannel.type == "channel") {
+          if(isOpen) {
+            console.log("IN IS OPEN FUNCTION");
+            usersInThisRoom = <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} />
+          } else {
+            usersInThisRoom = <LoadingSpinner/>;
+          }
+        }
         return (
             <Container fluid="true">
                 <NavbarMain />
@@ -139,7 +151,7 @@ import InviteUsersModal from './InviteUsersModal';
                             selectedChannel={this.props.selectedChannel}
                         />
                     </Col>
-                    { this.props.selectedChannel.type == 'channel' ? <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} /> : null}
+                    {usersInThisRoom}
                     {console.log(this.state.isOpen)}
                 </Row>
             </Container>
