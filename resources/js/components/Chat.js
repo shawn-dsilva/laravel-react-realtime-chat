@@ -104,7 +104,7 @@ import LoadingSpinner from './LoadingSpinner'
           if(isOpen) {
             usersInThisRoom = <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} />
           } else {
-            usersInThisRoom = <LoadingSpinner/>;
+            usersInThisRoom = null;
           }
         }
         return (
@@ -132,8 +132,13 @@ import LoadingSpinner from './LoadingSpinner'
 
 
           {this.props.selectedChannel.type == 'channel' ? 
-          ( [<ChannelDescDropdown desc={this.props.selectedChannel.desc}/> ,<Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
-          &nbsp; Users In Room</Button>]) : null}
+          ( 
+          <React.Fragment>
+          <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> 
+          <Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
+          &nbsp; Users In Room ( Total : {this.props.selectedChannel.users.length} )</Button>
+          </React.Fragment>
+          ) : null}
 
           
           
