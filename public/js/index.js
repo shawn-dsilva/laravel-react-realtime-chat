@@ -93680,7 +93680,6 @@ var Chat = /*#__PURE__*/function (_Component) {
 
       if (this.props.selectedChannel.type == "channel") {
         if (isOpen) {
-          console.log("IN IS OPEN FUNCTION");
           usersInThisRoom = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatRoomUsersList__WEBPACK_IMPORTED_MODULE_11__["default"], {
             selectedChannel: this.props.selectedChannel,
             usersInRoom: this.props.usersInRoom
@@ -93723,16 +93722,16 @@ var Chat = /*#__PURE__*/function (_Component) {
           fontSize: "1.8rem",
           color: "blue"
         }
-      }, "User @ "), this.props.selectedChannel.name, this.props.selectedChannel.type == 'channel' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }, "User @ "), this.props.selectedChannel.name, this.props.selectedChannel.type == 'channel' ? [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChannelDescDropdown__WEBPACK_IMPORTED_MODULE_9__["default"], {
         desc: this.props.selectedChannel.desc
-      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         onClick: function onClick() {
           return _this2.onClickUsersInRoom();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fa fa-users",
         "aria-hidden": "true"
-      }), "\xA0 Users In Room"), this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      }), "\xA0 Users In Room")] : null, this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
         buttonLabel: '+ Invite Users',
         dmUsers: this.props.dmUsers,
         currUser: this.props.currUser,
@@ -93743,7 +93742,7 @@ var Chat = /*#__PURE__*/function (_Component) {
         currUser: this.props.currUser
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
         selectedChannel: this.props.selectedChannel
-      })), usersInThisRoom, console.log(this.state.isOpen)));
+      })), usersInThisRoom));
     }
   }]);
 

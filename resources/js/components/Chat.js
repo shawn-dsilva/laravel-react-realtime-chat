@@ -102,7 +102,6 @@ import LoadingSpinner from './LoadingSpinner'
         let isOpen = this.state.isOpen;
          if(this.props.selectedChannel.type == "channel") {
           if(isOpen) {
-            console.log("IN IS OPEN FUNCTION");
             usersInThisRoom = <ChatRoomUsersList selectedChannel={this.props.selectedChannel} usersInRoom={this.props.usersInRoom} />
           } else {
             usersInThisRoom = <LoadingSpinner/>;
@@ -132,10 +131,11 @@ import LoadingSpinner from './LoadingSpinner'
           {this.props.selectedChannel.name}
 
 
-          {this.props.selectedChannel.type == 'channel' ? <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> : null}
+          {this.props.selectedChannel.type == 'channel' ? 
+          ( [<ChannelDescDropdown desc={this.props.selectedChannel.desc}/> ,<Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
+          &nbsp; Users In Room</Button>]) : null}
 
-          <Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
- &nbsp; Users In Room</Button>
+          
           
           { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
           <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} 
@@ -152,7 +152,6 @@ import LoadingSpinner from './LoadingSpinner'
                         />
                     </Col>
                     {usersInThisRoom}
-                    {console.log(this.state.isOpen)}
                 </Row>
             </Container>
         );
