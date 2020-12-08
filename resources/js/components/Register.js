@@ -52,8 +52,10 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-            <Form onSubmit={this.onSubmit}>
+      <div className="authcontainer">
+            <Form className="authcard" onSubmit={this.onSubmit}>
+              <h1>REGISTER</h1>
+              <p>Already have an account? <a href="/login">Login.</a></p>
               <FormGroup className="text-center">
                 <Label for="name">Name</Label>
                 <Input
@@ -88,7 +90,8 @@ class Register extends Component {
                   onChange={this.onChange}
                 />
                 <Button color="dark" className="mt-5" size="lg" block>
-              <span>Register</span>
+              <span>Register</span> &nbsp;
+              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                 </Button>
               </FormGroup>
             </Form>

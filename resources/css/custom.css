@@ -205,6 +205,16 @@ font-size:1rem;
     padding:0.5rem;
 }
 
+.authcard p {
+    font-size:1.1rem;
+    text-align: center;
+    color:#383838;
+}
+
+.authlabel {
+    font-size:2rem;
+}
+
 .authcontainer {
     background:linear-gradient(110deg, #F05340 50%, #61DBFB 50%);
     height:100%;

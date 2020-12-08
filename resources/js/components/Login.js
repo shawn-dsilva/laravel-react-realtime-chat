@@ -84,6 +84,7 @@ class Login extends Component {
       <div className="authcontainer" >
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>LOGIN</h1>
+              <p>Don't have an account? <a href="/register">Register.</a></p>
               <FormGroup className="text-center">
                 <Label for="email">E-mail</Label>
                 <Input
