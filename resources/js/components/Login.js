@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { login, getUser } from '../actions/authActions';
+import {AuthContainer} from './AuthContainer';
 
 class Login extends Component {
 
@@ -81,7 +82,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="authcontainer" >
+      <AuthContainer>
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>LOGIN</h1>
               <p>Don't have an account? <a href="/register">Register.</a></p>
@@ -113,7 +114,7 @@ class Login extends Component {
                 </Button>
               </FormGroup>
             </Form>
-      </div>
+      </AuthContainer>
     )
   }
 }
