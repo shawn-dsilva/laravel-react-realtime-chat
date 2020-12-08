@@ -6,6 +6,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import AuthContainer from './AuthContainer';
 
 class Register extends Component {
 
@@ -52,7 +53,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="authcontainer">
+      <AuthContainer>
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>REGISTER</h1>
               <p>Already have an account? <a href="/login">Login.</a></p>
@@ -95,7 +96,7 @@ class Register extends Component {
                 </Button>
               </FormGroup>
             </Form>
-      </div>
+      </AuthContainer>
     )
   }
 }
