@@ -4,7 +4,8 @@
 
 ### Immediate
 
-
+- Style Register and Login pages.
+- Changes to auth container with flex div for login and register forms and name of webapp at top, and name of author at bottom
 - Typing events support.
 - Invite to channel by URL system
 
