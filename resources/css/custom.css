@@ -203,6 +203,8 @@ font-size:1rem;
     font-weight: 900;
     text-align: center;
     padding:0.5rem;
+    font-size:2.3rem!important;
+    color:#343a40!important;
 }
 
 .authcard p {
@@ -217,7 +219,7 @@ font-size:1rem;
 }
 
 .authcontainer {
-    background:linear-gradient(110deg, #F05340 50%, #61DBFB 50%);
+    background:linear-gradient(105deg, #F05340 51%, #61DBFB 51.07%);
     height:100%;
     display:flex;
     flex-direction: column;
@@ -225,11 +227,22 @@ font-size:1rem;
     align-items: center;
 }
 
+.authcontainer h1, h2 {
+    color:white;
+    font-weight: 800;
+}
+
+.authcontainer h1 {
+    font-size:3rem;
+}
+
+
 .cardcontainer {
     width: 100%;
-    margin: 5rem 0;
+    margin: 6rem 0;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+

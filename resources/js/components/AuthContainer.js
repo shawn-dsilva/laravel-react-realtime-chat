@@ -4,7 +4,7 @@ import React from "react";
 export const AuthContainer = (props) => {
     return (
       <div className="authcontainer">
-        <h1>Laravel React RealTime Chat App</h1>
+        <h1>Laravel React Real-Time Chat App</h1>
         <div className="cardcontainer">        
           {props.children}
         </div>
