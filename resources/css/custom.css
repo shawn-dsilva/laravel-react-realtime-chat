@@ -1,6 +1,6 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 html,body, #root, .container-true, .fullHeight {
     height:100%!important;
@@ -195,7 +195,8 @@ font-size:1rem;
     background:white;
     padding:2rem;  
     border: 5px white solid;
-    border-radius: 3%;
+    border-radius: 2%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .authcard h1 {
@@ -208,6 +209,7 @@ font-size:1rem;
     background:linear-gradient(110deg, #F05340 50%, #61DBFB 50%);
     height:100%;
     display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

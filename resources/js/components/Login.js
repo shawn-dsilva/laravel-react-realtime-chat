@@ -107,7 +107,8 @@ class Login extends Component {
                   onChange={this.onChange}
                 />
                 <Button color="dark" className="mt-5" size="lg" block>
-              <span>Login</span>
+              <span>Login</span> &nbsp;
+              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                 </Button>
               </FormGroup>
             </Form>
