@@ -193,10 +193,21 @@ font-size:1rem;
     width:20%;
     margin: 0 auto;
     background:white;
-    padding:2rem;
+    padding:2rem;  
+    border: 5px white solid;
+    border-radius: 3%;
+}
+
+.authcard h1 {
+    font-weight: 900;
+    text-align: center;
+    padding:0.5rem;
 }
 
 .authcontainer {
-    background:linear-gradient(110deg, #fdcd3b 70%, #ffed4b 40%);
+    background:linear-gradient(110deg, #F05340 50%, #61DBFB 50%);
     height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }

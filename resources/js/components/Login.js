@@ -83,6 +83,7 @@ class Login extends Component {
     return (
       <div className="authcontainer" >
             <Form className="authcard" onSubmit={this.onSubmit}>
+              <h1>LOGIN</h1>
               <FormGroup className="text-center">
                 <Label for="email">E-mail</Label>
                 <Input
