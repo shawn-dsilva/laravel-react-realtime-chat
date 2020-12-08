@@ -4,8 +4,7 @@
 
 ### Immediate
 
-- Style Register and Login pages.
-- Changes to auth container with flex div for login and register forms and name of webapp at top, and name of author at bottom
+
 - Typing events support.
 - Invite to channel by URL system
 
@@ -21,6 +20,8 @@
 
 ### Done
 
+- Style Register and Login pages.
+- Changes to auth container with flex div for login and register forms and name of webapp at top, and name of author at bottom
 - Users currently online in chatroom only for chatrooms, UI element can be hidden
 - Add scrollbars for channels and dm user lists 
 - Add Online Offline user status support
