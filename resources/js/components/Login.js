@@ -81,8 +81,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-            <Form onSubmit={this.onSubmit}>
+      <div className="authcontainer" >
+            <Form className="authcard" onSubmit={this.onSubmit}>
               <FormGroup className="text-center">
                 <Label for="email">E-mail</Label>
                 <Input

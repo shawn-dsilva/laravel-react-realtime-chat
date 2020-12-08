@@ -188,3 +188,15 @@ color:grey;
 font-size:1rem;
 
 }
+
+.authcard {
+    width:20%;
+    margin: 0 auto;
+    background:white;
+    padding:2rem;
+}
+
+.authcontainer {
+    background:linear-gradient(110deg, #fdcd3b 70%, #ffed4b 40%);
+    height:100%;
+}
