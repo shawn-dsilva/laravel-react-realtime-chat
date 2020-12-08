@@ -57,7 +57,7 @@ class Register extends Component {
               <h1>REGISTER</h1>
               <p>Already have an account? <a href="/login">Login.</a></p>
               <FormGroup className="text-center">
-                <Label for="name">Name</Label>
+                <Label className="authlabel" for="name">Name</Label>
                 <Input
                   type="text"
                   name="name"
@@ -68,7 +68,7 @@ class Register extends Component {
                   onChange={this.onChange}
                 />
 
-                <Label for="email">E-mail</Label>
+                <Label className="authlabel"  for="email">E-Mail</Label>
                 <Input
                   type="email"
                   name="email"
@@ -79,7 +79,7 @@ class Register extends Component {
                   onChange={this.onChange}
                 />
 
-                <Label for="password">Password</Label>
+                <Label className="authlabel"  for="password">Password</Label>
                 <Input
                   type="password"
                   name="password"

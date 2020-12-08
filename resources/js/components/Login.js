@@ -86,7 +86,7 @@ class Login extends Component {
               <h1>LOGIN</h1>
               <p>Don't have an account? <a href="/register">Register.</a></p>
               <FormGroup className="text-center">
-                <Label for="email">E-mail</Label>
+                <Label className="authlabel"  for="email">E-Mail</Label>
                 <Input
                   type="email"
                   name="email"
@@ -97,7 +97,7 @@ class Login extends Component {
                   onChange={this.onChange}
                 />
 
-                <Label for="password">Password</Label>
+                <Label className="authlabel"  for="password">Password</Label>
                 <Input
                   type="password"
                   name="password"
