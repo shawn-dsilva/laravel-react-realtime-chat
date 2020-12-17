@@ -7,9 +7,9 @@ services:
             context: .
             dockerfile: dockerfile
         ports:
-            - "5000:5000"
+            - "3000:3000"
         volumes:
-            - .:/server
+            - .:/main
     mysql:
         container_name: mysql
         image: mysql:5.7

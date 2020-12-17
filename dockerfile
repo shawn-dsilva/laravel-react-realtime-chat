@@ -30,9 +30,9 @@ RUN useradd -G www-data,root -u 1000 -d /home/shawn shawn
 RUN mkdir -p /home/shawn/.composer && \
     chown -R shawn:shawn /home/shawn
 
-COPY package*.json /server/
+COPY package*.json /main/
 
-COPY composer.json /server/
+COPY composer.json /main/
 
 RUN composer install
 
