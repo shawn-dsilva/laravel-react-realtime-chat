@@ -1,8 +1,8 @@
 version: "3"
 services:
-    auth-server:
-        container_name: auth-server
-        hostname: auth-server
+    main:
+        container_name: main
+        hostname: main
         build:
             context: .
             dockerfile: dockerfile
@@ -10,21 +10,19 @@ services:
             - "5000:5000"
         volumes:
             - .:/server
-            - /server/node_modules
-
-    client-prod:
-        container_name: client-prod
-        hostname: client-prod
-        build:
-            context: ./client
-            dockerfile: Dockerfile-prod
+    mysql:
+        container_name: mysql
+        image: mysql:5.7
         ports:
-            - "3000:3000"
+             - '3312:3306'
+        environment:
+             - MYSQL_ROOT_PASSWORD=root
+             - MYSQL_DATABASE=boomerphpmvc
+             - MYSQL_USER=phpmyadmin
+             - MYSQL_PASSWORD=123456
         volumes:
-            - ./client:/client
-            - /client/node_modules
-        links:
-            - auth-server
+             - './bin:/docker-entrypoint-initdb.d/'
+             - ./mysql-data:/var/lib/mysql
 networks:
     default:
         external:
