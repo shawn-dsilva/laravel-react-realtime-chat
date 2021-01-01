@@ -22,24 +22,25 @@ RUN apt-get update && apt-get install -y \
     unzip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN curl -sL https://rpm.nodesource.com/setup | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 RUN apt-get install -y nodejs
 
-RUN useradd -G www-data,root -u 1000 -d /home/shawn shawn
-RUN mkdir -p /home/shawn/.composer && \
-    chown -R shawn:shawn /home/shawn
+RUN useradd -G www-data,root -u 1000 -d /home/admin admin
+RUN mkdir -p /home/admin/.composer && \
+    chown -R admin:admin /home/admin
 
-COPY package*.json /main/
+COPY package*.json ~/main/
 
-COPY composer.json /main/
+COPY composer.json ~/main/
 
-RUN composer install
+WORKDIR /home/admin/main
+# RUN composer install
 
-RUN npm install
+# RUN npm install
 
-RUN npm run dev
+# RUN npm run dev
 
-USER shawn
+USER admin
 
-CMD ["npm", "run", "all"]
+# CMD ["npm", "run", "all"]
