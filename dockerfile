@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:7.3-fpm
 
 # WORKDIR /server
 
@@ -11,6 +11,8 @@ FROM php:7.4-fpm
 # RUN npm install
 
 # # start command
+
+WORKDIR /home/admin/main
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -30,17 +32,17 @@ RUN useradd -G www-data,root -u 1000 -d /home/admin admin
 RUN mkdir -p /home/admin/.composer && \
     chown -R admin:admin /home/admin
 
-COPY package*.json ~/main/
+COPY package*.json /home/admin/main/
 
-COPY composer.json ~/main/
+COPY composer.json /home/admin/main/
+COPY composer.lock /home/admin/main/
 
-WORKDIR /home/admin/main
-# RUN composer install
+RUN composer install
 
-# RUN npm install
+RUN npm install
 
-# RUN npm run dev
+RUN npm run dev
 
 USER admin
 
-# CMD ["npm", "run", "all"]
+CMD ["npm", "run", "all"]
