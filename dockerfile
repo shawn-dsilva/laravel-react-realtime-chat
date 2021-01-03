@@ -11,8 +11,10 @@ FROM php:7.3-fpm
 # RUN npm install
 
 # # start command
+ COPY . /app/
+#  COPY ./database /app/
 
-WORKDIR /home/admin/main
+WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -23,26 +25,28 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 RUN apt-get install -y nodejs
 
-RUN useradd -G www-data,root -u 1000 -d /home/admin admin
-RUN mkdir -p /home/admin/.composer && \
-    chown -R admin:admin /home/admin
+# RUN useradd -G www-data,root -u 1000 -d /home/admin admin
+# RUN mkdir -p /home/admin/.composer && \
+#     chown -R admin:admin /home/admin
 
-COPY package*.json /home/admin/main/
 
-COPY composer.json /home/admin/main/
-COPY composer.lock /home/admin/main/
+# COPY package*.json /main/
+
+# COPY composer.json /main/
+# COPY composer.lock /main/
 
 RUN composer install
 
 RUN npm install
 
-RUN npm run dev
+# RUN npm run dev
 
-USER admin
+# USER admin
 
-CMD ["npm", "run", "all"]
+# CMD ["npm", "run", "all"]
