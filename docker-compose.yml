@@ -10,6 +10,8 @@ services:
             - "3000:3000"
         volumes:
             - .:/app
+            # - /main/node_modules
+            # - /main/vendor
     mysql:
         container_name: mysql
         image: mysql:5.7

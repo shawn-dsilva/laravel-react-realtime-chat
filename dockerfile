@@ -45,8 +45,8 @@ RUN composer install
 
 RUN npm install
 
-# RUN npm run dev
+RUN npm run dev
 
 # USER admin
 
-# CMD ["npm", "run", "all"]
+CMD ["npm", "run", "all"]
