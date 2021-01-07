@@ -45,6 +45,8 @@ RUN composer install
 
 RUN npm install
 
+RUN php artisan key:generate
+
 RUN npm run dev
 
 # USER admin
