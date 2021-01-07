@@ -47,9 +47,9 @@ RUN composer install
 RUN npm install
 
 RUN php artisan key:generate
-RUN php artisan passport:install
+RUN php artisan passport:keys
 
-RUN npm run dev
+# RUN npm run dev
 
 # USER admin
 

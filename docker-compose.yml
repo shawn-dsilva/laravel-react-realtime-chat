@@ -1,5 +1,15 @@
 version: "3"
 services:
+    mysql:
+        container_name: mysql
+        image: mysql:5.7
+        ports:
+             - '3306:3306'
+        environment:
+             - MYSQL_ROOT_PASSWORD=root
+             - MYSQL_DATABASE=react_laravel_websockets
+             - MYSQL_USER=admin
+             - MYSQL_PASSWORD=123456
     main:
         container_name: main
         hostname: main
@@ -12,19 +22,7 @@ services:
             - .:/app
             # - /main/node_modules
             # - /main/vendor
-    mysql:
-        container_name: mysql
-        image: mysql:5.7
-        ports:
-             - '3312:3306'
-        environment:
-             - MYSQL_ROOT_PASSWORD=root
-             - MYSQL_DATABASE=react_laravel_websockets
-             - MYSQL_USER=root
-             - MYSQL_PASSWORD=123456
-        volumes:
-             - './bin:/docker-entrypoint-initdb.d/'
-             - ./mysql-data:/var/lib/mysql
+   
 # networks:
 #     default:
 #         external:
