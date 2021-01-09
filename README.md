@@ -8,7 +8,9 @@
 
 ### Immediate
 
--Dockerization
+- Dockerization
+- SQL dump of current DB to be used to initiate MySQL Docker container
+
 - Typing events support.
 - Invite to channel by URL system
 
