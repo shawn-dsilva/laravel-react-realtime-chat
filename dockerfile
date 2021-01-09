@@ -46,11 +46,11 @@ RUN composer install
 
 RUN npm install
 
-RUN php artisan key:generate
-RUN php artisan passport:keys
+# RUN php artisan key:generate
+# RUN php artisan passport:keys
 
 # RUN npm run dev
 
 # USER admin
 
-CMD ["npm", "run", "all"]
+# CMD ["npm", "run", "all"]

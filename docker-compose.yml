@@ -22,6 +22,7 @@ services:
             - .:/app
             # - /main/node_modules
             # - /main/vendor
+        command: sh -c "php artisan key:generate && php artisan passport:keys && npm run all"
    
 # networks:
 #     default:
