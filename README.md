@@ -1,10 +1,14 @@
 # React Laravel Real-Time Chat
 
+## Notes
+
+- DB_HOST in .env should be the same as the service name in `docker-compose.yml`, by default it is mysql.
+
 ## TODO
 
 ### Immediate
 
-
+-Dockerization
 - Typing events support.
 - Invite to channel by URL system
 

@@ -1,10 +1,11 @@
 version: "3"
 services:
+    # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
     mysql:
         container_name: mysql
         image: mysql:5.7
         ports:
-             - '3306:3306'
+             - '3312:3306'
         environment:
              - MYSQL_ROOT_PASSWORD=root
              - MYSQL_DATABASE=react_laravel_websockets
@@ -22,7 +23,7 @@ services:
             - .:/app
             # - /main/node_modules
             # - /main/vendor
-        command: sh -c "php artisan key:generate && php artisan passport:keys && npm run all"
+        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run all"
    
 # networks:
 #     default:
