@@ -11,6 +11,8 @@ services:
              - MYSQL_DATABASE=react_laravel_websockets
              - MYSQL_USER=admin
              - MYSQL_PASSWORD=123456
+        volumes:
+             - './bin:/docker-entrypoint-initdb.d/'
     main:
         container_name: main
         hostname: main
