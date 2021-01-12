@@ -3,14 +3,13 @@
 ## Notes
 
 - DB_HOST in .env should be the same as the service name in `docker-compose.yml`, by default it is mysql.
+- Ports for both main server and websockets server must be exposed in `docker-compose.yml` else laravel echo client will not connect to the server
 
 ## TODO
 
 ### Immediate
 
-- Dockerization
-- SQL dump of current DB to be used to initiate MySQL Docker container
-
+- Dockerization to work in Production environment
 - Typing events support.
 - Invite to channel by URL system
 
@@ -26,6 +25,9 @@
 
 ### Done
 
+
+- Dockerization
+- SQL dump of current DB to be used to initiate MySQL Docker container
 - Style Register and Login pages.
 - Changes to auth container with flex div for login and register forms and name of webapp at top, and name of author at bottom
 - Users currently online in chatroom only for chatrooms, UI element can be hidden

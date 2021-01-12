@@ -20,9 +20,8 @@ services:
             context: .
             dockerfile: dockerfile
         ports:
-            - "3000:3000"
-            - "6001:6001"
-
+            - "3000:3000" # Main App
+            - "6001:6001" # Websocket server
         volumes:
             - .:/app
             # - /main/node_modules
