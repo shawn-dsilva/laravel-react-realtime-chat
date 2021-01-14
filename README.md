@@ -9,6 +9,7 @@
 
 ### Immediate
 
+- Preparation for Production deployment
 - Dockerization to work in Production environment
 - Typing events support.
 - Invite to channel by URL system
