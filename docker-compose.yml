@@ -28,7 +28,7 @@ services:
             # - /main/vendor
         command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run all"
    
-# networks:
-#     default:
-#         external:
-#             name: nginxrpgateway_default
+networks:
+    default:
+        external:
+            name: nginxrpgateway_default
