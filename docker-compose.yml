@@ -1,8 +1,8 @@
 version: "3"
 services:
     # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
-    mysql:
-        container_name: mysql
+    mysql-rca:
+        container_name: mysql-rca
         image: mysql:5.7
         ports:
              - '3312:3306'
@@ -23,9 +23,9 @@ services:
             - "3000:3000" # Main App
             - "6001:6001" # Websocket server
         volumes:
-            - .:/app
-            # - /main/node_modules
-            # - /main/vendor
+            - .:/main
+            - /main/node_modules
+            - /main/vendor
         command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run all"
    
 networks:

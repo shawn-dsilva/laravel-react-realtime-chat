@@ -3,7 +3,7 @@ FROM php:7.3-fpm
 # WORKDIR /server
 
 # EXPOSE 5000
-# # sets env to node_modules in app
+# # sets env to node_modules in main
 # ENV PATH /server/node_modules/.bin:$PATH
 
 # # copies package.json from directory and installs packages
@@ -11,10 +11,10 @@ FROM php:7.3-fpm
 # RUN npm install
 
 # # start command
- COPY . /app/
-#  COPY ./database /app/
+ COPY . /main/
+#  COPY ./database /main/
 
-WORKDIR /app
+WORKDIR /main
 
 RUN apt-get update && apt-get install -y \
     git \
