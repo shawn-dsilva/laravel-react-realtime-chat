@@ -1,21 +1,12 @@
 FROM php:7.3-fpm
 
-# WORKDIR /server
+# Copy current directory contents to directory /main in container
+COPY . /main/
 
-# EXPOSE 5000
-# # sets env to node_modules in main
-# ENV PATH /server/node_modules/.bin:$PATH
-
-# # copies package.json from directory and installs packages
-# COPY package*.json /server/
-# RUN npm install
-
-# # start command
- COPY . /main/
-#  COPY ./database /main/
-
+# Change current directory to /main
 WORKDIR /main
 
+# Install prerequisites
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -25,32 +16,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip 
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Install PHP specific extensions within docker
+RUN docker-php-ext-install mysqli pdo pdo_mysql 
 
+# Install Composer and NodeJS v12
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
-
 RUN apt-get install -y nodejs
 
-# RUN useradd -G www-data,root -u 1000 -d /home/admin admin
-# RUN mkdir -p /home/admin/.composer && \
-#     chown -R admin:admin /home/admin
-
-
-# COPY package*.json /main/
-
-# COPY composer.json /main/
-# COPY composer.lock /main/
-
-RUN composer install
-
+# Install Composer and NPM packages
+RUN composer install 
 RUN npm install
-
-# RUN php artisan key:generate
-# RUN php artisan passport:keys
-
-# RUN npm run dev
-
-# USER admin
-
-# CMD ["npm", "run", "all"]

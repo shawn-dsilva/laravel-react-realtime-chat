@@ -2,7 +2,7 @@ version: "3"
 services:
     # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
     mysql-rca:
-        container_name: mysql-rca
+        container_name: mysql-rca #container name should not conflict with existing containers/images
         image: mysql:5.7
         ports:
              - '3312:3306'
@@ -24,8 +24,8 @@ services:
             - "6001:6001" # Websocket server
         volumes:
             - .:/main
-            - /main/node_modules
-            - /main/vendor
+            - /main/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
+            - /main/vendor # empty vendor folder, composer create folder in container build,reason unknown
         command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run all"
    
 networks:
