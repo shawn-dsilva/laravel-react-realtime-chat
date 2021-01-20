@@ -1,10 +1,10 @@
-FROM php:7.3-fpm
+FROM php:7.3-apache
 
 # Copy current directory contents to directory /main in container
-COPY . /main/
+COPY . /var/www/
 
 # Change current directory to /main
-WORKDIR /main
+WORKDIR /var/www/
 
 # Install prerequisites
 RUN apt-get update && apt-get install -y \
@@ -27,3 +27,11 @@ RUN apt-get install -y nodejs
 # Install Composer and NPM packages
 RUN composer install 
 RUN npm install
+
+RUN echo "ServerName demos.shawndsilva.com/realtime-chat-app" >> /etc/apache2/apache2.conf
+
+ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+
+RUN a2enmod rewrite
+
+RUN service apache2 restart

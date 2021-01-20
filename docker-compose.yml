@@ -15,18 +15,20 @@ services:
              - './bin:/docker-entrypoint-initdb.d/'
     main:
         container_name: main
-        hostname: main
+        # hostname: main
+        depends_on:
+            - mysql
         build:
             context: .
             dockerfile: dockerfile
         ports:
-            - "3000:3000" # Main App
+            - "8000:80" # Main App
             - "6001:6001" # Websocket server
         volumes:
             - .:/main
             - /main/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
             - /main/vendor # empty vendor folder, composer create folder in container build,reason unknown
-        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run all"
+        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run nobs"
    
 networks:
     default:
