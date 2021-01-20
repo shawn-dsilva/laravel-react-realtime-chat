@@ -5,7 +5,7 @@ services:
         container_name: mysql-rca #container name should not conflict with existing containers/images
         image: mysql:5.7
         ports:
-             - '3312:3306'
+             - '3315:3306'
         environment:
              - MYSQL_ROOT_PASSWORD=root
              - MYSQL_DATABASE=react_laravel_websockets
@@ -28,7 +28,7 @@ services:
             - .:/main
             - /main/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
             - /main/vendor # empty vendor folder, composer create folder in container build,reason unknown
-        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run nobs"
+        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run prod"
    
 networks:
     default:
