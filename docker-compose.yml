@@ -17,7 +17,7 @@ services:
         container_name: main
         # hostname: main
         depends_on:
-            - mysql
+            - mysql-rca
         build:
             context: .
             dockerfile: dockerfile
