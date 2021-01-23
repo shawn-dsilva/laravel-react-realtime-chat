@@ -7,8 +7,6 @@ COPY . /var/www/
 WORKDIR /var/www/
 
 # Arguments defined in docker-compose.yml
-ARG user
-ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -36,8 +34,3 @@ RUN composer install
 RUN npm install
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
-USER $user

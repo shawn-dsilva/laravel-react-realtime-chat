@@ -19,21 +19,29 @@ services:
         depends_on:
             - mysql-rca
         build:
-            args:
-                user: admin
-                uid: 1000
             context: .
             dockerfile: dockerfile
-        restard: unless-stopped
+        restart: unless-stopped
         ports:
             - "9000:9000" # Main App
             - "6001:6001" # Websocket server
         volumes:
             - .:/var/www
-            - /main/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
-            - /main/vendor # empty vendor folder, composer create folder in container build,reason unknown
+            - /var/www/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
+            - /var/www/vendor # empty vendor folder, composer create folder in container build,reason unknown
         command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run prod"
-   
+        
+    nginx: 
+        image: nginx:alpine
+        container_name: nginx_laravel
+        restart: unless-stopped
+        ports: 
+            - "8000:8000"
+        volumes:
+            - './:/var/www'
+            - './nginx:/etc/nginx/conf.d/'
+        depends_on:
+            -  main
 networks:
     default:
         external:
