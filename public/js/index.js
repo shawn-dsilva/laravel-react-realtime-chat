@@ -93305,6 +93305,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = 'http://demos.shawndsilva.com/realtime-chat-app/';
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -96250,8 +96251,8 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /app/resources/js/index.js */"./resources/js/index.js");
-module.exports = __webpack_require__(/*! /app/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/shawn/webdev/docker-test-laravel-react-realtime-chat/laravel-react-realtime-chat/resources/js/index.js */"./resources/js/index.js");
+module.exports = __webpack_require__(/*! /home/shawn/webdev/docker-test-laravel-react-realtime-chat/laravel-react-realtime-chat/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

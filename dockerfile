@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.3-fpm
 
 # Copy current directory contents to directory /main in container
 COPY . /var/www/
@@ -6,7 +6,11 @@ COPY . /var/www/
 # Change current directory to /main
 WORKDIR /var/www/
 
-# Install prerequisites
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -14,10 +18,13 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip 
+    unzip
 
-# Install PHP specific extensions within docker
-RUN docker-php-ext-install mysqli pdo pdo_mysql 
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer and NodeJS v12
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -28,10 +35,9 @@ RUN apt-get install -y nodejs
 RUN composer install 
 RUN npm install
 
-RUN echo "ServerName demos.shawndsilva.com/realtime-chat-app" >> /etc/apache2/apache2.conf
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
-ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
-
-RUN a2enmod rewrite
-
-RUN service apache2 restart
+USER $user
