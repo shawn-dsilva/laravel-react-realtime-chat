@@ -9,7 +9,7 @@ export const echoInit = token => {
     window.Echo = new Echo({
         broadcaster: "pusher",
         key: process.env.MIX_PUSHER_APP_KEY,
-        wsHost: window.location.hostname,
+        wsHost: process.env.APP_URL,
         wsPort: 6001,
         disableStats: true,
         forceTLS: false
