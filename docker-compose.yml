@@ -19,13 +19,17 @@ services:
         depends_on:
             - mysql-rca
         build:
+            args:
+                user: admin
+                uid: 1000
             context: .
             dockerfile: dockerfile
+        restard: unless-stopped
         ports:
-            - "8000:80" # Main App
+            - "9000:9000" # Main App
             - "6001:6001" # Websocket server
         volumes:
-            - .:/main
+            - .:/var/www
             - /main/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
             - /main/vendor # empty vendor folder, composer create folder in container build,reason unknown
         command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run prod"
