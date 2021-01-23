@@ -1,4 +1,4 @@
-FROM php:7.3-apache
+FROM php:7.3-fpm
 
 # Copy current directory contents to directory /main in container
 COPY . /var/www/
