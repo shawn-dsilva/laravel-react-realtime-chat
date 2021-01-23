@@ -34,3 +34,4 @@ RUN composer install
 RUN npm install
 
 # Create system user to run Composer and Artisan Commands
+RUN chown -R root:root *
