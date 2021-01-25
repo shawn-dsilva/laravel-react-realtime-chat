@@ -9,6 +9,7 @@
 
 ### Immediate
 
+- Make WebSocket Server work in Production 
 - Preparation for Production deployment
 - Typing events support.
 - Invite to channel by URL system
@@ -25,6 +26,7 @@
 
 ### Done
 
+- Front End and API working in Production
 - Dockerization to work in Production environment.
 - Dockerization.
 - SQL dump of current DB to be used to initiate MySQL Docker container.
