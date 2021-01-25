@@ -35,3 +35,8 @@ RUN npm install
 
 # Create system user to run Composer and Artisan Commands
 RUN chown -R root:root *
+
+# Creates php.ini file from php.ini-production, lets php-fpm return correct status codes
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
+CMD [ "php-fpm", "-D"]

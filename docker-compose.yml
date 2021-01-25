@@ -29,7 +29,7 @@ services:
             - .:/var/www
             - /var/www/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
             - /var/www/vendor # empty vendor folder, composer create folder in container build,reason unknown
-        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && npm run prod && php-fpm"
+        command: sh -c "php artisan key:generate && php artisan passport:install && php artisan migrate && php-fpm -D && npm run prod"
         
     nginx: 
         image: nginx:alpine

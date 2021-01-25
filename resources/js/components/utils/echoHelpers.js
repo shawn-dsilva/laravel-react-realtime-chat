@@ -10,7 +10,7 @@ export const echoInit = token => {
         broadcaster: "pusher",
         key: process.env.MIX_PUSHER_APP_KEY,
         wsHost: process.env.APP_URL,
-        wsPort: 6001,
+        wsPort: 80,
         disableStats: true,
         forceTLS: false
     });

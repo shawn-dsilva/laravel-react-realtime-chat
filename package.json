@@ -39,5 +39,7 @@
         "reactstrap": "^8.4.1",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0"
-    }
+    },
+    "homepage": "https://demos.shawndsilva.com/realtime-chat-app"
+
 }
