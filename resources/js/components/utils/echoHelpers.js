@@ -9,10 +9,12 @@ export const echoInit = token => {
     window.Echo = new Echo({
         broadcaster: "pusher",
         key: process.env.MIX_PUSHER_APP_KEY,
-        wsHost: process.env.MIX_APP_URL,
-        wsPort: 80,
+        wsHost: process.env.MIX_WS_HOST_URL,
+        wsPort: 6001,
+	    wssPort: 6001,
         disableStats: true,
-        forceTLS: false
+        forceTLS: false,
+        authEndpoint: process.env.MIX_AUTH_ENDPOINT,
     });
 
     window.Echo.connector.options.auth.headers["Authorization"] =
