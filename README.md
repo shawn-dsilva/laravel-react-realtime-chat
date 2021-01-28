@@ -4,13 +4,15 @@
 
 - DB_HOST in .env should be the same as the service name in `docker-compose.yml`, by default it is mysql.
 - Ports for both main server and websockets server must be exposed in `docker-compose.yml` else laravel echo client will not connect to the server
+- PHP-FPM Docker container has no `php.ini` by default, rename or copy php.ini-production in `/usr/local/etc/php/`
+- Set authEndpoint to subdirectory+/broadcasting/auth if serving this app through a subfolder.
+- Set BROADCAST_DRIVER in .env to pusher, anything else and realtime chat functionality will not work at all.
 
 ## TODO
 
 ### Immediate
 
-- Make WebSocket Server work in Production 
-- Preparation for Production deployment
+- WebSocket server paths routing in nginx-laravel container instead of external nginx reverse proxy
 - Typing events support.
 - Invite to channel by URL system
 
@@ -26,6 +28,8 @@
 
 ### Done
 
+- Make WebSocket Server work in Production 
+- Preparation for Production deployment
 - Front End and API working in Production
 - Dockerization to work in Production environment.
 - Dockerization.
