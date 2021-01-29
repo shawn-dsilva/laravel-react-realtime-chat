@@ -7,12 +7,15 @@
 - PHP-FPM Docker container has no `php.ini` by default, rename or copy php.ini-production in `/usr/local/etc/php/`
 - Set authEndpoint to subdirectory+/broadcasting/auth if serving this app through a subfolder.
 - Set BROADCAST_DRIVER in .env to pusher, anything else and realtime chat functionality will not work at all.
+- While serving from subdirectory, `wsHost` must be the same in `config/broadcast.php` and `Echo` object in Javascript
 
 ## TODO
 
 ### Immediate
 
-- WebSocket server paths routing in nginx-laravel container instead of external nginx reverse proxy
+- Custom 404 page
+- Login/Registration error display
+- Styled scrollbars
 - Typing events support.
 - Invite to channel by URL system
 
@@ -28,6 +31,7 @@
 
 ### Done
 
+- WebSocket server paths routing in nginx-laravel container instead of external nginx reverse proxy
 - Make WebSocket Server work in Production 
 - Preparation for Production deployment
 - Front End and API working in Production
