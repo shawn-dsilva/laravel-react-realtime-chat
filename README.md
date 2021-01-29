@@ -13,6 +13,7 @@
 
 ### Immediate
 
+- PostgreSQL integration and dummy date creation
 - Custom 404 page
 - Login/Registration error display
 - Styled scrollbars
