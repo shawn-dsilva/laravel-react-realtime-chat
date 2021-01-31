@@ -23,7 +23,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.axios.defaults.baseURL = 'https://demos.shawndsilva.com/realtime-chat-app';
+window.axios.defaults.baseURL = process.env.MIX_APP_URL;
 
 
 /**

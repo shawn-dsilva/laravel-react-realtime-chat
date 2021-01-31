@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 
 
 ReactDOM.render(
-  <BrowserRouter basename='/realtime-chat-app'>
+  <BrowserRouter basename={process.env.MIX_BASENAME} >
     <App />
   </BrowserRouter>
 , document.getElementById('root'));
