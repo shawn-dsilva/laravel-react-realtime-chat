@@ -16,7 +16,6 @@
 - PostgreSQL integration and dummy date creation
 - Custom 404 page
 - Login/Registration error display
-- Styled scrollbars
 - Typing events support.
 - Invite to channel by URL system
 
@@ -32,6 +31,8 @@
 
 ### Done
 
+- ChatMainContainer CSS margin and padding fixes
+- Styled scrollbars
 - WebSocket server paths routing in nginx-laravel container instead of external nginx reverse proxy
 - Make WebSocket Server work in Production 
 - Preparation for Production deployment
