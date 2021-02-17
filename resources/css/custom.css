@@ -10,6 +10,20 @@ html,body, #root, .container-true, .fullHeight {
 
 }
 
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: orange!important ;       /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: blue;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid orange;  /* creates padding around scroll thumb */
+  }
+
 .sidenav {
     border-right: solid 1px grey;
     display: block;
@@ -37,6 +51,25 @@ html,body, #root, .container-true, .fullHeight {
     max-height: 95%;
 }
 
+/* Styled scrollbars for Firefox and Webkit */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: slategrey lightgrey;
+  }
+
+*::-webkit-scrollbar {
+    width: 14px;               /* width of the entire scrollbar */
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: lightgrey!important ;       /* color of the tracking area */
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color:slategray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid lightgrey;  /* creates padding around scroll thumb */
+  }
 .chatInput {
     margin-top:auto;
     border-top: 1px solid grey;
