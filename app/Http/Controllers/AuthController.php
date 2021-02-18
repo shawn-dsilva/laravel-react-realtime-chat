@@ -1,11 +1,16 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
+// use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class AuthController extends Controller
 {
@@ -23,28 +28,32 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         try {
-                $request->validate([
+            $request->validate([
                 'name' => 'required|string',
                 'email' => 'required|string|email|unique:users',
                 'password' => 'required|string'
             ]);
-                $user = new User([
+            $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
-                $user->save();
-                return response()->json([
+            $user->save();
+            return response()->json([
                 'message' => 'Successfully created user!'
             ], 201);
-        }
-        catch(ValidationException $exception) {
+        } catch (ValidationException $exception) {
             return response()->json([
                 'status' => 'error',
                 'msg' => 'Error',
                 'errors' => $exception->errors(),
             ], 422);
         }
+    }
+
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 
     /**
@@ -59,25 +68,43 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
+
+        $messages = [
+            "email.required" => "Email cannot be empty",
+            "email.email" => "Email is not valid",
+            "password.required" => "Password cannot be empty",
+            "password.min" => "Password must be at least 6 characters"
+        ];
+
+        $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-        $credentials = request(['email', 'password']);
-        if(!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Incorrect password or the account does not exist.'
-            ], 401);
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        // if ($request->remember_me)
-        //     $token->expires_at = Carbon::now()->addWeeks(1);
-        $token->save();
-        return response()->json([
-            'user' => $request->user(),
-            'token' => $tokenResult->accessToken,
-            ],200)->cookie('jwt', $tokenResult->accessToken, 3600);
+            'password' => 'required|string|min:6',
+        ], $messages);
+
+        // Send appropriate error message if validation fails
+        if ($validator->fails()) {
+            return response(['message'=> $validator->getMessageBag()->first()], 422);
+        } else {
+
+            // Check if password and email exist and match
+            $credentials = request(['email', 'password']);
+            if (!Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Incorrect password or the account does not exist.'
+                ], 401);
+            } else {
+                $user = $request->user();
+                $tokenResult = $user->createToken('Personal Access Token');
+                $token = $tokenResult->token;
+                // if ($request->remember_me)
+                //     $token->expires_at = Carbon::now()->addWeeks(1);
+                $token->save();
+                return response()->json([
+                    'user' => $request->user(),
+                    'token' => $tokenResult->accessToken,
+                ], 200)->cookie('jwt', $tokenResult->accessToken, 3600);
+            }
+        }
     }
 
     /**
