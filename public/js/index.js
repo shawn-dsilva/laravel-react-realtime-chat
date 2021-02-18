@@ -92649,22 +92649,18 @@ var register = function register(_ref) {
       email: email,
       password: password
     });
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/users/register", body, headers).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/register", body, headers).then(function (res) {
       dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(res.data, res.status, 'REGISTER_SUCCESS'));
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_3__["REGISTER_SUCCESS"]
-      });
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
-      });
+      }); // dispatch({ type: IS_LOADING })
     })["catch"](function (err) {
+      console.log("FROM REGISTRATION");
+      console.log(err.response.data);
       dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(err.response.data, err.response.status, 'REGISTER_FAIL'));
       dispatch({
         type: _types__WEBPACK_IMPORTED_MODULE_3__["REGISTER_FAIL"]
-      });
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_3__["IS_LOADING"]
-      });
+      }); // dispatch({ type: IS_LOADING })
     });
   };
 }; //Login User
@@ -95308,7 +95304,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
-/* harmony import */ var _AuthContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AuthContainer */ "./resources/js/components/AuthContainer.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
+/* harmony import */ var _AuthContainer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AuthContainer */ "./resources/js/components/AuthContainer.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -95337,6 +95338,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+
 var Register = /*#__PURE__*/function (_Component) {
   _inherits(Register, _Component);
 
@@ -95356,7 +95361,8 @@ var Register = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      msg: ""
     });
 
     _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
@@ -95369,41 +95375,61 @@ var Register = /*#__PURE__*/function (_Component) {
           name = _this$state.name,
           email = _this$state.email,
           password = _this$state.password;
-      var body = JSON.stringify({
+      var body = {
         name: name,
         email: email,
         password: password
-      });
-      var headers = {
-        headers: {
-          "Content-Type": "application/json"
-        }
       };
-      axios.post("/api/auth/register", body, headers).then(function (res) {
-        if (res.status === 201) {
-          console.log(res.data.message);
-        }
-      })["catch"](function (err) {
-        var errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map(function (error) {
-          console.log(error.toString());
-        });
-      });
+
+      _this.props.register(body); // const headers = {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // };
+      // axios
+      //   .post("/api/auth/register", body, headers)
+      //   .then((res) =>{
+      //    if(res.status === 201) {
+      //       console.log(res.data.message);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     const errors = err.response.data.errors;
+      //     console.log(errors);
+      //     Object.values(errors).map( error => {
+      //       console.log(error.toString());
+      //     });
+      //   });
+
     });
 
     return _this;
   }
 
   _createClass(Register, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var status = this.props.status;
+
+      if (status !== prevProps.status) {
+        if (status.id === "REGISTER_FAIL") {
+          this.setState({
+            msg: status.statusMsg.message
+          });
+        }
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthContainer__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthContainer__WEBPACK_IMPORTED_MODULE_6__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         className: "authcard",
         onSubmit: this.onSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "REGISTER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Already have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/login"
-      }, "Login.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+      }, "Login.")), this.state.msg ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["UncontrolledAlert"], {
+        color: "danger"
+      }, this.state.msg) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         className: "authlabel",
@@ -95453,7 +95479,21 @@ var Register = /*#__PURE__*/function (_Component) {
   return Register;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Register);
+_defineProperty(Register, "propTypes", {
+  register: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  getUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  status: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired
+});
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    status: state.status
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, {
+  register: _actions_authActions__WEBPACK_IMPORTED_MODULE_5__["register"]
+})(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Register)));
 
 /***/ }),
 

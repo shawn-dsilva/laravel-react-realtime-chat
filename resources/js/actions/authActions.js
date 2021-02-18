@@ -62,20 +62,22 @@ export const register = ({ name, email, password }) => (dispatch) => {
   const body = JSON.stringify({ name, email, password });
 
   axios
-    .post("/api/users/register", body, headers)
+    .post("/api/auth/register", body, headers)
     .then((res) =>{
       dispatch(returnStatus(res.data, res.status, 'REGISTER_SUCCESS'))
       dispatch({
         type: REGISTER_SUCCESS,
       });
-      dispatch({ type: IS_LOADING })
+      // dispatch({ type: IS_LOADING })
     })
     .catch((err) => {
+      console.log("FROM REGISTRATION");
+      console.log(err.response.data);
       dispatch(returnStatus(err.response.data, err.response.status, 'REGISTER_FAIL'))
       dispatch({
         type: REGISTER_FAIL
       });
-      dispatch({ type: IS_LOADING })
+      // dispatch({ type: IS_LOADING })
     });
 };
 

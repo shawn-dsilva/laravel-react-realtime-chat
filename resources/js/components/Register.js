@@ -4,8 +4,13 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  UncontrolledAlert
 } from "reactstrap";
+import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { register } from '../actions/authActions';
 import AuthContainer from './AuthContainer';
 
 class Register extends Component {
@@ -14,8 +19,25 @@ class Register extends Component {
     name: "",
     email: "",
     password: "",
+    msg:""
   };
 
+  static propTypes = {
+    register: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+    status: PropTypes.object.isRequired,
+  }
+
+  componentDidUpdate(prevProps) {
+    const status = this.props.status;
+
+   if (status !== prevProps.status) {
+
+    if (status.id === "REGISTER_FAIL") {
+      this.setState({ msg: status.statusMsg.message });
+    }
+  }
+};
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -27,28 +49,28 @@ class Register extends Component {
 
     const { name, email, password } = this.state;
 
-    const body = JSON.stringify({ name, email, password });
+    const body = { name, email, password };
+    this.props.register(body)
+    // const headers = {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // };
 
-    const headers = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-
-    axios
-      .post("/api/auth/register", body, headers)
-      .then((res) =>{
-       if(res.status === 201) {
-          console.log(res.data.message);
-        }
-      })
-      .catch((err) => {
-        const errors = err.response.data.errors;
-        console.log(errors);
-        Object.values(errors).map( error => {
-          console.log(error.toString());
-        });
-      });
+    // axios
+    //   .post("/api/auth/register", body, headers)
+    //   .then((res) =>{
+    //    if(res.status === 201) {
+    //       console.log(res.data.message);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     const errors = err.response.data.errors;
+    //     console.log(errors);
+    //     Object.values(errors).map( error => {
+    //       console.log(error.toString());
+    //     });
+    //   });
   };
 
   render() {
@@ -57,6 +79,9 @@ class Register extends Component {
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>REGISTER</h1>
               <p>Already have an account? <a href="/login">Login.</a></p>
+              {this.state.msg ? (
+              <UncontrolledAlert color="danger">{this.state.msg}</UncontrolledAlert>
+            ) : null}
               <FormGroup className="text-center">
                 <Label className="authlabel" for="name">Name</Label>
                 <Input
@@ -101,4 +126,8 @@ class Register extends Component {
   }
 }
 
-export default Register
+const mapStateToProps = (state) => ({
+  status: state.status,
+});
+
+export default connect(mapStateToProps, { register })(withRouter(Register));

@@ -27,12 +27,26 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|string|email|unique:users',
-                'password' => 'required|string'
-            ]);
+        
+        $messages = [
+            "name.required" => "Name cannot be empty",
+            "name.max" => "Name cannot be more than 50 characters",
+            "email.required" => "Email cannot be empty",
+            "email.email" => "Email is not valid",
+            "password.required" => "Password cannot be empty",
+            "password.min" => "Password must be at least 6 characters"
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:50',
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:6',
+        ], $messages);
+
+        // Send appropriate error message if validation fails
+        if ($validator->fails()) {
+            return response(['message'=> $validator->getMessageBag()->first()], 422);
+        } else {
             $user = new User([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -42,19 +56,9 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Successfully created user!'
             ], 201);
-        } catch (ValidationException $exception) {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'Error',
-                'errors' => $exception->errors(),
-            ], 422);
         }
     }
 
-
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(response()->json($validator->errors(), 422));
-    }
 
     /**
      * Login user and create token
