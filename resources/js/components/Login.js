@@ -4,7 +4,8 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  UncontrolledAlert
 } from "reactstrap";
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -18,6 +19,7 @@ class Login extends Component {
     name: "",
     email: "",
     password: "",
+    msg:""
   };
 
   static propTypes = {
@@ -26,7 +28,20 @@ class Login extends Component {
     token: PropTypes.string,
     login: PropTypes.func.isRequired,
     getUser: PropTypes.func.isRequired,
+    status: PropTypes.object.isRequired,
+
   }
+
+  componentDidUpdate(prevProps) {
+    const status = this.props.status;
+
+   if (status !== prevProps.status) {
+
+    if (status.id === "LOGIN_FAIL") {
+      this.setState({ msg: status.statusMsg.message });
+    }
+  }
+};
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -86,6 +101,11 @@ class Login extends Component {
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>LOGIN</h1>
               <p>Don't have an account? <a href="/register">Register.</a></p>
+
+              {this.state.msg ? (
+              <UncontrolledAlert color="danger">{this.state.msg}</UncontrolledAlert>
+            ) : null}
+
               <FormGroup className="text-center">
                 <Label className="authlabel"  for="email">E-Mail</Label>
                 <Input
@@ -122,7 +142,9 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   currUser: state.auth.currUser,
-  token: state.auth.token
+  token: state.auth.token,
+  status: state.status,
+
 });
 
 export default connect(mapStateToProps, { login,getUser })(withRouter(Login));

@@ -113,10 +113,10 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
     }
     )
     .catch((err) => {
-      // dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
-      // dispatch({
-      //   type: LOGIN_FAIL
-      // });
+      dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
+      dispatch({
+        type: LOGIN_FAIL
+      });
       // dispatch({ type: IS_LOADING })
     });
 };

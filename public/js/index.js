@@ -92698,11 +92698,11 @@ var login = function login(_ref2, history) {
       var state = getState(); // const token = state.auth.token;
       // echoInit(token);
       // dispatch(history.push("/chat"));
-    })["catch"](function (err) {// dispatch(returnStatus(err.response.data, err.response.status, 'LOGIN_FAIL'))
-      // dispatch({
-      //   type: LOGIN_FAIL
-      // });
-      // dispatch({ type: IS_LOADING })
+    })["catch"](function (err) {
+      dispatch(Object(_statusActions__WEBPACK_IMPORTED_MODULE_1__["returnStatus"])(err.response.data, err.response.status, 'LOGIN_FAIL'));
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_3__["LOGIN_FAIL"]
+      }); // dispatch({ type: IS_LOADING })
     });
   };
 }; //Logout User and Destroy session
@@ -94652,7 +94652,8 @@ var Login = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       name: "",
       email: "",
-      password: ""
+      password: "",
+      msg: ""
     });
 
     _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
@@ -94705,6 +94706,19 @@ var Login = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Login, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var status = this.props.status;
+
+      if (status !== prevProps.status) {
+        if (status.id === "LOGIN_FAIL") {
+          this.setState({
+            msg: status.statusMsg.message
+          });
+        }
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_AuthContainer__WEBPACK_IMPORTED_MODULE_6__["AuthContainer"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
@@ -94712,7 +94726,9 @@ var Login = /*#__PURE__*/function (_Component) {
         onSubmit: this.onSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "LOGIN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Don't have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/register"
-      }, "Register.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
+      }, "Register.")), this.state.msg ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["UncontrolledAlert"], {
+        color: "danger"
+      }, this.state.msg) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormGroup"], {
         className: "text-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
         className: "authlabel",
@@ -94756,14 +94772,16 @@ _defineProperty(Login, "propTypes", {
   currUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired,
   token: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
   login: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
-  getUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired
+  getUser: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  status: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     currUser: state.auth.currUser,
-    token: state.auth.token
+    token: state.auth.token,
+    status: state.status
   };
 };
 
