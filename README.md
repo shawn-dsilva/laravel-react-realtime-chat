@@ -13,9 +13,9 @@
 
 ### Immediate
 
+- Functionality for Profile Image upload by the user
 - PostgreSQL integration and dummy date creation
 - Custom 404 page
-- Login/Registration error display
 - Typing events support.
 - Invite to channel by URL system
 
@@ -31,6 +31,7 @@
 
 ### Done
 
+- Login/Registration error display
 - ChatMainContainer CSS margin and padding fixes
 - Styled scrollbars
 - WebSocket server paths routing in nginx-laravel container instead of external nginx reverse proxy
