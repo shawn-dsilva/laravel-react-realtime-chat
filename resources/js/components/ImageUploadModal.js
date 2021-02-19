@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { CreateChannel } from '../actions/chatActions';
+import { uploadImage } from '../actions/chatActions';
 
 class ImageUploadModal extends Component {
 
@@ -12,9 +12,9 @@ class ImageUploadModal extends Component {
     selectedImage:null
   }
 
-  // static propTypes = {
-  //   CreateChannel: PropTypes.func.isRequired
-  // }
+  static propTypes = {
+    uploadImage: PropTypes.func.isRequired
+  }
 
 
   toggle = () => {
@@ -78,4 +78,4 @@ class ImageUploadModal extends Component {
 }
 
 
-export default connect( null, {CreateChannel})(ImageUploadModal);
+export default connect( null, {uploadImage})(ImageUploadModal);

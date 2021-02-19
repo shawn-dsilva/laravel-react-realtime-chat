@@ -350,3 +350,15 @@ export const markAsRead = (id) => (dispatch, getState) => {
     })
     .catch(err => {});
 }
+
+export const inviteToChannel = (imageForm) => (dispatch,getState) => {
+
+    axios
+        .post("/api/images/upload", imageForm, makeHeaders(getState), {withCredentials:true})
+        .then(res => {
+            const response = res.data;
+            console.log("IMAGE UPLOAD RESPONSE BELOW");
+            console.log(response)
+        })
+        .catch(err => {});
+}
