@@ -351,7 +351,7 @@ export const markAsRead = (id) => (dispatch, getState) => {
     .catch(err => {});
 }
 
-export const inviteToChannel = (imageForm) => (dispatch,getState) => {
+export const uploadImage = (imageForm) => (dispatch,getState) => {
 
     axios
         .post("/api/images/upload", imageForm, makeHeaders(getState), {withCredentials:true})
