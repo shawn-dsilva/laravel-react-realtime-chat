@@ -9,35 +9,43 @@ class ImageUploadModal extends Component {
   state = {
     toggle:false,
     modal:false,
-    channelName:"",
-    description:"",
-    type:"",
-    visible:true,
+    selectedImage:null
   }
 
-  static propTypes = {
-    CreateChannel: PropTypes.func.isRequired
-  }
+  // static propTypes = {
+  //   CreateChannel: PropTypes.func.isRequired
+  // }
 
 
   toggle = () => {
     this.setState({ modal : !this.state.modal});
   }
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
 
-  onCheck = () => {
-    this.setState({ visible : !this.state.visible});
-  }
+
+  onChange = (e) => {
+    this.setState({ selectedImage: e.target.files[0] });
+  };
+  
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { channelName, description, type, visible } = this.state;
-    console.log("in form submit function");
-    const channelData =  { channelName, description, type, visible };
-    this.props.CreateChannel(channelData);
-  }
+
+    const formData = new FormData();
+  
+    // Update the formData object
+    formData.append(
+      "profileImage",
+      this.state.selectedImage,
+      this.state.selectedImage.name
+    );
+  
+    // Details of the uploaded file
+    console.log("UPLOAD CHOSEN FILE DATA");
+    console.log(this.state.selectedImage);
+    console.log(formData);
+
+  
+  };
 
   render() {
     return (
@@ -50,12 +58,16 @@ class ImageUploadModal extends Component {
           You can upload your own profile picture here.
         </Alert>
         <Form id="upload-image" onSubmit={this.onSubmit}>
-        
+        <Label for="profileImage">Profile Picture</Label>
+        <Input type="file" name="file" id="profileImage" onChange={this.onChange} />
+        <FormText color="muted">
+          Image format, max dimensions and max file size to be specified here.
+        </FormText>
       </Form>
    
           </ModalBody>
           <ModalFooter>
-            <Button form="upload-image" color="primary" >Confirm</Button>{' '}
+            <Button form="upload-image" color="primary" >Upload Image</Button>
             <Button color="danger" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>

@@ -94408,10 +94408,7 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       toggle: false,
       modal: false,
-      channelName: "",
-      description: "",
-      type: "",
-      visible: true
+      selectedImage: null
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
@@ -94421,31 +94418,20 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onCheck", function () {
       _this.setState({
-        visible: !_this.state.visible
+        selectedImage: e.target.files[0]
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
       e.preventDefault();
-      var _this$state = _this.state,
-          channelName = _this$state.channelName,
-          description = _this$state.description,
-          type = _this$state.type,
-          visible = _this$state.visible;
-      console.log("in form submit function");
-      var channelData = {
-        channelName: channelName,
-        description: description,
-        type: type,
-        visible: visible
-      };
+      var formData = new FormData(); // Update the formData object
 
-      _this.props.CreateChannel(channelData);
+      formData.append("profileImage", _this.state.selectedImage, _this.state.selectedImage.name); // Details of the uploaded file
+
+      console.log("UPLOAD CHOSEN FILE DATA");
+      console.log(_this.state.selectedImage);
+      console.log(formData);
     });
 
     return _this;
@@ -94469,10 +94455,19 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
       }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         id: "upload-image",
         onSubmit: this.onSubmit
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+        "for": "profileImage"
+      }, "Profile Picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Input"], {
+        type: "file",
+        name: "file",
+        id: "profileImage",
+        onChange: this.onChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["FormText"], {
+        color: "muted"
+      }, "Image format, max dimensions and max file size to be specified here."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         form: "upload-image",
         color: "primary"
-      }, "Confirm"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      }, "Upload Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         color: "danger",
         onClick: this.toggle
       }, "Cancel"))));
@@ -94481,10 +94476,6 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
 
   return ImageUploadModal;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-_defineProperty(ImageUploadModal, "propTypes", {
-  CreateChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired
-});
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
   CreateChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["CreateChannel"]
