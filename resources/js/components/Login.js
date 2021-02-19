@@ -130,7 +130,7 @@ class Login extends Component {
                 />
                 <Button color="dark" className="mt-5" size="lg" block>
               <span>Login</span> &nbsp;
-              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+              <i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
                 </Button>
               </FormGroup>
             </Form>

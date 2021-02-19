@@ -126,9 +126,6 @@ render() {
                 <DropdownItem>
                   <ImageUploadModal
                             buttonLabel={"Image Upload"}
-                            channels={this.props.allChannels}
-                            currUser={this.props.currUser}
-                            joinChannelRequest={this.joinChannelRequestWrapper}
                         /> 
                 </DropdownItem>
                 <DropdownItem onClick={this.onLogout}>

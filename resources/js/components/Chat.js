@@ -135,7 +135,7 @@ import LoadingSpinner from './LoadingSpinner'
           ( 
           <React.Fragment>
           <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> 
-          <Button onClick={() => this.onClickUsersInRoom()}><i class="fa fa-users" aria-hidden="true"></i>
+          <Button onClick={() => this.onClickUsersInRoom()}><i className="fa fa-users" aria-hidden="true"></i>
           &nbsp; Users In Room ( Total : {this.props.selectedChannel.users.length} )</Button>
           </React.Fragment>
           ) : null}

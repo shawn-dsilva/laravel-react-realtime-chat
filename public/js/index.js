@@ -93763,7 +93763,7 @@ var Chat = /*#__PURE__*/function (_Component) {
           return _this2.onClickUsersInRoom();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-users",
+        className: "fa fa-users",
         "aria-hidden": "true"
       }), "\xA0 Users In Room ( Total : ", this.props.selectedChannel.users.length, " )")) : null, this.props.currUser.id == this.props.selectedChannel.owner_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_InviteUsersModal__WEBPACK_IMPORTED_MODULE_15__["default"], {
         buttonLabel: '+ Invite Users',
@@ -94910,7 +94910,7 @@ var Login = /*#__PURE__*/function (_Component) {
         size: "lg",
         block: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Login"), " \xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-arrow-circle-right",
+        className: "fa fa-arrow-circle-right",
         "aria-hidden": "true"
       })))));
     }
@@ -95209,10 +95209,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }), this.props.currUser.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
         right: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ImageUploadModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        buttonLabel: "Image Upload",
-        channels: this.props.allChannels,
-        currUser: this.props.currUser,
-        joinChannelRequest: this.joinChannelRequestWrapper
+        buttonLabel: "Image Upload"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
         onClick: this.onLogout
       }, "Logout"))))))));
@@ -95637,7 +95634,7 @@ var Register = /*#__PURE__*/function (_Component) {
         size: "lg",
         block: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Register"), " \xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-arrow-circle-right",
+        className: "fa fa-arrow-circle-right",
         "aria-hidden": "true"
       })))));
     }
