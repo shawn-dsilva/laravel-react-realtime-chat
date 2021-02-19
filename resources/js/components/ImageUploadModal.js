@@ -42,7 +42,7 @@ class ImageUploadModal extends Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+        <Button color="body" className="p-0" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}><legend>Upload A Profile Picture</legend></ModalHeader>
           <ModalBody>

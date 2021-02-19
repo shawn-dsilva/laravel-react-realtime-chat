@@ -19,7 +19,7 @@ import {
 import NotificationDropdown from './NotificationDropdown';
 import AllUsersList from './AllUsersList';
 import AllChannelsList from './AllChannelsList';
-
+import ImageUploadModal from './ImageUploadModal';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
@@ -119,9 +119,18 @@ render() {
             </div>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
+              <img src="/assets/images/defaultuser.png" width="30" height="30"></img>
               {this.props.currUser.name}
               </DropdownToggle>
               <DropdownMenu right>
+                <DropdownItem>
+                  <ImageUploadModal
+                            buttonLabel={"Image Upload"}
+                            channels={this.props.allChannels}
+                            currUser={this.props.currUser}
+                            joinChannelRequest={this.joinChannelRequestWrapper}
+                        /> 
+                </DropdownItem>
                 <DropdownItem onClick={this.onLogout}>
                 Logout
                 </DropdownItem>

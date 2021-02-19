@@ -6927,7 +6927,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=In
 exports.push([module.i, "@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.fullHeight {\n    margin:0!important;\n    width:100%\n}\n\n/* Styled scrollbars for Firefox and Webkit */\n* {\n    scrollbar-width: thin;\n    scrollbar-color: slategrey lightgrey;\n  }\n\n*::-webkit-scrollbar {\n    width: 14px;               /* width of the entire scrollbar */\n  }\n  \n  *::-webkit-scrollbar-track {\n    background: lightgrey!important ;       /* color of the tracking area */\n  }\n  \n  *::-webkit-scrollbar-thumb {\n    background-color:slategray;    /* color of the scroll thumb */\n    border-radius: 20px;       /* roundness of the scroll thumb */\n    border: 3px solid lightgrey;  /* creates padding around scroll thumb */\n  }\n\n.sidenav {\n    border-right: solid 1px grey;\n    display: block;\n    max-width: 16%!important;\n    flex-grow: 1!important;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n    max-width: 20%;\n    display:flex;\n    padding:1rem;\n    flex-direction: column;\n    flex-grow: 1;\n    overflow: hidden;\n}\n\n.chatMainContainer {\n    min-width:70%;\n    max-width: 84%;\n    margin:0;\n    flex: 1 0;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n    padding:0;\n}\n\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.3rem;\n    height:7%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n    display:flex;\n}\n\n.channelDescButton {\n    font-size:1.2rem;\n    background-color: white!important;\n    border:none;\n    color:#6c757d!important;\n}\n\n.popover {\n    max-width: 25%!important;\n}\n\n.online {\n    height: 5px;\n    width: 5px;\n    border: solid 5px greenyellow;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.offline {\n    height: 5px;\n    width: 5px;\n    border: solid 5px lightgrey;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.sidepaneParent {\n    margin:1rem;\n    height:45vh;\n    display: flex;\n    flex-direction: column;\n}\n\n.sidepaneParent h3 {\n    border-bottom: 1px lightgrey solid;\n    padding-bottom:0.7rem;\n}\n.sidepaneDm {\n    overflow-y: auto;\n    display:block\n}\n\n.sidepaneChannel {\n    overflow-y: auto;\n    display:block\n}\n\n\n\n.dmuser {\n    padding:0.8rem;\n}\n\n.channelElement {\n    padding:0.5rem;\n}\n\n.channelElement button {\n    text-align: left;\n}\n\n.online-text {\ncolor:green;\nfont-size:1rem;\n}\n\n.offline-text {\ncolor:grey;\nfont-size:1rem;\n\n}\n\n.authcard {\n    width:20%;\n    margin: 0 auto;\n    background:white;\n    padding:2rem;  \n    border: 5px white solid;\n    border-radius: 2%;\n    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;\n}\n\n.authcard h1 {\n    font-weight: 900;\n    text-align: center;\n    padding:0.5rem;\n    font-size:2.3rem!important;\n    color:#343a40!important;\n}\n\n.authcard p {\n    font-size:1.1rem;\n    text-align: center;\n    color:#383838;\n}\n\n.authlabel {\n    font-size:1.1rem;\n    font-weight: 500;\n}\n\n.authcontainer {\n    background:linear-gradient(105deg, #F05340 51%, #61DBFB 51.07%);\n    height:100%;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.authcontainer h1, h2 {\n    color:white;\n    font-weight: 800;\n}\n\n.authcontainer h1 {\n    font-size:3rem;\n}\n\n\n.cardcontainer {\n    width: 100%;\n    margin: 6rem 0;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n", ""]);
+exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.fullHeight {\n    margin:0!important;\n    width:100%\n}\n\nimg {\n    margin:0 8px;\n}\n/* Styled scrollbars for Firefox and Webkit */\n* {\n    scrollbar-width: thin;\n    scrollbar-color: slategrey lightgrey;\n  }\n\n*::-webkit-scrollbar {\n    width: 14px;               /* width of the entire scrollbar */\n  }\n  \n  *::-webkit-scrollbar-track {\n    background: lightgrey!important ;       /* color of the tracking area */\n  }\n  \n  *::-webkit-scrollbar-thumb {\n    background-color:slategray;    /* color of the scroll thumb */\n    border-radius: 20px;       /* roundness of the scroll thumb */\n    border: 3px solid lightgrey;  /* creates padding around scroll thumb */\n  }\n\n.sidenav {\n    border-right: solid 1px grey;\n    display: block;\n    max-width: 16%!important;\n    flex-grow: 1!important;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n    max-width: 20%;\n    display:flex;\n    padding:1rem;\n    flex-direction: column;\n    flex-grow: 1;\n    overflow: hidden;\n}\n\n.chatMainContainer {\n    min-width:70%;\n    max-width: 84%;\n    margin:0;\n    flex: 1 0;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n    padding:0;\n}\n\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.3rem;\n    height:7%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n    display:flex;\n}\n\n.channelDescButton {\n    font-size:1.2rem;\n    background-color: white!important;\n    border:none;\n    color:#6c757d!important;\n}\n\n.popover {\n    max-width: 25%!important;\n}\n\n.online {\n    height: 5px;\n    width: 5px;\n    border: solid 5px greenyellow;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.offline {\n    height: 5px;\n    width: 5px;\n    border: solid 5px lightgrey;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.sidepaneParent {\n    margin:1rem;\n    height:45vh;\n    display: flex;\n    flex-direction: column;\n}\n\n.sidepaneParent h3 {\n    border-bottom: 1px lightgrey solid;\n    padding-bottom:0.7rem;\n}\n.sidepaneDm {\n    overflow-y: auto;\n    display:block\n}\n\n.sidepaneChannel {\n    overflow-y: auto;\n    display:block\n}\n\n\n\n.dmuser {\n    padding:0.8rem;\n}\n\n.channelElement {\n    padding:0.5rem;\n}\n\n.channelElement button {\n    text-align: left;\n}\n\n.online-text {\ncolor:green;\nfont-size:1rem;\n}\n\n.offline-text {\ncolor:grey;\nfont-size:1rem;\n\n}\n\n.authcard {\n    width:20%;\n    margin: 0 auto;\n    background:white;\n    padding:2rem;  \n    border: 5px white solid;\n    border-radius: 2%;\n    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;\n}\n\n.authcard h1 {\n    font-weight: 900;\n    text-align: center;\n    padding:0.5rem;\n    font-size:2.3rem!important;\n    color:#343a40!important;\n}\n\n.authcard p {\n    font-size:1.1rem;\n    text-align: center;\n    color:#383838;\n}\n\n.authlabel {\n    font-size:1.1rem;\n    font-weight: 500;\n}\n\n.authcontainer {\n    background:linear-gradient(105deg, #F05340 51%, #61DBFB 51.07%);\n    height:100%;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.authcontainer h1, h2 {\n    color:white;\n    font-weight: 800;\n}\n\n.authcontainer h1 {\n    font-size:3rem;\n}\n\n\n.cardcontainer {\n    width: 100%;\n    margin: 6rem 0;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n", ""]);
 
 // exports
 
@@ -94343,6 +94343,155 @@ _defineProperty(CreateChannelModal, "propTypes", {
 
 /***/ }),
 
+/***/ "./resources/js/components/ImageUploadModal.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/ImageUploadModal.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+var ImageUploadModal = /*#__PURE__*/function (_Component) {
+  _inherits(ImageUploadModal, _Component);
+
+  var _super = _createSuper(ImageUploadModal);
+
+  function ImageUploadModal() {
+    var _this;
+
+    _classCallCheck(this, ImageUploadModal);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      toggle: false,
+      modal: false,
+      channelName: "",
+      description: "",
+      type: "",
+      visible: true
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "toggle", function () {
+      _this.setState({
+        modal: !_this.state.modal
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
+      _this.setState(_defineProperty({}, e.target.name, e.target.value));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onCheck", function () {
+      _this.setState({
+        visible: !_this.state.visible
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
+      e.preventDefault();
+      var _this$state = _this.state,
+          channelName = _this$state.channelName,
+          description = _this$state.description,
+          type = _this$state.type,
+          visible = _this$state.visible;
+      console.log("in form submit function");
+      var channelData = {
+        channelName: channelName,
+        description: description,
+        type: type,
+        visible: visible
+      };
+
+      _this.props.CreateChannel(channelData);
+    });
+
+    return _this;
+  }
+
+  _createClass(ImageUploadModal, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        color: "body",
+        className: "p-0",
+        onClick: this.toggle
+      }, this.props.buttonLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+        isOpen: this.state.modal,
+        toggle: this.toggle,
+        className: this.props.className
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalHeader"], {
+        toggle: this.toggle
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", null, "Upload A Profile Picture")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
+        color: "info"
+      }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+        id: "upload-image",
+        onSubmit: this.onSubmit
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        form: "upload-image",
+        color: "primary"
+      }, "Confirm"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        color: "danger",
+        onClick: this.toggle
+      }, "Cancel"))));
+    }
+  }]);
+
+  return ImageUploadModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+_defineProperty(ImageUploadModal, "propTypes", {
+  CreateChannel: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func.isRequired
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, {
+  CreateChannel: _actions_chatActions__WEBPACK_IMPORTED_MODULE_4__["CreateChannel"]
+})(ImageUploadModal));
+
+/***/ }),
+
 /***/ "./resources/js/components/InviteUsersModal.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/InviteUsersModal.js ***!
@@ -94910,12 +95059,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NotificationDropdown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NotificationDropdown */ "./resources/js/components/NotificationDropdown.js");
 /* harmony import */ var _AllUsersList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AllUsersList */ "./resources/js/components/AllUsersList.js");
 /* harmony import */ var _AllChannelsList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AllChannelsList */ "./resources/js/components/AllChannelsList.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
-/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
-/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
+/* harmony import */ var _ImageUploadModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ImageUploadModal */ "./resources/js/components/ImageUploadModal.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _utils_echoHelpers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/echoHelpers */ "./resources/js/components/utils/echoHelpers.js");
+/* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
+/* harmony import */ var _actions_authActions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../actions/authActions */ "./resources/js/actions/authActions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94939,6 +95089,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -94998,7 +95149,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       // this.props.isAuth();
       // console.log(this.props.location.state.token);
-      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_7__["echoInit"])(this.myToken);
+      Object(_utils_echoHelpers__WEBPACK_IMPORTED_MODULE_8__["echoInit"])(this.myToken);
       this.props.getNotifications();
     }
   }, {
@@ -95044,9 +95195,18 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownToggle"], {
         nav: true,
         caret: true
-      }, this.props.currUser.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "/assets/images/defaultuser.png",
+        width: "30",
+        height: "30"
+      }), this.props.currUser.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
         right: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ImageUploadModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        buttonLabel: "Image Upload",
+        channels: this.props.allChannels,
+        currUser: this.props.currUser,
+        joinChannelRequest: this.joinChannelRequestWrapper
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
         onClick: this.onLogout
       }, "Logout"))))))));
     }
@@ -95056,19 +95216,19 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 _defineProperty(NavbarMain, "propTypes", {
-  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  acceptRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.number.isRequired,
-  notifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  currUser: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.object.isRequired,
-  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  logout: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired,
-  usersList: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  channels: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.array.isRequired,
-  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func.isRequired
+  makeRequest: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  getNotifications: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  getAllNotifications: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  acceptRequest: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  unreadNotifs: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.number.isRequired,
+  notifications: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array.isRequired,
+  allNotifications: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array.isRequired,
+  currUser: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.object.isRequired,
+  markAsRead: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  logout: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired,
+  usersList: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array.isRequired,
+  channels: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.array.isRequired,
+  joinChannelRequest: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.func.isRequired
 });
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -95084,14 +95244,14 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps, {
-  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["makeRequest"],
-  acceptRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["acceptRequest"],
-  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getNotifications"],
-  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["getAllNotifications"],
-  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["markAsRead"],
-  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_8__["joinChannelRequest"],
-  logout: _actions_authActions__WEBPACK_IMPORTED_MODULE_9__["logout"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
+  makeRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["makeRequest"],
+  acceptRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["acceptRequest"],
+  getNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["getNotifications"],
+  getAllNotifications: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["getAllNotifications"],
+  markAsRead: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["markAsRead"],
+  joinChannelRequest: _actions_chatActions__WEBPACK_IMPORTED_MODULE_9__["joinChannelRequest"],
+  logout: _actions_authActions__WEBPACK_IMPORTED_MODULE_10__["logout"]
 })(NavbarMain));
 
 /***/ }),

@@ -15,6 +15,9 @@ html,body, #root, .container-true, .fullHeight {
     width:100%
 }
 
+img {
+    margin:0 8px;
+}
 /* Styled scrollbars for Firefox and Webkit */
 * {
     scrollbar-width: thin;
