@@ -93152,7 +93152,7 @@ var markAsRead = function markAsRead(id) {
 };
 var uploadImage = function uploadImage(imageForm) {
   return function (dispatch, getState) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/images/upload", imageForm, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/upload/profile", imageForm, Object(_authActions__WEBPACK_IMPORTED_MODULE_1__["makeHeaders"])(getState), {
       withCredentials: true
     }).then(function (res) {
       var response = res.data;
@@ -94444,6 +94444,8 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
       console.log("UPLOAD CHOSEN FILE DATA");
       console.log(_this.state.selectedImage);
       console.log(formData);
+
+      _this.props.uploadImage(formData);
     });
 
     return _this;

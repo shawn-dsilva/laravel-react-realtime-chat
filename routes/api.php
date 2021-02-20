@@ -49,6 +49,7 @@ Route::group([
     Route::post('createchannel', 'ChatController@createChannel');
     Route::post('joinchannel', 'ChatController@joinChannel');
     Route::post('invitetochannel', 'ChatController@inviteToChannel');
+    Route::post('upload/profile', 'ImageUploadController@updateProfilePicture');
 
 
 });

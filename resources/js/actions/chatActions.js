@@ -354,7 +354,7 @@ export const markAsRead = (id) => (dispatch, getState) => {
 export const uploadImage = (imageForm) => (dispatch,getState) => {
 
     axios
-        .post("/api/images/upload", imageForm, makeHeaders(getState), {withCredentials:true})
+        .post("/api/upload/profile", imageForm, makeHeaders(getState), {withCredentials:true})
         .then(res => {
             const response = res.data;
             console.log("IMAGE UPLOAD RESPONSE BELOW");

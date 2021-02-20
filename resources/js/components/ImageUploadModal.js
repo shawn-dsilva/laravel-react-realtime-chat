@@ -43,6 +43,7 @@ class ImageUploadModal extends Component {
     console.log("UPLOAD CHOSEN FILE DATA");
     console.log(this.state.selectedImage);
     console.log(formData);
+    this.props.uploadImage(formData);
 
   
   };
