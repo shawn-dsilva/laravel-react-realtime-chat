@@ -13,7 +13,7 @@
 
 ### Immediate
 
-- Functionality for Profile Image upload by the user
+- Create User Details table for User profile data, most importantly the name of user's avatar image
 - PostgreSQL integration and dummy date creation
 - Custom 404 page
 - Typing events support.
@@ -31,6 +31,7 @@
 
 ### Done
 
+- Functionality for Profile Image upload by the user
 - Login/Registration error display
 - ChatMainContainer CSS margin and padding fixes
 - Styled scrollbars
