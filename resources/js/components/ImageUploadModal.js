@@ -9,7 +9,8 @@ class ImageUploadModal extends Component {
   state = {
     toggle:false,
     modal:false,
-    selectedImage:null
+    selectedImage:null,
+    imagePreview:null,
   }
 
   static propTypes = {
@@ -24,6 +25,7 @@ class ImageUploadModal extends Component {
 
   onChange = (e) => {
     this.setState({ selectedImage: e.target.files[0] });
+    this.setState({ imagePreview: URL.createObjectURL(e.target.files[0])});
   };
   
 
@@ -58,6 +60,8 @@ class ImageUploadModal extends Component {
           <Alert color="info">
           You can upload your own profile picture here.
         </Alert>
+        <Label for="imagePreview">Image Preview</Label>
+        <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img>
         <Form id="upload-image" onSubmit={this.onSubmit}>
         <Label for="profileImage">Profile Picture</Label>
         <Input type="file" name="file" id="profileImage" onChange={this.onChange} />

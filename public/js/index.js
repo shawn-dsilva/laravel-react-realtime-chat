@@ -94420,7 +94420,8 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "state", {
       toggle: false,
       modal: false,
-      selectedImage: null
+      selectedImage: null,
+      imagePreview: null
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
@@ -94432,6 +94433,10 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "onChange", function (e) {
       _this.setState({
         selectedImage: e.target.files[0]
+      });
+
+      _this.setState({
+        imagePreview: URL.createObjectURL(e.target.files[0])
       });
     });
 
@@ -94466,7 +94471,14 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         toggle: this.toggle
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", null, "Upload A Profile Picture")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
         color: "info"
-      }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
+        "for": "imagePreview"
+      }, "Image Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        height: "300px",
+        width: "300px",
+        id: "imagePreview",
+        src: this.state.imagePreview
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         id: "upload-image",
         onSubmit: this.onSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Label"], {
