@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { uploadImage } from '../actions/chatActions';
 import Cropper from 'react-easy-crop';
+import getCroppedImg from './cropImage'
+
 
 class ImageUploadModal extends Component {
 
@@ -15,7 +17,9 @@ class ImageUploadModal extends Component {
     crop: { x: 0, y: 0 },
     zoom: 1,
     aspect: 1,
-    isChosen:false
+    isChosen:false,
+    croppedImage:null,
+    croppedAreaPixels:null,
   }
 
   static propTypes = {
@@ -58,8 +62,8 @@ class ImageUploadModal extends Component {
 
   onCropComplete = (croppedArea, croppedAreaPixels) => {
     console.log(croppedArea, croppedAreaPixels)
+    this.setState({ croppedAreaPixels: croppedAreaPixels});
   }
-
   onZoomChange = (zoom) => {
     this.setState({ zoom })
   }
@@ -84,6 +88,19 @@ class ImageUploadModal extends Component {
 
   
   };
+
+  showCroppedImage = async () => {
+    try {
+      const croppedImage = await getCroppedImg(
+        this.state.imagePreview,
+        this.state.croppedAreaPixels,
+        0
+      )
+      this.setState({croppedImage:croppedImage});
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   render() {
     return (
@@ -111,9 +128,14 @@ class ImageUploadModal extends Component {
            onZoomChange={this.onZoomChange}
          />
      </div>
-       : null
+       : <img height="300px" width="300px" id="imagePreview" src={this.state.croppedImage}></img>
        }
-       
+      <Button
+          onClick={this.showCroppedImage}
+          color="primary"
+        >
+          Show Result
+        </Button>
         <Form id="upload-image" onSubmit={this.onSubmit}>
         <Label for="profileImage">Profile Picture</Label>
         <Input type="file" name="file" id="profileImage" onChange={this.onChange} />
