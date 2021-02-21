@@ -281,3 +281,8 @@ font-size:1rem;
     align-items: center;
 }
 
+.imagePreview {
+    position:relative;
+    flex: 1 1;
+    padding:10rem;
+}

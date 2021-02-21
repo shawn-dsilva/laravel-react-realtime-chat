@@ -30,6 +30,21 @@ class ImageUploadModal extends Component {
     this.setState({isChosen:false});
   }
 
+  CropperWrapper = () => {
+    return(
+      <div className="imagePreview">
+          <Cropper
+            image={this.state.imagePreview}
+            crop={this.state.crop}
+            zoom={this.state.zoom}
+            aspect={this.state.aspect}
+            onCropChange={this.onCropChange}
+            onCropComplete={this.onCropComplete}
+            onZoomChange={this.onZoomChange}
+          />
+      </div>
+    )
+  }
 
   onChange = (e) => {
     this.setState({ selectedImage: e.target.files[0] });
@@ -84,15 +99,19 @@ class ImageUploadModal extends Component {
         <br></br>
         {/* <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img> */}
        {
-         this.state.isChosen ?  <Cropper
-         image={this.state.imagePreview}
-         crop={this.state.crop}
-         zoom={this.state.zoom}
-         aspect={this.state.aspect}
-         onCropChange={this.onCropChange}
-         onCropComplete={this.onCropComplete}
-         onZoomChange={this.onZoomChange}
-       /> : null
+         this.state.isChosen ? 
+         <div className="imagePreview">
+         <Cropper
+           image={this.state.imagePreview}
+           crop={this.state.crop}
+           zoom={this.state.zoom}
+           aspect={this.state.aspect}
+           onCropChange={this.onCropChange}
+           onCropComplete={this.onCropComplete}
+           onZoomChange={this.onZoomChange}
+         />
+     </div>
+       : null
        }
        
         <Form id="upload-image" onSubmit={this.onSubmit}>
