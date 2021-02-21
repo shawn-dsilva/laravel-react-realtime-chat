@@ -15,9 +15,9 @@
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.10.1",
         "@babel/preset-react": "^7.0.0",
-        "axios": "^0.19",
+        "axios": "^0.21.1",
         "bootstrap": "^4.0.0",
-        "browser-sync": "^2.26.12",
+        "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^7.0",
         "jquery": "^3.2",
@@ -26,7 +26,7 @@
         "popper.js": "^1.12",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
-        "resolve-url-loader": "^3.1.0",
+        "resolve-url-loader": "^3.1.2",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0"
     },
@@ -34,6 +34,7 @@
         "concurrently": "^5.3.0",
         "laravel-echo": "^1.8.0",
         "pusher-js": "^6.0.3",
+        "react-easy-crop": "^3.3.1",
         "react-redux": "^7.2.0",
         "react-router-dom": "^5.2.0",
         "reactstrap": "^8.4.1",
@@ -41,5 +42,4 @@
         "redux-thunk": "^2.3.0"
     },
     "homepage": "https://demos.shawndsilva.com/realtime-chat-app"
-
 }

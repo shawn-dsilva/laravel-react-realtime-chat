@@ -3,6 +3,7 @@ import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGr
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { uploadImage } from '../actions/chatActions';
+import Cropper from 'react-easy-crop';
 
 class ImageUploadModal extends Component {
 
@@ -11,6 +12,10 @@ class ImageUploadModal extends Component {
     modal:false,
     selectedImage:null,
     imagePreview:null,
+    crop: { x: 0, y: 0 },
+    zoom: 1,
+    aspect: 1,
+    isChosen:false
   }
 
   static propTypes = {
@@ -20,14 +25,29 @@ class ImageUploadModal extends Component {
 
   toggle = () => {
     this.setState({ modal : !this.state.modal});
+    this.setState({ selectedImage: null});
+    this.setState({ imagePreview: null});
+    this.setState({isChosen:false});
   }
 
 
   onChange = (e) => {
     this.setState({ selectedImage: e.target.files[0] });
     this.setState({ imagePreview: URL.createObjectURL(e.target.files[0])});
+    this.setState({isChosen:true});
   };
   
+  onCropChange = (crop) => {
+    this.setState({ crop })
+  }
+
+  onCropComplete = (croppedArea, croppedAreaPixels) => {
+    console.log(croppedArea, croppedAreaPixels)
+  }
+
+  onZoomChange = (zoom) => {
+    this.setState({ zoom })
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -61,7 +81,20 @@ class ImageUploadModal extends Component {
           You can upload your own profile picture here.
         </Alert>
         <Label for="imagePreview">Image Preview</Label>
-        <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img>
+        <br></br>
+        {/* <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img> */}
+       {
+         this.state.isChosen ?  <Cropper
+         image={this.state.imagePreview}
+         crop={this.state.crop}
+         zoom={this.state.zoom}
+         aspect={this.state.aspect}
+         onCropChange={this.onCropChange}
+         onCropComplete={this.onCropComplete}
+         onZoomChange={this.onZoomChange}
+       /> : null
+       }
+       
         <Form id="upload-image" onSubmit={this.onSubmit}>
         <Label for="profileImage">Profile Picture</Label>
         <Input type="file" name="file" id="profileImage" onChange={this.onChange} />
