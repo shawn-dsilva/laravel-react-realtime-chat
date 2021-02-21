@@ -97007,24 +97007,30 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
             case 3:
               croppedImage = _context.sent;
 
+              // sets the returned Blob to croppedImage in state
               _this.setState({
-                croppedImage: croppedImage
+                croppedImage: URL.createObjectURL(croppedImage)
+              }); // Returned blob is set to selectedImage, this will be sent over to the server
+
+
+              _this.setState({
+                selectedImage: croppedImage
               });
 
-              _context.next = 10;
+              _context.next = 11;
               break;
 
-            case 7:
-              _context.prev = 7;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               console.error(_context.t0);
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 7]]);
+      }, _callee, null, [[0, 8]]);
     })));
 
     return _this;
@@ -97047,7 +97053,7 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         color: "info"
       }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         "for": "imagePreview"
-      }, "Image Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Image Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "imagePreview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_easy_crop__WEBPACK_IMPORTED_MODULE_6__["default"], {
         image: this.state.imagePreview,
@@ -97057,15 +97063,15 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         onCropChange: this.onCropChange,
         onCropComplete: this.onCropComplete,
         onZoomChange: this.onZoomChange
-      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+        onClick: this.showCroppedImage,
+        color: "primary"
+      }, "Confirm Crop")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         height: "300px",
         width: "300px",
         id: "imagePreview",
         src: this.state.croppedImage
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-        onClick: this.showCroppedImage,
-        color: "primary"
-      }, "Show Result"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
         id: "upload-image",
         onSubmit: this.onSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
@@ -98355,7 +98361,7 @@ function _getCroppedImg() {
 
             return _context.abrupt("return", new Promise(function (resolve) {
               canvas.toBlob(function (file) {
-                resolve(URL.createObjectURL(file));
+                resolve(file);
               }, 'image/jpeg');
             }));
 

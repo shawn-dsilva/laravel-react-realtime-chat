@@ -96,7 +96,12 @@ class ImageUploadModal extends Component {
         this.state.croppedAreaPixels,
         0
       )
-      this.setState({croppedImage:croppedImage});
+
+      // sets the returned Blob to croppedImage in state
+      this.setState({croppedImage:URL.createObjectURL(croppedImage)});
+
+      // Returned blob is set to selectedImage, this will be sent over to the server
+      this.setState({selectedImage:croppedImage});
     } catch (e) {
       console.error(e)
     }
@@ -117,6 +122,9 @@ class ImageUploadModal extends Component {
         {/* <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img> */}
        {
          this.state.isChosen ? 
+         <div>
+
+
          <div className="imagePreview">
          <Cropper
            image={this.state.imagePreview}
@@ -128,14 +136,12 @@ class ImageUploadModal extends Component {
            onZoomChange={this.onZoomChange}
          />
      </div>
+     <br></br>
+     <Button  onClick={this.showCroppedImage} color="primary">Confirm Crop</Button>
+         </div>
        : <img height="300px" width="300px" id="imagePreview" src={this.state.croppedImage}></img>
        }
-      <Button
-          onClick={this.showCroppedImage}
-          color="primary"
-        >
-          Show Result
-        </Button>
+
         <Form id="upload-image" onSubmit={this.onSubmit}>
         <Label for="profileImage">Profile Picture</Label>
         <Input type="file" name="file" id="profileImage" onChange={this.onChange} />
