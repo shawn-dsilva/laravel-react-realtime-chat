@@ -11,9 +11,24 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
 // use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class AuthController extends Controller
 {
+
+    use AuthenticatesUsers;
+
+    protected function authenticated(Request $request, $user)
+    {
+        return response([
+            $user->id,
+            $user->name,
+            $user->email,
+        ]);
+    }
+
+
     /**
      * Create user
      *
@@ -131,7 +146,12 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        $user = $request->user();
+        error_log($request->user());
+         if(User::find($request->user()->id)->details) {
+            $user->avatar = User::find($request->user()->id)->details->avatar;
+        };
+        return response()->json($user);
     }
 
     public function allUsersList()

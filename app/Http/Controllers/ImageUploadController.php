@@ -37,4 +37,10 @@ class ImageUploadController extends Controller
         error_log($path);
 
      }
+
+     public function getProfilePicture(Request $request) {
+        $user = User::find(auth()->user()->id);
+        $avatar = User::find(1)->avatar;
+
+     }
 }

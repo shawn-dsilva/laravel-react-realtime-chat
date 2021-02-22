@@ -119,7 +119,11 @@ render() {
             </div>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-              <img src="/assets/images/defaultuser.png" width="30" height="30"></img>
+                {
+                  this.props.currUser.avatar ? 
+                  <img src={"storage/"+this.props.currUser.avatar} width="30" height="30"></img> : 
+                  <img src="/assets/images/defaultuser.png" width="30" height="30"></img>
+                }
               {this.props.currUser.name}
               </DropdownToggle>
               <DropdownMenu right>
