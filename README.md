@@ -13,8 +13,8 @@
 
 ### Immediate
 
-- Fixes to Image upload/cropping UI on the React side
-- Create User Details table for User profile data, most importantly the name of user's avatar image
+- Display avatars of users and groups in chat sidebar
+- Sucesses message upon successful update of DP
 - PostgreSQL integration and dummy date creation
 - Custom 404 page
 - Typing events support.
@@ -32,6 +32,8 @@
 
 ### Done
 
+- Create User Details table for User profile data, most importantly the name of user's avatar image completed
+- Fixes to Image upload/cropping UI on the React side
 - Cropping functionality and sending of cropped image to server code completed
 - Functionality for Profile Image upload by the user
 - Login/Registration error display
