@@ -128,14 +128,12 @@ class ImageUploadModal extends Component {
           <Alert color="info">
           You can upload your own profile picture here.
         </Alert>
-        <Label for="imagePreview">Image Preview</Label>
-        <br></br>
-        {/* <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img> */}
+
        {
          this.state.isChosen ? 
          <div className="cropperContainer">
-
-
+        <Label for="imagePreview">Image Preview</Label>
+        <br></br>
          <div className="imagePreview">
          <Cropper
            image={this.state.imagePreview}
@@ -150,10 +148,13 @@ class ImageUploadModal extends Component {
      <br></br>
      <Button  onClick={this.confirmCroppedImage} color="primary">Confirm Crop</Button>
          </div>
-       : 
-       <div>
+       : !isNull(this.state.croppedImage) && <div>
+        <Label for="imagePreview">Image Preview</Label>
+        <br></br>
        <img class="croppedImage" src={this.state.croppedImage}></img>
        </div>
+      
+
        }
 
         <Form id="upload-image" onSubmit={this.onSubmit}>
