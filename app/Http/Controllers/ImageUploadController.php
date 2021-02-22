@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\UserDetail;
+use App\User;
+
 
 class ImageUploadController extends Controller
 {
@@ -13,7 +16,17 @@ class ImageUploadController extends Controller
         // Stores the Image into a folder called Avatars, 
         // image name is generated and assigned to $path
         // disk("public") is the local directory storage/app/public
+
+        $details = new UserDetail;
         $path = Storage::disk('public')->put('avatars', $image);
+        $details->avatar = $path;
+
+        $user = User::find(auth()->user()->id);
+
+        $user->details()->save($details);
+
+
+
 
 
         error_log('File Name: '.$image->getClientOriginalName());
