@@ -6986,7 +6986,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=In
 exports.push([module.i, "@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.fullHeight {\n    margin:0!important;\n    width:100%\n}\n\nimg {\n    margin:0 8px;\n}\n/* Styled scrollbars for Firefox and Webkit */\n* {\n    scrollbar-width: thin;\n    scrollbar-color: slategrey lightgrey;\n  }\n\n*::-webkit-scrollbar {\n    width: 14px;               /* width of the entire scrollbar */\n  }\n  \n  *::-webkit-scrollbar-track {\n    background: lightgrey!important ;       /* color of the tracking area */\n  }\n  \n  *::-webkit-scrollbar-thumb {\n    background-color:slategray;    /* color of the scroll thumb */\n    border-radius: 20px;       /* roundness of the scroll thumb */\n    border: 3px solid lightgrey;  /* creates padding around scroll thumb */\n  }\n\n.sidenav {\n    border-right: solid 1px grey;\n    display: block;\n    max-width: 16%!important;\n    flex-grow: 1!important;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n    max-width: 20%;\n    display:flex;\n    padding:1rem;\n    flex-direction: column;\n    flex-grow: 1;\n    overflow: hidden;\n}\n\n.chatMainContainer {\n    min-width:70%;\n    max-width: 84%;\n    margin:0;\n    flex: 1 0;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n    padding:0;\n}\n\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.3rem;\n    height:7%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n    display:flex;\n}\n\n.channelDescButton {\n    font-size:1.2rem;\n    background-color: white!important;\n    border:none;\n    color:#6c757d!important;\n}\n\n.popover {\n    max-width: 25%!important;\n}\n\n.online {\n    height: 5px;\n    width: 5px;\n    border: solid 5px greenyellow;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.offline {\n    height: 5px;\n    width: 5px;\n    border: solid 5px lightgrey;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.sidepaneParent {\n    margin:1rem;\n    height:45vh;\n    display: flex;\n    flex-direction: column;\n}\n\n.sidepaneParent h3 {\n    border-bottom: 1px lightgrey solid;\n    padding-bottom:0.7rem;\n}\n.sidepaneDm {\n    overflow-y: auto;\n    display:block\n}\n\n.sidepaneChannel {\n    overflow-y: auto;\n    display:block\n}\n\n\n\n.dmuser {\n    padding:0.8rem;\n}\n\n.channelElement {\n    padding:0.5rem;\n}\n\n.channelElement button {\n    text-align: left;\n}\n\n.online-text {\ncolor:green;\nfont-size:1rem;\n}\n\n.offline-text {\ncolor:grey;\nfont-size:1rem;\n\n}\n\n.authcard {\n    width:20%;\n    margin: 0 auto;\n    background:white;\n    padding:2rem;  \n    border: 5px white solid;\n    border-radius: 2%;\n    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;\n}\n\n.authcard h1 {\n    font-weight: 900;\n    text-align: center;\n    padding:0.5rem;\n    font-size:2.3rem!important;\n    color:#343a40!important;\n}\n\n.authcard p {\n    font-size:1.1rem;\n    text-align: center;\n    color:#383838;\n}\n\n.authlabel {\n    font-size:1.1rem;\n    font-weight: 500;\n}\n\n.authcontainer {\n    background:linear-gradient(105deg, #F05340 51%, #61DBFB 51.07%);\n    height:100%;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.authcontainer h1, h2 {\n    color:white;\n    font-weight: 800;\n}\n\n.authcontainer h1 {\n    font-size:3rem;\n}\n\n\n.cardcontainer {\n    width: 100%;\n    margin: 6rem 0;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.imagePreview {\n    position:relative;\n    flex: 1 1;\n    padding:10rem;\n}\n\n.croppedImage {\n    max-height: 300px;\n    max-width: 300px;\n    height: auto;\n    width: auto;\n}", ""]);
+exports.push([module.i, "\n\nhtml,body, #root, .container-true, .fullHeight {\n    height:100%!important;\n    overflow:hidden;\n    background:white;\n    font-family: 'Inter', sans-serif!important;\n\n}\n\n.fullHeight {\n    margin:0!important;\n    width:100%\n}\n\nimg {\n    margin:0 8px;\n}\n/* Styled scrollbars for Firefox and Webkit */\n* {\n    scrollbar-width: thin;\n    scrollbar-color: slategrey lightgrey;\n  }\n\n*::-webkit-scrollbar {\n    width: 14px;               /* width of the entire scrollbar */\n  }\n  \n  *::-webkit-scrollbar-track {\n    background: lightgrey!important ;       /* color of the tracking area */\n  }\n  \n  *::-webkit-scrollbar-thumb {\n    background-color:slategray;    /* color of the scroll thumb */\n    border-radius: 20px;       /* roundness of the scroll thumb */\n    border: 3px solid lightgrey;  /* creates padding around scroll thumb */\n  }\n\n.sidenav {\n    border-right: solid 1px grey;\n    display: block;\n    max-width: 16%!important;\n    flex-grow: 1!important;\n}\n\n.usersInRoom {\n    border-left: solid 1px grey;\n    max-width: 20%;\n    display:flex;\n    padding:1rem;\n    flex-direction: column;\n    flex-grow: 1;\n    overflow: hidden;\n}\n\n.chatMainContainer {\n    min-width:70%;\n    max-width: 84%;\n    margin:0;\n    flex: 1 0;\n    display:flex;\n    flex-direction: column;\n    max-height: 95%;\n    padding:0;\n}\n\n\n.chatInput {\n    margin-top:auto;\n    border-top: 1px solid grey;\n    border-bottom: 1px solid grey;\n    padding:0.3rem;\n    padding-bottom:0.3rem;\n    height:7%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatInput input {\n    height:100%;\n}\n\n.input-group-append {\n    width:10%;\n}\n\n.input-group-append button {\n    width: 100%;\n    font-weight: bold;\n    text-transform: uppercase;\n\n}\n\n.chatDisplay {\n    flex-direction: column!important;\n    flex-wrap:nowrap;\n    overflow-y:auto;\n    height: 85%;\n    /*margin left and right set to 0 to over write row class -15px left and right margins*/\n    margin-left:0!important;\n    margin-right:0!important;\n}\n\n.chatUserMsg {\n    text-align:right;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#0a85ff;\n    color:white;\n    padding:1rem;\n    border: 2px solid #0a85ff;\n    border-top-left-radius:15px;\n    border-bottom-left-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-left:auto;\n    flex-grow: 0;\n}\n\n.chatNotUserMsg {\n    text-align:left;\n    width:-webkit-max-content;\n    width:-moz-max-content;\n    width:max-content;\n    max-width:70%;\n    background:#f5f5f5;\n    padding:1rem;\n    border: 2px solid #f5f5f5;\n    border-top-right-radius:15px;\n    border-bottom-right-radius: 15px;\n    margin: 0.5rem 0 0.5rem 0;\n    margin-right:auto;\n    flex-grow: 0;\n}\n\n.navCustom {\n    border-bottom: solid 1px grey;\n    padding: 0 0.8rem!important;\n}\n\n.unread {\n    background-color: rgb(225, 243, 255)!important;\n}\n\n.channelName {\n    border-bottom: grey 2px solid;\n    padding: 0.8rem;\n    font-size:1.8rem;\n    display:flex;\n}\n\n.channelDescButton {\n    font-size:1.2rem;\n    background-color: white!important;\n    border:none;\n    color:#6c757d!important;\n}\n\n.popover {\n    max-width: 25%!important;\n}\n\n.online {\n    height: 5px;\n    width: 5px;\n    border: solid 5px greenyellow;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.offline {\n    height: 5px;\n    width: 5px;\n    border: solid 5px lightgrey;\n    border-radius: 50%;\n    display:inline-block;\n    margin:0 5px;\n}\n\n.sidepaneParent {\n    margin:1rem;\n    height:45vh;\n    display: flex;\n    flex-direction: column;\n}\n\n.sidepaneParent h3 {\n    border-bottom: 1px lightgrey solid;\n    padding-bottom:0.7rem;\n}\n.sidepaneDm {\n    overflow-y: auto;\n    display:block\n}\n\n.sidepaneChannel {\n    overflow-y: auto;\n    display:block\n}\n\n\n\n.dmuser {\n    padding:0.8rem;\n}\n\n.channelElement {\n    padding:0.5rem;\n}\n\n.channelElement button {\n    text-align: left;\n}\n\n.online-text {\ncolor:green;\nfont-size:1rem;\n}\n\n.offline-text {\ncolor:grey;\nfont-size:1rem;\n\n}\n\n.authcard {\n    width:20%;\n    margin: 0 auto;\n    background:white;\n    padding:2rem;  \n    border: 5px white solid;\n    border-radius: 2%;\n    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;\n}\n\n.authcard h1 {\n    font-weight: 900;\n    text-align: center;\n    padding:0.5rem;\n    font-size:2.3rem!important;\n    color:#343a40!important;\n}\n\n.authcard p {\n    font-size:1.1rem;\n    text-align: center;\n    color:#383838;\n}\n\n.authlabel {\n    font-size:1.1rem;\n    font-weight: 500;\n}\n\n.authcontainer {\n    background:linear-gradient(105deg, #F05340 51%, #61DBFB 51.07%);\n    height:100%;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.authcontainer h1, h2 {\n    color:white;\n    font-weight: 800;\n}\n\n.authcontainer h1 {\n    font-size:3rem;\n}\n\n\n.cardcontainer {\n    width: 100%;\n    margin: 6rem 0;\n    display:flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n\n.imagePreview {\n    position:relative;\n    flex: 1 1;\n    padding:10rem;\n}\n\n.croppedImage {\n    max-height: 300px;\n    max-width: 300px;\n    height: auto;\n    width: auto;\n    margin:0.8rem auto;\n}\n\n.cropperContainer {\n    margin: 2rem 0;\n}", ""]);
 
 // exports
 
@@ -96845,6 +96845,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_chatActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/chatActions */ "./resources/js/actions/chatActions.js");
 /* harmony import */ var react_easy_crop__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-easy-crop */ "./node_modules/react-easy-crop/index.module.js");
 /* harmony import */ var _cropImage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cropImage */ "./resources/js/components/cropImage.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_8__);
 
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -96883,6 +96885,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var ImageUploadModal = /*#__PURE__*/function (_Component) {
   _inherits(ImageUploadModal, _Component);
 
@@ -96912,7 +96915,8 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
       aspect: 1,
       isChosen: false,
       croppedImage: null,
-      croppedAreaPixels: null
+      croppedAreaPixels: null,
+      error: null
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
@@ -96930,6 +96934,10 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
 
       _this.setState({
         imagePreview: null
+      });
+
+      _this.setState({
+        error: null
       });
 
       _this.setState({
@@ -96987,18 +96995,29 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "onSubmit", function (e) {
       e.preventDefault();
-      var formData = new FormData(); // Update the formData object
 
-      formData.append("profileImage", _this.state.selectedImage, _this.state.selectedImage.name); // Details of the uploaded file
+      if (Object(lodash__WEBPACK_IMPORTED_MODULE_8__["isNull"])(_this.state.selectedImage)) {
+        _this.setState({
+          error: 'You need to choose an image first'
+        });
+      } else if (Object(lodash__WEBPACK_IMPORTED_MODULE_8__["isNull"])(_this.state.croppedImage)) {
+        _this.setState({
+          error: 'You must complete cropping the image before uploading'
+        });
+      } else {
+        var formData = new FormData(); // Update the formData object
 
-      console.log("UPLOAD CHOSEN FILE DATA");
-      console.log(_this.state.selectedImage);
-      console.log(formData);
+        formData.append("profileImage", _this.state.selectedImage, _this.state.selectedImage.name); // Details of the uploaded file
 
-      _this.props.uploadImage(formData);
+        console.log("UPLOAD CHOSEN FILE DATA");
+        console.log(_this.state.selectedImage);
+        console.log(formData);
+
+        _this.props.uploadImage(formData);
+      }
     });
 
-    _defineProperty(_assertThisInitialized(_this), "showCroppedImage", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    _defineProperty(_assertThisInitialized(_this), "confirmCroppedImage", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       var croppedImage;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -97061,7 +97080,9 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         color: "info"
       }, "You can upload your own profile picture here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         "for": "imagePreview"
-      }, "Image Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Image Preview"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "cropperContainer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "imagePreview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_easy_crop__WEBPACK_IMPORTED_MODULE_6__["default"], {
         image: this.state.imagePreview,
@@ -97072,7 +97093,7 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         onCropComplete: this.onCropComplete,
         onZoomChange: this.onZoomChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-        onClick: this.showCroppedImage,
+        onClick: this.confirmCroppedImage,
         color: "primary"
       }, "Confirm Crop")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         "class": "croppedImage",
@@ -97080,16 +97101,16 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Form"], {
         id: "upload-image",
         onSubmit: this.onSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
-        "for": "profileImage"
-      }, "Profile Picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Input"], {
         type: "file",
         name: "file",
         id: "profileImage",
         onChange: this.onChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["FormText"], {
         color: "muted"
-      }, "Image format, max dimensions and max file size to be specified here."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+      }, "Image format, max dimensions and max file size to be specified here.")), !Object(lodash__WEBPACK_IMPORTED_MODULE_8__["isNull"])(this.state.error) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
+        color: "danger"
+      }, this.state.error) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["ModalFooter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         form: "upload-image",
         color: "primary"
       }, "Upload Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Button"], {

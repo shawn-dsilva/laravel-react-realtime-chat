@@ -292,4 +292,9 @@ font-size:1rem;
     max-width: 300px;
     height: auto;
     width: auto;
+    margin:0.8rem auto;
+}
+
+.cropperContainer {
+    margin: 2rem 0;
 }

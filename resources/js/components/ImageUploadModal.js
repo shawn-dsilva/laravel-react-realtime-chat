@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { uploadImage } from '../actions/chatActions';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './cropImage'
+import { isNull } from 'lodash';
 
 
 class ImageUploadModal extends Component {
@@ -20,6 +21,7 @@ class ImageUploadModal extends Component {
     isChosen:false,
     croppedImage:null,
     croppedAreaPixels:null,
+    error:null
   }
 
   static propTypes = {
@@ -32,6 +34,7 @@ class ImageUploadModal extends Component {
     this.setState({ selectedImage: null});
     this.setState({ croppedImage: null});
     this.setState({ imagePreview: null});
+    this.setState({ error: null});
     this.setState({isChosen:false});
   }
 
@@ -65,6 +68,7 @@ class ImageUploadModal extends Component {
     console.log(croppedArea, croppedAreaPixels)
     this.setState({ croppedAreaPixels: croppedAreaPixels});
   }
+
   onZoomChange = (zoom) => {
     this.setState({ zoom })
   }
@@ -72,6 +76,11 @@ class ImageUploadModal extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    if(isNull(this.state.selectedImage)){
+      this.setState({ error : 'You need to choose an image first'});
+    } else if (isNull(this.state.croppedImage)) {
+      this.setState({error : 'You must complete cropping the image before uploading'})
+    } else {
     const formData = new FormData();
   
     // Update the formData object
@@ -86,11 +95,11 @@ class ImageUploadModal extends Component {
     console.log(this.state.selectedImage);
     console.log(formData);
     this.props.uploadImage(formData);
-
+    }
   
   };
 
-  showCroppedImage = async () => {
+  confirmCroppedImage = async () => {
     try {
       const croppedImage = await getCroppedImg(
         this.state.imagePreview,
@@ -124,7 +133,7 @@ class ImageUploadModal extends Component {
         {/* <img height="300px" width="300px" id="imagePreview" src={this.state.imagePreview}></img> */}
        {
          this.state.isChosen ? 
-         <div>
+         <div className="cropperContainer">
 
 
          <div className="imagePreview">
@@ -139,7 +148,7 @@ class ImageUploadModal extends Component {
          />
      </div>
      <br></br>
-     <Button  onClick={this.showCroppedImage} color="primary">Confirm Crop</Button>
+     <Button  onClick={this.confirmCroppedImage} color="primary">Confirm Crop</Button>
          </div>
        : 
        <div>
@@ -148,13 +157,16 @@ class ImageUploadModal extends Component {
        }
 
         <Form id="upload-image" onSubmit={this.onSubmit}>
-        <Label for="profileImage">Profile Picture</Label>
+
         <Input type="file" name="file" id="profileImage" onChange={this.onChange} />
         <FormText color="muted">
           Image format, max dimensions and max file size to be specified here.
         </FormText>
       </Form>
-   
+      { !isNull(this.state.error) ? 
+      <Alert color="danger">
+            {this.state.error}
+        </Alert> : null}
           </ModalBody>
           <ModalFooter>
             <Button form="upload-image" color="primary" >Upload Image</Button>
