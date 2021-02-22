@@ -30,6 +30,7 @@ class ImageUploadModal extends Component {
   toggle = () => {
     this.setState({ modal : !this.state.modal});
     this.setState({ selectedImage: null});
+    this.setState({ croppedImage: null});
     this.setState({ imagePreview: null});
     this.setState({isChosen:false});
   }
@@ -102,6 +103,7 @@ class ImageUploadModal extends Component {
 
       // Returned blob is set to selectedImage, this will be sent over to the server
       this.setState({selectedImage:croppedImage});
+      this.setState({isChosen:false});
     } catch (e) {
       console.error(e)
     }
@@ -139,7 +141,10 @@ class ImageUploadModal extends Component {
      <br></br>
      <Button  onClick={this.showCroppedImage} color="primary">Confirm Crop</Button>
          </div>
-       : <img height="300px" width="300px" id="imagePreview" src={this.state.croppedImage}></img>
+       : 
+       <div>
+       <img class="croppedImage" src={this.state.croppedImage}></img>
+       </div>
        }
 
         <Form id="upload-image" onSubmit={this.onSubmit}>
