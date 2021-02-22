@@ -22,6 +22,7 @@ import {
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
     ADD_CHANNEL_USERS,
+    USER_AVATAR_UPDATED
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -359,6 +360,7 @@ export const uploadImage = (imageForm) => (dispatch,getState) => {
             const response = res.data;
             console.log("IMAGE UPLOAD RESPONSE BELOW");
             console.log(response)
+            dispatch({type: USER_AVATAR_UPDATED, payload: res.data});
         })
         .catch(err => {});
 }

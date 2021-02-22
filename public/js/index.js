@@ -95628,6 +95628,10 @@ var uploadImage = function uploadImage(imageForm) {
       var response = res.data;
       console.log("IMAGE UPLOAD RESPONSE BELOW");
       console.log(response);
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_2__["USER_AVATAR_UPDATED"],
+        payload: res.data
+      });
     })["catch"](function (err) {});
   };
 };
@@ -95672,7 +95676,7 @@ var clearStatus = function clearStatus() {
 /*!***************************************!*\
   !*** ./resources/js/actions/types.js ***!
   \***************************************/
-/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS, ADD_CHANNEL_SUCCESS, IS_ONLINE, IS_OFFLINE, ADD_CHANNEL_USERS */
+/*! exports provided: AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, GET_STATUS, CLEAR_STATUS, BUTTON_CLICKED, BUTTON_RESET, AUTH_SUCCESS, AUTH_FAIL, IS_LOADING, IS_AUTH, GET_MESSAGES, SET_MESSAGES, ADD_MESSAGE, CLEAR_MESSAGES, SET_USERS_IN_ROOM, GET_DM_USERS, ADD_USER_TO_ROOM, USER_LEAVES_ROOM, SET_SELECTED_CHANNEL, CREATE_CHANNEL_SUCCESS, GET_CHANNELS, SEND_REQUEST_SUCCESS, ADD_NOTIFICATION, ACCEPT_REQUEST_SUCCESS, GET_ALL_USERS, GET_NOTIFICATIONS, GET_ALL_NOTIFICATIONS, NOTIF_MARK_AS_READ, GET_ALL_CHANNELS, ADD_CHANNEL_SUCCESS, IS_ONLINE, IS_OFFLINE, ADD_CHANNEL_USERS, USER_AVATAR_UPDATED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95714,6 +95718,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IS_ONLINE", function() { return IS_ONLINE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IS_OFFLINE", function() { return IS_OFFLINE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_CHANNEL_USERS", function() { return ADD_CHANNEL_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_AVATAR_UPDATED", function() { return USER_AVATAR_UPDATED; });
 var AUTH_ERROR = "AUTH_ERROR";
 var LOGIN_SUCCESS = "LOGIN_SUCCESS";
 var LOGIN_FAIL = "LOGIN_FAIL";
@@ -95751,6 +95756,7 @@ var ADD_CHANNEL_SUCCESS = 'ADD_CHANNEL_SUCCESS';
 var IS_ONLINE = 'IS_ONLINE';
 var IS_OFFLINE = 'IS_OFFLINE';
 var ADD_CHANNEL_USERS = 'ADD_CHANNEL_USERS';
+var USER_AVATAR_UPDATED = 'USER_AVATAR_UPDATED';
 
 /***/ }),
 
@@ -98856,6 +98862,14 @@ var initialState = {
       return _objectSpread(_objectSpread({}, state), {}, {
         isAuthenticated: false,
         user: null
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["USER_AVATAR_UPDATED"]:
+      // Correct way to update key in nested object
+      return _objectSpread(_objectSpread({}, state), {}, {
+        currUser: _objectSpread(_objectSpread({}, state.currUser), {}, {
+          avatar: action.payload
+        })
       });
 
     default:

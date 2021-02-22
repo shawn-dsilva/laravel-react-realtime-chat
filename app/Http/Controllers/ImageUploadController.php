@@ -25,16 +25,15 @@ class ImageUploadController extends Controller
 
         $user->details()->save($details);
 
-
-
-
-
         error_log('File Name: '.$image->getClientOriginalName());
         error_log('File Extension: '.$image->getClientOriginalExtension());
         error_log('File Real Path: '.$image->getRealPath());
         error_log('File Size: '.$image->getSize());
         error_log('File Mime Type: '.$image->getMimeType());
         error_log($path);
+
+        return response()->json($path);
+
 
      }
 

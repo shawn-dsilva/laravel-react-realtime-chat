@@ -7,7 +7,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   AUTH_SUCCESS,
-  AUTH_FAIL
+  AUTH_FAIL,
+  USER_AVATAR_UPDATED,
 } from "../actions/types";
 
 
@@ -49,6 +50,15 @@ export default function (state = initialState, action) {
         user: null,
       };
 
+    case USER_AVATAR_UPDATED:
+    // Correct way to update key in nested object
+      return {
+        ...state,
+        currUser: { 
+          ...state.currUser,
+          avatar:action.payload 
+        }
+      };
     default:
         return state;
   }
