@@ -21,7 +21,8 @@ class ImageUploadModal extends Component {
     isChosen:false,
     croppedImage:null,
     croppedAreaPixels:null,
-    error:null
+    error:null,
+    showAvatar:true
   }
 
   static propTypes = {
@@ -36,6 +37,8 @@ class ImageUploadModal extends Component {
     this.setState({ imagePreview: null});
     this.setState({ error: null});
     this.setState({isChosen:false});
+    this.setState({showAvatar:true});
+
   }
 
   CropperWrapper = () => {
@@ -58,6 +61,8 @@ class ImageUploadModal extends Component {
     this.setState({ selectedImage: e.target.files[0] });
     this.setState({ imagePreview: URL.createObjectURL(e.target.files[0])});
     this.setState({isChosen:true});
+    this.setState({showAvatar:false});
+
   };
   
   onCropChange = (crop) => {
@@ -128,6 +133,15 @@ class ImageUploadModal extends Component {
           <Alert color="info">
           You can upload your own profile picture here.
         </Alert>
+
+{    (this.props.currUser.avatar && this.state.showAvatar) && 
+      <div>
+        <Label for="imagePreview">Current Profile Picture</Label>
+            <br></br>
+       <img class="croppedImage" src={"storage/"+this.props.currUser.avatar}></img>
+      </div>
+        
+  }
 
        {
          this.state.isChosen ? 

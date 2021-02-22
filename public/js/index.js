@@ -96922,7 +96922,8 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
       isChosen: false,
       croppedImage: null,
       croppedAreaPixels: null,
-      error: null
+      error: null,
+      showAvatar: true
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggle", function () {
@@ -96948,6 +96949,10 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
 
       _this.setState({
         isChosen: false
+      });
+
+      _this.setState({
+        showAvatar: true
       });
     });
 
@@ -96976,6 +96981,10 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
 
       _this.setState({
         isChosen: true
+      });
+
+      _this.setState({
+        showAvatar: false
       });
     });
 
@@ -97084,7 +97093,12 @@ var ImageUploadModal = /*#__PURE__*/function (_Component) {
         toggle: this.toggle
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("legend", null, "Upload A Profile Picture")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["ModalBody"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Alert"], {
         color: "info"
-      }, "You can upload your own profile picture here."), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "You can upload your own profile picture here."), this.props.currUser.avatar && this.state.showAvatar && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
+        "for": "imagePreview"
+      }, "Current Profile Picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        "class": "croppedImage",
+        src: "storage/" + this.props.currUser.avatar
+      })), this.state.isChosen ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "cropperContainer"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_2__["Label"], {
         "for": "imagePreview"
@@ -97855,6 +97869,7 @@ var NavbarMain = /*#__PURE__*/function (_Component) {
       }), this.props.currUser.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownMenu"], {
         right: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ImageUploadModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        currUser: this.props.currUser,
         buttonLabel: "Image Upload"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
         onClick: this.onLogout
