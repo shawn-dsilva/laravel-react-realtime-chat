@@ -23,7 +23,8 @@ class ImageUploadController extends Controller
 
         $user = User::find(auth()->user()->id);
 
-        $user->details()->save($details);
+        $user->details()->updateOrCreate(['user_id' => auth()->user()->id],
+        ['avatar'=> $path]);
 
         error_log('File Name: '.$image->getClientOriginalName());
         error_log('File Extension: '.$image->getClientOriginalExtension());
