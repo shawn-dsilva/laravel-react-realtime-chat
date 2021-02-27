@@ -3,6 +3,8 @@ import {
   Col,
   Row
 } from 'reactstrap';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function ChatMessageList(props) {
 
@@ -18,12 +20,21 @@ function ChatMessageList(props) {
               return <div className="msg-container">
                  <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
                  <Col className="chatNotUserMsg" key={index}>
-                <b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+                 <span>
+                {value.user.name }  | &nbsp; 
+                <Moment date={value.user.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+                </span>
+                <br></br> {value.message}</Col>
                 </div>
             } else {
+              
               return <div className="user-msg-container">
               <Col className="chatUserMsg" key={index}>
-             <b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+                <span>
+                {value.user.name }  | &nbsp; 
+                <Moment date={value.user.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+                </span>
+                 <br></br> {value.message}</Col>
              <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
 
              </div>
