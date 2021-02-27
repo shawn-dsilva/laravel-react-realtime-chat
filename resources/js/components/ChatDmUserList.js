@@ -15,6 +15,7 @@ export const ChatDmUsersList = (props) => {
                 <Button color="link"
                     onClick={() => dmSelect(value.id, value.users[0].name)}
                     id={value.users[0].id}>
+                    <img  className="dmAvatar" src={'/storage/'+value.users[0].avatar}/>
                     <b>{value.users[0].name}</b>
                     <div className={ value.users[0].is_online ? "online" : "offline"}></div>
                 </Button>
