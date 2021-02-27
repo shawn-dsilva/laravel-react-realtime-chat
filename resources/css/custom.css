@@ -39,7 +39,7 @@ img {
   }
 
 .sidenav {
-    border-right: solid 1px grey;
+    border-right: solid 1px lightgrey;
     display: block;
     max-width: 16%!important;
     flex-grow: 1!important;
@@ -47,7 +47,7 @@ img {
 }
 
 .usersInRoom {
-    border-left: solid 1px grey;
+    border-left: solid 1px lightgrey;
     max-width: 20%;
     display:flex;
     padding:1rem;
@@ -144,7 +144,7 @@ img {
 }
 
 .channelName {
-    border-bottom: grey 2px solid;
+    box-shadow: 0 4px 5px -2px rgb(0 0 0 / 10%);
     padding: 0.8rem;
     font-size:1.8rem;
     display:flex;
