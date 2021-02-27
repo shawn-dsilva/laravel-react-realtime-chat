@@ -314,6 +314,21 @@ class ChatController extends Controller
         // Checks for Online status of Users
         $friends = $this->listOnlineUsers($friends);
 
+        // Sets the Avatar URL for all friends
+        foreach( $friends as $friend) {
+
+            $user = $friend->users[0]->id;
+            $avatar = null;
+
+            // If avatar is found, send it over, else send the default image
+            if(User::find($user)->details) {
+                $avatar = User::find($user)->details->avatar;
+            } else {
+                $avatar = 'avatars/defaultuser.png';
+            }
+
+            $friend->users[0]->avatar = $avatar;
+        }
         return response()->json($friends);
     }
 
