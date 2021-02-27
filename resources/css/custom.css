@@ -201,18 +201,18 @@ img {
 
 
 
-.dmuser {
+.dmuser, .channelElement {
     padding:0.3rem 0;
     border: 1px solid white;
     border-radius : 0.8rem;
     margin-right:0.4rem;
 }
 
-.dmuser:hover {
+.dmuser:hover, .channelElement:hover {
     background:whitesmoke;
 
 }
-.dmuser button {
+.dmuser, .channelElement button {
     padding:0.4rem 0;
 }
 

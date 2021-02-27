@@ -121,8 +121,8 @@ render() {
               <DropdownToggle nav caret>
                 {
                   this.props.currUser.avatar ? 
-                  <img src={"storage/"+this.props.currUser.avatar} width="30" height="30"></img> : 
-                  <img src="/assets/images/defaultuser.png" width="30" height="30"></img>
+                  <img src={"storage/"+this.props.currUser.avatar} className="dmAvatar"></img> : 
+                  <img src="/assets/images/defaultuser.png" className="dmAvatar"></img>
                 }
               {this.props.currUser.name}
               </DropdownToggle>
