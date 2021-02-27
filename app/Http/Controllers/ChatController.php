@@ -459,8 +459,30 @@ class ChatController extends Controller
     }
 
     public function getChannelsUsers($channel_id) {
-        $users = Channel::where("type","channel")->where('id',$channel_id)->with(["users"])->get();
-        return response()->json($users);
+        $channel = Channel::where("type","channel")->where('id',$channel_id)->with(["users"])->get();
+
+        $channel = $this->listOnlineUsers($channel);
+
+        error_log("GET_CHANNELS_USERS USER LIST BELOW");
+        error_log($channel);
+        
+        // Sets the Avatar URL for all users
+        $users = $channel[0]->users;
+        foreach( $users as $key=>$friend) {
+
+            $id = $friend->id;
+            $avatar = null;
+
+            // If avatar is found, send it over, else send the default image
+            if(User::find($id)->details) {
+                $avatar = User::find($id)->details->avatar;
+            } else {
+                $avatar = 'avatars/defaultuser.png';
+            }
+
+            $friend->avatar = $avatar;
+        }
+        return response()->json($channel);
     }
 }
 
