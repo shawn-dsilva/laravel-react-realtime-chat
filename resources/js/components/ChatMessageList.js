@@ -18,11 +18,12 @@ function ChatMessageList(props) {
           } else {
             if(value.user.name !== props.currUser.name) {
               return <div className="msg-container">
-                 <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
+                { users && <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img> }
+                 
                  <Col className="chatNotUserMsg" key={index}>
                  <span>
                 {value.user.name }  | &nbsp; 
-                <Moment date={value.user.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+                <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                 <br></br> {value.message}</Col>
                 </div>
@@ -32,10 +33,10 @@ function ChatMessageList(props) {
               <Col className="chatUserMsg" key={index}>
                 <span>
                 {value.user.name }  | &nbsp; 
-                <Moment date={value.user.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+                <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                  <br></br> {value.message}</Col>
-             <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
+                 { users && <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img> }
 
              </div>
             }
