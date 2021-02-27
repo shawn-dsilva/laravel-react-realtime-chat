@@ -96249,7 +96249,8 @@ var Chat = /*#__PURE__*/function (_Component) {
         inviteToChannel: this.props.inviteToChannel
       }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatMessageList__WEBPACK_IMPORTED_MODULE_6__["default"], {
         messages: this.props.messages,
-        currUser: this.props.currUser
+        currUser: this.props.currUser,
+        users: this.props.selectedChannel.users
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ChatInputBox__WEBPACK_IMPORTED_MODULE_14__["default"], {
         selectedChannel: this.props.selectedChannel
       })), usersInThisRoom));
@@ -96524,7 +96525,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ChatMessageList(props) {
-  var messages = props.messages; // console.log(typeof(messages));
+  var messages = props.messages;
+  var users = props.users; // console.log(typeof(messages));
 
   var messagelist = messages.map(function (value, index) {
     // console.log(value)
@@ -96543,12 +96545,24 @@ function ChatMessageList(props) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
           className: "chatNotUserMsg",
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          height: "40",
+          width: "40",
+          src: 'storage/' + users.find(function (user) {
+            return user.id === value.user.id;
+          }).avatar
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(reactstrap__WEBPACK_IMPORTED_MODULE_1__["Col"], {
           className: "chatUserMsg",
           key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          height: "40",
+          width: "40",
+          src: 'storage/' + users.find(function (user) {
+            return user.id === value.user.id;
+          }).avatar
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, value.user.name, "  < ", value.user.email, "  >  :"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " ", value.message);
       }
     }
   });

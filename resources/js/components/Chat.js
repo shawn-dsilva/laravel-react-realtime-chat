@@ -151,6 +151,7 @@ import LoadingSpinner from './LoadingSpinner'
                         <ChatMessageList
                             messages={this.props.messages}
                             currUser={this.props.currUser}
+                            users={this.props.selectedChannel.users}
                         />
                         <ChatInputBox
                             selectedChannel={this.props.selectedChannel}
