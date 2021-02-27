@@ -299,16 +299,21 @@ class ChatController extends Controller
     public function getFriendsList(Request $request)
     {
 
+        // ID of user that made this request
         $sender = auth()->user()->id;
 
         $friends = Channel::where('type', 'dm')->with(["users" => function ($query) use ($sender) {
-            $query->where("id", "!=", $sender);
+            // Removes user data object from the users array that 
+            // matches the id in $sender 
+            $query->where("id", "!=", $sender); 
         }])->whereHas('users', function ($q) use ($sender) {
+            // Only returns the channels that $sender has participated in
             $q->where('user_id', $sender);
         })->get();
 
+        // Checks for Online status of Users
         $friends = $this->listOnlineUsers($friends);
-        // $friends = Channel::with("users")->where('type','dm')->get();
+
         return response()->json($friends);
     }
 
