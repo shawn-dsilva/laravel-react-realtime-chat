@@ -15,13 +15,18 @@ function ChatMessageList(props) {
             return <Col className="my-3" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {
             if(value.user.name !== props.currUser.name) {
-              return <Col className="chatNotUserMsg" key={index}>
-                <img height="40" width="40" src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
+              return <div className="msg-container">
+                 <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
+                 <Col className="chatNotUserMsg" key={index}>
                 <b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+                </div>
             } else {
-              return <Col className="chatUserMsg" key={index}>
-                <img height="40" width="40" src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
-                <b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+              return <div className="user-msg-container">
+              <Col className="chatUserMsg" key={index}>
+             <b>{value.user.name }  &lt; { value.user.email }  &gt;  :</b> <br></br> {value.message}</Col>
+             <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img>
+
+             </div>
             }
           }
         });
