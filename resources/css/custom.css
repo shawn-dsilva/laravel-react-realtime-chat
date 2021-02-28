@@ -63,7 +63,7 @@ img {
     flex: 1 0;
     display:flex;
     flex-direction: column;
-    max-height: 95%;
+    max-height: 100%;
     padding:0;
 }
 
@@ -309,9 +309,11 @@ font-size:1rem;
 }
 
 .dmAvatar {
-    border: 1px solid white;
+    border: 1px solid whitesmoke;
     border-radius: 20%;
-    height:3rem;
+    height:3.5rem;
+    margin:0;
+    margin-right:8px
 }
 
 .msg-container {
@@ -340,7 +342,7 @@ font-size:1rem;
     height: auto;
     position:relative;
     display:inline-block;
-    margin-left:1rem;
+    margin-left:0.5rem;
 }
 
 .notificationsBell button, .userOptions i {
@@ -360,6 +362,7 @@ font-size:1rem;
 
 .userOptions a {
     padding:0;
+    margin-left:0.5rem;
 }
 
 .notificationsBell button:hover {
@@ -386,9 +389,16 @@ font-size:1rem;
 }
 
 .userControlPanel {
-    padding:1rem;
+    margin:1rem 0;
     border-bottom:1px solid lightgrey;
-    margin:auto;
     width:100%;
-    height: 5rem;
+    max-height: 5rem;
+}
+
+.userDetails {
+    margin:0 0.5rem 0.5rem 0.5rem;
+}
+
+.userDetails {
+    text-emphasis: bold;
 }
