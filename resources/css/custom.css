@@ -340,9 +340,10 @@ font-size:1rem;
     height: auto;
     position:relative;
     display:inline-block;
+    margin-left:1rem;
 }
 
-.notificationsBell button {
+.notificationsBell button, .userOptions i {
     border:unset;
     background:whitesmoke!important;
     border:1px solid lightgray!important;
@@ -351,6 +352,14 @@ font-size:1rem;
     box-shadow:unset!important;
     font-size:1.5rem;
     color:var(--dark);
+}
+
+.userOptions i {
+    padding:0.89rem!important
+}
+
+.userOptions a {
+    padding:0;
 }
 
 .notificationsBell button:hover {

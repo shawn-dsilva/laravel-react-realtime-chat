@@ -113,15 +113,19 @@ render() {
                         /> 
             </NavItem> */}
            <Row className="userContainer">
-            <UncontrolledDropdown>
-              <DropdownToggle nav caret>
-                {
+           {
                   this.props.currUser.avatar ? 
                   <img src={"storage/"+this.props.currUser.avatar} className="dmAvatar"></img> : 
                   <img src="/assets/images/defaultuser.png" className="dmAvatar"></img>
                 }
               {this.props.currUser.name}
+            <UncontrolledDropdown >
+            <div className="userOptions">
+              <DropdownToggle nav >
+                <i class="fas fa-cog"></i>
               </DropdownToggle>
+              </div>
+
               <DropdownMenu right>
                 <DropdownItem>
                   <ImageUploadModal
