@@ -121,21 +121,22 @@ render() {
                 }
               <span>{this.props.currUser.name}</span>
               </div>
-            <UncontrolledDropdown >
+            <UncontrolledDropdown inNavbar >
             <div className="userOptions">
               <DropdownToggle nav >
                 <i class="fas fa-cog"></i>
               </DropdownToggle>
               </div>
 
-              <DropdownMenu right>
+              <DropdownMenu left>
                 <DropdownItem>
                   <ImageUploadModal
                   currUser={this.props.currUser}
-                            buttonLabel={"Image Upload"}
+                            buttonLabel={"Change Avatar"}
                         /> 
                 </DropdownItem>
                 <DropdownItem onClick={this.onLogout}>
+                <i class="fas fa-sign-out-alt"></i>  &nbsp;
                 Logout
                 </DropdownItem>
                 

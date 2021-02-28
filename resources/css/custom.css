@@ -41,7 +41,7 @@ img {
 .sidenav {
     border-right: solid 1px lightgrey;
     display: block;
-    max-width: 16%!important;
+    max-width: 20%!important;
     flex-grow: 1!important;
     padding:0;
 }
@@ -178,7 +178,7 @@ img {
 }
 
 .sidepaneParent {
-    height:45vh;
+    height:41.5vh;
     display: flex;
     flex-direction: column;
 }
@@ -189,7 +189,8 @@ img {
 }
 .sidepaneDm {
     overflow-y: auto;
-    display:block
+    display:block;
+    border-bottom:1px solid lightgrey;
 }
 
 .sidepaneChannel {
@@ -309,7 +310,7 @@ font-size:1rem;
 }
 
 .dmAvatar {
-    border: 1px solid whitesmoke;
+    border: 1px solid lightgrey;
     border-radius: 20%;
     height:3.5rem;
     margin:0;
@@ -390,15 +391,19 @@ font-size:1rem;
 
 .userControlPanel {
     margin:1rem 0;
+    padding:0 1rem;
     border-bottom:1px solid lightgrey;
     width:100%;
     max-height: 5rem;
 }
 
 .userDetails {
-    margin:0 0.5rem 0.5rem 0.5rem;
+    margin:0 0.5rem 0.65rem 0.5rem;
 }
 
-.userDetails {
-    text-emphasis: bold;
+.userDetails span {
+    font-weight: 600;
+    font-size:1.2rem;
 }
+
+
