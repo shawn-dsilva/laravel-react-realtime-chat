@@ -6,6 +6,10 @@
       InputGroupAddon,
       Input,
       Container,
+      UncontrolledDropdown,
+      DropdownToggle,
+      DropdownMenu,
+      DropdownItem,
       Row,
       Col
     } from 'reactstrap';
@@ -23,7 +27,10 @@ import '../../css/custom.css';
 import NavbarMain from './NavbarMain';
 import ChatInputBox from './ChatInputBox';
 import InviteUsersModal from './InviteUsersModal';
-import LoadingSpinner from './LoadingSpinner'
+
+import LoadingSpinner from './LoadingSpinner';
+import UserControlPanel from './UserControlPanel';
+
 
     class Chat extends Component {
 
@@ -109,9 +116,9 @@ import LoadingSpinner from './LoadingSpinner'
         }
         return (
             <Container fluid="true">
-                <NavbarMain />
                 <Row className="fullHeight">
                     <Col xs="2" className="sidenav">
+                        <UserControlPanel/>
                         <ChatChannelsList
                             channels={this.props.channels}
                             currUser={this.props.currUser}

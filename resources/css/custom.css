@@ -1,7 +1,7 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-1/css/all.css');
 html,body, #root, .container-true, .fullHeight {
     height:100%!important;
     overflow:hidden;
@@ -43,7 +43,7 @@ img {
     display: block;
     max-width: 16%!important;
     flex-grow: 1!important;
-    padding: 0 0.5rem;
+    padding:0;
 }
 
 .usersInRoom {
@@ -103,15 +103,16 @@ img {
     /*margin left and right set to 0 to over write row class -15px left and right margins*/
     margin-left:0!important;
     margin-right:0!important;
+    background-image:url('/assets/images/tile_background.png');
 }
 
 .chatUserMsg {
     text-align:right;
     width:max-content;
-    background:#0a85ff;
+    background:#00cbff;
     color:white;
     padding:1rem;
-    border: 2px solid #0a85ff;
+    border: 2px solid #00cbff;
     border-radius:10px;
     margin-bottom: 1rem;
     flex-grow: 0;
@@ -144,6 +145,7 @@ img {
     padding: 0.8rem;
     font-size:1.8rem;
     display:flex;
+    height:5rem;
 }
 
 .channelDescButton {
@@ -329,4 +331,55 @@ font-size:1rem;
     /* border:1px solid white; */
     border-radius: 5px;
     height:3rem;
-    box-shadow: 0px 0px 2px 2px rgb(0 0 0 / 15%)}
+    box-shadow: 0px 0px 2px 2px rgb(0 0 0 / 15%);
+}
+
+
+.notificationsBell {
+    width: 1.4rem!important;
+    height: auto;
+    position:relative;
+    display:inline-block;
+}
+
+.notificationsBell button {
+    border:unset;
+    background:whitesmoke!important;
+    border:1px solid lightgray!important;
+    border-radius: 50%;
+    padding:0.5rem 1rem;
+    box-shadow:unset!important;
+    font-size:1.5rem;
+    color:var(--dark);
+}
+
+.notificationsBell button:hover {
+    border:unset;
+    background:whitesmoke;
+    border:0.5rem solid whitesmoke;
+    border-radius: 50%;
+    color:unset;
+}
+
+.notifContainer, .userContainer {
+    margin:0;
+}
+
+.notificationsBell span {
+    display:flex;
+    line-height: unset;
+    border-radius: 50%;;
+    font-size:0.8rem;
+    font-weight: 400;
+    position: absolute;
+    top: -5px;
+    right: -35px;
+}
+
+.userControlPanel {
+    padding:1rem;
+    border-bottom:1px solid lightgrey;
+    margin:auto;
+    width:100%;
+    height: 5rem;
+}

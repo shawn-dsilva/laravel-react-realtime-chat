@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,  Badge, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Row from 'reactstrap/lib/Row';
 import { markAsRead } from '../actions/chatActions';
 
 const NotificationDropdown = (props) => {
@@ -112,11 +113,13 @@ function AllNotificationsModal({modalAN, toggleModalAN}) {
 }
 
   return (
-    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-      <DropdownToggle color="secondary" size="lg" outline caret>
-       Notifications &nbsp;
-  <Badge color="primary"> {unreadNotifs}</Badge>
+    <Dropdown   isOpen={dropdownOpen} toggle={toggle}>
+      <Row className="notificationsBell">
+      <DropdownToggle className="notifButton" color="secondary" size="lg" outline >
+      <i class="far fa-bell"></i>
         </DropdownToggle>
+        <Badge color="primary"> {unreadNotifs}</Badge>
+</Row>
       <DropdownMenu>
         <DropdownItem divider />
           {notificationsList}
