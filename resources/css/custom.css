@@ -186,6 +186,8 @@ img {
 .sidepaneParent h3 {
     border-bottom: 1px lightgrey solid;
     padding-bottom:0.7rem;
+    padding-left:1rem;
+    font-weight: 700;
 }
 .sidepaneDm {
     overflow-y: auto;
@@ -195,7 +197,8 @@ img {
 
 .sidepaneChannel {
     overflow-y: auto;
-    display:block
+    display:block;
+    padding-left:1rem;
 }
 
 
@@ -343,7 +346,7 @@ font-size:1rem;
     height: auto;
     position:relative;
     display:inline-block;
-    margin-left:0.5rem;
+    margin-left:1rem;
 }
 
 .notificationsBell button, .userOptions i {

@@ -34,10 +34,11 @@ export const ChatChannelsList = props => {
     return (
         <div className="sidepaneParent">
             <h3>Channels</h3>
-            <CreateChannelModal buttonLabel={"+ Create New Channel"} />
-            <br></br>
+
             <div className="sidepaneChannel">
                 <div>
+                <CreateChannelModal buttonLabel={"+ Create New Channel"} />
+                <br></br>
                     {" "}
                     <Button
                         color="link"
@@ -53,7 +54,6 @@ export const ChatChannelsList = props => {
                     >
                         <b> General</b>
                     </Button>
-                    <hr></hr>
                     {channelList}
                 </div>
             </div>
