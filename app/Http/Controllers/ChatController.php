@@ -63,8 +63,9 @@ class ChatController extends Controller
             'channel_id' => $request->channel_id
         ]);
 
-        error_log($message);
-        broadcast(new MessageSent($request->user(), $message, $request->channel_id, $request->channel_type));
+        $user = User::where('id', auth()->user()->id)->with('details')->first();
+
+        broadcast(new MessageSent($user, $message, $request->channel_id, $request->channel_type));
 
         return ['status' => 'Message Sent!'];
     }

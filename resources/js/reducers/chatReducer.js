@@ -59,6 +59,8 @@ export default function(state = initialState, action) {
                 messages: action.payload
             };
         case ADD_MESSAGE:
+            console.log("ADD MESSAGE PAYLOAD BELOW");
+            console.log(action.payload);
             return {
                 ...state,
                 messages: state.messages.concat(action.payload)

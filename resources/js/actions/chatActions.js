@@ -220,11 +220,11 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
             })
             .listen("MessageSent", event => {
                 console.log("IN FRONT END MESSAGE SENT");
-                console.log(event);
                 const message = {
                     user: event.user,
                     message: event.message.message
                 };
+                console.log(message);
                 dispatch({ type: ADD_MESSAGE, payload: message });
             });
         })

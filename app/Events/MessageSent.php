@@ -14,7 +14,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class MessageSent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets;
 
     /**
      * User that sent the message
@@ -40,8 +40,10 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, $message, $channel, $type)
+    public function __construct($user, $message, $channel, $type)
     {
+        error_log($user);
+
         $this->user = $user;
 
         $this->message = $message;
