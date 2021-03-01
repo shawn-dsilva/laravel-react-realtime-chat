@@ -13,8 +13,8 @@
 
 ### Immediate
 
-- Display avatars of users and groups in chat sidebar
-- Sucesses message upon successful update of DP
+- Migrate to PostgresSQL and add avatar url fields to user objects in all models
+- Make Direct Message and Channels collapsable.
 - PostgreSQL integration and dummy date creation
 - Custom 404 page
 - Typing events support.
@@ -32,6 +32,7 @@
 
 ### Done
 
+- Display avatars of users and groups in chat sidebar
 - Create User Details table for User profile data, most importantly the name of user's avatar image completed
 - Fixes to Image upload/cropping UI on the React side
 - Cropping functionality and sending of cropped image to server code completed
