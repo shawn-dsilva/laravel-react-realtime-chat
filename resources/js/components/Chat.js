@@ -93,7 +93,8 @@ import UserControlPanel from './UserControlPanel';
 
       onClickUsersInRoom = () => {
         this.setState({isOpen: !this.state.isOpen});
-      }
+      };
+      
       channelSelect = (selectedChannel, channelName, desc,  owner_id, owner, event) => {
         if(event !== undefined) {
           event.stopPropagation();

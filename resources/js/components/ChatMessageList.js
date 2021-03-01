@@ -9,7 +9,6 @@ import 'moment-timezone';
 function ChatMessageList(props) {
 
   const messages = props.messages;
-  const users = props.users;
         // console.log(typeof(messages));
         const messagelist = messages.map((value, index) => {
           // console.log(value)
@@ -18,7 +17,7 @@ function ChatMessageList(props) {
           } else {
             if(value.user.name !== props.currUser.name) {
               return <div className="msg-container">
-                { users && <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img> }
+                 <img  src={'storage/'+value.user.details.avatar}></img>
                  
                  <Col className="chatNotUserMsg" key={index}>
                  <span>
@@ -36,7 +35,7 @@ function ChatMessageList(props) {
                 <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                  <br></br> {value.message}</Col>
-                 { users && <img  src={'storage/'+users.find(user => user.id === value.user.id).avatar}></img> }
+                 <img  src={'storage/'+value.user.details.avatar}></img>
 
              </div>
             }

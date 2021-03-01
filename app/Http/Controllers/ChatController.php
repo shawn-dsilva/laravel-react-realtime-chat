@@ -32,7 +32,7 @@ class ChatController extends Controller
 
     public function getMessages(Request $request, $channel_id)
     {
-        return Message::where("channel_id", $channel_id)->with('user')->get();
+        return Message::where("channel_id", $channel_id)->with('user.details')->get();
     }
 
     public function getSubscribedChannels(Request $request)
