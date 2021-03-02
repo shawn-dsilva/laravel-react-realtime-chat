@@ -201,7 +201,15 @@ img {
     padding-left:1rem;
 }
 
-
+.systemMsg {
+    text-align: center;
+    background: var(--light);
+    width: 50%;
+    margin: 1rem auto;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 4px rgba(0,0,0, 0.1);
+}
 
 .dmuser, .channelElement {
     padding:0.3rem 0;
@@ -314,8 +322,8 @@ font-size:1rem;
 
 .dmAvatar {
     border: 1px solid lightgrey;
-    border-radius: 20%;
-    height:3.5rem;
+    border-radius: 50%;
+    height:3.8rem;
     margin:0;
     margin-right:8px
 }
@@ -335,8 +343,8 @@ font-size:1rem;
 
 .msg-container img, .user-msg-container img {
     /* border:1px solid white; */
-    border-radius: 5px;
-    height:3rem;
+    border-radius: 50%;
+    height:3.2rem;
     box-shadow: 0px 0px 2px 2px rgb(0 0 0 / 15%);
 }
 

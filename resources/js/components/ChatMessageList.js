@@ -29,7 +29,7 @@ function ChatMessageList(props) {
         const messagelist = messages.map((value, index) => {
           // console.log(value)
           if(value.status === true) {
-            return <Col className="my-3" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
+            return <Col className="systemMsg" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {
             if(value.user.name !== props.currUser.name) {
               return <div className="msg-container">

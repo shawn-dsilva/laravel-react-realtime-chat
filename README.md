@@ -13,8 +13,9 @@
 
 ### Immediate
 
-- Migrate to PostgresSQL and add avatar url fields to user objects in all models
 - Make Direct Message and Channels collapsable.
+- Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
+- Migrate to PostgresSQL and add avatar url fields to user objects in all models
 - Typing events support.
 - Invite to channel by URL system
 
