@@ -15,8 +15,6 @@
 
 - Migrate to PostgresSQL and add avatar url fields to user objects in all models
 - Make Direct Message and Channels collapsable.
-- PostgreSQL integration and dummy date creation
-- Custom 404 page
 - Typing events support.
 - Invite to channel by URL system
 
@@ -24,7 +22,6 @@
 
 - Add search all users functionality.
 - Add search all channels functionality.
-- User Avatar uploading features
 - Add User profiles which are hyper linked.
 - Unread messages notification.
 - UI Design using SASS
@@ -32,6 +29,8 @@
 
 ### Done
 
+- Scroll to bottom when joining new chat room or sending message
+- User Avatar uploading features
 - Display avatars of users and groups in chat sidebar
 - Create User Details table for User profile data, most importantly the name of user's avatar image completed
 - Fixes to Image upload/cropping UI on the React side

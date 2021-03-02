@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef }  from 'react'
 import {
   Col,
   Row
@@ -15,6 +15,14 @@ const getAvatar = (value) => {
   }
 }
 function ChatMessageList(props) {
+
+  // Equivalent of a Div ID in React, remains even across re-renders
+  const bottomRef = useRef(null);
+
+  //  function to scroll to dummy div places at the bottom of message list
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const messages = props.messages;
         // console.log(typeof(messages));
@@ -50,9 +58,15 @@ function ChatMessageList(props) {
           }
         });
 
+        // Runs on every re-render
+        useEffect(() => {
+          scrollToBottom();
+        }, [messagelist]);
+
   return (
     <Row className="chatDisplay">
     {messagelist}
+    <div ref={bottomRef} />
     </Row>
   )
 }
