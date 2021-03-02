@@ -131,6 +131,10 @@ import UserControlPanel from './UserControlPanel';
                             currUser={this.props.currUser}
                             dmSelect={this.dmSelect}
                         />
+                        <Row className="Logo">
+                          <h2>Laravel React Chat</h2>
+                          <span>Made by <a href="https://www.shawndsilva.com">Shawn D'silva</a></span>
+                        </Row>
                     </Col>
                     <Col className="chatMainContainer">
         <div className="channelName">{this.props.selectedChannel.type ==  'channel' ? 

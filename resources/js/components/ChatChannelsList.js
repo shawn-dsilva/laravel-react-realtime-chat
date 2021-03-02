@@ -32,9 +32,9 @@ export const ChatChannelsList = props => {
     });
 
     return (
-        <div className="sidepaneParent">
+        <div className="sidepaneParentChannel">
            
-            <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
+            <Button color="white" id="toggler" style={{ marginBottom: '1rem', textAlign: 'left' }}>
             <h3>Channels</h3>
     </Button>
     <UncontrolledCollapse toggler="#toggler">

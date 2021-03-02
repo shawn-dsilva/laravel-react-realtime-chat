@@ -26,7 +26,7 @@ export const ChatDmUsersList = (props) => {
 
 
     return (
-        <div className="sidepaneParent">
+        <div className="sidepaneParentDm">
       <h3>Direct Message</h3>
             <div className="sidepaneDm">
             <div>{userList}</div>

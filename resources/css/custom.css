@@ -40,10 +40,11 @@ img {
 
 .sidenav {
     border-right: solid 1px lightgrey;
-    display: block;
+    display:flex;
+    flex-direction: column;
     max-width: 20%!important;
-    flex-grow: 1!important;
     padding:0;
+    height: 100vh;
 }
 
 .usersInRoom {
@@ -177,8 +178,15 @@ img {
     margin:0 5px;
 }
 
-.sidepaneParent {
-    height:41.5vh;
+.sidepaneParentChannel {
+    max-height:41.5vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidepaneParentDm {
+    min-height:41.5vh;
+    max-height:91.5vh;
     display: flex;
     flex-direction: column;
 }
@@ -189,6 +197,17 @@ img {
     padding-left:1rem;
     font-weight: 700;
 }
+
+.Logo {
+    margin:0;
+    padding:0.5rem;
+    margin-top:auto;
+}
+
+.Logo h2 {
+    color:var(--dark)!important;
+}
+
 .sidepaneDm {
     overflow-y: auto;
     display:block;
