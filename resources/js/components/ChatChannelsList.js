@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Button } from "reactstrap";
+import {UncontrolledCollapse, Button, CardBody, Card, Col } from "reactstrap";
 import CreateChannelModal from "./CreateChannelModal";
 
 export const ChatChannelsList = props => {
@@ -33,9 +33,12 @@ export const ChatChannelsList = props => {
 
     return (
         <div className="sidepaneParent">
+           
+            <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
             <h3>Channels</h3>
-
-            <div className="sidepaneChannel">
+    </Button>
+    <UncontrolledCollapse toggler="#toggler">
+    <div className="sidepaneChannel">
                 <div>
                 <CreateChannelModal buttonLabel={"+ Create New Channel"} />
                 <br></br>
@@ -57,6 +60,8 @@ export const ChatChannelsList = props => {
                     {channelList}
                 </div>
             </div>
+    </UncontrolledCollapse>
+            
         </div>
     );
 };
