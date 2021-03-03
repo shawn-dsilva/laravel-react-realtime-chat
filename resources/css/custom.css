@@ -29,13 +29,15 @@ img {
   }
   
   *::-webkit-scrollbar-track {
-    background: lightgrey!important ;       /* color of the tracking area */
+    background: lightgrey!important ;
+    border-radius:30px ;      /* color of the tracking area */
+    margin:3px 0;
   }
   
   *::-webkit-scrollbar-thumb {
     background-color:slategray;    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid lightgrey;  /* creates padding around scroll thumb */
+    border: 2px solid lightgrey;  /* creates padding around scroll thumb */
   }
 
 .sidenav {
@@ -59,7 +61,7 @@ img {
 }
 
 .chatMainContainer {
-    min-width:70%;
+    min-width:65%;
     max-width: 84%;
     margin:0;
     flex: 1 0;
@@ -76,7 +78,7 @@ img {
     border-bottom: 1px solid grey;
     padding:0.3rem;
     padding-bottom:0.3rem;
-    height:7%;
+    height:7.7%;
     /*margin left and right set to 0 to over write row class -15px left and right margins*/
     margin-left:0!important;
     margin-right:0!important;
@@ -147,7 +149,7 @@ img {
     padding: 0.8rem;
     font-size:1.8rem;
     display:flex;
-    height:5rem;
+    height:5.5rem;
 }
 
 .channelDescButton {
@@ -200,10 +202,16 @@ img {
 .sidepaneParentDm h3, .sidepaneParentChannel h3 {
     font-weight: 700!important;
     display:flex;
+    margin:0;
 }
 
 .sidepaneParentDm i, .sidepaneParentChannel i {
     margin-left: auto;
+}
+
+.sidepaneParentButton {
+    padding:0.75rem!important;
+    text-align: left;
 }
 
 .Logo {
@@ -215,6 +223,7 @@ img {
 
 .Logo h2 {
     color:var(--dark)!important;
+    margin:0;
 }
 
 .sidepaneDm {
@@ -242,7 +251,6 @@ img {
 
 .dmuser, .channelElement {
     padding:0.3rem 0;
-    border: 1px solid white;
     border-radius : 0.8rem;
     margin-right:0.4rem;
 }
@@ -431,6 +439,7 @@ font-size:1rem;
 
 .userControlPanel {
     margin:1rem 0;
+    margin-bottom: 0;
     padding:0 1rem;
     border-bottom:1px solid lightgrey;
     width:100%;

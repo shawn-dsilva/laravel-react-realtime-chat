@@ -132,8 +132,8 @@ import UserControlPanel from './UserControlPanel';
                             dmSelect={this.dmSelect}
                         />
                         <Row className="Logo">
-                          <h2>Laravel React Chat</h2>
-                          <span>Made by <a href="https://www.shawndsilva.com">Shawn D'silva</a></span>
+                        <h2><span style={{color:'#F05340' }}>Laravel</span> <span style={{color:'#61DBFB'}}> React</span> Chat</h2>
+                          <span style={{fontWeight:'500'}}>Made by <a href="https://www.shawndsilva.com">Shawn D'silva</a></span>
                         </Row>
                     </Col>
                     <Col className="chatMainContainer">

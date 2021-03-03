@@ -33,7 +33,7 @@ export const ChatDmUsersList = (props) => {
 
     return (
         <div className="sidepaneParentDm">
-      <Button color="white" onClick={toggle} style={{ marginBottom: '1rem', textAlign: 'left' }}>
+      <Button color="white" className="sidepaneParentButton" onClick={toggle}>
             <h3>Direct Message { !isOpen ? <i style={{marginLeft:'auto'}} class="fas fa-chevron-down"></i> : <i style={{marginLeft:'auto'}} class="fas fa-chevron-up"></i>}</h3>
             
     </Button>

@@ -39,7 +39,7 @@ export const ChatChannelsList = props => {
     return (
         <div className="sidepaneParentChannel">
            
-            <Button color="white" onClick={toggle} style={{ marginBottom: '1rem', textAlign: 'left' }}>
+            <Button color="white" className="sidepaneParentButton" onClick={toggle} >
             <h3>Channels { !isOpen ? <i class="fas fa-chevron-down"></i> : <i class="fas fa-chevron-up"></i>}</h3>
     </Button>
     <Collapse  isOpen={isOpen}>
