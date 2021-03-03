@@ -197,11 +197,13 @@ img {
     flex-direction: column;
 }
 
-.sidepaneParent h3 {
-    border-bottom: 1px lightgrey solid;
-    padding-bottom:0.7rem;
-    padding-left:1rem;
-    font-weight: 700;
+.sidepaneParentDm h3, .sidepaneParentChannel h3 {
+    font-weight: 700!important;
+    display:flex;
+}
+
+.sidepaneParentDm i, .sidepaneParentChannel i {
+    margin-left: auto;
 }
 
 .Logo {

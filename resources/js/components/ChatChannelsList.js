@@ -1,9 +1,14 @@
-import React from "react";
-import {UncontrolledCollapse, Button, CardBody, Card, Col } from "reactstrap";
+import React, {useState} from "react";
+import {Collapse , Button, CardBody, Card, Col } from "reactstrap";
 import CreateChannelModal from "./CreateChannelModal";
 
 export const ChatChannelsList = props => {
     const channels = props.channels;
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+
     // console.log(typeof(channels));
     const { channelSelect } = props;
     console.log("in channels list");
@@ -34,10 +39,10 @@ export const ChatChannelsList = props => {
     return (
         <div className="sidepaneParentChannel">
            
-            <Button color="white" id="toggler" style={{ marginBottom: '1rem', textAlign: 'left' }}>
-            <h3>Channels</h3>
+            <Button color="white" onClick={toggle} style={{ marginBottom: '1rem', textAlign: 'left' }}>
+            <h3>Channels { !isOpen ? <i class="fas fa-chevron-down"></i> : <i class="fas fa-chevron-up"></i>}</h3>
     </Button>
-    <UncontrolledCollapse toggler="#toggler">
+    <Collapse  isOpen={isOpen}>
     <div className="sidepaneChannel">
                 <div>
                 <CreateChannelModal buttonLabel={"+ Create New Channel"} />
@@ -60,7 +65,7 @@ export const ChatChannelsList = props => {
                     {channelList}
                 </div>
             </div>
-    </UncontrolledCollapse>
+    </Collapse >
             
         </div>
     );
