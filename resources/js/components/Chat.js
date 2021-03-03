@@ -132,7 +132,7 @@ import UserControlPanel from './UserControlPanel';
                             dmSelect={this.dmSelect}
                         />
                         <Row className="Logo">
-                        <h2><span style={{color:'#F05340' }}>Laravel</span> <span style={{color:'#61DBFB'}}> React</span> Chat</h2>
+                        <h2><span style={{color:'#F05340' }}>Laravel</span> <span style={{color:'#61DBFB'}}> React</span> Chat <i class="far fa-comments"></i></h2>
                           <span style={{fontWeight:'500'}}>Made by <a href="https://www.shawndsilva.com">Shawn D'silva</a></span>
                         </Row>
                     </Col>
