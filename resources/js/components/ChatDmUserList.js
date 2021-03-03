@@ -1,7 +1,7 @@
 
 
 import React from "react";
-import { Col, Button } from "reactstrap";
+import { UncontrolledCollapse, Col, Button } from "reactstrap";
 
 export const ChatDmUsersList = (props) => {
     const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
@@ -27,10 +27,14 @@ export const ChatDmUsersList = (props) => {
 
     return (
         <div className="sidepaneParentDm">
-      <h3>Direct Message</h3>
+      <Button color="white" id="dmtoggler" style={{ marginBottom: '1rem', textAlign: 'left' }}>
+            <h3>Direct Message</h3>
+    </Button>
+      <UncontrolledCollapse toggler="#dmtoggler" style={{overflowY:'hidden' }}> 
             <div className="sidepaneDm">
             <div>{userList}</div>
             </div>
+    </UncontrolledCollapse>
       </div>
     )
 };

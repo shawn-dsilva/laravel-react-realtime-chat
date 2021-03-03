@@ -8,12 +8,12 @@
 - Set authEndpoint to subdirectory+/broadcasting/auth if serving this app through a subfolder.
 - Set BROADCAST_DRIVER in .env to pusher, anything else and realtime chat functionality will not work at all.
 - While serving from subdirectory, `wsHost` must be the same in `config/broadcast.php` and `Echo` object in Javascript
+- overflow-y must be set to hidden in collapse container in ChatDmUserList, else the elements overflow into the divs below
 
 ## TODO
 
 ### Immediate
 
-- Make Direct Message and Channels collapsable.
 - Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
 - Migrate to PostgresSQL and add avatar url fields to user objects in all models
 - Typing events support.
@@ -30,6 +30,7 @@
 
 ### Done
 
+- Make Direct Message and Channels collapsable.
 - Scroll to bottom when joining new chat room or sending message
 - User Avatar uploading features
 - Display avatars of users and groups in chat sidebar

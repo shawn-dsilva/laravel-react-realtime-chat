@@ -44,7 +44,8 @@ img {
     flex-direction: column;
     max-width: 20%!important;
     padding:0;
-    height: 100vh;
+    flex-grow:1;
+    max-height: 100vh;
 }
 
 .usersInRoom {
@@ -184,6 +185,11 @@ img {
     flex-direction: column;
 }
 
+.show {
+    display:flex;
+    flex-direction: column;
+}
+
 .sidepaneParentDm {
     min-height:41.5vh;
     max-height:91.5vh;
@@ -202,6 +208,7 @@ img {
     margin:0;
     padding:0.5rem;
     margin-top:auto;
+    border-top:1px solid lightgrey;
 }
 
 .Logo h2 {
@@ -218,6 +225,7 @@ img {
     overflow-y: auto;
     display:block;
     padding-left:1rem;
+    max-height: 32vh;
 }
 
 .systemMsg {
