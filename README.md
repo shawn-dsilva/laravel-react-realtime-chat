@@ -14,10 +14,11 @@
 
 ### Immediate
 
-- Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
-- Migrate to PostgresSQL and add avatar url fields to user objects in all models
+- Beautify and improve UI of All Channels List and All Users List modals.
+- Add Tool Tip support for all buttons in DM and Channels sections.
+- Migrate to PostgresSQL and add avatar url fields to user objects in all models.
 - Typing events support.
-- Invite to channel by URL system
+- Invite to channel by URL system.
 
 ### Later
 
@@ -30,6 +31,7 @@
 
 ### Done
 
+- Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
 - Make Direct Message and Channels collapsable.
 - Scroll to bottom when joining new chat room or sending message
 - User Avatar uploading features
