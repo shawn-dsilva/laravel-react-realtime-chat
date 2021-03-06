@@ -2,7 +2,7 @@
 
 import React, {useState} from "react";
 import { Collapse, Col, Button } from "reactstrap";
-
+import AllUsersList from './AllUsersList';
 export const ChatDmUsersList = (props) => {
     const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
     // console.log(typeof(users));
@@ -34,6 +34,8 @@ export const ChatDmUsersList = (props) => {
     return (
         <div className="sidepaneParentDm">
       <Button color="white" className="sidepaneParentButton" onClick={toggle}>
+      <AllUsersList dmUsers={props.usersList} currUser={props.currUser} 
+      sendRequest={props.sendRequest}  />
             <h3>Direct Message { !isOpen ? <i style={{marginLeft:'auto'}} class="arrow fas fa-chevron-down"></i> : <i style={{marginLeft:'auto'}} class="arrow fas fa-chevron-up"></i>}</h3>
             
     </Button>

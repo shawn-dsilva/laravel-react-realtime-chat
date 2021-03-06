@@ -15,7 +15,8 @@
     } from 'reactstrap';
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
-import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect, getUsersList, inviteToChannel} from '../actions/chatActions';
+import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect,
+   getUsersList, inviteToChannel, makeRequest, joinChannelRequest } from '../actions/chatActions';
 import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -57,6 +58,9 @@ import UserControlPanel from './UserControlPanel';
         currUser: PropTypes.object.isRequired,
         selectedChannel: PropTypes.object.isRequired,
         usersList: PropTypes.array.isRequired,
+        joinChannelRequest: PropTypes.func.isRequired,
+        makeRequest: PropTypes.func.isRequired,
+
       };
 
 
@@ -102,7 +106,13 @@ import UserControlPanel from './UserControlPanel';
         this.props.channelSelect(selectedChannel, channelName, desc, owner_id, owner);
       }
 
+      sendRequest = (id) =>{
+        this.props.makeRequest(id)
+      }
       
+      joinChannelRequestWrapper = (id, type) => {
+        this.props.joinChannelRequest(id, type)
+      }
 
       render () {
 
@@ -124,12 +134,16 @@ import UserControlPanel from './UserControlPanel';
                             channels={this.props.channels}
                             currUser={this.props.currUser}
                             channelSelect={this.channelSelect}
+                            joinChannelRequest={this.joinChannelRequestWrapper}
+
                         />
 
                         <ChatDmUsersList
+                            usersList={this.props.usersList}
                             dmUsers={this.props.dmUsers}
                             currUser={this.props.currUser}
                             dmSelect={this.dmSelect}
+                            sendRequest={this.sendRequest}
                         />
                         <Row className="Logo">
                         <h2><span style={{color:'#F05340' }}>Laravel</span> <span style={{color:'#61DBFB'}}> React</span> Chat <i class="far fa-comments" style={{fontSize:'2.5rem'}}></i></h2>
@@ -188,4 +202,5 @@ import UserControlPanel from './UserControlPanel';
       selectedChannel:state.chat.selectedChannel,
       usersList: state.chat.usersList,
     });
-    export default connect(mapStateToProps, {getDmUsers, getChannels, getMessages,dmSelectAction, channelSelect,  getUsersList, inviteToChannel})(Chat);
+    export default connect(mapStateToProps, {makeRequest, getDmUsers, getChannels, getMessages,dmSelectAction,
+       channelSelect,  getUsersList, inviteToChannel, joinChannelRequest })(Chat);

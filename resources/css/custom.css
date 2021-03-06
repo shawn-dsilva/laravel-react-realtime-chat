@@ -185,7 +185,6 @@ img {
     max-height:41.5vh;
     display: flex;
     flex-direction: column;
-    cursor:pointer;
 }
 
 .show {
@@ -198,7 +197,6 @@ img {
     max-height:91.5vh;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
 }
 
 .sidepaneParentDm h3, .sidepaneParentChannel h3 {
@@ -216,6 +214,7 @@ img {
     margin-bottom:1rem;
     text-align: left;
     box-shadow: 0 5px 5px 2px rgb(0 0 0 / 6%);
+    cursor:pointer;
 }
 
 .createChannel {
