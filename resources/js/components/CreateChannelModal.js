@@ -20,7 +20,8 @@ class CreateChannelModal extends Component {
   }
 
 
-  toggle = () => {
+  toggle = (e) => {
+    e.stopPropagation();
     this.setState({ modal : !this.state.modal});
   }
   onChange = (e) => {
@@ -41,8 +42,8 @@ class CreateChannelModal extends Component {
 
   render() {
     return (
-      <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+      <div style={{marginLeft:'auto'}}>
+        <Button className="createChannel" onClick={this.toggle}><i class="fas fa-plus"></i></Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}><legend>Create A New Channel</legend></ModalHeader>
           <ModalBody>

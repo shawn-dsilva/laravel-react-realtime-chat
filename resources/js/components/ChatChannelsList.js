@@ -39,13 +39,15 @@ export const ChatChannelsList = props => {
     return (
         <div className="sidepaneParentChannel">
            
-            <Button color="white" className="sidepaneParentButton" onClick={toggle} >
-            <h3>Channels { !isOpen ? <i class="fas fa-chevron-down"></i> : <i class="fas fa-chevron-up"></i>}</h3>
-    </Button>
+            <div color="white" className="sidepaneParentButton" onClick={toggle} >                
+                <h3>Channels                 
+                    <CreateChannelModal buttonLabel={"+ Create New Channel"} />
+
+                    { !isOpen ? <i class="fas fa-chevron-down"></i> : <i class="fas fa-chevron-up"></i>}</h3>
+            </div>
     <Collapse  isOpen={isOpen}>
     <div className="sidepaneChannel">
                 <div>
-                <CreateChannelModal buttonLabel={"+ Create New Channel"} />
                 <br></br>
                     {" "}
                     <Button
