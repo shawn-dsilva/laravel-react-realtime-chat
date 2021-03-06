@@ -42,7 +42,7 @@ class CreateChannelModal extends Component {
 
   render() {
     return (
-      <div style={{marginLeft:'auto'}}>
+      <div >
         <Button className="createChannel" onClick={this.toggle}><i class="fas fa-plus"></i></Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}><legend>Create A New Channel</legend></ModalHeader>

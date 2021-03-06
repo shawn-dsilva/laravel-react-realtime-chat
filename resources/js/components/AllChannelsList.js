@@ -9,7 +9,10 @@ export const AllChannelsList = (props) => {
 
   const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal);
+  const toggle = (e) => {
+      e.stopPropagation();
+      setModal(!modal);
+  }
 
 
   console.log(channels);
@@ -47,8 +50,8 @@ export const AllChannelsList = (props) => {
 
 
     return (
-       <div>
-          <Button color="danger" onClick={toggle}>All Channels List</Button>
+       <div style={{marginLeft:'auto'}}>
+          <Button className="createChannel" onClick={toggle}><i class="far fa-compass"></i></Button>
           <Modal isOpen={modal} toggle={toggle} >
             <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
             <ModalBody>
