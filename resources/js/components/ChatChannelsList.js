@@ -43,7 +43,7 @@ export const ChatChannelsList = props => {
                 <h3>Channels                 
                     <CreateChannelModal buttonLabel={"+ Create New Channel"} />
 
-                    { !isOpen ? <i class="fas fa-chevron-down"></i> : <i class="fas fa-chevron-up"></i>}</h3>
+                    { !isOpen ? <i class=" arrow fas fa-chevron-down"></i> : <i class=" arrow fas fa-chevron-up"></i>}</h3>
             </div>
     <Collapse  isOpen={isOpen}>
     <div className="sidepaneChannel">

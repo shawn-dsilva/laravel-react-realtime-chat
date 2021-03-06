@@ -185,6 +185,7 @@ img {
     max-height:41.5vh;
     display: flex;
     flex-direction: column;
+    cursor:pointer;
 }
 
 .show {
@@ -197,6 +198,7 @@ img {
     max-height:91.5vh;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .sidepaneParentDm h3, .sidepaneParentChannel h3 {
@@ -223,17 +225,21 @@ img {
  font-size:1.5rem;
  padding: 5px 7px;
  margin-right:1rem;
- border-radius: 50%;
-
  display:flex;
 }
 
 
-.createChannel:hover {
+.createChannel:hover, .createChannel:active, .createChannel:focus  {
     background:lightgrey;
     border:lightgrey;
     color:var(--main-heading-color);
+    box-shadow: none;
    }
+
+.arrow {
+    padding: 5px 7px;
+    font-size: 1.7rem;
+}
    
 .Logo {
     margin:0;
