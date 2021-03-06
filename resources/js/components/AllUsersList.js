@@ -8,7 +8,10 @@ export const AllUsersList = (props) => {
 
   const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal);
+  const toggle = (e) => {
+      e.stopPropagation();
+      setModal(!modal);
+    };
 
 
   console.log(users);
@@ -33,8 +36,10 @@ export const AllUsersList = (props) => {
 
 
     return (
-       <div>
-          <Button color="danger" onClick={toggle}>All Users List</Button>
+       <div style={{marginLeft:'auto'}}>
+          <Button className="createChannel" style={{marginRight:'0.5rem'}} onClick={toggle}>
+              <i class="fas fa-user-plus"></i>
+              </Button>
           <Modal isOpen={modal} toggle={toggle} >
             <ModalHeader toggle={toggle}>All Users List</ModalHeader>
             <ModalBody>
