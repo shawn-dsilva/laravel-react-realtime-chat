@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Collapse , Button, CardBody, Card, Col } from "reactstrap";
 import CreateChannelModal from "./CreateChannelModal";
+import AllChannelsList from "./AllChannelsList";
 
 export const ChatChannelsList = props => {
     const channels = props.channels;
@@ -40,7 +41,12 @@ export const ChatChannelsList = props => {
         <div className="sidepaneParentChannel">
            
             <div color="white" className="sidepaneParentButton" onClick={toggle} >                
-                <h3>Channels                 
+                <h3>Channels          
+                <AllChannelsList
+                            channels={props.allChannels}
+                            currUser={props.currUser}
+                            joinChannelRequest={props.joinChannelRequest}
+                        />        
                     <CreateChannelModal buttonLabel={"+ Create New Channel"} />
 
                     { !isOpen ? <i class=" arrow fas fa-chevron-down"></i> : <i class=" arrow fas fa-chevron-up"></i>}</h3>

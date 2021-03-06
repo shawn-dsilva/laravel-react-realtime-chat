@@ -132,6 +132,7 @@ import UserControlPanel from './UserControlPanel';
                         <UserControlPanel/>
                         <ChatChannelsList
                             channels={this.props.channels}
+                            allChannels={this.props.allChannels}
                             currUser={this.props.currUser}
                             channelSelect={this.channelSelect}
                             joinChannelRequest={this.joinChannelRequestWrapper}
@@ -201,6 +202,8 @@ import UserControlPanel from './UserControlPanel';
       currUser:state.auth.currUser,
       selectedChannel:state.chat.selectedChannel,
       usersList: state.chat.usersList,
+      allChannels: state.chat.allChannels,
+
     });
     export default connect(mapStateToProps, {makeRequest, getDmUsers, getChannels, getMessages,dmSelectAction,
        channelSelect,  getUsersList, inviteToChannel, joinChannelRequest })(Chat);
