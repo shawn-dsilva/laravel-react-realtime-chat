@@ -14,7 +14,8 @@ import {
   DropdownItem,
   NavbarText, 
   Row,
-  Col
+  Col,
+  UncontrolledTooltip,
 } from 'reactstrap';
 import NotificationDropdown from './NotificationDropdown';
 import AllUsersList from './AllUsersList';
@@ -24,15 +25,13 @@ import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
-import { makeRequest, acceptRequest,  getNotifications, 
-  getAllNotifications, markAsRead, joinChannelRequest } from '../actions/chatActions';
+import { acceptRequest,  getNotifications, 
+  getAllNotifications, markAsRead, j } from '../actions/chatActions';
 import {logout} from '../actions/authActions';
 
 class UserControlPanel extends Component { 
 
   static propTypes = {
-
-    makeRequest: PropTypes.func.isRequired,
     getNotifications: PropTypes.func.isRequired,
     getAllNotifications: PropTypes.func.isRequired,
     acceptRequest: PropTypes.func.isRequired,
@@ -44,7 +43,6 @@ class UserControlPanel extends Component {
     logout: PropTypes.func.isRequired,
     usersList: PropTypes.array.isRequired,
     channels: PropTypes.array.isRequired,
-    joinChannelRequest: PropTypes.func.isRequired,
   };
 
 constructor(props) {
@@ -67,13 +65,6 @@ componentDidMount () {
   this.props.getNotifications();
 }
 
-sendRequest = (id) =>{
-  this.props.makeRequest(id)
-}
-
-joinChannelRequestWrapper = (id, type) => {
-  this.props.joinChannelRequest(id, type)
-}
 
 acceptRequest = (id) =>{
   this.props.acceptRequest(id)
@@ -94,24 +85,6 @@ toggle = () => {
 render() {
   return (
     <Row className="userControlPanel">
-      {/* <Navbar color="light" light expand="md" className="navCustom">
-        <NavbarBrand href="/">Laravel React Chat</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="container-fluid" navbar>
-            <NavItem>
-            <AllUsersList
-                            dmUsers={this.props.usersList}
-                            currUser={this.props.currUser}
-                            sendRequest={this.sendRequest}
-                        />            </NavItem>
-            <NavItem className="pl-3">
-            <AllChannelsList
-                            channels={this.props.allChannels}
-                            currUser={this.props.currUser}
-                            joinChannelRequest={this.joinChannelRequestWrapper}
-                        /> 
-            </NavItem> */}
            <Row className="userContainer">
              <div className="userDetails">
            {
@@ -122,9 +95,12 @@ render() {
               <span>{this.props.currUser.name}</span>
               </div>
             <UncontrolledDropdown inNavbar >
-            <div className="userOptions">
+            <div className="userOptions" id="userOptions">
               <DropdownToggle nav >
                 <i class="fas fa-cog"></i>
+                <UncontrolledTooltip placement="bottom" target="userOptions">
+                    Options
+                </UncontrolledTooltip>
               </DropdownToggle>
               </div>
 
@@ -143,11 +119,16 @@ render() {
               </DropdownMenu>
             </UncontrolledDropdown>
             </Row>
-            <Row className="notifContainer">
-              <NotificationDropdown markAsRead={this.props.markAsRead}  notifications={this.props.notifications}
+
+            <Row  className="notifContainer">
+              <NotificationDropdown  markAsRead={this.props.markAsRead}  notifications={this.props.notifications}
              allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptRequest}
               unreadNotifs={this.props.unreadNotifs} getAllNotifications={this.props.getAllNotifications}
-              /></Row>
+              />
+              </Row>
+              <UncontrolledTooltip placement="bottom" target="notifications">
+                    Notifications
+                </UncontrolledTooltip>
             
           {/* </Nav>
 
@@ -174,4 +155,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, { makeRequest,  acceptRequest, getNotifications,  getAllNotifications, markAsRead, joinChannelRequest, logout})(UserControlPanel);
+export default connect(mapStateToProps, {   acceptRequest, getNotifications,  getAllNotifications, markAsRead,  logout})(UserControlPanel);
