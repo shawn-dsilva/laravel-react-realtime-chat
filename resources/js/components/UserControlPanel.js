@@ -107,13 +107,14 @@ render() {
               </DropdownToggle>
               </div>
 
-              <DropdownMenu left>
-                <DropdownItem>
+              <DropdownMenu left className="OptionsDropdownMenu">
+                <DropdownItem style={{whiteSpace:'nowrap'}}>
                   <ImageUploadModal
                   currUser={this.props.currUser}
                             buttonLabel={"Change Avatar"}
                         /> 
                 </DropdownItem>
+                <DropdownItem divider></DropdownItem>
                 <DropdownItem onClick={this.onLogout}>
                 <i class="fas fa-sign-out-alt"></i>  &nbsp;
                 Logout

@@ -127,7 +127,7 @@ class ImageUploadModal extends Component {
     return (
       <div>
         <Button color="body" className="p-0" onClick={this.toggle}>
-        <i class="fas fa-file-upload"></i> &nbsp;
+        <img style={{margin:'0'}} width="20" src="/assets/images/upload.svg"></img> &nbsp;
           {this.props.buttonLabel}
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
