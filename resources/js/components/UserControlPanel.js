@@ -86,7 +86,10 @@ render() {
   return (
     <Row className="userControlPanel">
            <Row className="userContainer">
-             <div className="userDetails">
+           <UncontrolledTooltip placement="top" target="userProfile">
+                    User Profile
+                </UncontrolledTooltip>
+             <div id="userProfile" className="userDetails">
            {
                   this.props.currUser.avatar ? 
                   <img src={"storage/"+this.props.currUser.avatar} className="dmAvatar"></img> : 

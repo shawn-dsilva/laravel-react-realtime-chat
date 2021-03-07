@@ -37,7 +37,7 @@ export const AllUsersList = (props) => {
 
     return (
        <div style={{marginLeft:'auto'}}>
-          <Button className="createChannel" style={{marginRight:'0.5rem'}} onClick={toggle}>
+          <Button id="addFriend" className="createChannel" style={{marginRight:'0.5rem'}} onClick={toggle}>
               <i class="fas fa-user-plus"></i>
               </Button>
           <Modal isOpen={modal} toggle={toggle} >

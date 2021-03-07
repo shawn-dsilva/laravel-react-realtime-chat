@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Collapse , Button, CardBody, Card, Col } from "reactstrap";
+import {Collapse , Button, CardBody, Card, Col, UncontrolledTooltip } from "reactstrap";
 import CreateChannelModal from "./CreateChannelModal";
 import AllChannelsList from "./AllChannelsList";
 
@@ -39,7 +39,16 @@ export const ChatChannelsList = props => {
 
     return (
         <div className="sidepaneParentChannel">
-           
+                <UncontrolledTooltip placement="bottom" target="allChannels">
+                    Discover Channels
+                </UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="createChannel">
+                   Create A Channel
+                </UncontrolledTooltip>
+                <UncontrolledTooltip placement="right" target="ChannelArrow">
+                   Open / Close Channel Section
+                </UncontrolledTooltip>
+
             <div color="white" className="sidepaneParentButton" onClick={toggle} >                
                 <h3>Channels          
                 <AllChannelsList
@@ -49,7 +58,7 @@ export const ChatChannelsList = props => {
                         />        
                     <CreateChannelModal buttonLabel={"+ Create New Channel"} />
 
-                    { !isOpen ? <i class=" arrow fas fa-chevron-down"></i> : <i class=" arrow fas fa-chevron-up"></i>}</h3>
+                    { !isOpen ? <i id="ChannelArrow" class=" arrow fas fa-chevron-down"></i> : <i id="ChannelArrow" class=" arrow fas fa-chevron-up"></i>}</h3>
             </div>
     <Collapse  isOpen={isOpen}>
     <div className="sidepaneChannel">

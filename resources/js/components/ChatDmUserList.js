@@ -1,7 +1,7 @@
 
 
 import React, {useState} from "react";
-import { Collapse, Col, Button } from "reactstrap";
+import { Collapse, Col, Button, UncontrolledTooltip } from "reactstrap";
 import AllUsersList from './AllUsersList';
 export const ChatDmUsersList = (props) => {
     const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
@@ -33,10 +33,17 @@ export const ChatDmUsersList = (props) => {
 
     return (
         <div className="sidepaneParentDm">
+                <UncontrolledTooltip placement="bottom" target="addFriend">
+                   Add Friend
+                </UncontrolledTooltip>
+
+                <UncontrolledTooltip placement="right" target="DmArrow">
+                   Open or Close DM Section
+                </UncontrolledTooltip>
       <Button color="white" className="sidepaneParentButton" onClick={toggle}>
       
             <h3>Direct Message <AllUsersList dmUsers={props.usersList} currUser={props.currUser} 
-      sendRequest={props.sendRequest}  /> { !isOpen ? <i  class="arrow fas fa-chevron-down"></i> : <i class="arrow fas fa-chevron-up"></i>}</h3>
+      sendRequest={props.sendRequest}  /> { !isOpen ? <i  id="DmArrow" class="arrow fas fa-chevron-down"></i> : <i id="DmArrow" class="arrow fas fa-chevron-up"></i>}</h3>
             
     </Button>
       <Collapse isOpen={isOpen} defaultOpen={true} style={{overflowY:'hidden' }}> 

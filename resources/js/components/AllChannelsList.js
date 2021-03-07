@@ -51,7 +51,7 @@ export const AllChannelsList = (props) => {
 
     return (
        <div style={{marginLeft:'auto'}}>
-          <Button className="createChannel" onClick={toggle}><i class="far fa-compass"></i></Button>
+          <Button id="allChannels" className="createChannel" onClick={toggle}><i class="far fa-compass"></i></Button>
           <Modal isOpen={modal} toggle={toggle} >
             <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
             <ModalBody>
