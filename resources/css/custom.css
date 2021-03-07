@@ -421,11 +421,11 @@ font-size:1rem;
 
 .notificationsBell button, .userOptions i {
     border:unset;
-    background:whitesmoke!important;
+    background:white;
     border:1px solid lightgray!important;
     border-radius: 50%;
     padding:0.5rem 1rem;
-    box-shadow:unset!important;
+    box-shadow:0 0 3px 1px rgba(0,0,0,0.15)!important;
     font-size:1.5rem;
     color:var(--dark);
 }
@@ -445,6 +445,11 @@ font-size:1rem;
     border:0.5rem solid whitesmoke;
     border-radius: 50%;
     color:unset;
+}
+
+ .userOptions i:hover {
+    background:whitesmoke;
+    border-radius: 50%;
 }
 
 .notifContainer, .userContainer {
