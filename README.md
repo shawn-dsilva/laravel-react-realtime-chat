@@ -14,23 +14,23 @@
 
 ### Immediate
 
-- Beautify and improve UI of All Channels List and All Users List modals.
-- Add Tool Tip support for all buttons in DM and Channels sections.
+- Add User profiles accessible by clicking on name of user and image.
 - Migrate to PostgresSQL and add avatar url fields to user objects in all models.
 - Typing events support.
+
+### Luxury
+
 - Invite to channel by URL system.
-
-### Later
-
 - Add search all users functionality.
 - Add search all channels functionality.
-- Add User profiles which are hyper linked.
 - Unread messages notification.
 - UI Design using SASS
 - Responsiveness using SASS
 
 ### Done
 
+- Beautify and improve UI of All Channels List and All Users List modals.
+- Add Tool Tip support for all buttons in DM and Channels sections.
 - Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
 - Make Direct Message and Channels collapsable.
 - Scroll to bottom when joining new chat room or sending message
