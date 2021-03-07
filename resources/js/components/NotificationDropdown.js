@@ -120,7 +120,8 @@ function AllNotificationsModal({modalAN, toggleModalAN}) {
         </DropdownToggle>
         <Badge color="primary"> {unreadNotifs}</Badge>
 </Row>
-      <DropdownMenu>
+      <DropdownMenu className="NotifDropdownMenu">
+        <DropdownItem header> Your Notifications </DropdownItem>
         <DropdownItem divider />
           {notificationsList}
 

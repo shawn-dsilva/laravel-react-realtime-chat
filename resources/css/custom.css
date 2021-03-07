@@ -452,6 +452,23 @@ font-size:1rem;
     border-radius: 50%;
 }
 
+.NotifDropdownMenu {
+    width:450px;
+    box-shadow:0 0 3px 1px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.dropdown-item {
+    white-space: pre-wrap;
+}
+
+.dropdown-header {
+    font-weight: 700;
+    font-size:1.4rem;
+    text-align: center;
+    color:var(--main-heading-color);
+}
+
 .notifContainer, .userContainer {
     margin:0;
 }
