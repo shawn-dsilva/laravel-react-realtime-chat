@@ -455,14 +455,36 @@ font-size:1rem;
 .NotifDropdownMenu {
     width:450px;
     box-shadow:0 0 3px 1px rgba(0,0,0,0.1);
+    border:1px solid lightgrey;
     border-radius: 10px;
+    margin-top:0.8rem;
+}
+
+.NotifDropdownMenu:before,
+.NotifDropdownMenu:after, 
+.OptionsDropdownMenu:before,
+.OptionsDropdownMenu:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 19px;
+  border: 11px solid transparent;
+  border-bottom-color: rgba(0,0,0, 0.25);
+}
+
+.NotifDropdownMenu:after,
+.OptionsDropdownMenu:after {
+  left: 20px;
+  border: 10px solid transparent;
+  border-bottom-color: #ffffff;
 }
 
 .OptionsDropdownMenu {
+
     box-shadow:0 0 3px 1px rgba(0,0,0,0.1);
     border-radius: 10px;
     padding:1rem;
-    margin-top:-0.8rem;
+    margin-top:-0.3rem;
 }
 
 .OptionsDropdownMenu button {
