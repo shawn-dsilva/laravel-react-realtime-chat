@@ -14,6 +14,7 @@
 
 ### Immediate
 
+- Beautify and improve UI of All Channels List and All Users List modals.
 - Add User profiles accessible by clicking on name of user and image.
 - Migrate to PostgresSQL and add avatar url fields to user objects in all models.
 - Typing events support.
@@ -29,7 +30,7 @@
 
 ### Done
 
-- Beautify and improve UI of All Channels List and All Users List modals.
+- Beautify and improve UI of Options and Notifications dropdown menus.
 - Add Tool Tip support for all buttons in DM and Channels sections.
 - Add buttons for "Join Channel" and "Add Friend" to Channel and Direct Message sections respectively
 - Make Direct Message and Channels collapsable.
