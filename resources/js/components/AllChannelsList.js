@@ -22,23 +22,23 @@ export const AllChannelsList = (props) => {
                 <Card>
                     <CardBody>
                         <CardTitle>
-                            <Button color="link" id={value.id}>
-                                <b>{value.name}</b>
-                            </Button>
+                            <h5 id={value.id}>
+                            {value.name}
+                            </h5>
                         </CardTitle>
                         <b>Owner: </b> {value.owner}
                         <CardSubtitle><b>Type: </b>{value.type} channel</CardSubtitle>
                         <CardText>
                             <b>Channel Description: </b>{value.desc}
                         </CardText>
-                        <CardSubtitle><b>Visible : </b>{value.visible ? "Yes": "No"}</CardSubtitle>
+                        <CardSubtitle style={{marginTop:'auto'}}><b>Visible : </b>{value.visible ? "Yes": "No"}</CardSubtitle>
 
                         <Button
                             color="success"
                             onClick={() => joinChannelRequest(value.id, value.type)}
                             id={value.id}
                         >
-                            <b> + Request to Join</b>
+                            {value.type === 'private' ? <b> + Request to Join</b> : <b> + Join Now </b> }
                         </Button>
                     </CardBody>
                 </Card>
@@ -55,12 +55,12 @@ export const AllChannelsList = (props) => {
                 <i class="far fa-compass"></i>
             </Button>
             <Modal className="ChannelsListModal" isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
-                <ModalBody>
+                <ModalHeader toggle={toggle}>Discover Channels</ModalHeader>
+                <ModalBody className="ChannelsListDesc">
                     <p>
                         This modal lists all the channels created by users on
-                        this site, it would not be present in a production app,
-                        and is present here only for debug purposes
+                        this site, some of which are public and need approval of the owner to join, 
+                        while others are public and can be joined immediately
                     </p>
                 </ModalBody>
                 <ModalBody className="ChannelsList">{channelList}</ModalBody>

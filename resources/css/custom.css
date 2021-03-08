@@ -518,14 +518,35 @@ font-size:1rem;
     max-width: 50%!important;
 }
 
+.ChannelsListDesc {
+    width:60%;
+    margin:0 auto;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 .ChannelsListItem {
-    max-width:33%;
+    max-width:50%;
     flex-basis: unset;
     margin:auto;
 }
 
+.ChannelsListItem h5 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
 .card-body  {
     min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-title {
+    font-weight: 700;
+    font-size: 1.8rem;
 }
 
 .notificationsBell span {
