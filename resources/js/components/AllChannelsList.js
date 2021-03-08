@@ -18,7 +18,7 @@ export const AllChannelsList = (props) => {
   console.log(channels);
     const channelList = channels.map((value, index) => {
         return (
-            <Col  key={index}>
+            <Col className="ChannelsListItem" key={index}>
                 <Card>
                     <CardBody>
                         <CardTitle>
@@ -50,23 +50,28 @@ export const AllChannelsList = (props) => {
 
 
     return (
-       <div style={{marginLeft:'auto'}}>
-          <Button id="allChannels" className="createChannel" onClick={toggle}><i class="far fa-compass"></i></Button>
-          <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
-            <ModalBody>
-                <p>
-                    This modal lists all the channels created by users on this site, it would not be
-                    present in a production app, and is present here only for debug purposes
-                </p>
-        {channelList}
-        </ModalBody>
-            <ModalFooter>
-              <Button color="danger" onClick={toggle}>Close Window</Button>
-            </ModalFooter>
-          </Modal>
+        <div style={{ marginLeft: "auto" }}>
+            <Button id="allChannels" className="createChannel" onClick={toggle}>
+                <i class="far fa-compass"></i>
+            </Button>
+            <Modal className="ChannelsListModal" isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>All Channels List</ModalHeader>
+                <ModalBody>
+                    <p>
+                        This modal lists all the channels created by users on
+                        this site, it would not be present in a production app,
+                        and is present here only for debug purposes
+                    </p>
+                </ModalBody>
+                <ModalBody className="ChannelsList">{channelList}</ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={toggle}>
+                        Close Window
+                    </Button>
+                </ModalFooter>
+            </Modal>
         </div>
-    )
+    );
 };
 
 export default AllChannelsList;

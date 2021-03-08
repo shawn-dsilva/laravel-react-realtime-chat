@@ -508,6 +508,26 @@ font-size:1rem;
     margin:0;
 }
 
+.ChannelsList {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap!important;
+}
+
+.ChannelsListModal {
+    max-width: 50%!important;
+}
+
+.ChannelsListItem {
+    max-width:33%;
+    flex-basis: unset;
+    margin:auto;
+}
+
+.card-body  {
+    min-height: 40vh;
+}
+
 .notificationsBell span {
     display:flex;
     line-height: unset;
