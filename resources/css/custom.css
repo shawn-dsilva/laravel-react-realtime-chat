@@ -539,7 +539,7 @@ font-size:1rem;
 }
 
 .card-body  {
-    min-height: 40vh;
+    min-height: 30vh;
     display: flex;
     flex-direction: column;
 }

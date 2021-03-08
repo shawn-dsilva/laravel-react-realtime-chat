@@ -156,7 +156,7 @@ class AuthController extends Controller
 
     public function allUsersList()
     {
-        $allUsersList = User::all()->toArray();
+        $allUsersList = User::with('details')->get();
 
         return response()->json($allUsersList);
     }

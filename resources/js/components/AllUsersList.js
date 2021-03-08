@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Col } from 'reactstrap';
+import { getAvatar } from './utils/echoHelpers';
+
 
 export const AllUsersList = (props) => {
     const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
@@ -21,6 +23,7 @@ export const AllUsersList = (props) => {
             <Col key={index}>
                 <Button color="link"
                     id={value.id}>
+                    <img height="50" style={{borderRadius:'50%'}} src={'storage/'+getAvatar(value)}></img>
                     <b>{value.name}</b>
                 </Button>
                 <Button color="success"

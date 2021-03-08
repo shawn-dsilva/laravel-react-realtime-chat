@@ -5,15 +5,8 @@ import {
 } from 'reactstrap';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import { getAvatar } from './utils/echoHelpers';
 
-const getAvatar = (value) => {
-  let details = value.user.details;
-  if(!details) {
-    return 'avatars/defaultuser.png';
-  } else {
-    return details.avatar;
-  }
-}
 function ChatMessageList(props) {
 
   // Equivalent of a Div ID in React, remains even across re-renders
@@ -33,7 +26,7 @@ function ChatMessageList(props) {
           } else {
             if(value.user.name !== props.currUser.name) {
               return <div className="msg-container">
-                 <img  src={'storage/'+getAvatar(value)}></img>
+                 <img  src={'storage/'+getAvatar(value.user)}></img>
                  
                  <Col className="chatNotUserMsg" key={index}>
                  <span>
@@ -51,7 +44,7 @@ function ChatMessageList(props) {
                 <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                  <br></br> {value.message}</Col>
-                 <img  src={'storage/'+getAvatar(value)}></img>
+                 <img  src={'storage/'+getAvatar(value.user)}></img>
 
              </div>
             }

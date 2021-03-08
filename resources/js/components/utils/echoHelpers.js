@@ -87,3 +87,11 @@ export const sendMessage = ( message, channel_id, channel_type) => {
         });
 };
 
+export const getAvatar = (value) => {
+    let details = value.details;
+    if(!details) {
+      return 'avatars/defaultuser.png';
+    } else {
+      return details.avatar;
+    }
+  };
