@@ -9,6 +9,9 @@
 - Set BROADCAST_DRIVER in .env to pusher, anything else and realtime chat functionality will not work at all.
 - While serving from subdirectory, `wsHost` must be the same in `config/broadcast.php` and `Echo` object in Javascript
 - overflow-y must be set to hidden in collapse container in ChatDmUserList, else the elements overflow into the divs below
+- Run `php artisan storage:link` after cloning repo
+- Run `php artisan vendor:publish --provider="Laravolt\Avatar\ServiceProvider"`, change driver to gd if imagemagick doesn't work.
+- Run `sudo apt-get update && sudo apt-get install -y imagemagick php-imagick` to install imagemagick
 
 ## TODO
 

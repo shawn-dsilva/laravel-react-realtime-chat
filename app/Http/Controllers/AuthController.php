@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 // use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Avatar;
 
 class AuthController extends Controller
 {
@@ -68,6 +68,12 @@ class AuthController extends Controller
                 'password' => bcrypt($request->password)
             ]);
             $user->save();
+
+            Avatar::create($request->name)->save('storage/avatars/'.$request->name.'-default.jpg', 100);
+
+            $avatar = 'avatars/'.$request->name.'-default.jpg';
+            $user->details()->updateOrCreate(['user_id' => $user->id], ['avatar'=> $avatar]);
+
             return response()->json([
                 'message' => 'Successfully created user!'
             ], 201);
