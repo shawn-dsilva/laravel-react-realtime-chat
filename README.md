@@ -17,7 +17,7 @@
 
 ### Immediate
 
-- Upon user creation, dynamically fill up avatar field with default image or create dynamic default avatar and save.
+- Fix default avatar image size and font sizing
 - Migrate to PostgreSQL and create new SQL dump file
 
 ### Luxury
@@ -34,6 +34,7 @@
 
 ### Done
 
+- Upon user creation, dynamically fill up avatar field with default image or create dynamic default avatar and save.
 - Beautify and improve UI of All Channels List and All Users List modals.
 - Beautify and improve UI of Options and Notifications dropdown menus.
 - Add Tool Tip support for all buttons in DM and Channels sections.
