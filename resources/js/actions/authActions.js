@@ -173,7 +173,7 @@ const initNotificationAndEventChannels = (userId, dispatch  ) => {
         console.log("ACCEPT REQUEST EVENT OUTPUT BELOW");
         console.log(event);
         if(event[1] == 'FRND') {
-          dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: data });
+          dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: event[0] });
       } else {
           dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
       }
