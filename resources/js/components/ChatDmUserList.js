@@ -4,8 +4,8 @@ import React, {useState} from "react";
 import { Collapse, Col, Button, UncontrolledTooltip } from "reactstrap";
 import AllUsersList from './AllUsersList';
 export const ChatDmUsersList = (props) => {
-    const users = props.dmUsers.filter(u => u.id !== props.currUser.id);
-    // console.log(typeof(users));
+
+  const users = props.dmUsers;
   const { dmSelect } = props;
 
   const [isOpen, setIsOpen] = useState(true);
