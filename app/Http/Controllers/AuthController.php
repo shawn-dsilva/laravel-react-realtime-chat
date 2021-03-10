@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\User;
+use App\Channel;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
 // use Illuminate\Contracts\Validation\Validator;
@@ -69,10 +70,16 @@ class AuthController extends Controller
             ]);
             $user->save();
 
+            // Default Avatar created from Initials and saved
             Avatar::create($request->name)->save('storage/avatars/'.$request->name.'-default.jpg', 100);
 
             $avatar = 'avatars/'.$request->name.'-default.jpg';
             $user->details()->updateOrCreate(['user_id' => $user->id], ['avatar'=> $avatar]);
+
+            // Adds User to the default General Channel
+            $channel = Channel::find(1);
+            $channel->users()->attach($user->id);
+
 
             return response()->json([
                 'message' => 'Successfully created user!'
