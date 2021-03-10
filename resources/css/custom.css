@@ -150,6 +150,7 @@ img {
     font-size:1.8rem;
     display:flex;
     height:5.5rem;
+    z-index: 1;
 }
 
 .channelDescButton {

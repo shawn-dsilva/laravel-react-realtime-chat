@@ -123,7 +123,7 @@ export const getMessages = selectedChannel => (dispatch, getState) => {
         .catch(err => {});
 };
 
-export const dmSelectAction = (channel_id, username) => {
+export const dmSelectAction = (channel_id, username, avatar) => {
     return (dispatch, getState) => {
         // Leave general channel
 
@@ -134,7 +134,7 @@ export const dmSelectAction = (channel_id, username) => {
         // It will be returned, else a new chatroom will be created
         // for only these two users and  returned
 
-                const channel = { "id": channel_id, "type":"dm", "name":username};
+                const channel = { "id": channel_id, "type":"dm", "name":username, "avatar":avatar};
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
 
                 // Join the chatroom in Echo

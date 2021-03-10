@@ -19,7 +19,7 @@ export const ChatDmUsersList = (props) => {
         return (
             <div className="dmuser" key={index}>
                 <Button color="link"
-                    onClick={() => dmSelect(value.id, value.users[0].name)}
+                    onClick={() => dmSelect(value.id, value.users[0].name, value.users[0].avatar)}
                     id={value.users[0].id}>
                     <img  className="dmAvatar" src={'/storage/'+value.users[0].avatar}/>
                     <b>{value.users[0].name}</b>

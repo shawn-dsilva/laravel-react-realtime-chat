@@ -90,8 +90,8 @@ import UserControlPanel from './UserControlPanel';
 
       }
 
-      dmSelect(id, name){
-        this.props.dmSelectAction(id, name)
+      dmSelect(id, name, avatar){
+        this.props.dmSelectAction(id, name, avatar)
       }
 
 
@@ -153,10 +153,13 @@ import UserControlPanel from './UserControlPanel';
                     </Col>
                     <Col className="chatMainContainer">
         <div className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
-        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # </span> : 
-        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ </span> }
-          {this.props.selectedChannel.name}
+        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # 
+        </span> : 
+        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ 
+        </span> }
+          <h1>{this.props.selectedChannel.name}</h1>
 
+          {/* <img className="dmAvatar" src={'/storage/'+this.props.selectedChannel.avatar}></img> */}
 
           {this.props.selectedChannel.type == 'channel' ? 
           ( 
