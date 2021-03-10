@@ -219,8 +219,12 @@ class ChatController extends Controller
             $channel->users()->attach($receiver);
             $channel->users = $channel->users;
 
-            $senderObject = $channel->users[0];
-            $receiverObject = $channel->users[1];
+            $senderObject = User::where('id', '=', $sender)->with('details')->first();
+            $senderObject->avatar = $senderObject->details->avatar;
+
+            $receiverObject = User::where('id', '=', $receiver)->with('details')->first();
+            $receiverObject->avatar = $receiverObject->details->avatar;
+
 
             $channel->users[0] = $receiverObject;
 
