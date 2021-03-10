@@ -221,9 +221,15 @@ class ChatController extends Controller
 
             $senderObject = User::where('id', '=', $sender)->with('details')->first();
             $senderObject->avatar = $senderObject->details->avatar;
+            if(Cache::has('user-is-online-'.$sender)) {
+                $senderObject->is_online = 1;
+            }
 
             $receiverObject = User::where('id', '=', $receiver)->with('details')->first();
             $receiverObject->avatar = $receiverObject->details->avatar;
+            if(Cache::has('user-is-online-'.$receiver)) {
+                $receiverObject->is_online = 1;
+            }
 
 
             $channel->users[0] = $receiverObject;
