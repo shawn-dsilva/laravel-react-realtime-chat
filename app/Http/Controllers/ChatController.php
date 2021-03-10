@@ -219,20 +219,15 @@ class ChatController extends Controller
             $channel->users()->attach($receiver);
             $channel->users = $channel->users;
 
-            foreach ($channel->users as $key => $element) {
-                if ($channel->users[$key]->id != $sender) {
-                    $channel->users[0] = $channel->users[$key];
-                }
-            }
+            $senderObject = $channel->users[0];
+            $receiverObject = $channel->users[1];
+
+            $channel->users[0] = $receiverObject;
 
             error_log($channel->users);
             broadcast(new AcceptRequest($channel, $sender, 'FRND'));
 
-            foreach ($channel->users as $key => $element) {
-                if ($channel->users[$key]->id != $userId) {
-                    $channel->users[0] = $channel->users[$key];
-                }
-            }
+            $channel->users[0] = $senderObject;
 
             return $channel;
         }

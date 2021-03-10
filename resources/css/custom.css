@@ -265,6 +265,7 @@ img {
 }
 
 .systemMsg {
+    flex-grow: unset;
     text-align: center;
     background: var(--light);
     width: 50%;
