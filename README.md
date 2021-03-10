@@ -17,10 +17,10 @@
 
 ### Immediate
 
-- Return proper error message on Register screen for user that already exists.
-- Cleanup guards in JS code for lack of avatar 
 - BUG : Fix User addition to friends list upon accepting friend request
-- Migrate to PostgreSQL and create new SQL dump file
+- Return proper error message on Register screen for user that already exists.
+- Redirect user from Registration page to Login after successful register.
+- Cleanup guards in JS code for lack of avatar 
 
 ### Luxury
 
@@ -36,6 +36,8 @@
 
 ### Done
 
+- UserSeeder and GeneralSeederChannel completed.
+- Migrate to PostgreSQL and create new SQL dump file.
 - Fix default avatar image size and font sizing
 - Upon user creation, dynamically fill up avatar field with default image or create dynamic default avatar and save.
 - Beautify and improve UI of All Channels List and All Users List modals.
