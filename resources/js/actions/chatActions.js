@@ -63,7 +63,6 @@ export const getDmUsers = () => (dispatch, getState) => {
     axios
         .get("/api/getfriendslist", makeHeaders(getState), {withCredentials:true})
         .then(res => {
-            console.log(res.data);
             const users = res.data;
             dispatch({ type: GET_DM_USERS, payload: users });
         })
