@@ -38,7 +38,7 @@ return [
     'chars' => 2,
 
     // font size
-    'fontSize' => 96,
+    'fontSize' => 88,
 
     // convert initial letter in uppercase
     'uppercase' => false,
