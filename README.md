@@ -17,7 +17,6 @@
 
 ### Immediate
 
-- BUG : Fix User addition to friends list upon accepting friend request
 - Return proper error message on Register screen for user that already exists.
 - Redirect user from Registration page to Login after successful register.
 - Cleanup guards in JS code for lack of avatar 
@@ -36,6 +35,7 @@
 
 ### Done
 
+- BUG : Fix User addition to friends list upon accepting friend request
 - UserSeeder and GeneralSeederChannel completed.
 - Migrate to PostgreSQL and create new SQL dump file.
 - Fix default avatar image size and font sizing

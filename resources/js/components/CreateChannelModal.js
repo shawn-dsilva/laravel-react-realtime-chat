@@ -22,13 +22,18 @@ class CreateChannelModal extends Component {
 
   toggle = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     this.setState({ modal : !this.state.modal});
   }
   onChange = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onCheck = () => {
+  onCheck = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     this.setState({ visible : !this.state.visible});
   }
 
