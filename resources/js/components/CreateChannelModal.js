@@ -82,14 +82,14 @@ class CreateChannelModal extends Component {
         <FormGroup tag="fieldset">
             <Label>Access Permissions</Label>
           <FormGroup check>
-            <Label check>
               <Input type="radio" name="type"  value="public" onChange={this.onChange} />{' '}
+              <Label check>
               Anyone can join your channel, and can be invited to join your channel.(<span className="danger">PUBLIC</span>)
             </Label>
           </FormGroup>
           <FormGroup check>
-            <Label check>
               <Input type="radio" name="type" value="private" onChange={this.onChange} />{' '}
+              <Label check>
               Your channel can only be joined by others by your invitation.(<span className="success">PRIVATE</span>)
             </Label>
           </FormGroup>
@@ -97,8 +97,8 @@ class CreateChannelModal extends Component {
         <Label>Search Visibility</Label>
 
         <FormGroup check>
-          <Label check>
             <Input type="checkbox" name="visible" onChange={this.onCheck} />{' '}
+            <Label check>
             Make Channel Private
           </Label>
           <FormText color="muted">
