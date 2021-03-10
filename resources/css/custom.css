@@ -44,7 +44,7 @@ img {
     border-right: solid 1px lightgrey;
     display:flex;
     flex-direction: column;
-    max-width: 20%!important;
+    max-width: 22%!important;
     padding:0;
     flex-grow:1;
     max-height: 100vh;
@@ -575,7 +575,10 @@ font-size:1rem;
 
 .userDetails span {
     font-weight: 600;
-    font-size:1.2rem;
+    font-size:1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 
