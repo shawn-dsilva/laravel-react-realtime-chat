@@ -68,7 +68,7 @@ import UserControlPanel from './UserControlPanel';
         super(props);
         this.myToken = localStorage.token;
         window.token = localStorage.LRC_Token;
-        this.fakeGeneralChannel = 5;
+        this.fakeGeneralChannel = 1;
         this.dmSelect = this.dmSelect.bind(this);
         this.state = { isOpen : false};
         // this.onClickUsersInRoom = this.onClickUsersInRoom.bind(this);

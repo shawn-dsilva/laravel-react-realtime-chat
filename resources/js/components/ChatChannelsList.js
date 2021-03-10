@@ -69,13 +69,13 @@ export const ChatChannelsList = props => {
                         color="link"
                         onClick={() =>
                             channelSelect(
-                                5,
+                                1,
                                 "General",
                                 "A public channel where all users can chat"
                             )
                         }
-                        id="5"
-                        key="5"
+                        id="1"
+                        key="1"
                     >
                         <b> General</b>
                     </Button>
