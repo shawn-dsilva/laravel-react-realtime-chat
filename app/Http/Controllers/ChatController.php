@@ -276,9 +276,6 @@ class ChatController extends Controller
 
         // $channel_id = Channel::where('id', $invite->to_id)->first();
 
-        $channelWithDataNew = Channel::where('channels.id', $channel_id)->join('details', 'channels.id', '=', 'details.channel_id')
-        ->select('details.*')->first();
-
         $channel = Channel::where('channels.id', $channel_id)
         ->join('details', 'channels.id', '=', 'details.channel_id')
         ->join('users', 'users.id', '=', 'details.owner_id')
@@ -298,7 +295,7 @@ class ChatController extends Controller
         // Add Channel to requesters channel list
         // broadcast(new AcceptRequest($channel, $user_id, 'INVT'));
 
-        return $channelWithDataNew;
+        return $channel;
     }
 
 

@@ -15,7 +15,7 @@ const InviteUsersModal = (props) => {
 
   const toggle = () => setModal(!modal);
 
-  const users = dmUsers.filter(u => u.id !== currUser.id);
+  const users = dmUsers;
 
   const userList = users.map((value, index) => {
     return (

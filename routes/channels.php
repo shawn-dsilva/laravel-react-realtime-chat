@@ -18,12 +18,15 @@ Broadcast::channel('chat', function ($user) {
 });
 
 Broadcast::channel('chat.channel.{channel_id}', function ($user, $channel_id) {
-	if($channel_id == 5) {
+	if($channel_id == 1) {
 		return $user;
 	} else {
-		return 	User::where('id', $user->id)->whereHas('channels', function ($q) use ($channel_id) {
+		$data = 	User::where('id', $user->id)->whereHas('channels', function ($q) use ($channel_id) {
 			$q->where('channel_id', $channel_id);
 		})->first();
+
+		error_log($data);
+		return $data;
 	}
 	// return $user;
 });

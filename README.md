@@ -11,7 +11,13 @@
 - overflow-y must be set to hidden in collapse container in ChatDmUserList, else the elements overflow into the divs below
 - Run `php artisan storage:link` after cloning repo
 - Run `php artisan vendor:publish --provider="Laravolt\Avatar\ServiceProvider"`, change driver to gd if imagemagick doesn't work.
-- Run `sudo apt-get update && sudo apt-get install -y imagemagick php-imagick` to install imagemagick
+- Run `sudo apt-get update && sudo apt-get install -y imagemagick php-imagick` to install imagemagick.
+
+
+## Log of Fixed Errors 
+
+- Ref Error #1 : The error was occuring due to object `$channelWithDataNew` being returned in response of `acceptInviteRequest()`, with `id` being the channel detail entry's ID and not the ID of the Channel, which was causing 403 Permission denied errors when Laravel Echo tried to authorize at the `/broadcast/auth` route with incorrect channel ID.
+Error solved when correct `$channel` object being returned in response
 
 ## TODO
 
@@ -35,6 +41,8 @@
 
 ### Done
 
+- Fixed Error where user couldn't join a private channel even after accepting invite request from Owner | Error #1
+- Fixed "Invite Users" button not appearing in owned channel because owner_id wasn't send over in response.
 - BUG : Fix User addition to friends list upon accepting friend request
 - UserSeeder and GeneralSeederChannel completed.
 - Migrate to PostgreSQL and create new SQL dump file.
