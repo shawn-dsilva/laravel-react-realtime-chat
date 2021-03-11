@@ -551,10 +551,16 @@ font-size:1rem;
     font-size: 1.8rem;
 }
 
-.notificationsBell span {
-    line-height: unset;
-    font-size:0.8rem;
-    font-weight: 400;
+.notificationsBellCounter {
+    background: var(--blue);
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    color: #ffffff;
+    display: inline-block;
+    line-height: 1.6em;
+    text-align: center;
+    width: 1.6em; 
     position: absolute;
     top: -5px;
     right: -35px;
