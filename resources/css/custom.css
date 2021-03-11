@@ -552,9 +552,7 @@ font-size:1rem;
 }
 
 .notificationsBell span {
-    display:flex;
     line-height: unset;
-    border-radius: 50%;;
     font-size:0.8rem;
     font-weight: 400;
     position: absolute;

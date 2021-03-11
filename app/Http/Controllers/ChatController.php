@@ -121,7 +121,7 @@ class ChatController extends Controller
 
         $createdChannel = Channel::where('channels.id', $channelId)
             ->join('details', 'channels.id', '=', 'details.channel_id')
-            ->select('channels.id', 'details.name')->first();
+            ->select('channels.id', 'details.name', 'details.owner_id as owner_id')->first();
 
         return response()->json($createdChannel);
     }
