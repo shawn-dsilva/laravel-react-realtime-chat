@@ -23,6 +23,10 @@ Error solved when correct `$channel` object being returned in response
 
 ### Immediate
 
+- User Profiles with editable about section.
+- Styling for Notifications.
+- Notifications should appear in Latest Notifications first order.
+- Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Return proper error message on Register screen for user that already exists.
 - Redirect user from Registration page to Login after successful register.
 - Cleanup guards in JS code for lack of avatar 

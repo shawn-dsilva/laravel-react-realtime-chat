@@ -558,12 +558,13 @@ font-size:1rem;
     -webkit-border-radius: 1em;
     color: #ffffff;
     display: inline-block;
-    line-height: 1.6em;
+    line-height: 2em;
     text-align: center;
-    width: 1.6em; 
+    font-weight: 400;
+    width: 2em; 
     position: absolute;
     top: -5px;
-    right: -35px;
+    right: -40px;
 }
 
 .userControlPanel {
