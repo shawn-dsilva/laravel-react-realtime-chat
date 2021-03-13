@@ -36,7 +36,12 @@ class Register extends Component {
     if (status.id === "REGISTER_FAIL") {
       this.setState({ msg: status.statusMsg.message });
     }
+    if (status.id === "REGISTER_SUCCESS") {
+      setTimeout(() => {
+        this.props.history.push("/login");
+      }, 2000);
   }
+}
 };
 
   onChange = (e) => {

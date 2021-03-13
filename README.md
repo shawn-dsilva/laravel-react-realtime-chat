@@ -25,7 +25,6 @@ Error solved when correct `$channel` object being returned in response.
 ### Immediate
 
 - Return proper error message on Register screen for user that already exists.
-- Redirect user from Registration page to Login after successful register.
 - User Profiles with editable about section.
 - Styling for Notifications.
 - Fix any Errors/Issues in Join Private/Public Channel functionality.
@@ -45,6 +44,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Redirect user from Registration page to Login after successful register.
 - Notifications should appear in Latest Notifications first order.
 - All Users & All Channels list must fetch list from API server on click of button and not depend on props
 - Fixed addition of channel to requester's channel list when join request accepted by channel owner. | Error #2

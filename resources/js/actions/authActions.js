@@ -50,7 +50,7 @@ export const getUser = () => (dispatch, getState) => {
 
 
 //Register New User
-export const register = ({ name, email, password }) => (dispatch) => {
+export const register = ({ name, email, password }, history) => (dispatch) => {
   // Headers
   const headers = {
     headers: {
