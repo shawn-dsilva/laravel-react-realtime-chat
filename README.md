@@ -23,6 +23,8 @@ Error solved when correct `$channel` object being returned in response
 
 ### Immediate
 
+- Fix addition of channel to requester's channel list when join request accepted by channel owner.
+- All Users & All Channels list must fetch list on click of button and not depend on props
 - User Profiles with editable about section.
 - Styling for Notifications.
 - Notifications should appear in Latest Notifications first order.
