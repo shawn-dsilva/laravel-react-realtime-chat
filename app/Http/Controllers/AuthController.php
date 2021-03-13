@@ -62,6 +62,9 @@ class AuthController extends Controller
         // Send appropriate error message if validation fails
         if ($validator->fails()) {
             return response(['message'=> $validator->getMessageBag()->first()], 422);
+        } else if (!empty(User::where('email',$request->email)->first())) {
+            return response(['message'=> "A User with that E-Mail already exists."], 422);
+
         } else {
             $user = new User([
                 'name' => $request->name,
