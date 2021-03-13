@@ -3,8 +3,8 @@ import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Col, Card, C
     CardTitle, CardSubtitle } from 'reactstrap';
 
 export const AllChannelsList = (props) => {
-    let channels = props.channels;
-    // channels = channels.map( channel => props.currUser.id != channel.owner_id );
+    const channels = props.channels.filter( channel => props.currUser.id != channel.owner_id );
+
     // console.log(typeof(channels));
   const { joinChannelRequest } = props;
 
@@ -63,7 +63,9 @@ export const AllChannelsList = (props) => {
                     <p>
                         This modal lists all the channels created by users on
                         this site, some of which are public and need approval of the owner to join, 
-                        while others are public and can be joined immediately
+                        while others are public and can be joined immediately.
+
+                        Channels created by you are excluded from this list
                     </p>
                 </ModalBody>
                 <ModalBody className="ChannelsList">{channelList}</ModalBody>
