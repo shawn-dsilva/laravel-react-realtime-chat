@@ -344,7 +344,7 @@ class ChatController extends Controller
 
     public function getAllNotifications(Request $request)
     {
-        return response()->json(auth()->user()->notifications()->get(['data', 'read_at', 'id']));
+        return response()->json(auth()->user()->notifications()->orderBy('timestamps','asc')->get(['data', 'read_at', 'id']));
     }
 
     public function markNotificationAsRead(Request $request, $id)
