@@ -13,6 +13,7 @@ export const AllUsersList = (props) => {
   const toggle = (e) => {
       e.stopPropagation();
       setModal(!modal);
+      props.getAllUsersList();
     };
 
 

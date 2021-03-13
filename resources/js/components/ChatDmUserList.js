@@ -43,7 +43,7 @@ export const ChatDmUsersList = (props) => {
       <Button color="white" className="sidepaneParentButton" onClick={toggle}>
       
             <h3>Direct Message <AllUsersList dmUsers={props.usersList} currUser={props.currUser} 
-      sendRequest={props.sendRequest}  /> { !isOpen ? <i  id="DmArrow" class="arrow fas fa-chevron-down"></i> : <i id="DmArrow" class="arrow fas fa-chevron-up"></i>}</h3>
+      sendRequest={props.sendRequest} getAllUsersList={props.getAllUsersList} /> { !isOpen ? <i  id="DmArrow" class="arrow fas fa-chevron-down"></i> : <i id="DmArrow" class="arrow fas fa-chevron-up"></i>}</h3>
             
     </Button>
       <Collapse isOpen={isOpen} defaultOpen={true} style={{overflowY:'hidden' }}> 

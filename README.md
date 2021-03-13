@@ -24,13 +24,12 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- All Users & All Channels list must fetch list on click of button and not depend on props
-- User Profiles with editable about section.
-- Styling for Notifications.
 - Notifications should appear in Latest Notifications first order.
-- Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Return proper error message on Register screen for user that already exists.
 - Redirect user from Registration page to Login after successful register.
+- User Profiles with editable about section.
+- Styling for Notifications.
+- Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Cleanup guards in JS code for lack of avatar 
 
 ### Luxury
@@ -47,6 +46,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- All Users & All Channels list must fetch list from API server on click of button and not depend on props
 - Fixed addition of channel to requester's channel list when join request accepted by channel owner. | Error #2
 - Fixed Error where user couldn't join a private channel even after accepting invite request from Owner | Error #1
 - Fixed "Invite Users" button not appearing in owned channel because owner_id wasn't send over in response.

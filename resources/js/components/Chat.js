@@ -147,6 +147,7 @@ import UserControlPanel from './UserControlPanel';
                             currUser={this.props.currUser}
                             dmSelect={this.dmSelect}
                             sendRequest={this.sendRequest}
+                            getAllUsersList={this.props.getUsersList}
                         />
                         <Row className="Logo">
                         <h2><span style={{color:'#F05340' }}>Laravel</span> <span style={{color:'#61DBFB'}}> React</span> Chat <i class="far fa-comments" style={{fontSize:'2.5rem'}}></i></h2>
