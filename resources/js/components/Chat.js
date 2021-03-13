@@ -16,7 +16,7 @@
 import { connect }from 'react-redux';
 import PropTypes from "prop-types";
 import {  getDmUsers, getChannels, getMessages, dmSelectAction, channelSelect,
-   getUsersList, inviteToChannel, makeRequest, joinChannelRequest } from '../actions/chatActions';
+   getUsersList, inviteToChannel, makeRequest, joinChannelRequest, getAllChannelsList } from '../actions/chatActions';
 import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
@@ -60,6 +60,7 @@ import UserControlPanel from './UserControlPanel';
         usersList: PropTypes.array.isRequired,
         joinChannelRequest: PropTypes.func.isRequired,
         makeRequest: PropTypes.func.isRequired,
+        getAllChannelsList: PropTypes.func.isRequired
 
       };
 
@@ -136,6 +137,7 @@ import UserControlPanel from './UserControlPanel';
                             currUser={this.props.currUser}
                             channelSelect={this.channelSelect}
                             joinChannelRequest={this.joinChannelRequestWrapper}
+                            getAllChannelsList={this.props.getAllChannelsList}
 
                         />
 
@@ -209,4 +211,4 @@ import UserControlPanel from './UserControlPanel';
 
     });
     export default connect(mapStateToProps, {makeRequest, getDmUsers, getChannels, getMessages,dmSelectAction,
-       channelSelect,  getUsersList, inviteToChannel, joinChannelRequest })(Chat);
+       channelSelect,  getUsersList, inviteToChannel, joinChannelRequest, getAllChannelsList })(Chat);

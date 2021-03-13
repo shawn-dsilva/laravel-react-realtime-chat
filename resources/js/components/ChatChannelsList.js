@@ -55,6 +55,7 @@ export const ChatChannelsList = props => {
                             channels={props.allChannels}
                             currUser={props.currUser}
                             joinChannelRequest={props.joinChannelRequest}
+                            getAllChannelsList={props.getAllChannelsList}
                         />        
                     <CreateChannelModal buttonLabel={"+ Create New Channel"} />
 

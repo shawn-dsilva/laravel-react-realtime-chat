@@ -82,6 +82,16 @@ export const getUsersList = () => (dispatch, getState) => {
         .catch(err => {});
 };
 
+export const getAllChannelsList = () => (dispatch, getState) => {
+    axios
+    .get("/api/getallchannels", makeHeaders(getState), {withCredentials:true})
+    .then(res => {
+        const channels = res.data;
+        dispatch({ type: GET_ALL_CHANNELS, payload: channels });
+    })
+    .catch(err => {});
+};
+
 export const getChannels = () => (dispatch, getState) => {
     axios
         .get("/api/getchannels", makeHeaders(getState), {withCredentials:true})

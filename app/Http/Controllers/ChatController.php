@@ -51,7 +51,7 @@ class ChatController extends Controller
     {
         $user = auth()->user()->id;
         $channels = Channel::where('channels.type', 'channel')->join('details', 'channels.id', '=', 'details.channel_id')->join('users', 'users.id', '=', 'details.owner_id')
-            ->select('channels.id', 'channels.type', 'details.name', 'users.name as owner', 'details.desc', 'details.type', 'details.visible')->distinct()->get();
+            ->select('channels.id', 'channels.type', 'details.name', 'users.name as owner', 'details.desc', 'details.type', 'details.visible', 'details.owner_id')->distinct()->get();
 
         return response()->json($channels);
     }

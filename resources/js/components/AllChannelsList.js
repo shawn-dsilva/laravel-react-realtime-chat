@@ -3,7 +3,8 @@ import { Button,Alert,  Modal, ModalHeader, ModalBody, ModalFooter, Col, Card, C
     CardTitle, CardSubtitle } from 'reactstrap';
 
 export const AllChannelsList = (props) => {
-    const channels = props.channels;
+    let channels = props.channels;
+    // channels = channels.map( channel => props.currUser.id != channel.owner_id );
     // console.log(typeof(channels));
   const { joinChannelRequest } = props;
 
@@ -12,10 +13,12 @@ export const AllChannelsList = (props) => {
   const toggle = (e) => {
       e.stopPropagation();
       setModal(!modal);
+      props.getAllChannelsList();
   }
 
 
   console.log(channels);
+  
     const channelList = channels.map((value, index) => {
         return (
             <Col className="ChannelsListItem" key={index}>
