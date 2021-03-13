@@ -85,7 +85,7 @@ class AuthController extends Controller
 
 
             return response()->json([
-                'message' => 'Successfully created user!'
+                'message' => 'You have Registered Successfully! Redirecting you to the Login page'
             ], 201);
         }
     }

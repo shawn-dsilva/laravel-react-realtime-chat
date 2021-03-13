@@ -37,6 +37,7 @@ class Register extends Component {
       this.setState({ msg: status.statusMsg.message });
     }
     if (status.id === "REGISTER_SUCCESS") {
+      this.setState({ msg: status.statusMsg.message });
       setTimeout(() => {
         this.props.history.push("/login");
       }, 2000);
@@ -84,9 +85,11 @@ class Register extends Component {
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>REGISTER</h1>
               <p>Already have an account? <a href="/login">Login.</a></p>
-              {this.state.msg ? (
-              <UncontrolledAlert color="danger">{this.state.msg}</UncontrolledAlert>
-            ) : null}
+              {this.props.status.id === "REGISTER_SUCCESS" ? (
+              <UncontrolledAlert color="success">{this.state.msg}</UncontrolledAlert>
+            ) : ( this.props.status.id === "REGISTER_FAIL" &&
+            <UncontrolledAlert color="danger">{this.state.msg}</UncontrolledAlert> )
+          }
               <FormGroup className="text-center">
                 <Label className="authlabel" for="name">Name</Label>
                 <Input
