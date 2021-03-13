@@ -175,7 +175,7 @@ const initNotificationAndEventChannels = (userId, dispatch  ) => {
         if(event[1] == 'FRND') {
           dispatch({ type: ACCEPT_REQUEST_SUCCESS, payload: event[0] });
       } else {
-          dispatch({ type: ADD_CHANNEL_SUCCESS, payload: channel });
+          dispatch({ type: ADD_CHANNEL_SUCCESS, payload: event[0] });
       }
     });
 }

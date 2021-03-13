@@ -17,13 +17,13 @@
 ## Log of Fixed Errors 
 
 - Ref Error #1 : The error was occuring due to object `$channelWithDataNew` being returned in response of `acceptInviteRequest()`, with `id` being the channel detail entry's ID and not the ID of the Channel, which was causing 403 Permission denied errors when Laravel Echo tried to authorize at the `/broadcast/auth` route with incorrect channel ID.
-Error solved when correct `$channel` object being returned in response
+Error solved when correct `$channel` object being returned in response.
+- Ref Error #2 : Same reason as Error #1, id of the details entry being returned instead of the channel's id
 
 ## TODO
 
 ### Immediate
 
-- Fix addition of channel to requester's channel list when join request accepted by channel owner.
 - All Users & All Channels list must fetch list on click of button and not depend on props
 - User Profiles with editable about section.
 - Styling for Notifications.
@@ -47,6 +47,7 @@ Error solved when correct `$channel` object being returned in response
 
 ### Done
 
+- Fixed addition of channel to requester's channel list when join request accepted by channel owner. | Error #2
 - Fixed Error where user couldn't join a private channel even after accepting invite request from Owner | Error #1
 - Fixed "Invite Users" button not appearing in owned channel because owner_id wasn't send over in response.
 - BUG : Fix User addition to friends list upon accepting friend request

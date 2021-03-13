@@ -251,7 +251,7 @@ class ChatController extends Controller
         // $channel = Channel::where('id', $invite->to_id)->first();
 
         $channelWithDataNew = Channel::where('channels.id', $privateChannel)->join('details', 'channels.id', '=', 'details.channel_id')
-        ->select('details.*')->first();
+        ->select('channels.id as id', 'channels.type', 'details.name',  'details.desc', 'details.type', 'details.visible', 'details.owner_id as owner_id')->first();
 
         $channel = $channelWithDataNew;
 
@@ -264,9 +264,9 @@ class ChatController extends Controller
         $channel->users()->attach($user);
 
         // Add Channel to requesters channel list
-        broadcast(new AcceptRequest($channelWithDataNew, $user, 'JOIN'));
+        broadcast(new AcceptRequest($channel, $user, 'JOIN'));
 
-        return $channelWithDataNew;
+        return $channel;
        
     }
 
