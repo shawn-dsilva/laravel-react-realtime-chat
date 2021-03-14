@@ -551,17 +551,40 @@ font-size:1rem;
     font-size: 1.8rem;
 }
 
+.profileModal div {
+    padding-top:1rem;
+    display: flex;
+}
+
 .profileModal h2 {
-    padding-top: 1rem;
     color:#212529;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    margin: 0 1rem;
+    width: 70%;
     border-bottom: solid 5px #212529;
 }
 
+.profileModal button {
+    margin-left:auto;
+    width:25%;
+}
+
 .profileModal p {
-    margin:1rem 0;
+    margin:1rem;
     font-size: 16px;
     font-weight: 500;
+}
+
+.profileModal span {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 0 1rem;
+}
+
+.profileModal img {
+    height:7rem;
+    width: auto;
+    margin: 0;
 }
 
 .notificationsBellCounter {
