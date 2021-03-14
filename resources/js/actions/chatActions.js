@@ -22,7 +22,8 @@ import {
     GET_ALL_CHANNELS,
     ADD_CHANNEL_SUCCESS,
     ADD_CHANNEL_USERS,
-    USER_AVATAR_UPDATED
+    USER_AVATAR_UPDATED,
+    USER_DESC_UPDATED
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -372,4 +373,13 @@ export const uploadImage = (imageForm) => (dispatch,getState) => {
             dispatch({type: USER_AVATAR_UPDATED, payload: res.data});
         })
         .catch(err => {});
+}
+
+export const editDesc = (desc) => (dispatch, getState) => {
+    axios
+    .post("/api/editdesc", desc, makeHeaders(getState), {withCredentials:true})
+    .then(res => {
+        dispatch({type: USER_DESC_UPDATED, payload: res.data});
+    })
+    .catch(err => {});
 }

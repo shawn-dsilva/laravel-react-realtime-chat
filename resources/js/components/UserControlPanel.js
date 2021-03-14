@@ -26,7 +26,7 @@ import PropTypes from "prop-types";
 import { echoInit } from './utils/echoHelpers';
 
 import { acceptRequest,  getNotifications, 
-  getAllNotifications, markAsRead, j } from '../actions/chatActions';
+  getAllNotifications, markAsRead, editDesc } from '../actions/chatActions';
 import {logout} from '../actions/authActions';
 import UserProfileModal from './UserProfileModal';
 
@@ -42,6 +42,7 @@ class UserControlPanel extends Component {
     currUser: PropTypes.object.isRequired,
     markAsRead: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
+    editDesc: PropTypes.func.isRequired,
     usersList: PropTypes.array.isRequired,
     channels: PropTypes.array.isRequired,
   };
@@ -90,7 +91,7 @@ render() {
            <UncontrolledTooltip placement="top" target="userProfile">
                     User Profile
                 </UncontrolledTooltip>
-             <UserProfileModal user={this.props.currUser} currUser={this.props.currUser} />
+             <UserProfileModal user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
             <UncontrolledDropdown inNavbar >
             <div className="userOptions" id="userOptions">
               <DropdownToggle nav >
@@ -153,4 +154,4 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   allChannels: state.chat.allChannels,
 });
 
-export default connect(mapStateToProps, {   acceptRequest, getNotifications,  getAllNotifications, markAsRead,  logout})(UserControlPanel);
+export default connect(mapStateToProps, {   acceptRequest, getNotifications,  getAllNotifications, markAsRead, editDesc, logout})(UserControlPanel);

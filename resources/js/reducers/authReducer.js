@@ -9,6 +9,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAIL,
   USER_AVATAR_UPDATED,
+  USER_DESC_UPDATED,
 } from "../actions/types";
 
 
@@ -59,6 +60,14 @@ export default function (state = initialState, action) {
           avatar:action.payload 
         }
       };
+    case USER_DESC_UPDATED:
+      return {
+        ...state,
+        currUser: {
+          ...state.currUser,
+          desc:action.payload
+        }
+      }
     default:
         return state;
   }
