@@ -15,8 +15,11 @@ const UserProfileModal = (props) => {
 
   const toggle = () => setModal(!modal);
   const toggleEdit = () => {
-      editDesc(userDesc);
-      setEdit(!isEditOpen)
+      setEdit(!isEditOpen);
+      if(isEditOpen) {
+        editDesc(userDesc);
+        setEdit(false);
+      }
     };
 
   const onChange = (e) => {

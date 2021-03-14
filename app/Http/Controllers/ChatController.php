@@ -487,5 +487,14 @@ class ChatController extends Controller
         }
         return response()->json($channel);
     }
+
+    public function updateUserDesc ( Request $request) {
+        $user = User::find(auth()->user()->id);
+
+        $user->details()->updateOrCreate(['user_id' => auth()->user()->id],
+        ['desc'=> $request->desc]);
+
+        return response()->json($request->desc);
+    }
 }
 

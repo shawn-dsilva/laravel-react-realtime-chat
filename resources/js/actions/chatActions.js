@@ -376,8 +376,10 @@ export const uploadImage = (imageForm) => (dispatch,getState) => {
 }
 
 export const editDesc = (desc) => (dispatch, getState) => {
+    const body = { desc:desc};
+
     axios
-    .post("/api/editdesc", desc, makeHeaders(getState), {withCredentials:true})
+    .post("/api/editdesc", body, makeHeaders(getState), {withCredentials:true})
     .then(res => {
         dispatch({type: USER_DESC_UPDATED, payload: res.data});
     })

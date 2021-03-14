@@ -166,6 +166,8 @@ class AuthController extends Controller
         error_log($request->user());
          if(User::find($request->user()->id)->details) {
             $user->avatar = User::find($request->user()->id)->details->avatar;
+            $user->desc = User::find($request->user()->id)->details->desc;
+
         };
         return response()->json($user);
     }
