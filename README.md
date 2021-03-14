@@ -24,8 +24,8 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- User Profiles with editable about section.
-- Styling for Notifications.
+- Add User Profile component in names of Users in group Channel message lists
+- Add User Profile component in Direct Message "channel name" section.
 - Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Cleanup guards in JS code for lack of avatar 
 
@@ -43,6 +43,8 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- User Profiles with editable about section.
+- Styling for Notifications.
 - Return proper error message on Register screen for user that already exists.
 - Redirect user from Registration page to Login after successful register.
 - Notifications should appear in Latest Notifications first order.
