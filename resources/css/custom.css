@@ -551,6 +551,19 @@ font-size:1rem;
     font-size: 1.8rem;
 }
 
+.profileModal h2 {
+    padding-top: 1rem;
+    color:#212529;
+    font-size: 1.8rem;
+    border-bottom: solid 5px #212529;
+}
+
+.profileModal p {
+    margin:1rem 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
 .notificationsBellCounter {
     background: var(--blue);
     border-radius: 1em;
@@ -574,6 +587,7 @@ font-size:1rem;
     border-bottom:1px solid lightgrey;
     width:100%;
     max-height: 5rem;
+    cursor: pointer;
 }
 
 .userDetails {

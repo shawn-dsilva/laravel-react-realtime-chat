@@ -28,6 +28,7 @@ import { echoInit } from './utils/echoHelpers';
 import { acceptRequest,  getNotifications, 
   getAllNotifications, markAsRead, j } from '../actions/chatActions';
 import {logout} from '../actions/authActions';
+import UserProfileModal from './UserProfileModal';
 
 class UserControlPanel extends Component { 
 
@@ -89,14 +90,7 @@ render() {
            <UncontrolledTooltip placement="top" target="userProfile">
                     User Profile
                 </UncontrolledTooltip>
-             <div id="userProfile" className="userDetails">
-           {
-                  this.props.currUser.avatar ? 
-                  <img src={"storage/"+this.props.currUser.avatar} className="dmAvatar"></img> : 
-                  <img src="/assets/images/defaultuser.png" className="dmAvatar"></img>
-                }
-              <span>{this.props.currUser.name}</span>
-              </div>
+             <UserProfileModal user={this.props.currUser}  />
             <UncontrolledDropdown inNavbar >
             <div className="userOptions" id="userOptions">
               <DropdownToggle nav >
