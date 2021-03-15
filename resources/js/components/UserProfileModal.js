@@ -8,6 +8,7 @@ const UserProfileModal = (props) => {
     currUser,
     editDesc,
     userDetailsClass,
+    addFriend
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -27,6 +28,8 @@ const UserProfileModal = (props) => {
     setUserDesc(e.target.value);
   };
 
+
+
   return (
     <div>
       <div onClick={toggle} id="userProfile" className={userDetailsClass} > {
@@ -42,7 +45,7 @@ const UserProfileModal = (props) => {
         <ModalBody className="profileModal" >
         <img src={"storage/"+user.avatar} ></img>
         <span>{user.name}</span>
-        {user.id !== currUser.id && <Button onClick={addFriend} color="success"> <i class="fas fa-user-plus"></i> Add Friend</Button>}
+        {user.id !== currUser.id && <Button onClick={ () => addFriend(user.id)} color="success"> <i class="fas fa-user-plus"></i> Add Friend</Button>}
         <div>
         <h2>About</h2>
         { user.id === currUser.id && <Button onClick={toggleEdit} color="success"><i class="fas fa-edit"></i> { isEditOpen ? "Save Edit" : "Edit This" }</Button> }

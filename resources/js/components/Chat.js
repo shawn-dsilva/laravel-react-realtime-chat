@@ -185,6 +185,7 @@ import UserControlPanel from './UserControlPanel';
                             messages={this.props.messages}
                             currUser={this.props.currUser}
                             users={this.props.selectedChannel.users}
+                            sendRequest={this.sendRequest}
                         />
                         <ChatInputBox
                             selectedChannel={this.props.selectedChannel}

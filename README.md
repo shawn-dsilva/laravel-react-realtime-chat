@@ -24,13 +24,13 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Add User Profile component in names of Users in group Channel message lists
 - Add User Profile component in Direct Message "channel name" section.
 - Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Cleanup guards in JS code for lack of avatar 
 
 ### Luxury
 
+- Fully disconnect user from chat server upon logout
 - Add User profiles accessible by clicking on name of user and image.
 - Invite to channel by URL system.
 - Add search all users functionality.
@@ -43,6 +43,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Add User Profile component in names of Users in group Channel message lists
 - User Profiles with editable about section.
 - Styling for Notifications.
 - Return proper error message on Register screen for user that already exists.
