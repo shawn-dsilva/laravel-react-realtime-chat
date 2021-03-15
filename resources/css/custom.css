@@ -113,6 +113,7 @@ img {
 .chatUserMsg {
     text-align:right;
     width:max-content;
+    word-wrap: break-word;
     background:#00cbff;
     color:white;
     padding:1rem;
@@ -127,7 +128,8 @@ img {
 
 .chatNotUserMsg {
     text-align:left;
-    width:max-content;
+    width: max-content;
+    word-wrap: break-word;
     background:#f5f5f5;
     padding:1rem;
     border: 2px solid #f5f5f5;
@@ -399,13 +401,15 @@ font-size:1rem;
 .msg-container {
     display:flex;
     width:fit-content;
+    max-width: 65%;
+    margin-right: auto; 
     margin-top:1rem;
 }
 
 .user-msg-container {
     display:flex;
-    width:fit-content;
-    margin-left:auto;
+    max-width: 65%;
+    margin-left: auto; 
     margin-top:1rem;
 }
 
