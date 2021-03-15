@@ -644,3 +644,8 @@ font-size:1rem;
     color:lightsteelblue;
     font-weight: 200;
 }
+
+.chatUserMsg time {
+    font-size: 0.8rem;
+    font-weight: 200;
+}
