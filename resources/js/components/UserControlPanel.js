@@ -91,7 +91,7 @@ render() {
            <UncontrolledTooltip placement="top" target="userProfile">
                     User Profile
                 </UncontrolledTooltip>
-             <UserProfileModal user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
+             <UserProfileModal userDetailsClass="userDetails" user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
             <UncontrolledDropdown inNavbar >
             <div className="userOptions" id="userOptions">
               <DropdownToggle nav >

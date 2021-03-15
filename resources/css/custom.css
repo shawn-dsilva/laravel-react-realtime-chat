@@ -121,6 +121,8 @@ img {
     margin-bottom: 1rem;
     flex-grow: 0;
     flex-basis:auto!important;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .chatNotUserMsg {
@@ -133,6 +135,8 @@ img {
     margin-bottom: 1rem;
     flex-grow: 0;
     flex-basis:auto!important;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .navCustom {
@@ -625,4 +629,18 @@ font-size:1rem;
     overflow: hidden;
 }
 
+.userDetailsMessage {
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
 
+.userDetailsMessage img {
+    display:none;
+}
+
+.chatNotUserMsg time {
+    font-size: 0.8rem;
+    color:lightsteelblue;
+    font-weight: 200;
+}

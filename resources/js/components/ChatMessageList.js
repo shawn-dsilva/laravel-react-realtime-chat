@@ -26,13 +26,13 @@ function ChatMessageList(props) {
             return <Col className="systemMsg" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {
             if(value.user.name !== props.currUser.name) {
+              value.user.avatar = value.user.details.avatar;
               return <div className="msg-container">
                  <img  src={'storage/'+getAvatar(value.user)}></img>
                  
                  <Col className="chatNotUserMsg" key={index}>
                  <span>
-                <UserProfileModal currUser={props.currUser} user={value.user} />
-                {value.user.name }  | &nbsp; 
+                <UserProfileModal currUser={props.currUser} user={value.user} userDetailsClass="userDetailsMessage" />
                 <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                 <br></br> {value.message}</Col>

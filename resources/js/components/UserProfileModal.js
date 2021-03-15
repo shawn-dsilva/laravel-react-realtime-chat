@@ -7,6 +7,7 @@ const UserProfileModal = (props) => {
     user,
     currUser,
     editDesc,
+    userDetailsClass,
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -28,12 +29,13 @@ const UserProfileModal = (props) => {
 
   return (
     <div>
-      <div onClick={toggle} id="userProfile" className="userDetails" > {
+      <div onClick={toggle} id="userProfile" className={userDetailsClass} > {
                   user.avatar ? 
                   <img src={"storage/"+user.avatar} className="dmAvatar"></img> : 
                   <img src="/assets/images/defaultuser.png" className="dmAvatar"></img>
                 }
                 <span>{user.name}</span>
+                {console.log(user)}
         </div>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>User Profile</ModalHeader>
