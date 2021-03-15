@@ -43,7 +43,7 @@ function ChatMessageList(props) {
               return <div className="user-msg-container">
               <Col className="chatUserMsg" key={index}>
                 <span>
-                <UserProfileModal currUser={props.currUser} user={value.user} userDetailsClass="userDetailsMessage" />
+                {/* <UserProfileModal currUser={props.currUser} user={value.user} userDetailsClass="userDetailsMessage" /> */}
                 <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>
                  <br></br> {value.message}</Col>
