@@ -6,6 +6,7 @@ import {
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { getAvatar } from './utils/echoHelpers';
+import UserProfileModal from './UserProfileModal';
 
 function ChatMessageList(props) {
 
@@ -30,6 +31,7 @@ function ChatMessageList(props) {
                  
                  <Col className="chatNotUserMsg" key={index}>
                  <span>
+                <UserProfileModal currUser={props.currUser} user={value.user} />
                 {value.user.name }  | &nbsp; 
                 <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
                 </span>

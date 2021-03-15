@@ -36,10 +36,11 @@ const UserProfileModal = (props) => {
                 <span>{user.name}</span>
         </div>
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Your User Profile</ModalHeader>
+        <ModalHeader toggle={toggle}>User Profile</ModalHeader>
         <ModalBody className="profileModal" >
         <img src={"storage/"+user.avatar} ></img>
         <span>{user.name}</span>
+        {user.id !== currUser.id && <Button onClick={addFriend} color="success"> <i class="fas fa-user-plus"></i> Add Friend</Button>}
         <div>
         <h2>About</h2>
         { user.id === currUser.id && <Button onClick={toggleEdit} color="success"><i class="fas fa-edit"></i> { isEditOpen ? "Save Edit" : "Edit This" }</Button> }
