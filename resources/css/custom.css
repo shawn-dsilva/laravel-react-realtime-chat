@@ -139,6 +139,20 @@ img {
     flex-basis:auto!important;
     font-size: 0.9rem;
     font-weight: 400;
+    border-top-left-radius:0;
+}
+
+.chatNotUserMsg::before {
+    content:"";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 15px 14px 0;
+    border-color: transparent whitesmoke transparent transparent;
+    content: "";
+    position: absolute;
+    right: 258px;
+    top: -2px;
 }
 
 .navCustom {
