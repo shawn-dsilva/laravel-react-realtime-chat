@@ -22,6 +22,18 @@ function ChatMessageList(props) {
         // console.log(typeof(messages));
         const messagelist = messages.map((value, index) => {
           // console.log(value)
+          if(value.type === 'typing') {
+            return <div className="msg-container">
+            <img  src={'storage/'+value.user.avatar}></img>
+            
+            <Col className="chatNotUserMsg" key={index}>
+            <span>
+           <UserProfileModal currUser={props.currUser} user={value.user} addFriend={props.sendRequest} userDetailsClass="userDetailsMessage" />
+           <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+           </span>
+           <br></br> {value.user.name} is typing... </Col>
+           </div>
+          }
           if(value.status === true) {
             return <Col className="systemMsg" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {

@@ -240,6 +240,12 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
             .listenForWhisper("typing", event => {
                 console.log("TYPING");
                 console.log(event.name);
+                const message = {
+                    user: event.name,
+                    type:'typing'
+                }
+                dispatch({ type: ADD_MESSAGE, payload: message });
+
             });
         })
         
