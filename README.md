@@ -24,13 +24,12 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Typing events support.
-- Add User Profile component in Direct Message "channel name" section.
 - Deployment Preperation once again.
-- Cleanup guards in JS code for lack of avatar 
+- Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
 
+- Fix Typing bubble REMOVE_TYPING_EVENT reducer 
 - Fully disconnect user from chat server upon logout
 - Invite to channel by URL system.
 - Add search all users functionality.
@@ -42,6 +41,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Typing events support.
 - Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Add User Profile component in names of Users in group Channel message lists
 - User Profiles with editable about section.
