@@ -18,6 +18,10 @@ export class ChatInputBox extends Component {
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+        window.Echo.join(`chat.channel.${this.props.selectedChannel.id}`)
+        .whisper("typing", {
+            name: this.props.currUser
+          });
       };
 
       // Calls action to register user

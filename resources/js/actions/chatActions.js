@@ -236,6 +236,10 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 };
                 console.log(message);
                 dispatch({ type: ADD_MESSAGE, payload: message });
+            })
+            .listenForWhisper("typing", event => {
+                console.log("TYPING");
+                console.log(event.name);
             });
         })
         

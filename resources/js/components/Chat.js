@@ -189,6 +189,7 @@ import UserControlPanel from './UserControlPanel';
                         />
                         <ChatInputBox
                             selectedChannel={this.props.selectedChannel}
+                            currUser={this.props.currUser}
                         />
                     </Col>
                     {usersInThisRoom}

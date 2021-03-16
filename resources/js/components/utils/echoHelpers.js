@@ -61,7 +61,7 @@ export const echoInit = token => {
         console.log(event.user.name+" IS OFFLINE ");
         console.log(event.user);
         store.dispatch({ type: IS_OFFLINE, payload: event.user.id});
-    });;
+    });
 };
 
 export const sendMessage = ( message, channel_id, channel_type) => {
