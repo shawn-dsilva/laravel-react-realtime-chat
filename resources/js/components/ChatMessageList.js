@@ -23,15 +23,16 @@ function ChatMessageList(props) {
         const messagelist = messages.map((value, index) => {
           // console.log(value)
           if(value.type === 'typing') {
-            return <div className="msg-container">
+            return <div className="typing-container">
             <img  src={'storage/'+value.user.avatar}></img>
-            
-            <Col className="chatNotUserMsg" key={index}>
-            <span>
-           <UserProfileModal currUser={props.currUser} user={value.user} addFriend={props.sendRequest} userDetailsClass="userDetailsMessage" />
-           <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
-           </span>
-           <br></br> {value.user.name} is typing... </Col>
+                <div>
+                  <Col className="chatNotUserMsg" key={index}>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                  </Col>
+                  <span>{value.user.name} is typing... </span> 
+              </div>
            </div>
           }
           if(value.status === true) {
