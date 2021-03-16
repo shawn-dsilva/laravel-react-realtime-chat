@@ -23,7 +23,9 @@ import {
     ADD_CHANNEL_SUCCESS,
     ADD_CHANNEL_USERS,
     USER_AVATAR_UPDATED,
-    USER_DESC_UPDATED
+    USER_DESC_UPDATED,
+    ADD_TYPING_EVENT,
+    REMOVE_TYPING_EVENT
 } from "./types";
 
 //axios.defaults.baseURL = "https://demos.shawndsilva.com/list-wala"
@@ -238,13 +240,21 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 dispatch({ type: ADD_MESSAGE, payload: message });
             })
             .listenForWhisper("typing", event => {
+                let timer
                 console.log("TYPING");
                 console.log(event.name);
                 const message = {
                     user: event.name,
                     type:'typing'
                 }
-                dispatch({ type: ADD_MESSAGE, payload: message });
+                dispatch({ type: ADD_TYPING_EVENT, payload: message });
+
+                clearTimeout(timer)
+
+                timer = setTimeout( () => {
+                    dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
+                }, 2000)
+
 
             });
         })

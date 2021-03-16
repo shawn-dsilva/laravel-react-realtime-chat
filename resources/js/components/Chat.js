@@ -52,6 +52,7 @@ import UserControlPanel from './UserControlPanel';
         dmSelectAction: PropTypes.func.isRequired,
         channelSelect: PropTypes.func.isRequired,
         messages: PropTypes.array.isRequired,
+        typings: PropTypes.array.isRequired,
         usersInRoom: PropTypes.array.isRequired,
         dmUsers: PropTypes.array.isRequired,
         message: PropTypes.object.isRequired,
@@ -186,6 +187,7 @@ import UserControlPanel from './UserControlPanel';
                             currUser={this.props.currUser}
                             users={this.props.selectedChannel.users}
                             sendRequest={this.sendRequest}
+                            typings={this.props.typings}
                         />
                         <ChatInputBox
                             selectedChannel={this.props.selectedChannel}
@@ -211,7 +213,7 @@ import UserControlPanel from './UserControlPanel';
       selectedChannel:state.chat.selectedChannel,
       usersList: state.chat.usersList,
       allChannels: state.chat.allChannels,
-
+      typings: state.chat.typings
     });
     export default connect(mapStateToProps, {makeRequest, getDmUsers, getChannels, getMessages,dmSelectAction,
        channelSelect,  getUsersList, inviteToChannel, joinChannelRequest, getAllChannelsList })(Chat);

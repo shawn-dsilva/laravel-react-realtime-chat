@@ -1,4 +1,4 @@
-import React, { useEffect, useRef }  from 'react'
+import React, { useEffect, useRef, useState }  from 'react'
 import {
   Col,
   Row
@@ -7,11 +7,14 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import { getAvatar } from './utils/echoHelpers';
 import UserProfileModal from './UserProfileModal';
+import NavbarText from 'reactstrap/lib/NavbarText';
 
 function ChatMessageList(props) {
 
   // Equivalent of a Div ID in React, remains even across re-renders
   const bottomRef = useRef(null);
+
+
 
   //  function to scroll to dummy div places at the bottom of message list
   const scrollToBottom = () => {
@@ -20,21 +23,44 @@ function ChatMessageList(props) {
 
   const messages = props.messages;
         // console.log(typeof(messages));
+
+  const typingArray = props.typings;
+  const typingArrayReady = typingArray.map((value,index) => {
+    return <div className="typing-container">
+     <img  src={'storage/'+value.user.avatar}></img>
+         <div>
+           <Col className="chatNotUserMsg" key={index}>
+             <div className="dot"></div>
+             <div className="dot"></div>
+             <div className="dot"></div>
+           </Col>
+           <span>{value.user.name} is typing... </span> 
+       </div>
+    </div>
+});
+
         const messagelist = messages.map((value, index) => {
           // console.log(value)
-          if(value.type === 'typing') {
-            return <div className="typing-container">
-            <img  src={'storage/'+value.user.avatar}></img>
-                <div>
-                  <Col className="chatNotUserMsg" key={index}>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                  </Col>
-                  <span>{value.user.name} is typing... </span> 
-              </div>
-           </div>
-          }
+        //   if(value.type === 'typing') {
+        //     const typingBubble = <div className="typing-container">
+        //     <img  src={'storage/'+value.user.avatar}></img>
+        //         <div>
+        //           <Col className="chatNotUserMsg" key={index}>
+        //             <div className="dot"></div>
+        //             <div className="dot"></div>
+        //             <div className="dot"></div>
+        //           </Col>
+        //           <span>{value.user.name} is typing... </span> 
+        //       </div>
+        //    </div>
+
+        // setTypingArray([
+        //     ...typingArray,
+        //     typingBubble
+        //   ]);
+
+
+        //   }
           if(value.status === true) {
             return <Col className="systemMsg" style={{textAlign:"center"}} key={index} ><strong>{value.user.name}</strong> has <span className="text-primary">{value.message}</span> the channel</Col>
           } else {
@@ -75,6 +101,7 @@ function ChatMessageList(props) {
   return (
     <Row className="chatDisplay">
     {messagelist}
+    {typingArrayReady}
     <div ref={bottomRef} />
     </Row>
   )

@@ -22,7 +22,9 @@ import {
     ADD_CHANNEL_SUCCESS,
     IS_ONLINE,
     IS_OFFLINE,
-    ADD_CHANNEL_USERS
+    ADD_CHANNEL_USERS,
+    ADD_TYPING_EVENT,
+    REMOVE_TYPING_EVENT
 } from "../actions/types";
 
 const initialState = {
@@ -38,7 +40,8 @@ const initialState = {
     requests: [],
     notifications: [],
     unreadNotifs: 0,
-    allNotifications: []
+    allNotifications: [],
+    typings:[]
 };
 
 export default function(state = initialState, action) {
@@ -208,6 +211,21 @@ export default function(state = initialState, action) {
                     users: action.payload
                 }
             } 
+        case ADD_TYPING_EVENT:
+                console.log(action.payload);
+                let isFound =  state.typings.find( typing => typing.user.id === action.payload.user.id);
+                return {
+                    ...state,
+                    typings: isFound ?  state.typings : state.typings.concat(action.payload) 
+            };
+        case REMOVE_TYPING_EVENT:
+                console.log(action.payload);
+                return {
+                    ...state,
+                    typings:state.typings.filter(
+                        typing => typing.user.id !== action.payload.user.id
+                    )
+            };
         default:
             return state;
     }

@@ -432,6 +432,7 @@ font-size:1rem;
     max-width: 65%;
     margin-right: auto; 
     margin-top:1rem;
+    margin-bottom: 1rem;
 }
 
 .typing-container:nth-child(1) {
