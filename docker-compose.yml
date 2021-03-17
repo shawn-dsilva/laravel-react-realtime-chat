@@ -2,22 +2,21 @@ version: "3"
 services:
     # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
     mysql-rca:
-        container_name: mysql-rca #container name should not conflict with existing containers/images
-        image: mysql:5.7
+        container_name: postgres-rca #container name should not conflict with existing containers/images
+        image: postgres
         ports:
-             - '3315:3306'
+             - '3315:5432'
         environment:
-             - MYSQL_ROOT_PASSWORD=root
-             - MYSQL_DATABASE=react_laravel_websockets
-             - MYSQL_USER=admin
-             - MYSQL_PASSWORD=123456
+             - POSTGRES_DATABASE=react_laravel_websockets
+             - POSTGRES_USER=admin
+             - POSTGRES_PASSWORD=123456
         volumes:
              - './bin:/docker-entrypoint-initdb.d/'
     main:
         container_name: main
         # hostname: main
         depends_on:
-            - mysql-rca
+            - postgres-rca
         build:
             context: .
             dockerfile: dockerfile
