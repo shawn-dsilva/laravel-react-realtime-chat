@@ -16,13 +16,15 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    libpq-dev
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 
 # Install Composer and NodeJS v12
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -39,4 +41,3 @@ RUN chown -R root:root *
 # Creates php.ini file from php.ini-production, lets php-fpm return correct status codes
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
-CMD [ "php-fpm", "-D"]
