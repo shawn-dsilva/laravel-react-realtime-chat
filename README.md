@@ -24,11 +24,14 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Deployment Preperation once again.
+- User Avatar in Direct Message users pane change `/storage` to `storage`
+- Fix DP sizing issues during Is Typing bubble events
+- Turn Docker Compose commands into bash scripts file instead of a long string.
 - Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
 
+- Deployment Preperation once again.
 - Fix Typing bubble REMOVE_TYPING_EVENT reducer 
 - Fully disconnect user from chat server upon logout
 - Invite to channel by URL system.
