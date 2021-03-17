@@ -7,11 +7,9 @@ services:
         ports:
              - '3315:5432'
         environment:
-             - POSTGRES_DATABASE=react_laravel_websockets
+             - POSTGRES_DB=react_laravel_websockets
              - POSTGRES_USER=admin
              - POSTGRES_PASSWORD=123456
-        volumes:
-             - './bin:/docker-entrypoint-initdb.d/'
     main:
         container_name: main
         # hostname: main
