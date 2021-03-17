@@ -1,7 +1,7 @@
 version: "3"
 services:
     # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
-    mysql-rca:
+    postgres-rca:
         container_name: postgres-rca #container name should not conflict with existing containers/images
         image: postgres
         ports:
