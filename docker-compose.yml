@@ -26,7 +26,7 @@ services:
             - .:/var/www
             - /var/www/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
             - /var/www/vendor # empty vendor folder, composer create folder in container build,reason unknown
-        command: sh -c "composer update && php artisan key:generate && php artisan storage:link  && php artisan migrate:fresh --seed && php artisan passport:install && php artisan config:clear && php-fpm -D && npm run prod"
+        command: sh  "./bin/init.sh"
         
     nginx: 
         image: nginx:alpine

@@ -40,7 +40,12 @@ return [
                 'encrypted' => false,
                 'host' => env('MIX_WS_HOST_URL'),
                 'port' => 6001,
-                'scheme' => 'http'
+                'useTLS' => true,
+                'scheme' => 'https',
+                'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                ],
             ],
         ],
 
