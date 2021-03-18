@@ -66,16 +66,29 @@ function ChatMessageList(props) {
           } else {
             if(value.user.name !== props.currUser.name) {
               value.user.avatar = value.user.details.avatar;
-              return <div className="msg-container">
-                 <img  src={'storage/'+getAvatar(value.user)}></img>
-                 
-                 <Col className="chatNotUserMsg" key={index}>
-                 <span>
-                <UserProfileModal currUser={props.currUser} user={value.user} addFriend={props.sendRequest} userDetailsClass="userDetailsMessage" />
-                <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
-                </span>
-                <br></br> {value.message}</Col>
-                </div>
+              return (
+                  <div className="msg-container">
+                      <img src={"storage/" + getAvatar(value.user)}></img>
+
+                      <div className="msg-container-inner">
+                          <Col className="chatNotUserMsg" key={index}>
+                              <span>
+                                  <UserProfileModal
+                                      currUser={props.currUser}
+                                      user={value.user}
+                                      addFriend={props.sendRequest}
+                                      userDetailsClass="userDetailsMessage"
+                                  />
+                                  <br></br> {value.message}
+                              </span>
+                          </Col>
+                          <Moment
+                              date={value.created_at}
+                              format="dddd, MMMM Do YYYY [at] h:mm A"
+                          />
+                      </div>
+                  </div>
+              );
             } else {
               value.user.avatar = value.user.details.avatar;
 

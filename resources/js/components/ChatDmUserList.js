@@ -25,7 +25,6 @@ export const ChatDmUsersList = (props) => {
                     <b>{value.users[0].name}</b>
                     <div className={ value.users[0].is_online ? "online" : "offline"}></div>
                 </Button>
-                <br></br>
             </div>
         );
     });
