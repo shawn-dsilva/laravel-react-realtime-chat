@@ -25,6 +25,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
+- Typing events for DM Users
 - Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.
