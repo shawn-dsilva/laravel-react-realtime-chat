@@ -64,8 +64,7 @@ export const ChatChannelsList = props => {
     <Collapse  isOpen={isOpen} defaultOpen={true}>
     <div className="sidepaneChannel">
                 <div>
-                <br></br>
-                    {" "}
+                <div className="channelElement" key={1}>
                     <Button
                         color="link"
                         onClick={() =>
@@ -76,10 +75,11 @@ export const ChatChannelsList = props => {
                             )
                         }
                         id="1"
-                        key="1"
                     >
                         <b> General</b>
                     </Button>
+                    <br></br>
+                </div>
                     {channelList}
                 </div>
             </div>

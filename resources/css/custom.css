@@ -107,7 +107,7 @@ img {
     /*margin left and right set to 0 to over write row class -15px left and right margins*/
     margin-left:0!important;
     margin-right:0!important;
-    background-image:url('/assets/images/tile_background.png');
+    background: white;
 }
 
 .chatUserMsg {
@@ -165,7 +165,7 @@ img {
     border-color: transparent whitesmoke transparent transparent;
     content: "";
     position: absolute;
-    right: 258px;
+    right: 267px;
     top: -2px;
 }
 
@@ -199,21 +199,21 @@ img {
 }
 
 .online {
-    height: 5px;
-    width: 5px;
-    border: solid 5px greenyellow;
+    height: 15px;
+    width: 15px;
     border-radius: 50%;
-    display:inline-block;
-    margin:0 5px;
+    background-color: greenyellow;
+    display:block;
+    margin:auto 1rem;
 }
 
 .offline {
-    height: 5px;
-    width: 5px;
-    border: solid 5px lightgrey;
+    height: 15px;
+    width: 15px;
     border-radius: 50%;
-    display:inline-block;
-    margin:0 5px;
+    background-color:lightgrey;
+    display:block;
+    margin:auto 1rem;
 }
 
 .sidepaneParentChannel {
@@ -318,20 +318,44 @@ img {
 
 .dmuser:hover, .channelElement:hover {
     background:whitesmoke;
-
 }
+
+
 .dmuser, .channelElement button {
     padding:0.4rem 0;
 }
 
 .channelElement {
     padding:0.5rem;
+    display: flex;
 }
 
 .channelElement button {
     text-align: left;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
+.channelElement::before {
+    content:"#";
+    color:lightslategrey;
+    font-size:1.2rem;
+    font-weight: 600;
+    margin:auto 0;
+    padding-right: 1rem;
+}
+
+.dmuser button:hover, .channelElement button:hover {
+    text-decoration: none!important;
+}
+
+.dmuser button {
+    display:flex;
+}
+
+.dmuser b {
+    margin:auto 0;
+}
 .online-text {
 color:green;
 font-size:1rem;
