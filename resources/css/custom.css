@@ -353,6 +353,18 @@ font-size:1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+@media only screen and (min-device-width : 40rem ) and (orientation : portrait) {
+    .authcard {
+        width:40%;
+        margin: 0 auto;
+        background:white;
+        padding:2rem;  
+        border: 5px white solid;
+        border-radius: 2%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }    
+
+}
 .authcard h1 {
     font-weight: 900;
     text-align: center;
@@ -436,7 +448,7 @@ font-size:1rem;
 }
 
 .typing-container:nth-child(1) {
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .dot {

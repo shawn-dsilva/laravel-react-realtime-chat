@@ -61,7 +61,7 @@ export const ChatChannelsList = props => {
 
                     { !isOpen ? <i id="ChannelArrow" class=" arrow fas fa-chevron-down"></i> : <i id="ChannelArrow" class=" arrow fas fa-chevron-up"></i>}</h3>
             </div>
-    <Collapse  isOpen={isOpen}>
+    <Collapse  isOpen={isOpen} defaultOpen={true}>
     <div className="sidepaneChannel">
                 <div>
                 <br></br>
