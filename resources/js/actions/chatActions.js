@@ -154,18 +154,41 @@ export const dmSelectAction = (channel_id, username, avatar) => {
                 dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
 
                 // Join the chatroom in Echo
-                window.Echo.join(`chat.dm.${channel_id}`).listen(
+                window.Echo.join(`chat.dm.${channel_id}`)
+                .listen(
                     "MessageSent",
                     event => {
                         console.log("FROM DM USERS EVENT FUNCTION");
                         console.log(event);
                         const message = {
                             user: event.user,
+                            type:'typing'
+                        }
+                        dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
+                        const message = {
+                            user: event.user,
                             message: event.message.message
                         };
                         dispatch({ type: ADD_MESSAGE, payload: message });
                     }
-                );
+                ).listenForWhisper("typing", event => {
+                    let timer
+                    console.log("TYPING");
+                    console.log(event.name);
+                    const message = {
+                        user: event.name,
+                        type:'typing'
+                    }
+                    dispatch({ type: ADD_TYPING_EVENT, payload: message });
+    
+                    clearTimeout(timer)
+    
+                    timer = setTimeout( () => {
+                        dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
+                    }, 2000)
+    
+    
+                });
                 // Get current updated State
                 const state = getState();
                 const selectedChannel = state.chat.selectedChannel;
@@ -243,6 +266,11 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 };
                 console.log(message);
                 dispatch({ type: ADD_MESSAGE, payload: message });
+                const message = {
+                    user: event.user,
+                    type:'typing'
+                }
+                dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
             })
             .listenForWhisper("typing", event => {
                 let timer

@@ -29,7 +29,7 @@ function ChatMessageList(props) {
     return <div className="typing-container">
      <img  src={'storage/'+value.user.avatar}></img>
          <div>
-           <Col className="chatNotUserMsg" key={index}>
+           <Col className="typingBubble" key={index}>
              <div className="dot"></div>
              <div className="dot"></div>
              <div className="dot"></div>

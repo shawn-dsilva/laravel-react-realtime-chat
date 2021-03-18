@@ -19,7 +19,7 @@ export class ChatInputBox extends Component {
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
         setTimeout( () => {
-          window.Echo.join(`chat.channel.${this.props.selectedChannel.id}`)
+          window.Echo.join(`chat.${this.props.selectedChannel.type}.${this.props.selectedChannel.id}`)
           .whisper("typing", {
             name: this.props.currUser
           });

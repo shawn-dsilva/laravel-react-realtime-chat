@@ -25,7 +25,6 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Typing events for DM Users
 - Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.
@@ -44,6 +43,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Typing events for DM Users
 - Fix DP sizing issues during Is Typing bubble events
 - Double or Triple messages appearing in Message List after switching channels error fixed Error #3
 - User Avatar in Direct Message users pane change `/storage` to `storage`
