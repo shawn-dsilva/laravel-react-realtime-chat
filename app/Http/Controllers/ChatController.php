@@ -66,8 +66,6 @@ class ChatController extends Controller
         $user = User::where('id', auth()->user()->id)->with('details')->first();
 
         broadcast(new MessageSent($user, $message, $request->channel_id, $request->channel_type));
-
-        return ['status' => 'Message Sent!'];
     }
 
     public function directMessage(Request $request)

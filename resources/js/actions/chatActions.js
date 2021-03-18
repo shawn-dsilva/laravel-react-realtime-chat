@@ -141,6 +141,9 @@ export const dmSelectAction = (channel_id, username, avatar) => {
         // Leave general channel
 
         window.Echo.leave("chat.channel.5");
+        const prevId = getState().chat.selectedChannel.id;
+        const type = getState().chat.selectedChannel.type;
+        window.Echo.leave(`chat.${type}.${prevId}`);
 
         // Make Post request containing ID of recepient.
         // If a Chat Room containing only these two users exists.
@@ -154,6 +157,7 @@ export const dmSelectAction = (channel_id, username, avatar) => {
                 window.Echo.join(`chat.dm.${channel_id}`).listen(
                     "MessageSent",
                     event => {
+                        console.log("FROM DM USERS EVENT FUNCTION");
                         console.log(event);
                         const message = {
                             user: event.user,
@@ -175,7 +179,8 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
 
     return (dispatch, getState) => {
         const prevId = getState().chat.selectedChannel.id;
-        window.Echo.leave(`chat.channel.${prevId}`);
+        const type = getState().chat.selectedChannel.type;
+        window.Echo.leave(`chat.${type}.${prevId}`);
 
 
         
@@ -231,7 +236,7 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 }
             })
             .listen("MessageSent", event => {
-                console.log("IN FRONT END MESSAGE SENT");
+                console.log("FROM CHANNEL EVENT FUNCTION");
                 const message = {
                     user: event.user,
                     message: event.message.message

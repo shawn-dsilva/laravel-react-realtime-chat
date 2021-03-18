@@ -6,7 +6,7 @@ import AllChannelsList from "./AllChannelsList";
 export const ChatChannelsList = props => {
     const channels = props.channels;
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const toggle = () => setIsOpen(!isOpen);
 

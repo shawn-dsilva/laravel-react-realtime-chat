@@ -18,13 +18,15 @@
 
 - Ref Error #1 : The error was occuring due to object `$channelWithDataNew` being returned in response of `acceptInviteRequest()`, with `id` being the channel detail entry's ID and not the ID of the Channel, which was causing 403 Permission denied errors when Laravel Echo tried to authorize at the `/broadcast/auth` route with incorrect channel ID.
 Error solved when correct `$channel` object being returned in response.
-- Ref Error #2 : Same reason as Error #1, id of the details entry being returned instead of the channel's id
+- Ref Error #2 : Same reason as Error #1, id of the details entry being returned instead of the channel's id.
+- Ref Error #3 : Multiple copies of the same message appearing because of not leaving previous channels properly.
 
 ## TODO
 
 ### Immediate
 
-- Fix DP sizing issues during Is Typing bubble events
+- Microsite with a list of features on index.
+- Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
@@ -40,6 +42,9 @@ Error solved when correct `$channel` object being returned in response.
 
 
 ### Done
+
+- Fix DP sizing issues during Is Typing bubble events
+- Double or Triple messages appearing in Message List after switching channels error fixed Error #3
 - User Avatar in Direct Message users pane change `/storage` to `storage`
 - Deployment Preperation once again.
 - Turn Docker Compose commands into bash scripts file instead of a long string.
