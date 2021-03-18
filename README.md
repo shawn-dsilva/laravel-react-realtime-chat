@@ -24,14 +24,11 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- User Avatar in Direct Message users pane change `/storage` to `storage`
 - Fix DP sizing issues during Is Typing bubble events
-- Turn Docker Compose commands into bash scripts file instead of a long string.
 - Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
 
-- Deployment Preperation once again.
 - Fix Typing bubble REMOVE_TYPING_EVENT reducer 
 - Fully disconnect user from chat server upon logout
 - Invite to channel by URL system.
@@ -43,7 +40,9 @@ Error solved when correct `$channel` object being returned in response.
 
 
 ### Done
-
+- User Avatar in Direct Message users pane change `/storage` to `storage`
+- Deployment Preperation once again.
+- Turn Docker Compose commands into bash scripts file instead of a long string.
 - Typing events support.
 - Fix any Errors/Issues in Join Private/Public Channel functionality.
 - Add User Profile component in names of Users in group Channel message lists
