@@ -92,16 +92,20 @@ function ChatMessageList(props) {
             } else {
               value.user.avatar = value.user.details.avatar;
 
-              return <div className="user-msg-container">
-              <Col className="chatUserMsg" key={index}>
-                <span>
-                {/* <UserProfileModal currUser={props.currUser} user={value.user} userDetailsClass="userDetailsMessage" /> */}
-                <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
-                </span>
-                 <br></br> {value.message}</Col>
-                 <img  src={'storage/'+getAvatar(value.user)}></img>
+              return (
+              <div className="user-msg-container">
+              <div className="user-msg-container-inner">
+                <Col className="chatUserMsg" key={index}>
+                  <span>
+                  {value.message}                
+                  </span>
+                  </Col>
+                  <Moment date={value.created_at} format="dddd, MMMM Do YYYY [at] h:mm A"/>
+              </div>
+              <img  src={'storage/'+getAvatar(value.user)}></img>
 
              </div>
+              )
             }
           }
         });

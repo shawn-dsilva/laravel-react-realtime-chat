@@ -112,7 +112,6 @@ img {
 
 .chatUserMsg {
     text-align:right;
-    width:max-content;
     word-wrap: break-word;
     background:#00cbff;
     color:white;
@@ -125,6 +124,8 @@ img {
     font-size: 0.9rem;
     font-weight: 400;
     border-top-right-radius:0;
+    width: fit-content;
+    margin-left: auto;
 
 }
 
@@ -480,6 +481,9 @@ font-size:1rem;
     min-width: 250px;
 }
 
+.user-msg-container-inner {
+    min-width: 50px;
+}
 .dot {
     float: left;
     width: 8px;
@@ -518,6 +522,7 @@ font-size:1rem;
 .user-msg-container {
     display:flex;
     max-width: 65%;
+    flex-direction: row;
     margin-left: auto; 
     margin-top:1rem;
 }
@@ -750,6 +755,10 @@ font-size:1rem;
 
 .userDetailsMessage img {
     display:none;
+}
+
+.userDetailsMessage:hover {
+    text-decoration: underline;
 }
 
  time {
