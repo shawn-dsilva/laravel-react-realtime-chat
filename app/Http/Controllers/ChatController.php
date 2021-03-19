@@ -423,6 +423,7 @@ class ChatController extends Controller
   
     public function isOnline(Request $request) {
         $user = auth()->user();
+        Cache::put('user-is-online-'.$user->id, $user->id);
         broadcast(new UserOnline($user));
 
     }
