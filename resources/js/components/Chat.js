@@ -6,10 +6,11 @@
       InputGroupAddon,
       Input,
       Container,
-      UncontrolledDropdown,
+      UncontrolledTooltip,
       DropdownToggle,
       DropdownMenu,
       DropdownItem,
+
       Row,
       Col
     } from 'reactstrap';
@@ -171,8 +172,12 @@ import UserControlPanel from './UserControlPanel';
           ( 
           <React.Fragment>
           <ChannelDetailsModal channel={this.props.selectedChannel}/> 
-          <Button onClick={() => this.onClickUsersInRoom()}><i className="fa fa-users" aria-hidden="true"></i>
-          &nbsp; Channel Members</Button>
+          <UncontrolledTooltip placement="bottom" target="MembersList">
+              Channel Member's List
+          </UncontrolledTooltip>
+          <Button id="MembersList" className="channelDescButton" onClick={() => this.onClickUsersInRoom()}>
+            <i className="fa fa-users" aria-hidden="true"></i>
+         </Button>
           </React.Fragment>
           ) }
 

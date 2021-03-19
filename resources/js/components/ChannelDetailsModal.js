@@ -1,15 +1,18 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 import React, { useState } from 'react';
-import { Button,  Modal, ModalHeader, ModalBody, ModalFooter,} from 'reactstrap';
+import { Button,  Modal, ModalHeader, ModalBody, UncontrolledTooltip,} from 'reactstrap';
 
 const ChannelDetailsModal = (props) => {
-  const [modalOpen, setPopoverOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const toggle = () => setPopoverOpen(!modalOpen);
+  const toggle = () => setModalOpen(!modalOpen);
 
   return (
     <div style={{marginLeft:"auto"}}>
-      <Button className="channelDescButton" onClick={toggle} type="button">
+          <UncontrolledTooltip placement="bottom" target="aboutChannel">
+              About This Channel
+          </UncontrolledTooltip>
+      <Button id="aboutChannel" className="channelDescButton" onClick={toggle} type="button">
       <i className="fa fa-info-circle" aria-hidden="true"></i>
       </Button>
       <Modal placement="bottom" isOpen={modalOpen} toggle={toggle} className="channelDetailsModal">

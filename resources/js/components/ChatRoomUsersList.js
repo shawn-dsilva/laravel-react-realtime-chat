@@ -11,7 +11,7 @@ export const ChatRoomUsersList = props => {
     const userInRoomList = onlineUsers.map((value, index) => {
         return (
             <div key={index}>
-                <div className="online"></div>
+                <span className="online"></span>
                 <b className="online-text">{value.name}</b>
             </div>
         );
@@ -41,7 +41,7 @@ export const ChatRoomUsersList = props => {
      offlineUsers = offlineUsers.map((value, index) => {
         return (
             <div key={index}>
-                <div className="offline"></div>
+                <span className="offline"></span>
                 <b className="offline-text" >{value.name}</b>
             </div>
         );
@@ -50,11 +50,12 @@ export const ChatRoomUsersList = props => {
 
     return (
         <Col xs="1" className="usersInRoom">
-            <h3>In This Room </h3>
+            <h3>Members List</h3>
+            <br></br>
             <h5>Active ( {onlineUsers.length} )</h5>
-            <ul>{userInRoomList}</ul>
+            {userInRoomList}
             <h5>Offline ( {offlineUsers.length} )</h5>
-            <ul>{offlineUsers}</ul>
+            {offlineUsers}
         </Col>
     );
 };

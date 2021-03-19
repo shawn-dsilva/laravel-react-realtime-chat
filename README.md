@@ -25,13 +25,13 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Refactor about channel and users in room into smaller buttons without text
 - Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
 
+- Refactor about channel and users in room into smaller buttons without text
 - Fix Typing bubble REMOVE_TYPING_EVENT reducer 
 - Invite to channel by URL system.
 - Add search all users functionality.
