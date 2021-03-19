@@ -198,7 +198,7 @@ export const dmSelectAction = (channel_id, username, avatar) => {
     };
 };
 
-export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) => {
+export const channelSelect = (channel_id, channel_name, desc, owner_id, owner,owner_avatar) => {
 
     return (dispatch, getState) => {
         const prevId = getState().chat.selectedChannel.id;
@@ -210,7 +210,7 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
         axios.get(`/api/getusers/${channel_id}`, makeHeaders(getState), {withCredentials:true})
         .then ( res => {
             const users = res.data[0].users;
-            const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc, "owner_id":owner_id, "owner":owner, "users":users};
+            const channel = { "id": channel_id, "type":"channel", "name": channel_name, "desc": desc, "owner_id":owner_id, "owner":owner, "owner_avatar":owner_avatar, "users":users};
 
             dispatch({ type: SET_SELECTED_CHANNEL, payload: channel });
             // dispatch({ type: ADD_CHANNEL_USERS, payload : users})

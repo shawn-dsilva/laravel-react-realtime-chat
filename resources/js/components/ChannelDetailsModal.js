@@ -23,8 +23,8 @@ const ChannelDetailsModal = (props) => {
             <p>{props.channel.desc}</p>
           <h3>Owner</h3>
           { props.channel.id === 1 ? 
-            <p>  SYSTEM </p> : 
-            <p> {props.channel.owner}</p> }
+            <p>  <img class="dmAvatar" src={"assets/images/SYSTEM.jpg"}/> <b>SYSTEM</b> </p> : 
+            <p> <img class="dmAvatar" src={"storage/"+props.channel.owner_avatar}/><b>{props.channel.owner}</b></p> }
             
           </ModalBody>
       </Modal>

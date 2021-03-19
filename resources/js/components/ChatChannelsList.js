@@ -25,7 +25,8 @@ export const ChatChannelsList = props => {
                             value.name,
                             value.desc,
                             value.owner_id,
-                            value.owner
+                            value.owner,
+                            value.owner_avatar
                         )
                     }
                     id={value.id}
@@ -71,9 +72,9 @@ export const ChatChannelsList = props => {
                             channelSelect(
                                 1,
                                 "General",
-                                "A public channel where all users can chat",
+                                "A Public channel where all users can chat freely, Users are automatically added to this room upon registration of an account",
                                 null,
-                                
+
                             )
                         }
                         id="1"

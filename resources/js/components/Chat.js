@@ -87,7 +87,9 @@ import UserControlPanel from './UserControlPanel';
           this.props.getDmUsers();
           this.props.getUsersList();
           this.props.getChannels();
-          this.channelSelect(this.fakeGeneralChannel, 'General', 'A public channel where all users can chat');
+          this.channelSelect(this.fakeGeneralChannel, 'General',                                 
+          "A Public channel where all users can chat freely, \n Users are automatically added to this room upon registration of an account, \n this channel is owned by SYSTEM and not by a normal user",
+          );
 
 
       }
@@ -101,11 +103,11 @@ import UserControlPanel from './UserControlPanel';
         this.setState({isOpen: !this.state.isOpen});
       };
       
-      channelSelect = (selectedChannel, channelName, desc,  owner_id, owner, event) => {
+      channelSelect = (selectedChannel, channelName, desc,  owner_id, owner, owner_avatar, event) => {
         if(event !== undefined) {
           event.stopPropagation();
         }
-        this.props.channelSelect(selectedChannel, channelName, desc, owner_id, owner);
+        this.props.channelSelect(selectedChannel, channelName, desc, owner_id, owner, owner_avatar);
       }
 
       sendRequest = (id) =>{
