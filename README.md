@@ -25,6 +25,9 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
+- Leave selectedChannel on Logout
+-Refactor About Channel with more details into a modal.
+- Refactor about channel and users in room into smaller buttons without text
 - Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.

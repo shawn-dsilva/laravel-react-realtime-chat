@@ -170,7 +170,7 @@ import UserControlPanel from './UserControlPanel';
           <React.Fragment>
           <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> 
           <Button onClick={() => this.onClickUsersInRoom()}><i className="fa fa-users" aria-hidden="true"></i>
-          &nbsp; Users In Room ( Total : {this.props.selectedChannel.users.length} )</Button>
+          &nbsp; Channel Members</Button>
           </React.Fragment>
           ) : null}
 
