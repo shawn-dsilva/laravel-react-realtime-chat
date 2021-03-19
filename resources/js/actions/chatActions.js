@@ -160,11 +160,11 @@ export const dmSelectAction = (channel_id, username, avatar) => {
                     event => {
                         console.log("FROM DM USERS EVENT FUNCTION");
                         console.log(event);
-                        const message = {
+                        const typingEvent = {
                             user: event.user,
                             type:'typing'
                         }
-                        dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
+                        dispatch({ type: REMOVE_TYPING_EVENT, payload: typingEvent });
                         const message = {
                             user: event.user,
                             message: event.message.message
@@ -266,11 +266,11 @@ export const channelSelect = (channel_id, channel_name, desc, owner_id, owner) =
                 };
                 console.log(message);
                 dispatch({ type: ADD_MESSAGE, payload: message });
-                const message = {
+                const typingEvent = {
                     user: event.user,
                     type:'typing'
                 }
-                dispatch({ type: REMOVE_TYPING_EVENT, payload: message });
+                dispatch({ type: REMOVE_TYPING_EVENT, payload: typingEvent });
             })
             .listenForWhisper("typing", event => {
                 let timer
