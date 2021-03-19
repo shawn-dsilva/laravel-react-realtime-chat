@@ -40,6 +40,7 @@ class UserControlPanel extends Component {
     notifications: PropTypes.array.isRequired,
     allNotifications: PropTypes.array.isRequired,
     currUser: PropTypes.object.isRequired,
+    selectedChannel: PropTypes.object.isRequired,
     markAsRead: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     editDesc: PropTypes.func.isRequired,
@@ -76,7 +77,7 @@ acceptRequest = (id) =>{
 
 onLogout = () => {
 
-  this.props.logout();
+  this.props.logout(this.props.currUser.id, this.props.selectedChannel.id);
 }
 
 toggle = () => {
@@ -152,6 +153,7 @@ const mapStateToProps = (state) => ({ //Maps state to redux store as props
   usersList: state.chat.usersList,
   channels: state.chat.channels,
   allChannels: state.chat.allChannels,
+  selectedChannel: state.chat.selectedChannel
 });
 
 export default connect(mapStateToProps, {   acceptRequest, getNotifications,  getAllNotifications, markAsRead, editDesc, logout})(UserControlPanel);

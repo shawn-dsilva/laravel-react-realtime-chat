@@ -11,8 +11,6 @@ const ChannelDetailsModal = (props) => {
     <div style={{marginLeft:"auto"}}>
       <Button className="channelDescButton" onClick={toggle} type="button">
       <i className="fa fa-info-circle" aria-hidden="true"></i>
-        &nbsp;
-        About Channel
       </Button>
       <Modal placement="bottom" isOpen={modalOpen} toggle={toggle} className="channelDetailsModal">
         <ModalHeader  toggle={toggle} >Channel Details</ModalHeader>

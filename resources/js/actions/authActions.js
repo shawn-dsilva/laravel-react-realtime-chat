@@ -124,14 +124,19 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
 };
 
 //Logout User and Destroy session
-export const logout = () => (dispatch) => {
-
+export const logout = (id, channel_id) => (dispatch) => {
+  window.Echo.leave("chat")
+  axios
+  .get(`/api/offline/${id}`, {withCredentials:true});
+  window.Echo.leave(`chat.channel.${channel_id}`)
+  window.Echo.connector.pusher.disconnect();
     axios
     .get("/api/auth/logout", { withCredentials: true })
-    .then((res) =>
+    .then((res) =>{
       dispatch({
         type: LOGOUT_SUCCESS,
       })
+    }
     )
     .catch((err) => {
       console.log(err);

@@ -25,8 +25,6 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Leave selectedChannel on Logout
-- Refactor About Channel with more details into a modal.
 - Refactor about channel and users in room into smaller buttons without text
 - Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
@@ -35,7 +33,6 @@ Error solved when correct `$channel` object being returned in response.
 ### Luxury
 
 - Fix Typing bubble REMOVE_TYPING_EVENT reducer 
-- Fully disconnect user from chat server upon logout
 - Invite to channel by URL system.
 - Add search all users functionality.
 - Add search all channels functionality.
@@ -46,6 +43,8 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Leave selectedChannel on Logout
+- Refactor About Channel with more details into a modal.
 - Typing events for DM Users
 - Fix DP sizing issues during Is Typing bubble events
 - Double or Triple messages appearing in Message List after switching channels error fixed Error #3
