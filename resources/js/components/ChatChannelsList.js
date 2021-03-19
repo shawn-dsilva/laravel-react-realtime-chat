@@ -71,7 +71,9 @@ export const ChatChannelsList = props => {
                             channelSelect(
                                 1,
                                 "General",
-                                "A public channel where all users can chat"
+                                "A public channel where all users can chat",
+                                null,
+                                
                             )
                         }
                         id="1"

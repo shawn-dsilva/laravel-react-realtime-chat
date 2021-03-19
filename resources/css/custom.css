@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-1/css/all.css');
+
 html,body, #root, .container-true, .fullHeight {
     height:100%!important;
     overflow:hidden;
@@ -791,4 +792,17 @@ font-size:1rem;
 .chatUserMsg time {
     font-size: 0.8rem;
     font-weight: 200;
+}
+
+.channelDetailsModal {
+    font-size:1rem;
+    font-weight: 400;
+}
+
+.channelDetailsModal h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom:1px solid lightgrey;
+    margin: 1rem 0;
+    padding-bottom: 0.7rem;
 }

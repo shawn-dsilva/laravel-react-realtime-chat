@@ -21,7 +21,7 @@ import { echoInit} from './utils/echoHelpers';
 import ChatMessageList from './ChatMessageList';
 import ChatDmUsersList from './ChatDmUserList';
 import AllUsersList from './AllUsersList';
-import ChannelDescDropdown from './ChannelDescDropdown';
+import ChannelDetailsModal from './ChannelDetailsModal';
 import ChatChannelsList from './ChatChannelsList';
 import ChatRoomUsersList from './ChatRoomUsersList';
 import '../../css/custom.css';
@@ -165,14 +165,14 @@ import UserControlPanel from './UserControlPanel';
 
           {/* <img className="dmAvatar" src={'/storage/'+this.props.selectedChannel.avatar}></img> */}
 
-          {this.props.selectedChannel.type == 'channel' ? 
+          {this.props.selectedChannel.type == 'channel' &&
           ( 
           <React.Fragment>
-          <ChannelDescDropdown desc={this.props.selectedChannel.desc}/> 
+          <ChannelDetailsModal channel={this.props.selectedChannel}/> 
           <Button onClick={() => this.onClickUsersInRoom()}><i className="fa fa-users" aria-hidden="true"></i>
           &nbsp; Channel Members</Button>
           </React.Fragment>
-          ) : null}
+          ) }
 
           
           
