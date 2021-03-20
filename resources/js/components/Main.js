@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
+import Home from './Home';
 import Landing from './Landing';
 import Chat from './Chat';
 
@@ -17,7 +18,8 @@ export class Main extends Component {
     return (
       <Switch>
         <ProtectedRoute isAuthenticated={this.props.isAuthenticated} exact path="/chat" component={Chat} />
-        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/(|login)/" component={Login} />
+        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/" component={Home} />
+        <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/login" component={Login} />
         <ProtectedRouteIfAuth isAuthenticated={this.props.isAuthenticated} exact path="/register" component={Register} />
 
       </Switch>
