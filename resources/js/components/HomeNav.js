@@ -17,8 +17,8 @@ const HomeNav = (props) => {
     const toggle = () => setIsOpen(!isOpen);
   
     return (
-      <div>
-        <Navbar color="light" light expand="md">
+      <div className="NavContainer">
+        <Navbar color="transparent" light expand="md" className="mx-4" >
           <NavbarBrand href="/"> 
             <Row className="LogoNav">
                     <h2><span style={{color:'#F05340' }}>Laravel</span> 
@@ -29,7 +29,7 @@ const HomeNav = (props) => {
         </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
+            <Nav className="ml-auto" navbar>
             <NavItem>
                 <NavLink href="#motivation">Motivation</NavLink>
               </NavItem>
@@ -38,6 +38,9 @@ const HomeNav = (props) => {
               </NavItem>
               <NavItem>
                 <NavLink href="#features">Features</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#startchatting">Start Chatting</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
