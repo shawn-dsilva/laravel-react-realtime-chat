@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import HomeNav from './HomeNav'
 
 export class Home extends Component {
     render() {
         return (
             <div>
-                <h1>HOMEPAGE</h1>
+                <HomeNav/>
             </div>
         )
     }
