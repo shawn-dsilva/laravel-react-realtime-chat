@@ -342,7 +342,7 @@ img {
 }
 
 .nav-link {
-    color:white!important;
+    color:white!important
 }
 
 .fullDiv {
@@ -357,7 +357,7 @@ img {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-image:linear-gradient(18deg, white 28%, transparent 28.1%), linear-gradient(-18deg, white 30%, transparent 30.1%);
+    background-image:linear-gradient(-6deg, #61dbfb 33%, transparent 33.1%);
 }
 
 .hero-centre {
@@ -370,7 +370,7 @@ img {
 
 .hero-centre p {
     font-size: 1.3rem;
-    color:whitesmoke;
+    color: rgba(255, 255, 255, 0.78)!important;
     width: 80%;
     margin:0 auto;
 }
