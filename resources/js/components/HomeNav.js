@@ -31,16 +31,16 @@ const HomeNav = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="ml-auto" navbar>
             <NavItem>
-                <NavLink href="#motivation">Motivation</NavLink>
+                <NavLink href="https://wwww.shawndsilva.com/projects/realtime-chat-app">Project Details</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#techstack">Tech Stack</NavLink>
+                <NavLink href="https://www.github.com/shawn-dsilva/realtime-chat-app">Source on GitHub</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#features">Features</NavLink>
+                <NavLink href="#features">Login</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#startchatting">Start Chatting</NavLink>
+                <NavLink href="#startchatting">Register</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

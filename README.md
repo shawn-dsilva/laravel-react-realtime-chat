@@ -25,7 +25,6 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Microsite with a list of features on index.
 - Responsive Design for side-by-side browser windows and Tablets.
 - Add User Profile component in Direct Message "channel name" section.
 
@@ -43,6 +42,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Homepage design.
 - Leave selectedChannel on Logout
 - Refactor About Channel with more details into a modal.
 - Typing events for DM Users

@@ -357,15 +357,41 @@ img {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-image:linear-gradient(-6deg, #61dbfb 33%, transparent 33.1%);
 }
 
 .hero-centre {
     margin: 0 auto;
-    margin-top:10%;
+    margin-top:5%;
     margin-bottom: auto;
     width:50%;
     text-align: center;
+}
+
+.hero-centre a, .hero-centre a:hover {
+    background-color:#61DBFB;
+    font-weight: 700;
+    color:white;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    padding:5px 10px;
+}
+
+.svg-std {
+    border:none;
+    height: 6.5em;
+    width: 6.5em;
+    display: inline-block;
+    margin:0;
+  }
+
+.tech-stack {
+    background:white;
+    padding: 1rem;
+    margin:0.5rem;
+    border-radius: 10px;
+    display:flex;
+    justify-content: space-between;
 }
 
 .hero-centre p {
