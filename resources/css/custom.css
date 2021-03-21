@@ -368,13 +368,18 @@ img {
 }
 
 .hero-centre a, .hero-centre a:hover {
-    background-color:#61DBFB;
+    background-color: #292841;
     font-weight: 700;
     color:white;
     text-decoration: none;
     border-radius: 3px;
     font-size: 1.5rem;
     padding:5px 10px;
+}
+
+.hero-centre a:hover {
+    color:#61DBFB;
+    text-decoration: none;
 }
 
 .svg-std {

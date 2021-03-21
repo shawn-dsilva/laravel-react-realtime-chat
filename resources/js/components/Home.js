@@ -25,7 +25,7 @@ export class Home extends Component {
                     <img class="svg-std" src="https://www.shawndsilva.com/public/assets/icons/docker.svg"></img>
                     </div>
                     <br></br>
-                    <p>For the Motivations behind this project, Challenges Faced and Lessons Learned, 
+                    <p>For the Motivations behind this project, Challenges Faced, Lessons Learned and more detailed Features List, 
                         Check the <a href="https://wwww.shawndsilva.com/projects/realtime-chat-app">Project Details page</a>.</p>
                     </div>
                 </div>
