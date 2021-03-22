@@ -116,8 +116,8 @@ function AllNotificationsModal({modalAN, toggleModalAN}) {
     <Dropdown   isOpen={dropdownOpen} toggle={toggle}>
       <Row className="notificationsBell">
       <DropdownToggle id="notifications" className="notifButton" color="secondary" size="lg" outline >
-      <i class="far fa-bell"></i>
-        </DropdownToggle>
+      <i class="fas fa-bell"></i>
+              </DropdownToggle>
         <div className="notificationsBellCounter"> {unreadNotifs}</div>
 </Row>
       <DropdownMenu className="NotifDropdownMenu">
