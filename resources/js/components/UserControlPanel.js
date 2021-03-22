@@ -30,6 +30,35 @@ import { acceptRequest,  getNotifications,
 import {logout} from '../actions/authActions';
 import UserProfileModal from './UserProfileModal';
 
+const UserOptions = (props) => {
+  return (
+  <UncontrolledDropdown inNavbar >
+           
+  <div className="userOptions" id="userOptions">
+    <DropdownToggle nav >
+      <i class="fas fa-cog"></i>
+    </DropdownToggle>
+    </div>
+
+    <DropdownMenu left className="OptionsDropdownMenu">
+      <DropdownItem style={{whiteSpace:'nowrap'}}>
+        <ImageUploadModal
+        currUser={props.currUser}
+                  buttonLabel={"Change Avatar"}
+              /> 
+      </DropdownItem>
+      <DropdownItem divider></DropdownItem>
+      <DropdownItem onClick={props.onLogout}>
+      <i class="fas fa-sign-out-alt"></i>  &nbsp;
+      Logout
+      </DropdownItem>
+      
+    </DropdownMenu>
+  </UncontrolledDropdown>
+  );
+  
+}
+
 class UserControlPanel extends Component { 
 
   static propTypes = {
@@ -85,40 +114,25 @@ toggle = () => {
     isOpen: !this.state.isOpen
   })
 }
+
+
+
+
 render() {
   return (
     <Row className="userControlPanel">
-           <Row className="userContainer">
-           <UncontrolledTooltip placement="top" target="userProfile">
+                <UncontrolledTooltip placement="top" target="userProfile">
                     User Profile
                 </UncontrolledTooltip>
-             <UserProfileModal userDetailsClass="userDetails" user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
-            <UncontrolledDropdown inNavbar >
-            <div className="userOptions" id="userOptions">
-              <DropdownToggle nav >
-                <i class="fas fa-cog"></i>
                 <UncontrolledTooltip placement="bottom" target="userOptions">
                     Options
                 </UncontrolledTooltip>
-              </DropdownToggle>
-              </div>
 
-              <DropdownMenu left className="OptionsDropdownMenu">
-                <DropdownItem style={{whiteSpace:'nowrap'}}>
-                  <ImageUploadModal
-                  currUser={this.props.currUser}
-                            buttonLabel={"Change Avatar"}
-                        /> 
-                </DropdownItem>
-                <DropdownItem divider></DropdownItem>
-                <DropdownItem onClick={this.onLogout}>
-                <i class="fas fa-sign-out-alt"></i>  &nbsp;
-                Logout
-                </DropdownItem>
-                
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            </Row>
+           <Row className="userContainer"> 
+             <UserProfileModal userDetailsClass="userDetails" user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
+          </Row>
+          
+           <UserOptions currUser={this.props.currUser} onLogout={this.onLogout}/>
 
             <Row  className="notifContainer">
               <NotificationDropdown  markAsRead={this.props.markAsRead}  notifications={this.props.notifications}

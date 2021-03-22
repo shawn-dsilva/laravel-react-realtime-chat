@@ -968,4 +968,17 @@ font-size:1rem;
         display: flex;
         height: 100%;
     }
+
+    .userContainer {
+        flex-wrap: nowrap!important;
+    }
+
+    .userControlPanel {
+        flex-wrap: nowrap!important;
+        padding:0 0.375rem;
+    }
+
+    .chatMainContainer {
+        min-width: 50%;
+    }
 }
