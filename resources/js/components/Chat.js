@@ -159,13 +159,15 @@ import UserControlPanel from './UserControlPanel';
                         </Row>
                     </Col>
                     <Col className="chatMainContainer">
-        <div className="channelName">{this.props.selectedChannel.type ==  'channel' ? 
-        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"orange"}}> Channel # 
-        </span> : 
-        <span style={{fontWeight:"900", textTransform: 'uppercase', fontSize:"1.8rem", color:"blue"}}>User @ 
+        <div className="channelNameContainer">
+          <div className="channelName">
+          {this.props.selectedChannel.type ==  'channel' ? 
+          <span className="channelHash"> # 
+          </span> : 
+          <span className="userAt" >@ 
         </span> }
           <h1>{this.props.selectedChannel.name}</h1>
-
+          </div>
           {/* <img className="dmAvatar" src={'/storage/'+this.props.selectedChannel.avatar}></img> */}
 
           {this.props.selectedChannel.type == 'channel' &&

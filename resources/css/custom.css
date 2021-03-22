@@ -18,7 +18,11 @@ html,body, #root, .container-true, .fullHeight {
 
 h1,h2,h3,h4,h5,h6 {
     font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
 }
+
 img {
     margin:0 8px;
 }
@@ -208,7 +212,7 @@ img {
     background-color: rgb(225, 243, 255)!important;
 }
 
-.channelName {
+.channelNameContainer {
     box-shadow: 0 4px 5px -2px rgb(0 0 0 / 10%);
     padding: 0.8rem;
     font-size:1.8rem;
@@ -927,5 +931,41 @@ font-size:1rem;
         text-align: center;
     }
     
+    .sidepaneParentDm h3, .sidepaneParentChannel h3 {
+        font-weight: 700!important;
+        display:flex;
+        margin:0;
+        font-size: 22px;
+        line-height: 1.6;
+    }
 
+    .sidepaneParentButton {
+        padding:0.375rem!important;
+    }
+
+    .sidenav {
+        max-width: 30%!important;
+    }
+
+    .Logo h2 {
+        white-space: pre-wrap;
+    }
+
+    .channelHash, .userAt {
+        font-weight: 700;
+        font-size: 2rem;
+        color:#F05340;
+        display: block;
+        padding:0 1rem;
+    }
+
+    .userAt {
+        color:#61DBFB;
+    }
+
+    .channelName{
+        margin: 1rem 0;
+        display: flex;
+        height: 100%;
+    }
 }
