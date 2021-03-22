@@ -31,7 +31,7 @@ const UserProfileModal = (props) => {
 
 
   return (
-    <div>
+    <div className="userProfileContainer">
       <div onClick={toggle} id="userProfile" className={userDetailsClass} > {
                   user.avatar ? 
                   <img src={"storage/"+user.avatar} className="dmAvatar"></img> : 

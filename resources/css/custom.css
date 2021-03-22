@@ -984,7 +984,13 @@ font-size:1rem;
     }
 
     .userDetails {
-        margin:0;
+        margin:0 auto;
+        display: flex;
+        width: 99%;
+    }
+
+    .userDetails span {
+        margin:auto 0;
     }
 
     .dmAvatar {
@@ -1015,5 +1021,10 @@ font-size:1rem;
 
     .userOptions a {
         margin:0; 
+    }
+
+    .userProfileContainer {
+        display: flex;
+        width: 59%;
     }
 }
