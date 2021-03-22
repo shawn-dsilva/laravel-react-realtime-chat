@@ -127,28 +127,17 @@ render() {
                 <UncontrolledTooltip placement="bottom" target="userOptions">
                     Options
                 </UncontrolledTooltip>
+                <UncontrolledTooltip placement="bottom" target="notifications">
+                    Notifications
+                </UncontrolledTooltip>
 
-           <Row className="userContainer"> 
-             <UserProfileModal userDetailsClass="userDetails" user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
-          </Row>
-          
+          <UserProfileModal userDetailsClass="userDetails" user={this.props.currUser} editDesc={this.props.editDesc} currUser={this.props.currUser} />
            <UserOptions currUser={this.props.currUser} onLogout={this.onLogout}/>
 
-            <Row  className="notifContainer">
               <NotificationDropdown  markAsRead={this.props.markAsRead}  notifications={this.props.notifications}
              allNotifications={this.props.allNotifications} acceptRequest={this.props.acceptRequest}
               unreadNotifs={this.props.unreadNotifs} getAllNotifications={this.props.getAllNotifications}
               />
-              </Row>
-              <UncontrolledTooltip placement="bottom" target="notifications">
-                    Notifications
-                </UncontrolledTooltip>
-            
-          {/* </Nav>
-
-        </Collapse>
-      </Navbar> */}
-      
       </Row>
   );
 }
