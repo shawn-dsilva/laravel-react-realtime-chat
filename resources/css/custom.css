@@ -52,7 +52,7 @@ img {
     border-right: solid 1px lightgrey;
     display:flex;
     flex-direction: column;
-    max-width: 22%!important;
+    max-width: 20%!important;
     padding:0;
     flex-grow:1;
     max-height: 100vh;
@@ -512,6 +512,26 @@ font-size:1rem;
 color:grey;
 font-size:1rem;
 
+}
+
+.dmuser button {
+    width:100%;
+    overflow-x:hidden;
+}
+
+.channelElement button {
+    width:55%;
+    overflow-x:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dmuser b, .channelElement b {
+    width:65%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x:hidden;
+    text-align:left
 }
 
 .channelName{
@@ -1026,6 +1046,7 @@ font-size:1rem;
         height:3rem;
         margin-right: 3px;
     }
+
 
     .notificationsBell {
         margin-left: 0;
