@@ -51,7 +51,7 @@ export const ChatChannelsList = props => {
                 </UncontrolledTooltip>
 
             <div color="white" className="sidepaneParentButton" onClick={toggle} >                
-                <h3>Channels          
+                <h3>Channels </h3>
                 <AllChannelsList
                             channels={props.allChannels}
                             currUser={props.currUser}
@@ -60,7 +60,7 @@ export const ChatChannelsList = props => {
                         />        
                     <CreateChannelModal buttonLabel={"+ Create New Channel"} />
 
-                    { !isOpen ? <i id="ChannelArrow" class=" arrow fas fa-chevron-down"></i> : <i id="ChannelArrow" class=" arrow fas fa-chevron-up"></i>}</h3>
+                    { !isOpen ? <i id="ChannelArrow" class=" arrow fas fa-chevron-down"></i> : <i id="ChannelArrow" class=" arrow fas fa-chevron-up"></i>}
             </div>
     <Collapse  isOpen={isOpen} defaultOpen={true}>
     <div className="sidepaneChannel">

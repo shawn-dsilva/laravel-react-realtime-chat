@@ -281,6 +281,7 @@ img {
     max-height:91.5vh;
     display: flex;
     flex-direction: column;
+    border-top:1px solid lightgrey;
 }
 
 .sidepaneParentDm h3, .sidepaneParentChannel h3 {
@@ -299,6 +300,7 @@ img {
     text-align: left;
     box-shadow: 0 5px 5px 2px rgb(0 0 0 / 6%);
     cursor:pointer;
+    display:flex;
 }
 
 .createChannel {
