@@ -1087,4 +1087,12 @@ font-size:1rem;
         margin: auto 10px;
         margin-left: auto;
     }
+
+    .Logo {
+        padding: 0.4rem;
+    }
+
+    .Logo h2 {
+        font-size: 1.4rem;
+    }
 }

@@ -25,7 +25,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Immediate
 
-- Responsive Design for side-by-side browser windows and Tablets.
+- Responsive design for Mobile
 - Add User Profile component in Direct Message "channel name" section.
 
 ### Luxury
@@ -42,6 +42,7 @@ Error solved when correct `$channel` object being returned in response.
 
 ### Done
 
+- Responsive Design for side-by-side browser windows and Tablets.
 - Homepage design.
 - Leave selectedChannel on Logout
 - Refactor About Channel with more details into a modal.
