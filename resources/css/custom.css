@@ -520,6 +520,12 @@ font-size:1rem;
     height: fit-content!important;
 }
 
+.channelNameButtons {
+    display: flex;
+    flex-direction: row;
+    margin: auto 10px;
+    margin-left: auto;
+}
 
 .authcard {
     width:20%;
@@ -972,10 +978,24 @@ font-size:1rem;
         white-space: pre-wrap;
     }
 
+    .channelNameContainer {
+        padding: 0.375rem;
+        height:4.5rem;
+    }
+
     .channelName{
         margin: auto 0!important;
         display: flex;
         height: 100%;
+        width:65%
+    }
+
+    .channelName h1, .channelHash, .userAt {
+        font-size: 1.7rem;
+    }
+
+    .channelHash, .userAt {
+        padding:0 0.5rem;
     }
 
     .userContainer {
@@ -1022,22 +1042,22 @@ font-size:1rem;
 
     .notificationsBellCounter {
         background: var(--blue);
-        border-radius: 1em;
-        -moz-border-radius: 1em;
-        -webkit-border-radius: 1em;
+        border-radius: 0.8em;
+        -moz-border-radius: 0.8em;
+        -webkit-border-radius: 0.8em;
         color: #ffffff;
         display: inline-block;
-        line-height: 2em;
+        line-height: 1.65em;
         text-align: center;
         font-weight: 400;
-        width: 2em; 
+        width: 1.6em; 
         position: absolute;
         top: -5px;
-        right: -40px;
+        right: -30px;
     }
 
     .input-group-append {
-        width:16%;
+        width:22%;
     }
 
     .dropdown {
@@ -1051,5 +1071,20 @@ font-size:1rem;
     .userProfileContainer {
         display: flex;
         width: 59%;
+    }
+
+    .channelDescButton {
+        font-size: 1.8rem;
+        margin: 0 0.3rem;
+        height: fit-content;
+        width: fit-content;
+        padding: 0.4rem;
+    }
+
+    .channelNameButtons {
+        display: flex;
+        flex-direction: row;
+        margin: auto 10px;
+        margin-left: auto;
     }
 }

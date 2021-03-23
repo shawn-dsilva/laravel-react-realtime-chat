@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter , Col} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter , Col, UncontrolledTooltip} from 'reactstrap';
 
 const InviteUsersModal = (props) => {
   const {
@@ -41,7 +41,11 @@ const InviteUsersModal = (props) => {
 
   return (
     <div>
-      <Button color="success" onClick={toggle}>{buttonLabel}</Button>
+       <UncontrolledTooltip placement="top" target="invite">
+                    Invite Users 
+        </UncontrolledTooltip>
+      <Button color="transparent" id="invite" className="channelDescButton" onClick={toggle}>
+      <i class="fas fa-user-plus"></i></Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>Invite Users to your Channel</ModalHeader>
 

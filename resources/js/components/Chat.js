@@ -167,29 +167,29 @@ import UserControlPanel from './UserControlPanel';
           </span> : 
           <span className="userAt" >@ 
         </span> }
-            {this.props.selectedChannel.name}</h1>
+            {this.props.selectedChannel.name}
+            </h1>
           </div>
-          {/* <img className="dmAvatar" src={'/storage/'+this.props.selectedChannel.avatar}></img> */}
 
-          {this.props.selectedChannel.type == 'channel' &&
-          ( 
-          <React.Fragment>
-          <ChannelDetailsModal channel={this.props.selectedChannel}/> 
-          <UncontrolledTooltip placement="bottom" target="MembersList">
-              Channel Member's List
-          </UncontrolledTooltip>
-          <Button id="MembersList" className="channelDescButton" onClick={() => this.onClickUsersInRoom()}>
-            <i className="fa fa-users" aria-hidden="true"></i>
-         </Button>
-          </React.Fragment>
-          ) }
+          <div className="channelNameButtons">
+            { this.props.currUser.id == this.props.selectedChannel.owner_id &&
+            <InviteUsersModal   dmUsers={this.props.dmUsers} 
+            currUser={this.props.currUser} selectedChannel={this.props.selectedChannel}
+            inviteToChannel={this.props.inviteToChannel} /> }
 
-          
-          
-          { this.props.currUser.id == this.props.selectedChannel.owner_id ? 
-          <InviteUsersModal buttonLabel={'+ Invite Users'}  dmUsers={this.props.dmUsers} 
-          currUser={this.props.currUser} selectedChannel={this.props.selectedChannel} inviteToChannel={this.props.inviteToChannel} /> : null}
-          
+            { this.props.selectedChannel.type == 'channel' &&
+            ( 
+            <React.Fragment>
+            <ChannelDetailsModal channel={this.props.selectedChannel}/> 
+            <UncontrolledTooltip placement="bottom" target="MembersList">
+                Channel Member's List
+            </UncontrolledTooltip>
+            <Button id="MembersList" className="channelDescButton" onClick={() => this.onClickUsersInRoom()}>
+              <i className="fa fa-users" aria-hidden="true"></i>
+          </Button>
+            </React.Fragment>
+            ) }
+            </div>
           </div>
 
                         <ChatMessageList
