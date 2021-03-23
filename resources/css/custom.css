@@ -117,6 +117,20 @@ img {
 
 }
 
+.channelHash, .userAt {
+    font-weight: 700;
+    font-size: inherit;
+    color:#F05340;
+    display: inline;
+    padding:0 1rem;
+    margin: auto 0!important;
+    line-height: 1!important;
+}
+
+.userAt {
+    color:#61DBFB;
+}
+
 .chatDisplay {
     flex-direction: column!important;
     flex-wrap:nowrap;
@@ -499,6 +513,13 @@ color:grey;
 font-size:1rem;
 
 }
+
+.channelName{
+    margin: auto 0!important;
+    display: flex;
+    height: fit-content!important;
+}
+
 
 .authcard {
     width:20%;
@@ -951,20 +972,8 @@ font-size:1rem;
         white-space: pre-wrap;
     }
 
-    .channelHash, .userAt {
-        font-weight: 700;
-        font-size: 2rem;
-        color:#F05340;
-        display: block;
-        padding:0 1rem;
-    }
-
-    .userAt {
-        color:#61DBFB;
-    }
-
     .channelName{
-        margin: 1rem 0;
+        margin: auto 0!important;
         display: flex;
         height: 100%;
     }
@@ -1009,6 +1018,22 @@ font-size:1rem;
     padding: 0.5rem 0.9rem;
     box-shadow: 0 0 3px 1px rgba(0,0,0,0.15)!important;
     font-size: 1.3rem;
+    }
+
+    .notificationsBellCounter {
+        background: var(--blue);
+        border-radius: 1em;
+        -moz-border-radius: 1em;
+        -webkit-border-radius: 1em;
+        color: #ffffff;
+        display: inline-block;
+        line-height: 2em;
+        text-align: center;
+        font-weight: 400;
+        width: 2em; 
+        position: absolute;
+        top: -5px;
+        right: -40px;
     }
 
     .input-group-append {

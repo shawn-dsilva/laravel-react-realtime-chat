@@ -161,12 +161,13 @@ import UserControlPanel from './UserControlPanel';
                     <Col className="chatMainContainer">
         <div className="channelNameContainer">
           <div className="channelName">
+          <h1>
           {this.props.selectedChannel.type ==  'channel' ? 
           <span className="channelHash"> # 
           </span> : 
           <span className="userAt" >@ 
         </span> }
-          <h1>{this.props.selectedChannel.name}</h1>
+            {this.props.selectedChannel.name}</h1>
           </div>
           {/* <img className="dmAvatar" src={'/storage/'+this.props.selectedChannel.avatar}></img> */}
 
