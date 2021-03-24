@@ -61,6 +61,7 @@ class CreateChannelModal extends Component {
           <Label for="channelName">Channel Name</Label>
           <Input type="channelName" name="channelName" id="channelName" 
           placeholder="Enter a Name for your channel Here"
+          autocomplete="off"
           onChange={this.onChange}
           />
         </FormGroup>
@@ -69,15 +70,9 @@ class CreateChannelModal extends Component {
           <Label for="description">Description</Label>
           <Input type="textarea" name="description" id="description" 
           placeholder="Describe your channel here "
+          autocomplete="off"
           onChange={this.onChange}
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="channelPicture">Channel Logo</Label>
-          <Input type="file" name="picture" id="channelPicture" />
-          <FormText color="muted">
-            Upload a logo or avatar for your channel to make it easily recognizable, maximum resolution 512x512, PNG, JPG supported
-          </FormText>
         </FormGroup>
         <FormGroup tag="fieldset">
             <Label>Access Permissions</Label>

@@ -51,7 +51,7 @@ const UserProfileModal = (props) => {
         { user.id === currUser.id && <Button onClick={toggleEdit} color="success"><i class="fas fa-edit"></i> { isEditOpen ? "Save Edit" : "Edit This" }</Button> }
         </div>
         <p>
-        { isEditOpen === true ? <Input type="textarea" onChange={onChange} name="text" defaultValue={user.desc ? user.desc : "Write something...."} /> :
+        { isEditOpen === true ? <Input type="textarea" autocomplete="off" onChange={onChange} name="text" defaultValue={user.desc ? user.desc : "Write something...."} /> :
             (user.desc ? user.desc : "This user prefers to keep an air of mystery about themselves...") }
         </p>
         </ModalBody>

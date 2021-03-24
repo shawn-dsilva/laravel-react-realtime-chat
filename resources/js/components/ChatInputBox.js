@@ -40,7 +40,7 @@ export class ChatInputBox extends Component {
         return (
            <Row className="chatInput">
               <InputGroup  >
-                <Input onChange={this.onChange} id="message" value={this.state.message}name="message" />
+                <Input autocomplete="off" onChange={this.onChange} id="message" value={this.state.message}name="message" />
                   <InputGroupAddon addonType="append"><Button color="primary"  onClick={this.sendMessageWrapper} style={{fontSize:'1.3rem', textTransform:'lowercase'}}> <i class="far fa-paper-plane"></i> send </Button></InputGroupAddon>
                 </InputGroup> 
                 </Row>
