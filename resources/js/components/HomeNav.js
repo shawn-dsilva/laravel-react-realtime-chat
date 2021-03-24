@@ -37,10 +37,10 @@ const HomeNav = (props) => {
                 <NavLink href="https://www.github.com/shawn-dsilva/realtime-chat-app">Source on GitHub</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/login">Login</NavLink>
+                <NavLink href="login">Login</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/register">Register</NavLink>
+                <NavLink href="register">Register</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
