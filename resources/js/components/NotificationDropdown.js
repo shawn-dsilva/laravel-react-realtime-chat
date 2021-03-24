@@ -58,13 +58,13 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_cha
   let msg = '';
   switch(request_type) {
     case 'FRND':
-      msg = <span>Do you want to accept <b>{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
+      msg = <span>Do you want to accept <b className="userMention">{sender_name}</b>'s friend request and add them to your Direct Message list?</span>
       break;
     case 'JOIN':
-      msg = <span>Do you want to accept <b>{sender_name}</b>'s join request and add them to your channel {recv_channel} ?</span>;
+      msg = <span>Do you want to accept <b className="userMention">{sender_name}</b>'s join request and add them to your channel <b className="channelMention">{recv_channel}</b> ?</span>;
       break;
       case 'INVT':
-      msg = <span>Do you want to accept <b>{sender_name}</b>'s invite and join their channel {recv_channel} ?</span>;
+      msg = <span>Do you want to accept <b className="userMention">{sender_name}</b>'s invite and join their channel <b className="channelMention">{recv_channel}</b> ?</span>;
       break;
     default:
         null;
@@ -75,7 +75,6 @@ function AcceptModal({sender_name, desc, toggleModal, modal, invite_id, recv_cha
        <Modal isOpen={modal} toggle={toggleModal} >
          <ModalHeader toggle={toggleModal}>Accept Request</ModalHeader>
          <ModalBody>
-         {recv_channel}
           <span><b>{sender_name}</b> {desc}</span>
           <br></br>
           <br></br>

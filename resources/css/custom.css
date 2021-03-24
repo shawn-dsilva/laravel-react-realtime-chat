@@ -436,6 +436,20 @@ img {
     white-space: pre-wrap;
 }
 
+.userMention::before {
+    content:"@";
+    color:#61DBFB;
+    font-weight: bold;
+    padding-right: 0.8rem;
+}
+
+.channelMention::before {
+    content:"#";
+    color:#F05340;
+    font-weight: bold;
+    padding-right: 0.8rem;
+}
+
 .NavContainer {
     background-color: #292841;
 }
