@@ -39,7 +39,7 @@ export const echoInit = token => {
           };
 
         axios
-        .get(`/api/online`, headersObj, {withCredentials:true})
+        .get(`/api/online/${user.id}`, headersObj, {withCredentials:true})
     })
     .leaving((user) => {
         const headersObj = {

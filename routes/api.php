@@ -38,7 +38,7 @@ Route::group([
     Route::get('getallchannels', 'ChatController@getAllChannels');
     Route::post('makerequest', 'ChatController@createInvite');
     Route::get('acceptinvite/{invite_id}', 'ChatController@acceptRequest');
-    Route::get('online', 'ChatController@isOnline');
+    Route::get('online/{user_id}', 'ChatController@isOnline');
     Route::get('offline/{user_id}', 'ChatController@isOffline');
     Route::get('getfriendslist', 'ChatController@getFriendsList');
     Route::get('notifications', 'ChatController@getNotifications');
