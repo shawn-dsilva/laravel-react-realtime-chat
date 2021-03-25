@@ -99,6 +99,7 @@ class Register extends Component {
                   placeholder="Enter your name"
                   className="mb-3"
                   size="lg"
+                  autocomplete="off"
                   onChange={this.onChange}
                 />
 
@@ -110,6 +111,7 @@ class Register extends Component {
                   placeholder="you@youremail.com"
                   className="mb-3"
                   size="lg"
+                  autocomplete="off"
                   onChange={this.onChange}
                 />
 
@@ -121,6 +123,7 @@ class Register extends Component {
                   placeholder="Enter your Password"
                   className="mb-3"
                   size="lg"
+                  autocomplete="off"
                   onChange={this.onChange}
                 />
                 <Button color="dark" className="mt-5" size="lg" block>

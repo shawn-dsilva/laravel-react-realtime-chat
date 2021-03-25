@@ -115,6 +115,7 @@ class Login extends Component {
                   placeholder="you@youremail.com"
                   className="mb-3"
                   bsSize="lg"
+                  autocomplete="off"
                   onChange={this.onChange}
                 />
 
@@ -126,6 +127,7 @@ class Login extends Component {
                   placeholder="Enter your Password"
                   className="mb-3"
                   bsSize="lg"
+                  autocomplete="off"
                   onChange={this.onChange}
                 />
                 <Button color="dark" className="mt-5" size="lg" block>
