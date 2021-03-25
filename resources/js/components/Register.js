@@ -84,7 +84,7 @@ class Register extends Component {
       <AuthContainer>
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>REGISTER</h1>
-              <p>Already have an account? <a href="/login">Login.</a></p>
+              <p>Already have an account? <a href="login">Login.</a></p>
               {this.props.status.id === "REGISTER_SUCCESS" ? (
               <UncontrolledAlert color="success">{this.state.msg}</UncontrolledAlert>
             ) : ( this.props.status.id === "REGISTER_FAIL" &&

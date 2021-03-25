@@ -100,7 +100,7 @@ class Login extends Component {
       <AuthContainer>
             <Form className="authcard" onSubmit={this.onSubmit}>
               <h1>LOGIN</h1>
-              <p>Don't have an account? <a href="/register">Register.</a></p>
+              <p>Don't have an account? <a href="register">Register.</a></p>
 
               {this.state.msg ? (
               <UncontrolledAlert color="danger">{this.state.msg}</UncontrolledAlert>
