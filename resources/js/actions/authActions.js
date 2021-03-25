@@ -110,7 +110,8 @@ export const login = ({ email, password }, history) => (dispatch, getState) => {
       // const token = state.auth.token;
       // echoInit(token);
       // dispatch(history.push("/chat"));
-
+      axios
+      .get(`/api/online/${state.auth.currUser.id}`, headersObj, {withCredentials:true})
       
     }
     )
@@ -129,7 +130,7 @@ export const logout = (id, channel_id) => (dispatch) => {
   axios
   .get(`/api/offline/${id}`, {withCredentials:true});
   window.Echo.leave(`chat.channel.${channel_id}`)
-  window.Echo.connector.pusher.disconnect();
+  window.Echo.disconnect();
     axios
     .get("/api/auth/logout", { withCredentials: true })
     .then((res) =>{

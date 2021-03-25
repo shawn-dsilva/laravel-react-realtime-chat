@@ -14,6 +14,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Avatar;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
@@ -150,6 +151,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
+        Cache::forget('user-is-online-'.$request->user()->id);
         return response()->json([
             'message' => 'Successfully logged out'
         ], 200)->cookie(Cookie::forget('jwt'));
