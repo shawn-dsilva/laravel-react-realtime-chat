@@ -3,6 +3,7 @@
 Full Featured Chat Web App with User-to-User and User to Group Real Time chatting, Profile Picture Uploading and Notifications.
 Built with React, Redux, Laravel, PostgreSQL and powered by WebSockets, hosted in Docker containers running NGINX and PHP-FPM.
 
+Live Demo( Desktop & Tablet only, Mobile responsiveness is WIP ) at https://demos.shawndsilva.com/realtime-chat-app
 
 ## ⭐ Features
 
@@ -10,7 +11,7 @@ Built with React, Redux, Laravel, PostgreSQL and powered by WebSockets, hosted i
 - Create your own Chat Rooms/Channels and make them Public or Private( needing your permission or invitation to join )
 - User To User Private Messaging
 
-For complete ✨Feature List✨ check out https://www.shawndsilva.com/projects
+For complete ✨Feature List✨ and details check out https://www.shawndsilva.com/projects/laravel-react-chat.html
 
 ## ✅ Requirements
 
@@ -57,3 +58,4 @@ For Changelog, TODOS and Error Notes about this project, see `TODOS.md` within t
 
 | [<img src="https://avatars0.githubusercontent.com/u/33859225?s=460&u=797dc9181252488a9c325fca842898c24ff28688&v=4" width="150px;"/><br /><sub>Shawn D'silva</sub>](https://www.shawndsilva.com)<br /> |
 | :---: |
+
