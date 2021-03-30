@@ -59,7 +59,7 @@ Make executable and run the Local Development Init script
     chmod +x initlocal.sh
 ```
 ```
-    ./init.sh
+    ./initlocal.sh
 ```
 
 Run the app
