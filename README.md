@@ -11,7 +11,7 @@ Live Demo( Desktop & Tablet only, Mobile responsiveness is WIP ) at https://demo
 - Create your own Chat Rooms/Channels and make them Public or Private( needing your permission or invitation to join )
 - User To User Private Messaging
 
-For complete ✨Feature List✨ and details check out https://www.shawndsilva.com/projects/laravel-react-chat.html
+For complete ✨Feature List✨ screenshots and a video of the features check out https://www.shawndsilva.com/projects/laravel-react-chat.html
 
 ## ✅ Requirements
 
@@ -21,6 +21,17 @@ For complete ✨Feature List✨ and details check out https://www.shawndsilva.co
 - React
 - PostgreSQL
 
+A PostgresSQL service needs to be running with user, password, database name, port and hostname supplied in .env
+
+Following are the default values provided in `.env.example`, either setup your pgsql instance with these values, or change them with your own accordingly
+```
+    DB_CONNECTION=pgsql
+    DB_HOST=127.0.0.1
+    DB_PORT=5432
+    DB_DATABASE=laravel_react_chat
+    DB_USERNAME=admin
+    DB_PASSWORD=123456
+```
 
 ## 🚀 Quick Start
 
@@ -33,13 +44,22 @@ Clone the repository
 Install dependencies 
 
 ```
-    composer install && npm install
+    composer update && npm install
 ```
 
 Create .env file from local development template .env
 
 ```
-    mv .env .env.example
+    cp .env.example .env
+```
+
+Make executable and run the Local Development Init script 
+
+```
+    chmod +x initlocal.sh
+```
+```
+    ./init.sh
 ```
 
 Run the app
