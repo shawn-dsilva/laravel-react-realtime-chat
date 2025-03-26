@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravolt/avatar": "^3.2",
-        "pusher/pusher-php-server": "~3.0"
+        "pusher/pusher-php-server": "~4.0",
+        "react/promise": "^2.7"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

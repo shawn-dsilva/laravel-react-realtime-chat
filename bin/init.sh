@@ -1,4 +1,6 @@
 composer update 
+composer require react/promise:^2.7
+composer require pusher/pusher-php-server "~4.0"
 php artisan key:generate
 php artisan storage:link  
 php artisan migrate:fresh --seed 

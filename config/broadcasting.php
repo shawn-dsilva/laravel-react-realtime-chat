@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => env('BROADCAST_DRIVER', 'pusher'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,12 +40,13 @@ return [
                 'encrypted' => false,
                 'host' => env('MIX_WS_HOST_URL'),
                 'port' => 6001,
-                'useTLS' => true,
-                'scheme' => 'https',
-                'curl_options' => [
-                    CURLOPT_SSL_VERIFYHOST => 0,
-                    CURLOPT_SSL_VERIFYPEER => 0,
-                ],
+                'scheme' => 'http',
+                // 'scheme' => 'https',
+                // 'useTLS' => true,
+                // 'curl_options' => [
+                //     CURLOPT_SSL_VERIFYHOST => 0,
+                //     CURLOPT_SSL_VERIFYPEER => 0,
+                // ],
             ],
         ],
 
