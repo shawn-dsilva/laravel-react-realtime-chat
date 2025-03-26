@@ -1,45 +1,45 @@
 version: "3"
 services:
-    # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
-    postgres-rca:
-        container_name: postgres-rca #container name should not conflict with existing containers/images
-        image: postgres
-        ports:
-             - '3315:5432'
-        environment:
-             - POSTGRES_DB=react_laravel_websockets
-             - POSTGRES_USER=admin
-             - POSTGRES_PASSWORD=123456
-    main:
-        container_name: main
-        # hostname: main
-        depends_on:
-            - postgres-rca
-        build:
-            context: .
-            dockerfile: dockerfile
-        restart: unless-stopped
-        ports:
-            - "9000:9000" # Main App
-            - "6001:6001" # Websocket server
-        volumes:
-            - .:/var/www
-            - /var/www/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
-            - /var/www/vendor # empty vendor folder, composer create folder in container build,reason unknown
-        command: sh  "./bin/init.sh"
-        
-    nginx: 
-        image: nginx:alpine
-        container_name: nginx_laravel
-        restart: unless-stopped
-        ports: 
-            - "8000:8000"
-        volumes:
-            - './:/var/www'
-            - './nginx:/etc/nginx/conf.d/'
-        depends_on:
-            -  main
-networks:
-    default:
-        external:
-            name: nginxrpgateway_default
+  # IMPORTANT, NAME HOST IN .env THE SAME AS THE SERVICE NAME HERE, IN THIS CASE MYSQL
+  postgres-rca:
+    container_name: postgres-rca #container name should not conflict with existing containers/images
+    image: postgres
+    ports:
+      - "3315:5432"
+    environment:
+      - POSTGRES_DB=react_laravel_websockets
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+  main:
+    container_name: main
+    # hostname: main
+    depends_on:
+      - postgres-rca
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: unless-stopped
+    ports:
+      - "9000:9000" # Main App
+      - "6001:6001" # Websocket server
+    volumes:
+      - .:/var/www
+      - /var/www/node_modules # empty node_modules folder, npm cannot create folder in container build,reason unknown
+      - /var/www/vendor # empty vendor folder, composer create folder in container build,reason unknown
+    command: sh  "./bin/init.sh"
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_laravel
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./:/var/www"
+      - "./nginx:/etc/nginx/conf.d/"
+    depends_on:
+      - main
+# networks:
+#     default:
+#         external:
+#             name: nginxrpgateway_default

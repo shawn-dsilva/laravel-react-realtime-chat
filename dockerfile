@@ -38,7 +38,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
 
 # Install Composer and NPM packages
-RUN composer install 
+RUN composer update
 RUN npm install
 
 # Create system user to run Composer and Artisan Commands
